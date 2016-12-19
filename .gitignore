@@ -13,7 +13,6 @@ hs_err_pid*
 
 # for the maven
 target/
-bin/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -22,3 +21,13 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+# especifcs
+/META-INF/application.properties
+/bin/
+/logs/
+/.settings/
+*.classpath
+*.project
+.metadata
+*.jasper
