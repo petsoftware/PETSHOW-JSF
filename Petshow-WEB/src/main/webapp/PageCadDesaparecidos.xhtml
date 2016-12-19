@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components"
+	>
+<h:head>
+
+
+<title>Barcadero - Redirecionando</title>
+
+</h:head>
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+		<ui:define name="content">
+			<h:form enctype="multipart/form-data">
+			
+			<h:panelGrid columns="2">
+					<h:outputLabel value="Nome:"/>
+					<h:inputText value="#{desaparecidosBean.desaparecidos.nome}"/>
+					
+					<h:outputLabel value="Nome do Dono:"/>
+					<h:inputText value="#{desaparecidosBean.desaparecidos.nmDono}"/>
+					
+					<h:outputLabel value="Contato:"/>
+					<h:inputText value="#{desaparecidosBean.desaparecidos.contato}"/>
+					
+					<h:outputLabel value="breve descricao"/>
+					<h:inputText value="#{desaparecidosBean.desaparecidos.breveDescicao}"/>
+					
+					<h:outputLabel value="Imagem"/>
+					<h:inputFile value="#{desaparecidosBean.imagem}" />
+				</h:panelGrid>
+				<div align="right">
+					<h:graphicImage url="data:image/jpg;base64,#{desaparecidosBean.desaparecidos.foto}" 
+		                                    width="275px" height="75px" alt="Imagem do Animal desaparecido" />
+				</div>
+				<!-- 
+				<o:graphicImage value="#{desaparecidosBean.image}" dataURI="true"/>
+				 -->
+		       <h:commandButton styleClass="btn btn-default" action="#{desaparecidosBean.salvar}" value="Enviar" >
+		       		<i class="fa fa-paper-plane" aria-hidden="true"></i>
+		       </h:commandButton>
+				
+				
+			</h:form>
+			 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+		</ui:define>
+	</ui:composition>
+	
+</h:body>
+</html>

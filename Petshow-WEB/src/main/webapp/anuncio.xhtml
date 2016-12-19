@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form  enctype="multipart/form-data">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="1">
+					<h:outputLabel value="Descreva o seu anúncio:" for="txtDesc" />
+					<p:inputTextarea rows="6" cols="33" id="txtDesc"
+						value="#{anuncioBean.anuncio.descricao}" />
+
+					<h:outputLabel value="Data inicial do anúncio ativo:"
+						for="txtInicio" />
+					<p:calendar id="txtInicio"
+						value="#{anuncioBean.anuncio.dataInicial}"
+						pattern="dd/MM/yyyy HH:mm:ss" />
+
+					<h:outputLabel value="Data final do anúncio ativo:" for="txtFim" />
+					<p:calendar id="txtFim"
+						value="#{anuncioBean.anuncio.dataVencimento}"
+						pattern="dd/MM/yyyy HH:mm:ss" />
+						
+					<h:outputLabel value="FOTO" for="txtInputFoto"/>
+					<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
+					
+					<h:commandButton action="#{anuncioBean.novo}"
+						type="submit" value="Novo"   update="messages" />
+					<h:commandButton action="#{anuncioBean.salvarAnuncio}"
+						type="submit" value="Salvar"   update="messages" />
+						<h:commandButton action="#{anuncioBean.excluirAnuncio}"
+						type="submit" value="Excluir"  update="messages"  />
+
+				</h:panelGrid>
+				<p:dataTable var="anuncio" value="#{anuncioBean.anuncios}"
+					paginator="#{anuncioBean.anuncios.size() > 12}" rows="13"
+					paginatorPosition="bottom">
+
+					<p:column headerText="Descrição" style="width:50%">
+						<h:outputText value="#{anuncio.descricao}" />
+					</p:column>
+
+					<p:column headerText="Data inicial" style="width:10%">
+						<h:outputText value="#{anuncio.dataInicial}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"
+								timeZone="America/Recife" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Data Final" style="width:10%">
+						<h:outputText value="#{anuncio.dataVencimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Recife" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Data Cadastro" style="width:10%">
+						<h:outputText value="#{anuncio.dataCadastro}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Recife" />
+						</h:outputText>
+					</p:column>
+					
+					
+					<p:column headerText="Edição" style="width:20%">
+						<h:commandButton action="#{anuncioBean.selecionar(anuncio)}" type="submit" value="Editar" />
+						<h:commandButton action="#{anuncioBean.excluirAnuncio(anuncio.id)}" type="submit"	value="Excluir" />
+					</p:column>
+				</p:dataTable>
+
+
+
+				<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+

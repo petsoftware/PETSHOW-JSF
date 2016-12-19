@@ -1,0 +1,46 @@
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Introduction Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">PETSHOW
+                    <small>Mostre seu PET</small>
+                </h1>
+                <p>A PETSHOW é uma plataforma para ajudar animais, ONG's, Tutores e PetShops a se encontrarem e manterem um relação de parceria. Juntos podemos fazer muito pelos animais do que você imagina.</p>
+            </div>
+        </div>
+
+        <!-- Team Members Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="page-header">Desaparecidos</h2>
+                <div align="right">
+                <button type="button" class="btn btn-default btn-lg">
+  					<span class="glyphicon glyphicon-tags" aria-hidden="true"></span> Anunciar
+				</button>
+				</div>
+            </div>
+            <ui:repeat var="desap" value="#{desaparecidosBean.all}">
+            	 <div class="col-lg-4 col-sm-6 text-center">
+                 <h:graphicImage url="data:image/jpg;base64,#{desap.foto}" width="275px" height="75px" styleClass="img-circle img-responsive img-center" />
+                 <h3> #{desap.nome}
+                    <small>sumiu dia #{desap.dtDesaparecimento}</small>
+                 </h3>
+                	<p>#{desap.breveDescicao}</p>
+            	 </div>
+            </ui:repeat>
+        </div>   
+         <div class="row">   
+             <div class="col-lg-12">
+                <h2 class="page-header">Para Adoção</h2>
+            </div>
+        </div>
+        
+
+        <hr/>
+
+ 
+    </div>

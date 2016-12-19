@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>PETSHOW</title>
+    <meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+</h:head>
+
+<body >
+
+
+<h:form>  
+    
+ <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+    <p:menubar>
+     
+        <f:facet name="options">
+            <p:inputText style="margin-right:20px" placeholder="Usuario" value="#{loginBean.usuario}"/>
+            <p:inputText style="margin-right:10px" placeholder="Senha" value="#{loginBean.senha}"/>
+            
+            <h:commandButton action="#{loginBean.login}" value="Ok" update="growlMessage" />
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+      
+        </f:facet>
+    </p:menubar>
+</h:form>
+
+
+
+
+
+	
+</body>
+</html>

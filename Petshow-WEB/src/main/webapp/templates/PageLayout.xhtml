@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta charset="utf-8" />
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	    <meta name="description" content="" />
+	    <meta name="author" content="" />
+	
+	    <title>PETSHOW - Animais e Cia</title>
+	
+	    <h:outputStylesheet library="css" name="bootstrap.min.css"  />
+	    <h:outputStylesheet library="css" name="round-about.css"  />
+	    <h:outputStylesheet library="css" name="main.css"  />
+	    <h:outputStylesheet library="css" name="pageMenu.css"/>
+        <h:outputStylesheet name="css/footer-distributed-with-address-and-phones.css" />
+	    
+	</h:head>
+	<h:body>
+		<ui:insert name="header">
+			<ui:include src="PageHeader.xhtml" />
+		</ui:insert>
+		
+		<ui:insert name="content">
+			<ui:include src="PageContent.xhtml" />
+		</ui:insert>
+		
+		<ui:insert name="footer">
+			<ui:include src="PageFooter.xhtml" />
+		</ui:insert>
+	</h:body>
+</html>

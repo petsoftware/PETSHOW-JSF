@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:clx="http://java.sun.com/jsf/composite/components"
+	>
+<h:head>
+
+
+<title>Menu Principal</title>
+
+</h:head>
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+		
+		<ui:define name="content">
+			<h:form enctype="multipart/form-data">
+			
+			<div class="container">
+    	<br />
+		<div class="row">
+	        <div class="col-md-3">
+	            <a href="#" class="btn btn-primary btn-lg btn-block btn-huge"><b>Anúncios</b></a>
+	        </div>
+	        
+	        <div class="col-md-3">
+	            <a href="#" class="btn btn-default btn-lg btn-block btn-huge"><b>Agendamento / Notificação</b></a>
+	        </div>
+	        <div class="col-md-3">
+	            <a href="#" class="btn btn-success btn-lg btn-block btn-huge"><b>Animais</b></a>
+	        </div>
+	       
+	     </div>
+	     <hr />
+	     <div class="row">   
+	          <div class="col-md-3">
+	            <a href="#" class="btn btn-warning btn-lg btn-block btn-huge"><b>Clientes</b></a>
+	        </div>
+	        
+	          <div class="col-md-3">
+	            <a href="#" class="btn btn-danger btn-lg btn-block btn-huge"><b>Evento</b></a>
+	        </div>
+	        
+	         <div class="col-md-3">
+	            <a href="#" class="btn btn-primary btn-lg btn-block btn-huge">Página Comercial</a>
+	        </div>
+		</div>
+	    <hr />
+	    <br />
+	</div>
+			
+			<!--
+			<div class="container">
+			   <nav id="menu">
+					<ul>
+						<li><a href="">Anúncios</a></li>
+						<li><a href="">Agendamento/Notificação</a></li>
+						<li><a href="">Animais</a></li>
+						<li><a href="">Página Comercial</a></li>
+						<li><a href="">Clientes</a></li>
+						<li><a href="">Eventos</a></li>
+						 
+						<li><a href="">Design</a></li>
+						<li><a href="">Other</a></li>
+						 
+						<div class="current">
+							<div class="ctoparr"></div>   
+							<div class="cback"></div>
+							<div class="cbotarr"></div>
+						</div>
+					</ul>
+				</nav>				   
+			</div>
+			-->
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>	
+		

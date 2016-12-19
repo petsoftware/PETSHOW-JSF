@@ -1,0 +1,13 @@
+/target/
+/bin/
+/logs/
+/.settings/
+*.class
+*.log
+*.classpath
+*.project
+.metadata
+/NFeCacerts
+*.jasper
+/workspaceSVN_2.4/
+/git/
