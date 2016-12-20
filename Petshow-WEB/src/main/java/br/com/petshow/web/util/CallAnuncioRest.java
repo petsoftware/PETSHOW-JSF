@@ -26,7 +26,7 @@ public class CallAnuncioRest extends RestUtil {
 			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Anuncio>>() {});
 			
 		}catch(Exception ex){
-
+ 
 			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
 			
 		}

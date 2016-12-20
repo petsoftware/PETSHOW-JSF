@@ -14,7 +14,7 @@ public class ImagemUtil {
 		byte[] imageAsByte = new byte[(int) imagem.getSize()];
 		try {
 			imagem.getInputStream().read(imageAsByte);
-		} catch (IOException e) {
+		} catch (IOException e) { 
 
 			e.printStackTrace();
 		}

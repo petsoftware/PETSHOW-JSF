@@ -30,7 +30,7 @@ public class RestUtil {
 	
 	public ResteasyWebTarget target;
 	
-	
+	 
 	public static <T> T postEntity(Entidade entidade, String url,Class<T> type) throws ExceptionErroCallRest,ExceptionValidation{
 
 		ResteasyClient client = new ResteasyClientBuilder().build();

@@ -27,7 +27,7 @@ public class AnuncioBean  {
 
 	private Anuncio anuncio;
 	private List<Anuncio> anuncios;
-	private CallAnuncioRest restAnuncio;
+	private CallAnuncioRest restAnuncio; 
 
 	private Part imagem;
 
