@@ -22,7 +22,7 @@ import br.com.petshow.util.MapErroRetornoRest;
 import br.com.petshow.util.WriteConsoleUtil;
 
 
-public class RestUtil {
+public class RestUtilCall {
 	
 	public static final String URL_BASE = FileApplicationUtil.getUrlBaseREST();
 	

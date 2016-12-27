@@ -10,20 +10,21 @@ import br.com.petshow.enums.EnumErrosSistema;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Anuncio;
+import br.com.petshow.model.Servico;
 import br.com.petshow.util.MapErroRetornoRest;
 
-public class CallAnuncioRest extends RestUtilCall {
+public class CallServicoRest extends RestUtilCall {
 	
-	public  List<Anuncio> getListAnuncio(long usuarioId) throws ExceptionErroCallRest, ExceptionValidation{
+	public  List<Servico> getListServico(long usuarioId) throws ExceptionErroCallRest, ExceptionValidation{
 
 		client = new ResteasyClientBuilder().build();
 		
-		target= client.target(URL_BASE+"anuncio/consulta/usuario/"+usuarioId);
+		target= client.target(URL_BASE+"servico/consulta/usuario/"+usuarioId);
 		
 		
 		Object entidades = null;
 		try{
-			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Anuncio>>() {});
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Servico>>() {});
 			
 		}catch(Exception ex){
  
@@ -41,28 +42,10 @@ public class CallAnuncioRest extends RestUtilCall {
 		
 		
 		
-		return (List<Anuncio>)entidades;
+		return (List<Servico>)entidades;
 	
 	}
 	
 	
-	public  List<Anuncio> getListAnuncio2(long usuarioId) throws ExceptionErroCallRest, ExceptionValidation{
-
-		client = new ResteasyClientBuilder().build();
-		
-		target= client.target(URL_BASE+"anuncio/consulta/usuario/"+usuarioId);
-		
-		
-		List<Anuncio> entidades = null;
-		try{
-			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Anuncio>>() {});
-			
-		}catch(Exception ex){
-			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
-			
-		}
-		return entidades;
-	
-	}
 
 }

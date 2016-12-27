@@ -8,6 +8,7 @@
 <h:head>
 	<title>PETSHOW</title>
 	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="resources/css/page-anuncio.css"/>
 </h:head>
 
 <h:body>
@@ -17,16 +18,17 @@
 
 			<h:form  enctype="multipart/form-data">
 				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="2">
 				<h:panelGrid columns="1">
 					<h:outputLabel value="Descreva o seu anúncio:" for="txtDesc" />
-					<p:inputTextarea rows="6" cols="33" id="txtDesc"
-						value="#{anuncioBean.anuncio.descricao}" />
+					<p:inputTextarea rows="6" cols="33" id="txtDesc" 
+					    value="#{anuncioBean.anuncio.descricao}"/>
 
 					<h:outputLabel value="Data inicial do anúncio ativo:"
 						for="txtInicio" />
 					<p:calendar id="txtInicio"
 						value="#{anuncioBean.anuncio.dataInicial}"
-						pattern="dd/MM/yyyy HH:mm:ss" />
+						pattern="dd/MM/yyyy HH:mm:ss" required="true"/>
 
 					<h:outputLabel value="Data final do anúncio ativo:" for="txtFim" />
 					<p:calendar id="txtFim"
@@ -36,17 +38,21 @@
 					<h:outputLabel value="FOTO" for="txtInputFoto"/>
 					<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
 					
-					<h:commandButton action="#{anuncioBean.novo}"
-						type="submit" value="Novo"   update="messages" />
-					<h:commandButton action="#{anuncioBean.salvarAnuncio}"
-						type="submit" value="Salvar"   update="messages" />
-						<h:commandButton action="#{anuncioBean.excluirAnuncio}"
-						type="submit" value="Excluir"  update="messages"  />
+					<h:commandButton action="#{anuncioBean.novo}" type="submit" value="Novo"   update="messages"  id="btNovo"/>
+					
+					<h:commandButton action="#{anuncioBean.salvarAnuncio}" 	type="submit" value="Salvar"   update="messages,grid" id="btSalvar"/>
+						
+						
+						<h:commandButton action="#{anuncioBean.excluirAnuncio}" type="submit" value="Excluir"  update="messages"  id="btExcluir"/>
 
+				</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:graphicImage url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"      id="visualizacao" alt="Visualização do anuncio"  />
+					</h:panelGrid>
 				</h:panelGrid>
 				<p:dataTable var="anuncio" value="#{anuncioBean.anuncios}"
 					paginator="#{anuncioBean.anuncios.size() > 12}" rows="13"
-					paginatorPosition="bottom">
+					paginatorPosition="bottom" id="grid">
 
 					<p:column headerText="Descrição" style="width:50%">
 						<h:outputText value="#{anuncio.descricao}" />
@@ -64,6 +70,7 @@
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
 								timeZone="America/Recife" />
 						</h:outputText>
+						
 					</p:column>
 
 					<p:column headerText="Data Cadastro" style="width:10%">
@@ -80,9 +87,10 @@
 					</p:column>
 				</p:dataTable>
 
-
+	
 
 				<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
+				
 
 			</h:form>
 

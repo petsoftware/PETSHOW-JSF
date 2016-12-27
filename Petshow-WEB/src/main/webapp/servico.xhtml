@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="resources/css/page-servico.css"/>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content"> 
+
+			<h:form  enctype="multipart/form-data">
+				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="1">
+				
+					<h:outputLabel value="Nome do serviço:" for="txtNMServico" />
+					<p:inputText id="txtNMServico"   value="#{servicoBean.servico.nmServico}" maxlength="30"/>
+					    
+					    
+					<h:outputLabel value="Descreva o seu serviço:" for="txtDesc" />
+					<p:inputTextarea rows="6" cols="33" id="txtDesc"    value="#{servicoBean.servico.descricao}"  maxlength="255"/>
+
+				
+					
+					 <p:selectOneMenu id="cbAtivo" value="#{servicoBean.servico.flAtivo}" style="width:125px">
+            			<f:selectItem itemLabel="Ativo" itemValue="true" />
+            			<f:selectItem itemLabel="Inativo" itemValue="false" />
+            			
+        			</p:selectOneMenu>		
+									
+					<h:commandButton action="#{servicoBean.novo}" type="submit" value="Novo"   update="messages"  id="btNovo"/>
+					<h:commandButton action="#{servicoBean.salvarServico}" 	type="submit" value="Salvar"   update="messages,grid" id="btSalvar"/>
+				
+					<h:commandButton action="#{servicoBean.excluirServico}" type="submit" value="Excluir"  update="messages"  id="btExcluir"/>
+
+				
+				
+				</h:panelGrid>
+				<p:dataTable var="servico" value="#{servicoBean.servicos}"
+					paginator="#{servicoBean.servicos.size() > 12}" rows="13"
+					paginatorPosition="bottom" id="grid">
+
+
+					<p:column headerText="Nome" style="width:25%">
+						<h:outputText value="#{servico.nmServico}" />
+					</p:column>
+
+					<p:column headerText="Descrição" style="width:50%">
+						<h:outputText value="#{servico.descricao}" />
+					</p:column>
+					
+					<p:column headerText="Ativo" style="width:5%">
+						<p:graphicImage value="/resources/images/OK.png" rendered="#{servico.flAtivo}"/>
+   						<p:graphicImage value="/resources/images/error.png"  rendered="#{not servico.flAtivo}"/>		
+					</p:column>
+
+					
+					
+					<p:column headerText="Edição" style="width:20%">
+						<h:commandButton action="#{servicoBean.selecionar(servico)}" type="submit" value="Editar" />
+						<h:commandButton action="#{servicoBean.ativarServico(servico)}" type="submit" value="Ativar"  update="messages"  id="btAtivar"  rendered="#{not servico.flAtivo}"/>
+						<h:commandButton action="#{servicoBean.inativarServico(servico)}" type="submit" value="Inativar"  update="messages"  id="btInativar"  rendered="#{servico.flAtivo}"/>
+						<h:commandButton action="#{servicoBean.excluirServico(servico.id)}" type="submit"	value="Excluir" />
+						
+					</p:column>
+				</p:dataTable>
+
+	
+
+				<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
+				
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+

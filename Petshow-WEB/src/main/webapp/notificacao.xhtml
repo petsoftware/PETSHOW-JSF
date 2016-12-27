@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="resources/css/page-servico.css"/>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content"> 
+
+			<h:form  enctype="multipart/form-data">
+				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="1">
+					
+				
+					<p:outputLabel value="Informe o usuário ou animal:" for="txtNM" />
+        			<p:autoComplete id="txtNM" value="#{autoCompleteBean.usuario}" 
+        			completeMethod="#{autoCompleteBean.getUsuariosLike}"  var="usuario" 
+        			itemLabel="#{usuario.nome}" itemValue="#{usuario}" converter="themeConverter" forceSelection="true" />
+
+        			 
+					 
+					 
+									
+				
+				
+				
+				</h:panelGrid>
+					
+
+				<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
+				
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+
