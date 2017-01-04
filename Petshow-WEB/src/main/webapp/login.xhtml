@@ -23,6 +23,7 @@
             <p:inputText style="margin-right:10px" placeholder="Senha" value="#{loginBean.senha}"/>
             
             <h:commandButton action="#{loginBean.login}" value="Ok" update="growlMessage" />
+            <h:commandButton action="solicita-novo-usuario" value="Solicitar cadastro"  />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
       
         </f:facet>

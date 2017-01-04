@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>PETSHOW</title>
+    <meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+    
+    <h:outputScript library="js" name="jquery.js" />
+     <h:outputScript library="js" name="jquery.mask.min.js" />
+    <h:outputStylesheet library="css" name="solicita-novo-usuario.css"  />
+   
+    <script type="text/javascript">
+    	jQuery(function($){
+    	   $("input.txtCNPJ").mask("99.999.999/9999-99");
+    	  
+    	});
+    </script>
+</h:head>
+
+<body >
+
+
+<h:form>  
+    
+ <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+    
+     <h:form id="formulario">
+        <h:panelGrid columns="2">
+          	<p:outputLabel for="txtNmEstabelecimento" value="Nome estabelecimento:" />
+        	<p:inputText  id="txtNmEstabelecimento" value="#{usuarioBean.usuario.nome}" required="true" requiredMessage="Informe seu estabelecimento!"/>
+
+			<p:outputLabel for="txtEmail" value="E-mail:" />
+        	<p:inputText  id="txtEmail" value="#{usuarioBean.usuario.email}"
+        	 		requiredMessage="informe seu e-mail!"
+					validatorMessage="E-mail não está em formato válido!"
+					required="true">
+        	<f:validateRegex	pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+        	</p:inputText>
+
+			<p:outputLabel for="txtCNPJ" value="CNPJ:"	/>
+        	<p:inputText  id="txtCNPJ" value="#{usuarioBean.usuario.cnpjCpf}" styleClass="txtCNPJ" converter="cnpjConverter" requiredMessage="informe seu CNPJ!"		
+					required="true">
+        		<f:validator validatorId="br.com.petshow.validator.CnpjValidator" />
+        	</p:inputText>
+        	
+        	<p:outputLabel for="txtnmLogin" value="Nome usuário:" />
+        	<p:inputText  id="txtnmLogin" value="#{usuarioBean.usuario.nmLogin}" required="true" requiredMessage="Informe seu nome de usuário! "/>
+
+			
+           
+            <h:commandButton action="#{usuarioBean.solicitarCadastro}" value="Solicitar Cadastro"/>
+              
+         </h:panelGrid>   
+           <input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
+       </h:form> 
+    
+</h:form>
+
+
+
+
+
+	
+</body>
+</html>

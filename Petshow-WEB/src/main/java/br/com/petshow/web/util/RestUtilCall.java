@@ -2,6 +2,8 @@ package br.com.petshow.web.util;
 
 
 
+import java.util.HashMap;
+
 import javax.ws.rs.client.Entity;
 
 import javax.ws.rs.core.MediaType;
@@ -56,6 +58,32 @@ public class RestUtilCall {
 		
 		WriteConsoleUtil.write("Retornado:"+JsonUtil.getJSON(entidade));
 		return  type.cast(response.readEntity(type));
+	}
+	
+	
+	public static void post( HashMap<String,String> map, String url) throws ExceptionErroCallRest,ExceptionValidation{
+// ver melhor impliementacao futuramente
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		
+		ResteasyWebTarget target= client.target(URL_BASE+url);
+						
+		Response response = target.request().post(Entity.entity(map, MediaType.APPLICATION_JSON));
+		
+		if(response.getStatus() != 200){
+			MapErroRetornoRest erro=null;
+			try{
+				erro=response.readEntity(MapErroRetornoRest.class); // caso der problema de conversao é por que nao foi um erro previsto pelo proprio REST
+			}catch(Throwable th){
+				throw new ExceptionErroCallRest("Failed: HTTP error code:" +response.getStatus());
+			}
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}
+		}
+		
+		
+		
+		
 	}
 
 

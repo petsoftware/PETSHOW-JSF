@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/page-anuncio.css" />
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form enctype="multipart/form-data">
+				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="1">
+					
+					<h:outputLabel value="#{}"  />
+										
+					<h:outputLabel value="#{}"  />
+					
+					<h:outputLabel value="Nome:" for="txtNome" />
+					<p:inputText id="txtNome"   value="#{}" maxlength="50" required="true" requiredMessage=""/>
+
+					<h:outputLabel value="Razão social:" for="txtRazaoSocial" />
+					<p:inputText id="txtRazaoSocial"   value="#{}" maxlength="50" required="true" requiredMessage=""/>
+					
+					<h:outputLabel value="Telefone :" for="txtTel1" />
+					<p:inputText id="txtTel1"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="Telefone :" for="txtTel2" />
+					<p:inputText id="txtTel2"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="CEP:" for="txtCep" />
+					<p:inputText id="txtCep"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="Estado:" for="txtEstado" />
+					<p:inputText id="txtEstado"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="Cidade:" for="txtCidade" />
+					<p:inputText id="txtCidade"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="Bairro:" for="txtBairro" />
+					<p:inputText id="txtBairro"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="Rua:" for="txtRua" />
+					<p:inputText id="txtRua"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="Numero/Loja:" for="txtNumero" />
+					<p:inputText id="txtNumero"   value="#{}" maxlength="10"/>
+					
+					<h:outputLabel value="Tipo:" for="cbTipo" required="true" requiredMessage=""/>
+					
+					<h:outputLabel value="Foto perfil:" for="txtftPerfil" />
+					<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+			
+					<h:commandButton action="#{anuncioBean.salvarAnuncio}"
+						type="submit" value="Salvar" update="messages,grid" id="btSalvar" />
+
+
+
+
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+
