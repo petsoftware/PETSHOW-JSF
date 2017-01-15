@@ -32,7 +32,7 @@ public class AuthenticationService {
         return true;
       }
     }
-    catch (AuthenticationException e) {}
+    catch (AuthenticationException e) {e.printStackTrace();}
     return false;
   }
 

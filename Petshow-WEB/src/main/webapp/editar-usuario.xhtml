@@ -8,70 +8,110 @@
 <h:head>
 	<title>PETSHOW</title>
 	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="resources/css/page-anuncio.css" />
+
+
 </h:head>
 
 <h:body>
 	<ui:composition template="templates/PageLayout.xhtml">
 
 		<ui:define name="content">
+		
+			<h:outputScript library="js" name="jquery.mask.min.js" />
 
+
+			<script type="text/javascript">
+    	jQuery(function($){
+    	   $("input.txtCEP").mask("99999-999", {reverse: true});
+    	  
+    	});
+    </script>
 			<h:form enctype="multipart/form-data">
-				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
+				<p:messages id="messages" infoStyle="color:darkgreen"
+					showDetail="true" autoUpdate="true" closable="true" />
 				<h:panelGrid columns="1">
-					
-					<h:outputLabel value="#{}"  />
-										
-					<h:outputLabel value="#{}"  />
-					
+
+					<h:outputLabel value="#{usuarioBean.lblNmLogin}" />
+
+					<h:outputLabel value="#{usuarioBean.lblCNPJ}" />
+
+					<h:outputLabel value="#{usuarioBean.lblEmail}" />
+
 					<h:outputLabel value="Nome:" for="txtNome" />
-					<p:inputText id="txtNome"   value="#{}" maxlength="50" required="true" requiredMessage=""/>
+					<p:inputText id="txtNome" value="#{usuarioBean.usuario.nome}"
+						maxlength="50" required="true"
+						requiredMessage="Informe o campo de nome!" />
 
 					<h:outputLabel value="Razão social:" for="txtRazaoSocial" />
-					<p:inputText id="txtRazaoSocial"   value="#{}" maxlength="50" required="true" requiredMessage=""/>
-					
-					<h:outputLabel value="Telefone :" for="txtTel1" />
-					<p:inputText id="txtTel1"   value="#{}" maxlength="10"/>
-					
-					<h:outputLabel value="Telefone :" for="txtTel2" />
-					<p:inputText id="txtTel2"   value="#{}" maxlength="10"/>
-					
+					<p:inputText id="txtRazaoSocial"
+						value="#{usuarioBean.usuario.razaoSocial}" maxlength="100"
+						required="true" requiredMessage="Informe o campo de Razão social" />
+
+					<h:outputLabel value="Telefone :" for="txtTel1,txtDDD1" />
+					<p:inputText id="txtDDD1" value="#{usuarioBean.usuario.ddd}"
+						maxlength="2" />
+					<p:inputText id="txtTel1" value="#{usuarioBean.usuario.telefone}"
+						maxlength="9" />
+
+					<h:outputLabel value="Telefone :" for="txtTel2,txtDDD2" />
+					<p:inputText id="txtDDD2" value="#{usuarioBean.usuario.ddd2}"
+						maxlength="2" />
+					<p:inputText id="txtTel2" value="#{usuarioBean.usuario.telefone2}"
+						maxlength="9" />
+
 					<h:outputLabel value="CEP:" for="txtCep" />
-					<p:inputText id="txtCep"   value="#{}" maxlength="10"/>
-					
+					<p:inputText id="txtCep" value="#{usuarioBean.usuario.nrCep}"
+						styleClass="txtCEP" converter="cepConverter">
+						<f:validator validatorId="cepValidator" />
+						<p:ajax event="change"
+							update="txtEstado,txtCidade,txtBairro,txtRua"
+							listener="#{usuarioBean.consultaCEP}" />
+					</p:inputText>
+
 					<h:outputLabel value="Estado:" for="txtEstado" />
-					<p:inputText id="txtEstado"   value="#{}" maxlength="10"/>
-					
+					<p:inputText id="txtEstado" value="#{usuarioBean.usuario.estado}"
+						maxlength="15" />
+
 					<h:outputLabel value="Cidade:" for="txtCidade" />
-					<p:inputText id="txtCidade"   value="#{}" maxlength="10"/>
-					
+					<p:inputText id="txtCidade" value="#{usuarioBean.usuario.cidade}"
+						maxlength="50" />
+
 					<h:outputLabel value="Bairro:" for="txtBairro" />
-					<p:inputText id="txtBairro"   value="#{}" maxlength="10"/>
-					
+					<p:inputText id="txtBairro" value="#{usuarioBean.usuario.bairro}"
+						maxlength="50" />
+
 					<h:outputLabel value="Rua:" for="txtRua" />
-					<p:inputText id="txtRua"   value="#{}" maxlength="10"/>
-					
+					<p:inputText id="txtRua" value="#{usuarioBean.usuario.rua}"
+						maxlength="50" />
+
 					<h:outputLabel value="Numero/Loja:" for="txtNumero" />
-					<p:inputText id="txtNumero"   value="#{}" maxlength="10"/>
+					<p:inputText id="txtNumero"
+						value="#{usuarioBean.usuario.nrEndereco}" maxlength="10" />
+
+					 <h:outputLabel value="Tipo:" for="cbTipo" /> 
+					<p:selectOneMenu id="cbTipo" value="#{usuarioBean.usuario.flTpEstabelecimento}"	>
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItem itemLabel="PETSHOP" itemValue="P" />
+						<f:selectItem itemLabel="ONG" itemValue="O" />
+						
+					</p:selectOneMenu>
 					
-					<h:outputLabel value="Tipo:" for="cbTipo" required="true" requiredMessage=""/>
-					
+
 					<h:outputLabel value="Foto perfil:" for="txtftPerfil" />
-					<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-			
-					<h:commandButton action="#{anuncioBean.salvarAnuncio}"
-						type="submit" value="Salvar" update="messages,grid" id="btSalvar" />
+					<h:inputFile id="txtInputFoto" value="#{usuarioBean.imagem}" />
+
+
+
+
+
+
+
+
+
+
+
+					<h:commandButton action="#{usuarioBean.salvarUsuario}"
+						type="submit" value="Salvar" update="messages" id="btSalvar" />
 
 
 

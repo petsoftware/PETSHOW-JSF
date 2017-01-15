@@ -28,7 +28,7 @@
 					<p:inputTextarea rows="6" cols="33" id="txtDesc"    value="#{servicoBean.servico.descricao}"  maxlength="255"/>
 
 				
-					
+					<h:outputLabel value="Status:" for="cbAtivo" />
 					 <p:selectOneMenu id="cbAtivo" value="#{servicoBean.servico.flAtivo}" style="width:125px">
             			<f:selectItem itemLabel="Ativo" itemValue="true" />
             			<f:selectItem itemLabel="Inativo" itemValue="false" />

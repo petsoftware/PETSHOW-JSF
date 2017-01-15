@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="resources/css/page-anuncio.css"/>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content"> 
+		<h:outputScript library="js" name="jquery.mask.min.js" />
+
+
+			<script type="text/javascript">
+    	jQuery(function($){
+    	   
+    	   $("input.txtCelularDDD").mask("99");
+    	   $("input.txtCelularTel").mask("999999999");
+    	   $("input.txtResidencialDDD").mask("99");
+    	   $("input.txtResidencialTel").mask("99999999");
+    	   
+		
+    	});
+    	</script>
+			<h:form  enctype="multipart/form-data" id="form">
+				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="2">
+				<h:panelGrid columns="1">
+					<h:outputLabel value="Nome do produto/serviço:" for="txtNMVenda" />
+					<p:inputText id="txtNMVenda"   value="#{vendaBean.venda.descResumida}" maxlength="30" required="#{!empty param['form:btSalvar']}"
+						requiredMessage="Informe o campo de Nome do produto/serviço!"/>   
+					
+					
+					<h:outputLabel value="Descrição:" for="txtDesc" />
+					<p:inputTextarea rows="6" cols="33" id="txtDesc"     value="#{vendaBean.venda.descricao}" required="#{!empty param['form:btSalvar']}"
+						requiredMessage="Informe o campo de Descrição!"/>
+					
+					<h:outputLabel value="Estado" for="autoCompleteEstado" />
+					<!-- <p:inputText  id="autoCompleteEstado"     value="#{vendaBean.venda.estado}"/> -->
+					<!-- <p:autoComplete id="autoCompleteEstado" dropdown="true" value="#{vendaBean.venda.estado}" completeMethod="#{autoCompleteBean.completeTextEstado}" >
+						<p:ajax event="itemSelect"  listener="#{autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}"  update="cbCidade"/>
+					</p:autoComplete>
+					 -->
+					 
+                   <!-- <p:autoComplete id="cbEstado" dropdown="true" value="#{vendaBean.venda.estado}" completeMethod="#{autoCompleteBean.completeTextEstado}" >
+						<p:ajax event="itemSelect"  listener="#{autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}"  update="cbCidade"/>
+					</p:autoComplete>	 -->
+					
+					<p:selectOneMenu id="cbEstado" value="#{vendaBean.venda.estado}" >
+		               	
+                		<f:selectItem itemLabel="Selecione um estado" itemValue="" noSelectionOption="true" />
+                		<f:selectItems value="#{autoCompleteBean.estados}" var="estado"  itemLabel="#{estado.nome}" itemValue="#{estado.id}"/>
+                		 <p:ajax listener="#{autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}" update="cbCidade" />	
+           			 </p:selectOneMenu>
+					 
+					<p:selectOneMenu value="#{vendaBean.venda.cidade}"  id ="cbCidade" >
+   						 
+   						 <f:selectItems value="#{autoCompleteBean.cidades}" var="cidade"      itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
+   						 <!--<p:ajax event="change" listener="#{autoCompleteBean.consultaBairros}"  update="cbBairro"/>--> 
+   						 
+					</p:selectOneMenu>
+					
+					<p:selectOneMenu value="#{vendaBean.venda.bairro}"  id ="cbBairro" >
+   						 <!-- <p:ajax listener="#{autoCompleteBean.completeTextBairro}" /> -->
+   						 <f:selectItems value="#{autoCompleteBean.bairros}" var="bairro"      itemLabel="#{bairro.nome}" itemValue="#{bairro.id}" />
+					</p:selectOneMenu>
+					
+					
+					<!--  update="autoCompleteCidade" (vendaBean.venda.estado)
+					<h:outputLabel value="Cidade" for="txtCidade" />
+					<p:autoComplete id="autoCompleteCidade" dropdown="true" value="#{vendaBean.venda.cidade}" completeMethod="#{autoCompleteBean.completeTextCidade}" />
+						-->
+					
+				
+					
+					<h:outputLabel value="Cidade" for="txtCidade" />
+					<p:inputText  id="txtCidade"     value="#{vendaBean.venda.cidade}"/>
+					
+					<h:outputLabel value="Bairro" for="txtBairro" />
+					<p:inputText  id="txtBairro"     value="#{vendaBean.venda.bairro}"/>
+					
+					<h:outputLabel value="Telefone Residencial" for="txtResidencialDDD" />
+					<p:inputText styleClass="txtResidencialDDD" id="txtResidencialDDD"     value="#{vendaBean.venda.dddResidencial}" maxlength="2"/>
+					<p:inputText styleClass="txtResidencialTel" id="txtResidencialTel"     value="#{vendaBean.venda.telefoneResidencial}" maxlength="9"/>
+					
+					<h:outputLabel value="Telefone Celular" for="txtCelularDDD" />
+					<p:inputText  styleClass="txtCelularDDD" id="txtCelularDDD"     value="#{vendaBean.venda.dddCelular}" maxlength="2"/>
+					<p:inputText  styleClass="txtCelularTel" id="txtCelularTel"     value="#{vendaBean.venda.telefoneCelular}" maxlength="9"/>
+					
+					<h:outputLabel value="Valor" for="txtValor" />
+					<p:inputText  id="txtValor"   validator="numeroValidator"  value="#{vendaBean.venda.vlVenda}" validatorMessage="Campo de valor aceita somente numericos!"/>
+
+					<h:outputLabel value="FOTO" for="txtInputFoto1"/>
+					<h:inputFile id="txtInputFoto1" value="#{vendaBean.imagem1}" />
+					
+					<h:outputLabel value="FOTO" for="txtInputFoto2"/>
+					<h:inputFile id="txtInputFoto2" value="#{vendaBean.imagem2}" />
+					
+					<h:outputLabel value="FOTO" for="txtInputFoto3"/>
+					<h:inputFile id="txtInputFoto3" value="#{vendaBean.imagem3}" />
+					
+					
+					<h:commandButton action="#{vendaBean.novo}" type="submit" value="Novo"   update="messages"  id="btNovo"/>
+					
+					<h:commandButton action="#{vendaBean.salvarVenda}" 	type="submit" value="Salvar"   update="messages,grid" id="btSalvar"/>
+						
+					<h:commandButton action="#{vendaBean.excluirVenda}" type="submit" value="Excluir"  update="messages,grid"  id="btExcluir"/>
+
+				</h:panelGrid>
+					<h:panelGrid columns="1">
+<!-- 						<h:graphicImage url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"      id="visualizacao" alt="Visualização do anuncio"  /> -->
+					</h:panelGrid>
+				</h:panelGrid>
+				<p:dataTable var="venda" value="#{vendaBean.vendas}"
+					paginator="#{vendaBean.vendas.size() > 12}" rows="13"
+					paginatorPosition="bottom" id="grid">
+
+					<p:column headerText="Produto/Serviço" style="width:20%">
+						<h:outputText value="#{venda.descResumida}" />
+					</p:column>
+
+					<p:column headerText="Descrição" style="width:70%">
+						<h:outputText value="#{venda.descricao}" />
+					</p:column>
+
+					
+					<p:column headerText="Data Cadastro" style="width:10%">
+						<h:outputText value="#{venda.dataCadastro}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Recife" />
+						</h:outputText>
+					</p:column>
+					
+					
+					<p:column headerText="Edição" style="width:20%">
+						<h:commandButton action="#{vendaBean.selecionar(venda)}" type="submit" value="Editar" id="gridEditar" />
+						<h:commandButton action="#{vendaBean.excluirVenda(venda.id)}" type="submit"	value="Excluir" immediate="true"/>
+					</p:column>
+				</p:dataTable>
+
+	
+
+				<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
+				
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+

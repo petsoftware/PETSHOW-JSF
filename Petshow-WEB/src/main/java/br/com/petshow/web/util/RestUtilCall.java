@@ -140,7 +140,33 @@ public class RestUtilCall {
 		WriteConsoleUtil.write("Retornado:"+JsonUtil.getJSON(entidade));
 		return type.cast(entidade);
 	}
-	
+	public static HashMap<String,String> getHashMap(String url) throws ExceptionErroCallRest, ExceptionValidation{
+
+		ResteasyClient client = new ResteasyClientBuilder().build();
+		
+		ResteasyWebTarget target= client.target(URL_BASE+url);
+		
+		
+		Object entidade=null;
+		try{
+			Response response = target.request().get();
+			entidade = response.readEntity(HashMap.class);
+		}catch(Exception ex){
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+		
+		}
+
+		if(entidade instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
+			MapErroRetornoRest erro=(MapErroRetornoRest) entidade;
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}
+		}
+		
+		
+		WriteConsoleUtil.write("Retornado:"+JsonUtil.getJSON(entidade));
+		return (HashMap<String,String>)entidade;
+	}
 	
 	
 	
