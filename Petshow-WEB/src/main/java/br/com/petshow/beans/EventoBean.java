@@ -1,5 +1,7 @@
 package br.com.petshow.beans;
 
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.ws.rs.core.Response;
@@ -12,6 +14,11 @@ import br.com.petshow.model.Evento;
 public class EventoBean extends SuperBean {
 	
 	private Evento evento;
+	public EventoBean (){
+		super();
+		System.out.println("criado o EventoBean:"+ new Date().getTime());
+	}
+
 	
 	
 	@PostConstruct

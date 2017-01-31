@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/page-anuncio.css" />
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content">
+<h:outputScript library="js" name="jquery.mask.min.js" />
+
+
+			<script type="text/javascript">
+    	jQuery(function($){
+
+    	   $("input.txtTel").mask("99999999999");
+
+    	});
+    	</script>
+				<h:form  enctype="multipart/form-data">
+				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="2">
+				
+				
+					<h:panelGrid columns="1">
+						<p:galleria value="#{detalheClassificadoBean.venda.fotos}" var="foto"
+							panelWidth="500" panelHeight="313" showCaption="true">
+								
+								<h:graphicImage url="data:image/jpg;base64,#{foto}" alt="#{detalheClassificadoBean.venda.descResumida}" style="width:300px;height:200"	id="visualizacao"  title="" />
+						</p:galleria>
+						<h:panelGrid columns="2">
+							<h:panelGrid columns="1">
+								<h:outputLabel value="Descrição:" for="txtDesc" />
+								<h:outputLabel id="txtDesc"
+									value="#{detalheClassificadoBean.venda.descricao}" />
+
+							</h:panelGrid>
+							<h:panelGrid columns="2">
+								<h:outputLabel value="Preço:" for="lblValor" />
+								<h:outputLabel id="lblValor"
+									value="#{detalheClassificadoBean.venda.vlVenda}">
+									<f:convertNumber locale="pt_BR" type="currency" />
+								</h:outputLabel>
+								<h:outputLabel value="Telefone Fixo:" for="lblTelFixo" />
+								<h:outputLabel id="lblTelFixo"
+									value="#{detalheClassificadoBean.telResFormatado}">
+									
+								</h:outputLabel>
+								<h:outputLabel value="Telefone Celular:" for="lblTelCelular" />
+								<h:outputLabel id="lblTelCelular"
+									value="#{detalheClassificadoBean.telCelFormatado}">
+									
+								</h:outputLabel>
+								
+								<h:outputLabel value="Estado:" for="lblEstado" />
+								<h:outputLabel id="lblEstado"
+									value="#{detalheClassificadoBean.estado}">
+									
+								</h:outputLabel>
+								
+								<h:outputLabel value="Cidade:" for="lblCidade" />
+								<h:outputLabel id="lblCidade"
+									value="#{detalheClassificadoBean.cidade}">
+									
+								</h:outputLabel>
+								
+								
+								<h:outputLabel value="Bairro:" for="lblBairro" />
+								<h:outputLabel id="lblBairro"
+									value="#{detalheClassificadoBean.bairro}">
+									
+								</h:outputLabel>
+								
+								
+								<h:outputLabel value="Anuncio feito em:" for="lblDataAnuncio" />
+								<h:outputLabel id="lblDataAnuncio"
+									value="#{detalheClassificadoBean.dataAnunciada}">
+									
+								</h:outputLabel>
+
+							</h:panelGrid>
+
+						</h:panelGrid>
+					</h:panelGrid>
+			<h:panelGrid columns="1">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Vendedor:" for="lblContatoVendedor" />
+						<h:outputLabel value="#{detalheClassificadoBean.venda.usuario.nome}" id="lblContatoVendedor" />
+						<h:outputLabel value="Contato:" for="lblTelVendedor" />
+						<h:outputLabel value="#{detalheClassificadoBean.telCelVendedor}" for="lblTelVendedor" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+						<h:outputLabel value="Nome:" for="txtNome" />
+						<p:inputText id="txtNome" required="true" maxlength="40" value="#{detalheClassificadoBean.nome}"/>
+						<h:outputLabel value="E-mail:" for="txtEmail" />
+						<p:inputText id="txtEmail"  required="true"  maxlength="70" value="#{detalheClassificadoBean.email}"
+													requiredMessage="informe seu e-mail!"
+													validatorMessage="E-mail não está em formato válido!">
+        				<f:validateRegex	pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+        				</p:inputText>
+						<h:outputLabel value="Telefone:" for="txtTel" />
+						<p:inputText id="txtTel" maxlength="20" value="#{detalheClassificadoBean.telefone}"/>
+						<h:outputLabel value="Mensagem:" for="txtMensagem" />
+						<p:inputTextarea id="txtMensagem"  required="true" maxlength="250"  rows="6" value="#{detalheClassificadoBean.mensagem}"/>
+						<h:commandButton action="#{detalheClassificadoBean.enviar}" type="submit" value="Enviar"   update="messages"  id="btNovo"/>
+					
+					
+							
+					</h:panelGrid>
+					</h:panelGrid>
+				</h:panelGrid>
+				<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+

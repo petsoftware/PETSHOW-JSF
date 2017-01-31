@@ -9,6 +9,10 @@ import br.com.petshow.model.Adocao;
 @ManagedBean
 public class AdocaoBean extends SuperBean{
 
+	public AdocaoBean (){
+		super();
+		System.out.println("criado o adocaoBean:"+ new Date().getTime());
+	}
 	public String send() {
 
 		Adocao adocao = new Adocao();

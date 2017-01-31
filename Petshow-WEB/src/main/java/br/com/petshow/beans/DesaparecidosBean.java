@@ -2,6 +2,7 @@ package br.com.petshow.beans;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -26,6 +27,13 @@ import br.com.petshow.util.FileApplicationUtil;
 @ManagedBean
 public class DesaparecidosBean {//extends SuperBean{
 
+	public DesaparecidosBean (){
+		super();
+		System.out.println("criado o DesaparecidosBean:"+ new Date().getTime());
+	}
+
+	
+	
 	@ManagedProperty("#{desaparecidosRole}")
 	private DesaparecidosRole desaparecidosRole;
 	@ManagedProperty("#{desaparecidosDAO}")

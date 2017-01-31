@@ -25,7 +25,10 @@ import br.com.petshow.web.util.RestUtilCall;
 @ViewScoped
 public class UsuarioBean {
 
-
+	public UsuarioBean (){
+		super();
+		System.out.println("criado o UsuarioBean:"+ new Date().getTime());
+	}
 	private Usuario usuario;
 
 

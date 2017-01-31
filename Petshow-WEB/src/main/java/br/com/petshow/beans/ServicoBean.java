@@ -1,6 +1,7 @@
 package br.com.petshow.beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -23,6 +24,10 @@ import br.com.petshow.web.util.RestUtilCall;
 @ViewScoped
 public class ServicoBean  {
 
+	public ServicoBean (){
+		super();
+		System.out.println("criado o ServicoBean:"+ new Date().getTime());
+	}
 
 	private Servico servico;
 	private List<Servico> servicos;

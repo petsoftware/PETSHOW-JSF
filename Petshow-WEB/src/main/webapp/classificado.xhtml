@@ -42,49 +42,32 @@
 					<p:inputTextarea rows="6" cols="33" id="txtDesc"     value="#{vendaBean.venda.descricao}" required="#{!empty param['form:btSalvar']}"
 						requiredMessage="Informe o campo de Descrição!"/>
 					
-					<h:outputLabel value="Estado" for="autoCompleteEstado" />
-					<!-- <p:inputText  id="autoCompleteEstado"     value="#{vendaBean.venda.estado}"/> -->
-					<!-- <p:autoComplete id="autoCompleteEstado" dropdown="true" value="#{vendaBean.venda.estado}" completeMethod="#{autoCompleteBean.completeTextEstado}" >
-						<p:ajax event="itemSelect"  listener="#{autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}"  update="cbCidade"/>
-					</p:autoComplete>
-					 -->
-					 
-                   <!-- <p:autoComplete id="cbEstado" dropdown="true" value="#{vendaBean.venda.estado}" completeMethod="#{autoCompleteBean.completeTextEstado}" >
-						<p:ajax event="itemSelect"  listener="#{autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}"  update="cbCidade"/>
-					</p:autoComplete>	 -->
-					
-					<p:selectOneMenu id="cbEstado" value="#{vendaBean.venda.estado}" >
-		               	
-                		<f:selectItem itemLabel="Selecione um estado" itemValue="" noSelectionOption="true" />
-                		<f:selectItems value="#{autoCompleteBean.estados}" var="estado"  itemLabel="#{estado.nome}" itemValue="#{estado.id}"/>
-                		 <p:ajax listener="#{autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}" update="cbCidade" />	
-           			 </p:selectOneMenu>
-					 
-					<p:selectOneMenu value="#{vendaBean.venda.cidade}"  id ="cbCidade" >
-   						 
-   						 <f:selectItems value="#{autoCompleteBean.cidades}" var="cidade"      itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
-   						 <!--<p:ajax event="change" listener="#{autoCompleteBean.consultaBairros}"  update="cbBairro"/>--> 
-   						 
-					</p:selectOneMenu>
-					
-					<p:selectOneMenu value="#{vendaBean.venda.bairro}"  id ="cbBairro" >
-   						 <!-- <p:ajax listener="#{autoCompleteBean.completeTextBairro}" /> -->
-   						 <f:selectItems value="#{autoCompleteBean.bairros}" var="bairro"      itemLabel="#{bairro.nome}" itemValue="#{bairro.id}" />
-					</p:selectOneMenu>
-					
-					
-					<!--  update="autoCompleteCidade" (vendaBean.venda.estado)
-					<h:outputLabel value="Cidade" for="txtCidade" />
-					<p:autoComplete id="autoCompleteCidade" dropdown="true" value="#{vendaBean.venda.cidade}" completeMethod="#{autoCompleteBean.completeTextCidade}" />
-						-->
+					<h:outputLabel value="Estado" for="cbEstado" />
 					
 				
+					<p:selectOneMenu id="cbEstado"  value="#{vendaBean.venda.estado}"  converter="estadoConverter"> 
+		               	
+    	           		 <f:selectItem itemLabel="#{placeHolderBean.selEstado}" itemValue="" noSelectionOption="true"  /> 
+	               		<f:selectItems value="#{vendaBean.autoCompleteBean.estados}" var="estado"  itemLabel="#{estado.nome}" itemValue="#{estado}" />
+            		 		<p:ajax listener="#{vendaBean.autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}"  update="cbCidade"/>	
+            		 		
+           			 </p:selectOneMenu>
+
 					
-					<h:outputLabel value="Cidade" for="txtCidade" />
-					<p:inputText  id="txtCidade"     value="#{vendaBean.venda.cidade}"/>
+					<h:outputLabel value="Cidade" for="cbCidade" />
+					<p:selectOneMenu  id ="cbCidade" value="#{vendaBean.venda.cidade}" converter="cidadeConverter"> 
+   						  <f:selectItem itemLabel="#{placeHolderBean.selCidade}" itemValue="" noSelectionOption="true"  /> 
+   						 <f:selectItems value="#{vendaBean.autoCompleteBean.cidades}" var="cidade"      itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+   						 <p:ajax event="change" listener="#{vendaBean.autoCompleteBean.onCidadeChange(vendaBean.venda.cidade)}" update="cbBairro"  /> 
+   						   
+					</p:selectOneMenu>
 					
-					<h:outputLabel value="Bairro" for="txtBairro" />
-					<p:inputText  id="txtBairro"     value="#{vendaBean.venda.bairro}"/>
+					<h:outputLabel value="Bairro" for="cbBairro" />
+					<p:selectOneMenu value="#{vendaBean.venda.bairro}"  id ="cbBairro" converter="bairroConverter">
+					 <f:selectItem itemLabel="#{placeHolderBean.selBairro}" itemValue="" noSelectionOption="true"  /> 
+   						 <f:selectItems value="#{vendaBean.autoCompleteBean.bairros}" var="bairro"      itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
+   						   
+   					</p:selectOneMenu>
 					
 					<h:outputLabel value="Telefone Residencial" for="txtResidencialDDD" />
 					<p:inputText styleClass="txtResidencialDDD" id="txtResidencialDDD"     value="#{vendaBean.venda.dddResidencial}" maxlength="2"/>

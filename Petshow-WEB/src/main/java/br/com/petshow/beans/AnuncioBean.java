@@ -27,7 +27,10 @@ import br.com.petshow.web.util.RestUtilCall;
 @ManagedBean
 @ViewScoped
 public class AnuncioBean  {
-
+	public AnuncioBean (){
+		super();
+		System.out.println("criado o anuncio:"+ new Date().getTime());
+	}
 
 	private Anuncio anuncio;
 	private List<Anuncio> anuncios;

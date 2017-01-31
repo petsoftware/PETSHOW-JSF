@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
@@ -14,7 +15,9 @@ import javax.servlet.http.Part;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Bairro;
 import br.com.petshow.model.Cidade;
+import br.com.petshow.model.Estado;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.model.Venda;
 import br.com.petshow.role.UsuarioRole;
@@ -25,13 +28,17 @@ import br.com.petshow.web.util.RestUtilCall;
 @ManagedBean
 @ViewScoped
 public class VendaBean {
-	
+	public VendaBean (){
+		super();
+		System.out.println("criado o VendaBean:"+ new Date().getTime());
+	}
 	private Venda venda;
 	private List<Venda> vendas;
 	private CallVendaRest restVenda;
 	private Usuario usuarioLogado;
-	private Cidade cidade;
-	
+	@ManagedProperty(value="#{autoCompleteBean}")
+    private AutoCompleteBean autoCompleteBean;
+
 	private Part imagem1;
 	private Part imagem2;
 	private Part imagem3;
@@ -44,7 +51,7 @@ public class VendaBean {
 		restVenda = new CallVendaRest();
 		usuarioLogado=UsuarioRole.getUsuarioLogado();
 		venda.setUsuario(usuarioLogado);
-		cidade = new Cidade();
+		
 		getVendasBanco();
 	}
 	
@@ -122,7 +129,10 @@ public class VendaBean {
 
 			venda = new Venda();
 			venda.setUsuario(UsuarioRole.getUsuarioLogado());
-
+			getAutoCompleteBean().setCidades(new ArrayList<Cidade>());
+			getAutoCompleteBean().setBairros(new ArrayList<Bairro>());
+			
+			
 
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
@@ -134,6 +144,14 @@ public class VendaBean {
 
 	public void selecionar(Venda venda){
 		this.venda=venda;
+		
+		if(venda.getEstado()!=null){
+			getAutoCompleteBean().consultaCidades(venda.getEstado());
+			if(venda.getCidade()!=null){
+				getAutoCompleteBean().consultaBairros(venda.getCidade());;
+			}
+		}
+		
 
 	}
 	public List<Venda> getVendasBanco() {
@@ -141,6 +159,7 @@ public class VendaBean {
 			vendas=restVenda.getListVenda(usuarioLogado.getId());
 
 		} catch (ExceptionErroCallRest  e) {
+			// erro: nao está mostrando a mensavem
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 
 		} catch (ExceptionValidation e) {
@@ -222,6 +241,16 @@ public class VendaBean {
 
 	public void setImagem3(Part imagem3) {
 		this.imagem3 = imagem3;
+	}
+
+
+	public AutoCompleteBean getAutoCompleteBean() {
+		return autoCompleteBean;
+	}
+
+
+	public void setAutoCompleteBean(AutoCompleteBean autoCompleteBean) {
+		this.autoCompleteBean = autoCompleteBean;
 	}
 	
 }

@@ -40,7 +40,10 @@ public class AutoCompleteBean {
 	private List<Cidade> cidades;
 	private List<Bairro> bairros;
 
-
+	public AutoCompleteBean (){
+		super();
+		System.out.println("criado o AutoCompleteBean:"+ new Date().getTime());
+	}
 
 
 	
@@ -100,17 +103,25 @@ public class AutoCompleteBean {
 		return retorno;
 	}
 	
-	public void onEstadoChange(String id) {
+	public void onEstadoChange(Estado estado) {
 
 		System.out.println("chamou estado trocado");
-
+		System.out.println("trace descobrir lentidao:entrou bean:"+new Date().toString());
+		consultaCidades(estado);
 
 	}
 	
+	public void onCidadeChange(Cidade cidade) {
 
-	public void consultaCidades() {
+		System.out.println("chamou cidade trocado");
+		System.out.println("trace descobrir lentidao:entrou call rest:"+new Date().toString());
+		consultaBairros(cidade);
+	}
+	
+
+	public void consultaCidades(Estado estado) {
 		try {
-			this.cidades=restCallEndereco.getListCidade(EnderecoUtil.getSigla(estadoUltimaConsulta));
+			this.cidades=restCallEndereco.getListCidadeIDEstado(estado.getId()+"");
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 
@@ -139,16 +150,9 @@ public class AutoCompleteBean {
 	}
 
 
-	public void consultaBairros(AjaxBehaviorEvent event) {
+	public void consultaBairros(Cidade cidade) {
 		try {
-			
-			
-			String a = "";
-			SelectEvent selectEvent=(SelectEvent)event;
-			
-			Object dueDate =   selectEvent.getObject();
-			
-			this.bairros=restCallEndereco.getListBairro("");
+			this.bairros=restCallEndereco.getListBairro(cidade.getId()+"");
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 

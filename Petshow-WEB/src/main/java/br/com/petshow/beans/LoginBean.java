@@ -1,5 +1,7 @@
 package br.com.petshow.beans;
 
+import java.util.Date;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -11,7 +13,13 @@ import br.com.petshow.security.*;
 @ManagedBean
 @RequestScoped
 public class LoginBean {
+	public LoginBean (){
+		super();
+		System.out.println("criado o LoginBean:"+ new Date().getTime());
+	}
 
+	
+	
   @ManagedProperty(value = "#{authenticationService}")
   private AuthenticationService authenticationService;
 

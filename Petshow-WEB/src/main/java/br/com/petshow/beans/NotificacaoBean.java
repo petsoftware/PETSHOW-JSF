@@ -23,7 +23,7 @@ import br.com.petshow.model.Servico;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.CallAnuncioRest;
-import br.com.petshow.web.util.CallRestAnimal;
+import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
@@ -34,9 +34,15 @@ import br.com.petshow.web.util.RestUtilCall;
 @ViewScoped
 public class NotificacaoBean  {
 
+	public NotificacaoBean (){
+		super();
+		System.out.println("criado o NotificacaoBean:"+ new Date().getTime());
+	}
+
+	
 	private String autoCompleteUsuario;
 	private Usuario usuario;
-	private CallRestAnimal callRestAnimal;
+	private CallAnimalRest callRestAnimal;
 	private List<Animal> animais;
 	private Animal animalSelecionado;
 	private String usuarioSel;
@@ -57,7 +63,7 @@ public class NotificacaoBean  {
 	public void init() {
 		this.autoCompleteUsuario="";
 		usuario = new Usuario();
-		callRestAnimal= new CallRestAnimal();
+		callRestAnimal= new CallAnimalRest();
 		//teste
 		//usuarioSel="1";
 		//getAnimaisBanco();
@@ -127,11 +133,11 @@ public class NotificacaoBean  {
 		this.usuario = usuario;
 	}
 
-	public CallRestAnimal getCallRestAnimal() {
+	public CallAnimalRest getCallRestAnimal() {
 		return callRestAnimal;
 	}
 
-	public void setCallRestAnimal(CallRestAnimal callRestAnimal) {
+	public void setCallRestAnimal(CallAnimalRest callRestAnimal) {
 		this.callRestAnimal = callRestAnimal;
 	}
 

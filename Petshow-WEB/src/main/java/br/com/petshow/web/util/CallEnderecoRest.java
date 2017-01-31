@@ -1,5 +1,6 @@
 package br.com.petshow.web.util;
 
+import java.util.Date;
 import java.util.List;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -16,11 +17,11 @@ import br.com.petshow.util.MapErroRetornoRest;
 public class CallEnderecoRest extends RestUtilCall{
 	
 	
-	public  List<Cidade> getListCidade(String uf) throws ExceptionErroCallRest, ExceptionValidation{
+	public  List<Cidade> getListCidadeUF(String uf) throws ExceptionErroCallRest, ExceptionValidation{
 
 		client = new ResteasyClientBuilder().build();
 		
-		target= client.target(URL_BASE+"endereco/consulta/cidade/estado/"+uf);
+		target= client.target(URL_BASE+"endereco/consulta/cidade/estado/uf/"+uf);
 		
 		
 		Object entidades = null;
@@ -46,6 +47,37 @@ public class CallEnderecoRest extends RestUtilCall{
 		return (List<Cidade>)entidades;
 	
 	}
+	public  List<Cidade> getListCidadeIDEstado(String id) throws ExceptionErroCallRest, ExceptionValidation{
+		System.out.println("trace descobrir lentidao:entrou call rest:"+new Date().toString());
+		client = new ResteasyClientBuilder().build();
+		
+		target= client.target(URL_BASE+"endereco/consulta/cidade/estado/id/"+id);
+		
+		
+		Object entidades = null;
+		try{
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Cidade>>() {});
+			
+		}catch(Exception ex){
+ 
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+			
+		}
+		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
+			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}else{
+				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
+			}
+		}
+		
+		System.out.println("trace descobrir lentidao:entrou call rest:"+new Date().toString());
+		
+		return (List<Cidade>)entidades;
+	
+	}
+	
 	
 	
 	public  List<Bairro> getListBairro(String idCidade) throws ExceptionErroCallRest, ExceptionValidation{

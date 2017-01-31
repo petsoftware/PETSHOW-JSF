@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/page-anuncio.css" />
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form id="form">
+				<h:panelGrid columns="2">
+					<h:panelGrid columns="1">
+
+						<h:outputLabel value="Palavra-chave:" for="txtPalavra" />
+						<p:inputText id="txtPalavra"
+							value="#{consultaClassificadoBean.palavraChave}" maxlength="50" />
+
+						<h:outputLabel value="Estado:" for="cbEstado" />
+						<p:selectOneMenu id="cbEstado"
+							value="#{consultaClassificadoBean.estado}"
+							converter="estadoConverter">
+
+							<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
+								itemValue=" " noSelectionOption="true" />
+							<f:selectItems
+								value="#{consultaClassificadoBean.autoCompleteBean.estados}"
+								var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
+							<p:ajax
+								listener="#{consultaClassificadoBean.autoCompleteBean.onEstadoChange(consultaClassificadoBean.estado)}"
+								update="cbCidade" />
+
+						</p:selectOneMenu>
+
+
+						<h:outputLabel value="Cidade" for="cbCidade" />
+						<p:selectOneMenu id="cbCidade"
+							value="#{consultaClassificadoBean.cidade}"
+							converter="cidadeConverter">
+							<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
+								itemValue="" noSelectionOption="true" />
+							<f:selectItems
+								value="#{consultaClassificadoBean.autoCompleteBean.cidades}"
+								var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+							<p:ajax event="change"
+								listener="#{consultaClassificadoBean.autoCompleteBean.onCidadeChange(consultaClassificadoBean.cidade)}" />
+
+						</p:selectOneMenu>
+
+
+
+
+						<h:commandButton
+							action="#{consultaClassificadoBean.getVendasBanco}" type="submit"
+							value="Consultar" update="messages" id="btConsulta" />
+
+
+
+
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+
+
+						<p:dataScroller value="#{consultaClassificadoBean.vendas}"
+							var="venda" chunkSize="10" mode="inline" scrollHeight="500">
+							<f:facet name="header">
+            					Classificados
+        					</f:facet>
+
+							<h:panelGrid columns="2" style="width:100%"
+								columnClasses="logo,detail" >
+								<!-- 								<p:graphicImage name="demo/images/car/#{car.brand}-big.gif" /> -->
+
+								<p:outputPanel>
+
+									<h:panelGrid columns="2" style="border-bottom: 1px solid #a8a8a8;    padding: 25px 10px;">
+
+
+										<h:panelGrid columns="1">
+											<h:graphicImage url="data:image/jpg;base64,#{venda.foto}" 	id="visualizacao"  />
+										</h:panelGrid>
+										<h:panelGrid columns="1" cellpadding="5" >
+											<h:outputText value="#{venda.descResumida}"
+												style="font-weight: bold" />
+
+											<h:outputText value="#{venda.descricao}"
+												style="font-weight: bold" />
+
+
+											<h:outputText value="#{venda.vlVenda}"
+												style="font-weight: bold" >
+												<f:convertNumber locale ="pt_BR" type ="currency" />
+												</h:outputText>
+											<h:commandButton value ="ver detalhe" action="classificado-detalhe" >
+											 <f:param name="id" value="#{venda.id}"></f:param>
+											</h:commandButton>
+										</h:panelGrid>
+									</h:panelGrid>
+								</p:outputPanel>
+							</h:panelGrid>
+						</p:dataScroller>
+
+
+
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+
