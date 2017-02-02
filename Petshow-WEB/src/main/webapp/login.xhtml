@@ -28,7 +28,45 @@
       
         </f:facet>
     </p:menubar>
+    
+    
+    <p:carousel  rows="4" value="#{inicialBean.consultaClassificadoBean.vendas}" headerText="Classificados" var="linha" itemStyle="text-align:center" responsive="true">
+        <p:panelGrid columns="2" style="height:250px;width:400px;margin:10px 0px" columnClasses="label,value" layout="grid" styleClass="ui-panelgrid-blank">
+            
+            
+            <h:graphicImage url="data:image/jpg;base64,#{linha.foto}"  />
+            
+ 
+            <p:panelGrid columns="1">
+            	<h:outputText value="#{linha.descResumida}" />
+ 
+           
+            	<h:outputText value="#{linha.descricao}" />
+            	<p:commandButton  value ="ver detalhe"  action="classificado-detalhe" > 
+            					<f:param name="id" value="#{linha.id}"></f:param> 
+					    <!-- <f:setPropertyActionListener value="#{linha.id}" target="#{detalheClassificadoBean.id}" /> --> 
+				</p:commandButton >
+			
+ 			</p:panelGrid>
+            
+        </p:panelGrid>
+ 
+        
+    </p:carousel>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 </h:form>
+
+
+
 
 
 

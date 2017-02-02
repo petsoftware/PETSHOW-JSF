@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Anuncio;
 import br.com.petshow.model.Venda;
 import br.com.petshow.util.FormatacaoUtil;
@@ -22,11 +23,10 @@ import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
-public class DetalheClassificadoBean {
+public class DetalheAdocaoBean {
 
-	private Venda venda;
+	private Adocao adocao;
 	
-	private String id;
 	
 	private String nome;
 	
@@ -36,20 +36,20 @@ public class DetalheClassificadoBean {
 	
 	private String mensagem;
 	
+	private String id;
+	
 	@PostConstruct
 	public void init() {
-		this.venda= new Venda();
+		this.adocao= new Adocao();
+		getAdocaoBanco();
 	
-	
-		getVendaBanco();
 	}
 	
-	public void getVendaBanco(){
+	public void getAdocaoBanco(){
 		try {
-			if(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id") !=null){
-				id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
-			}
-			venda = RestUtilCall.getEntity("venda/"+id,Venda.class);
+			 id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
+			
+			adocao = RestUtilCall.getEntity("adocao/"+id,Adocao.class);
 
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
@@ -70,12 +70,12 @@ public class DetalheClassificadoBean {
 		try {
 			
 			HashMap<String,String> map = new HashMap<String,String>();
-			map.put("destinatario", venda.getUsuario().getEmail());
+			map.put("idAdocao", id );
 			map.put("mensagem", mensagem);
 			map.put("telefone", telefone+"");
 			map.put("email", email);
 			
-			RestUtilCall.post( map, "email/enviar");
+			RestUtilCall.post( map, "notificacao/adocao/msganuncio");
 
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
@@ -90,44 +90,38 @@ public class DetalheClassificadoBean {
 	}
 
 	public String getTelResFormatado(){
-		if(venda ==null || venda.getDddResidencial() ==0 || venda.getTelefoneResidencial()==0){
+		if(adocao ==null || adocao.getDddResidencial() ==null || adocao.getTelefoneResidencial()==null){
 			return "Não Informado";
 			
 		}else{
-			return FormatacaoUtil.telefoneComDDD(venda.getDddResidencial(), venda.getTelefoneResidencial(), true);
+			return FormatacaoUtil.telefoneComDDD(adocao.getDddResidencial(), adocao.getTelefoneResidencial(), true);
 		}
 	}
 	public String getTelCelFormatado(){
-		if(venda ==null || venda.getDddCelular() ==0 || venda.getTelefoneCelular()==0){
-			return "Não Informad!";
+		if(adocao ==null || adocao.getDddCelular() ==null || adocao.getTelefoneCelular()==null){
+			return "Não Informado";
 		}else{
-			return FormatacaoUtil.telefoneComDDD(venda.getDddCelular(), venda.getTelefoneCelular(), false);
+			return FormatacaoUtil.telefoneComDDD(adocao.getDddCelular(), adocao.getTelefoneCelular(), false);
 			
 		}
 	}
 	public String getTelCelVendedor(){
-		if(venda ==null || venda.getUsuario().getDdd() ==0 || venda.getUsuario().getTelefone()==0){
+		//if(venda ==null || adocao.getUsuario().getDdd() ==0 || adocao.getUsuario().getTelefone()==0){
 			return "Não Informado";
-		}else{
-			return FormatacaoUtil.telefoneComDDD(venda.getUsuario().getDdd(), venda.getUsuario().getTelefone(), false);
+			/*}else{
+			return FormatacaoUtil.telefoneComDDD(adocao.getUsuario().getDdd(), adocao.getUsuario().getTelefone(), false);
 			
-		}
+		}*/
+		
 	}
 	public String getDataAnunciada(){
-		if(venda !=null ){
-			return FormatacaoUtil.dataPorExtenso(venda.getDataCadastro());
+		if(adocao !=null ){
+			return FormatacaoUtil.dataPorExtenso(adocao.getDataCadastro());
 		}else{
 			return "Não Informado";
 		}
 	}
 	
-
-	public void setVenda(Venda venda) {
-		this.venda = venda;
-	}
-	public Venda getVenda() {
-		return venda;
-	}
 
 	public String getNome() {
 		return nome;
@@ -162,36 +156,38 @@ public class DetalheClassificadoBean {
 	}
 	
 	public String getEstado() {
-		if(venda.getEstado() !=null){
-			return venda.getEstado().getNome();
+		if(adocao.getEstado() !=null){
+			return adocao.getEstado().getNome();
 		}else{
 			return "Não Informado";
 		}
 		
 	}
 	public String getCidade() {
-		if(venda.getCidade() !=null){
-			return venda.getCidade().getNome();
+		if(adocao.getCidade() !=null){
+			return adocao.getCidade().getNome();
 		}else{
 			return "Não Informado";
 		}
 	}
 	public String getBairro() {
-		if(venda.getBairro() !=null){
-			return venda.getBairro().getNome();
+		if(adocao.getBairro() !=null){
+			return adocao.getBairro().getNome();
 		}else{
 			return "Não Informado";
 		}
 	}
 
-	public String getId() {
-		return id;
+
+
+	public Adocao getAdocao() {
+		return adocao;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+
+
+	public void setAdocao(Adocao adocao) {
+		this.adocao = adocao;
 	}
-	
-	
 	
 }

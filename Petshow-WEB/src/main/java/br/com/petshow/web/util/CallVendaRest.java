@@ -44,12 +44,16 @@ public class CallVendaRest extends RestUtilCall {
 	
 	}
 	
-	
 	public  List<Venda> getListVenda(String palavraChave ,long idCidade,long idEstado) throws ExceptionErroCallRest, ExceptionValidation{
+		return getListVenda( palavraChave , idCidade, idEstado,300);
+	}
+	
+	
+	public  List<Venda> getListVenda(String palavraChave ,long idCidade,long idEstado,int limiteRegistros) throws ExceptionErroCallRest, ExceptionValidation{
 		System.out.println("trace descobrir lentidao:entrou call rest:"+new Date().toString());
 		client = new ResteasyClientBuilder().build();
 		
-		target= client.target(URL_BASE+"venda/consulta/"+palavraChave+"/"+idCidade+"/"+idEstado);
+		target= client.target(URL_BASE+"venda/consulta/"+palavraChave+"/"+idCidade+"/"+idEstado+"/"+limiteRegistros);
 		
 		
 		Object entidades = null;

@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Anuncio;
+import br.com.petshow.model.Perdido;
 import br.com.petshow.model.Venda;
 import br.com.petshow.util.FormatacaoUtil;
 import br.com.petshow.util.ValidationUtil;
@@ -22,13 +24,13 @@ import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
-public class DetalheClassificadoBean {
+public class DetalhePerdidoBean {
 
-	private Venda venda;
-	
-	private String id;
-	
+	private Perdido perdido;
+		
 	private String nome;
+	
+	
 	
 	private String email;
 	
@@ -36,20 +38,21 @@ public class DetalheClassificadoBean {
 	
 	private String mensagem;
 	
+	private String id;
+	
 	@PostConstruct
 	public void init() {
-		this.venda= new Venda();
+		this.perdido= new Perdido();
+		 id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
+		getAdocaoBanco();
 	
-	
-		getVendaBanco();
 	}
 	
-	public void getVendaBanco(){
+	public void getAdocaoBanco(){
 		try {
-			if(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id") !=null){
-				id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
-			}
-			venda = RestUtilCall.getEntity("venda/"+id,Venda.class);
+			
+			
+			perdido = RestUtilCall.getEntity("animal/perdido/"+id,Perdido.class);
 
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
@@ -70,12 +73,12 @@ public class DetalheClassificadoBean {
 		try {
 			
 			HashMap<String,String> map = new HashMap<String,String>();
-			map.put("destinatario", venda.getUsuario().getEmail());
+			map.put("idPerdido", id );
 			map.put("mensagem", mensagem);
 			map.put("telefone", telefone+"");
-			map.put("email", email);
+			map.put("email", email+"");
 			
-			RestUtilCall.post( map, "email/enviar");
+			RestUtilCall.post( map, "notificacao/perdido/msganuncio");
 
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
@@ -90,43 +93,57 @@ public class DetalheClassificadoBean {
 	}
 
 	public String getTelResFormatado(){
-		if(venda ==null || venda.getDddResidencial() ==0 || venda.getTelefoneResidencial()==0){
+		if(perdido ==null || perdido.getDddResidencial() ==null || perdido.getTelefoneResidencial()==null){
 			return "Não Informado";
 			
 		}else{
-			return FormatacaoUtil.telefoneComDDD(venda.getDddResidencial(), venda.getTelefoneResidencial(), true);
+			return FormatacaoUtil.telefoneComDDD(perdido.getDddResidencial(), perdido.getTelefoneResidencial(), true);
 		}
 	}
 	public String getTelCelFormatado(){
-		if(venda ==null || venda.getDddCelular() ==0 || venda.getTelefoneCelular()==0){
-			return "Não Informad!";
+		if(perdido ==null || perdido.getDddCelular() ==null || perdido.getTelefoneCelular()==null){
+			return "Não Informado";
 		}else{
-			return FormatacaoUtil.telefoneComDDD(venda.getDddCelular(), venda.getTelefoneCelular(), false);
+			return FormatacaoUtil.telefoneComDDD(perdido.getDddCelular(), perdido.getTelefoneCelular(), false);
 			
 		}
 	}
 	public String getTelCelVendedor(){
-		if(venda ==null || venda.getUsuario().getDdd() ==0 || venda.getUsuario().getTelefone()==0){
+		//if(venda ==null || adocao.getUsuario().getDdd() ==0 || adocao.getUsuario().getTelefone()==0){
 			return "Não Informado";
-		}else{
-			return FormatacaoUtil.telefoneComDDD(venda.getUsuario().getDdd(), venda.getUsuario().getTelefone(), false);
+			/*}else{
+			return FormatacaoUtil.telefoneComDDD(adocao.getUsuario().getDdd(), adocao.getUsuario().getTelefone(), false);
 			
-		}
+		}*/
+		
 	}
 	public String getDataAnunciada(){
-		if(venda !=null ){
-			return FormatacaoUtil.dataPorExtenso(venda.getDataCadastro());
+		if(perdido !=null ){
+			return FormatacaoUtil.dataPorExtenso(perdido.getDataCadastro());
 		}else{
 			return "Não Informado";
 		}
 	}
-	
-
-	public void setVenda(Venda venda) {
-		this.venda = venda;
+	public String getDtAcontecimentoExt(){
+		
+		
+		
+		if(perdido !=null && perdido.getDtPerdidoAchado() !=null  ){
+			return FormatacaoUtil.dataPorExtenso(perdido.getDtPerdidoAchado());
+		}else{
+			return "Não Informado";
+		}
+		
 	}
-	public Venda getVenda() {
-		return venda;
+	
+	public String getAcontecimento(){
+		String retorno="";
+		if(perdido.getFlAcontecimento().equals("A")){
+			retorno="Encontrado:";
+		}else{
+			retorno="Perdido:";
+		}
+		return retorno;
 	}
 
 	public String getNome() {
@@ -136,6 +153,8 @@ public class DetalheClassificadoBean {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	
 
 	public String getEmail() {
 		return email;
@@ -162,26 +181,34 @@ public class DetalheClassificadoBean {
 	}
 	
 	public String getEstado() {
-		if(venda.getEstado() !=null){
-			return venda.getEstado().getNome();
+		if(perdido.getEstado() !=null){
+			return perdido.getEstado().getNome();
 		}else{
 			return "Não Informado";
 		}
 		
 	}
 	public String getCidade() {
-		if(venda.getCidade() !=null){
-			return venda.getCidade().getNome();
+		if(perdido.getCidade() !=null){
+			return perdido.getCidade().getNome();
 		}else{
 			return "Não Informado";
 		}
 	}
 	public String getBairro() {
-		if(venda.getBairro() !=null){
-			return venda.getBairro().getNome();
+		if(perdido.getBairro() !=null){
+			return perdido.getBairro().getNome();
 		}else{
 			return "Não Informado";
 		}
+	}
+
+	public Perdido getPerdido() {
+		return perdido;
+	}
+
+	public void setPerdido(Perdido perdido) {
+		this.perdido = perdido;
 	}
 
 	public String getId() {
@@ -191,7 +218,8 @@ public class DetalheClassificadoBean {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
-	
+
+
+
 	
 }

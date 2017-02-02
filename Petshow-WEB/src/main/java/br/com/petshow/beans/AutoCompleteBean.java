@@ -121,7 +121,13 @@ public class AutoCompleteBean {
 
 	public void consultaCidades(Estado estado) {
 		try {
-			this.cidades=restCallEndereco.getListCidadeIDEstado(estado.getId()+"");
+			if(estado!=null){
+				this.cidades=restCallEndereco.getListCidadeIDEstado(estado.getId()+"");
+			}else{
+				cidades = new ArrayList<Cidade>();
+				bairros = new ArrayList<Bairro>();
+				
+			}
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 
@@ -152,7 +158,11 @@ public class AutoCompleteBean {
 
 	public void consultaBairros(Cidade cidade) {
 		try {
-			this.bairros=restCallEndereco.getListBairro(cidade.getId()+"");
+			if(cidade !=null){
+				this.bairros=restCallEndereco.getListBairro(cidade.getId()+"");
+			}else{
+				this.bairros= new ArrayList<Bairro>();
+			}
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 

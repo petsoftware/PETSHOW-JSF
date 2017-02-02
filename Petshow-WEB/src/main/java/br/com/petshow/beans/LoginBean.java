@@ -67,6 +67,9 @@ public String getSenha() {
 public void setSenha(String senha) {
 	this.senha = senha;
 }
-  
+public void chamar(){
+	System.out.println("chamou");
+}
+
   
 }
