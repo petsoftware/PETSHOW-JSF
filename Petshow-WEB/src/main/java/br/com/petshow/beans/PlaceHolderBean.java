@@ -45,5 +45,7 @@ public class PlaceHolderBean {
 	public  String getSelFase() {
 		return PlaceHolderUtil.getSelFase();
 	}
-	
+	public  String getSelServico() {
+		return PlaceHolderUtil.getSelServico();
+	}
 }

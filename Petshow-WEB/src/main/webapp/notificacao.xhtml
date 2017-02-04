@@ -22,10 +22,92 @@
 					showDetail="true" autoUpdate="true" closable="true" />
 				<h:panelGrid columns="1">
 
-					<p:outputLabel value="Informe o dono:" for="donoCB" />
-					<p:inputText id="donoCB"   value="#{notificacaoBean.usuarioSel}" valueChangeListener="#{notificacaoBean.eventoConsultaAnimais}" maxlength="30" > 
- 							<p:ajax event="change" update="animalCB,animalCBL,animalL" listener="#{notificacaoBean.eventoConsultaAnimais}" />
-       				 </p:inputText>
+					<!-- 					<p:outputLabel value="Informe o dono:" for="donoCB" /> -->
+					<!-- 					<p:inputText id="donoCB"   value="#{notificacaoBean.usuarioSel}" valueChangeListener="#{notificacaoBean.eventoConsultaAnimais}" maxlength="30" >  -->
+					<!--  							<p:ajax event="change" update="animalCB,animalCBL,animalL" listener="#{notificacaoBean.eventoConsultaAnimais}" /> -->
+					<!--        				 </p:inputText> -->
+					<p:outputLabel value="Usuario:" for="autoUsuario" />
+					<p:autoComplete id="autoUsuario" value="#{notificacaoBean.usuario}"
+						completeMethod="#{notificacaoBean.getclientes}" var="usuario"
+						itemLabel="#{usuario.nome}" queryDelay="1000"
+						itemValue="#{usuario}" minQueryLength="3"
+						emptyMessage="Não existem clientes com esse nome!"
+						converter="usuarioConverter" size="50"
+						placeholder="Consulte o cliente" forceSelection="true">
+						<p:column>
+							<h:graphicImage url="data:image/jpg;base64,#{usuario.foto}" />
+						</p:column>
+
+						<p:column>
+							<h:outputText value="#{usuario.nome}" />
+						</p:column>
+
+						<p:ajax event="itemSelect"
+							listener="#{notificacaoBean.eventoConsultaAnimais}"
+							update="panelGrid,panelAnimalUnico" />
+					</p:autoComplete>
+
+
+					<h:panelGroup id="panelGrid">
+						<p:dataTable id="checkboxDT"
+							rendered="#{notificacaoBean.mostrarGrid()}" var="animal"
+							value="#{notificacaoBean.animais}"
+							selection="#{notificacaoBean.animaisSelecionados}"
+							rowKey="#{animal.id}" style="margin-bottom:0">
+							<f:facet name="header">    Animais  </f:facet>
+							<p:column selectionMode="multiple"
+								style="width:16px;text-align:center" />
+							<p:column headerText="Nome">
+								<h:outputText value="#{animal.nome}" />
+							</p:column>
+							<p:column headerText="Tipo">
+								<h:outputText value="#{animal.tipo}" />
+							</p:column>
+							<p:column headerText="Raça">
+								<h:outputText value="#{animal.raca}" />
+							</p:column>
+						</p:dataTable>
+					</h:panelGroup>
+					<h:panelGroup id="panelAnimalUnico">
+						<h:panelGrid columns="2"
+							rendered="#{notificacaoBean.mostrarlabel()}">
+							<p:outputLabel value="Dados do Animal" />
+							<p:outputLabel value="Nome:" for="lblnome" />
+							<p:outputLabel value="#{notificacaoBean.animalSelecionado.nome}"
+								id="lblnome" />
+							<p:outputLabel value="Tipo:" for="lblTipo" />
+							<p:outputLabel value="#{notificacaoBean.animalSelecionado.tipo}"
+								id="lblTipo" />
+							<p:outputLabel value="Raça:" for="lblRaca" />
+							<p:outputLabel value="#{notificacaoBean.animalSelecionado.raca}"
+								id="lblRaca" />
+						</h:panelGrid>
+					</h:panelGroup>
+
+					<h:outputLabel value="Serviço:" for="cbServico" />
+						<p:selectOneMenu id="cbServico"
+							value="#{notificacaoBean.servico}"
+							converter="servicoConverter">
+
+							<f:selectItem itemLabel="#{placeHolderBean.selServico}"
+								itemValue=" " noSelectionOption="true" />
+							<f:selectItems
+								value="#{notificacaoBean.servicos}"
+								var="servico" itemLabel="#{servico.nmServico}" itemValue="#{servico}" />
+						
+						</p:selectOneMenu>
+
+
+
+
+					<!-- 
+
+
+
+
+
+
+
 
 					<p:outputLabel id='animalL' value="Só tem um animal"  	/>
 					<p:outputLabel value="Informe o animal" for="animalCB" id="animalCBL"	/>
@@ -34,13 +116,13 @@
 						<h:panelGrid columns="2">
 							<p:column>
 								<h:outputText value="#{t.nome}" />
-								<!--  PENDENCIA TROCAR POR FOTO -->
+								 PENDENCIA TROCAR POR FOTO
 							</p:column>
 							<p:column>
 								<h:outputText value="#{t.nome}" />
 							</p:column>
 						</h:panelGrid>
-					</p:selectOneMenu>
+					</p:selectOneMenu> -->
 
 
 

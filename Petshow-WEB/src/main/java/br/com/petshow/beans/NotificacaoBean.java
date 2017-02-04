@@ -15,6 +15,8 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.Part;
 
+import org.primefaces.event.SelectEvent;
+
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
@@ -23,6 +25,8 @@ import br.com.petshow.model.Servico;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.CallAnuncioRest;
+import br.com.petshow.web.util.CallServicoRest;
+import br.com.petshow.web.util.CallUsuarioRest;
 import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
@@ -43,7 +47,12 @@ public class NotificacaoBean  {
 	private String autoCompleteUsuario;
 	private Usuario usuario;
 	private CallAnimalRest callRestAnimal;
+	private CallUsuarioRest callRestUsuariol;
+	private CallServicoRest restServico;
 	private List<Animal> animais;
+	private List<Animal> animaisSelecionados;
+	private List<Usuario> usuarios;
+	private List<Servico> servicos;
 	private Animal animalSelecionado;
 	private String usuarioSel;
 	private Servico servico;
@@ -64,25 +73,29 @@ public class NotificacaoBean  {
 		this.autoCompleteUsuario="";
 		usuario = new Usuario();
 		callRestAnimal= new CallAnimalRest();
+		callRestUsuariol= new CallUsuarioRest();
+		restServico = new CallServicoRest();
+		animais = new ArrayList<Animal>();
+		getServicosBanco();
 		//teste
 		//usuarioSel="1";
 		//getAnimaisBanco();
 	}
 
-	public void eventoConsultaAnimais () {
-	
-		getAnimaisBanco("1");
+	public void eventoConsultaAnimais(SelectEvent event) {
+    	getAnimaisBanco(((Usuario) event.getObject()).getId());
 	 
 	 
 	 }
 
 
-	public void getAnimaisBanco(String  id){
+	public void getAnimaisBanco(long  id){
 		try {
-			animais=callRestAnimal.getListAnimal(Long.parseLong(id));
+			animais=callRestAnimal.getListAnimal(id);
 			if(animais.size()==1){
 				animalSelecionado=animais.get(0);
-
+			}else{
+				animalSelecionado=null;
 			}
 
 		} catch (ExceptionErroCallRest  e) {
@@ -95,6 +108,25 @@ public class NotificacaoBean  {
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+	public List<Usuario> getclientes(String parteNome){
+		try {
+			//usuarios= callRestUsuariol.getListClienteAutoComplete(UsuarioRole.getUsuarioLogado().getId(), parteNome);
+			usuarios= callRestUsuariol.getListClienteAutoComplete(12, parteNome);
+		} catch (ExceptionErroCallRest  e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+
+		} catch (ExceptionValidation e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+			e.printStackTrace();
+		}
+		return usuarios;
 	}
 
 	public void enviarNotificacao(){
@@ -115,6 +147,25 @@ public class NotificacaoBean  {
 			e.printStackTrace();
 		}
 
+	}
+	
+	
+	public List<Servico> getServicosBanco() {
+		try {
+			servicos=restServico.getListServico(UsuarioRole.getUsuarioLogado().getId());
+
+		} catch (ExceptionErroCallRest  e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+
+		} catch (ExceptionValidation e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+			e.printStackTrace();
+		}
+		
+		
+		return servicos;
 	}
 
 	public String getAutoCompleteUsuario() {
@@ -187,5 +238,62 @@ public class NotificacaoBean  {
     	}
     	return this.animais.size()==1;
 	}
-    
+
+	public CallUsuarioRest getCallRestUsuariol() {
+		return callRestUsuariol;
+	}
+
+	public void setCallRestUsuariol(CallUsuarioRest callRestUsuariol) {
+		this.callRestUsuariol = callRestUsuariol;
+	}
+
+	public List<Animal> getAnimaisSelecionados() {
+		return animaisSelecionados;
+	}
+
+	public void setAnimaisSelecionados(List<Animal> animaisSelecionados) {
+		this.animaisSelecionados = animaisSelecionados;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+    public boolean mostrarGrid(){
+    	
+    	if(animais.size()>1){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    	
+    }
+    public boolean mostrarlabel(){
+    	
+    	if(animais.size()==1){
+    		return true;
+    	}else{
+    		return false;
+    	}
+    	
+    }
+
+	public CallServicoRest getRestServico() {
+		return restServico;
+	}
+
+	public void setRestServico(CallServicoRest restServico) {
+		this.restServico = restServico;
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
 }
