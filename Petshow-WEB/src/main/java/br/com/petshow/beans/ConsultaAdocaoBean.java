@@ -1,5 +1,6 @@
 package br.com.petshow.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -31,8 +32,12 @@ import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
-public class ConsultaAdocaoBean {
+public class ConsultaAdocaoBean implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6287940244391936527L;
 	private List<Adocao> adocoes;
 	private CallAnimalRest restAnimal;
 	@ManagedProperty(value="#{autoCompleteBean}")

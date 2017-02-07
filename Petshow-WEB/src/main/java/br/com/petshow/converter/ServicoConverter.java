@@ -7,13 +7,10 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.jsf.FacesContextUtils;
 
-import br.com.petshow.beans.PlaceHolderBean;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Estado;
 import br.com.petshow.model.Servico;
-import br.com.petshow.role.EstadoRole;
 import br.com.petshow.role.ServicoRole;
 import br.com.petshow.util.PlaceHolderUtil;
 
@@ -24,7 +21,7 @@ public class ServicoConverter  implements Converter{
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 
-		ServicoRole role = new ClassPathXmlApplicationContext("spring-context.xml").getBean(ServicoRole.class);
+		ServicoRole role = FacesContextUtils.getWebApplicationContext(context).getBean(ServicoRole.class);
 		Servico servico;
 		try {
 			if(!value.trim().equals("") && !value.trim().equals(PlaceHolderUtil.getSelServico()) ){

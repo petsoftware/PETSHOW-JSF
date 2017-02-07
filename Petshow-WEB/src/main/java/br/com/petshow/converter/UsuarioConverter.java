@@ -7,7 +7,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
@@ -18,7 +18,8 @@ public class UsuarioConverter implements Converter{
 
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		UsuarioRole usuarioRole =new ClassPathXmlApplicationContext("spring-context.xml").getBean(UsuarioRole.class);
+
+		UsuarioRole usuarioRole = FacesContextUtils.getWebApplicationContext(context).getBean(UsuarioRole.class);
 		Usuario usuario;
 		try {
 			usuario = usuarioRole.find(Long.parseLong(value));

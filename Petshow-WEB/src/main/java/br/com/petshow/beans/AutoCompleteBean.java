@@ -1,5 +1,6 @@
 package br.com.petshow.beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,11 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
-
-import org.primefaces.event.SelectEvent;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -27,7 +24,11 @@ import br.com.petshow.web.util.CallEnderecoRest;
 
 @ManagedBean
 @ViewScoped
-public class AutoCompleteBean {
+public class AutoCompleteBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6337290547223375763L;
 	private String caracteres;
 	private CallAutoComplete restCallAuto;
 	private Usuario usuario;

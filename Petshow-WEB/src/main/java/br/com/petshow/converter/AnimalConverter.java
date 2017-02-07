@@ -7,19 +7,18 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
-import br.com.petshow.model.Usuario;
 import br.com.petshow.role.AnimalRole;
-import br.com.petshow.role.UsuarioRole;
 
 @FacesConverter("animalConverter")
 public class AnimalConverter  implements Converter{
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		AnimalRole role =new ClassPathXmlApplicationContext("spring-context.xml").getBean(AnimalRole.class);
+
+		AnimalRole role = FacesContextUtils.getWebApplicationContext(context).getBean(AnimalRole.class);
 		Animal animal;
 		try {
 			animal = role.find(Long.parseLong(value));

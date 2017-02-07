@@ -7,11 +7,10 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.web.jsf.FacesContextUtils;
 
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Cidade;
-
 import br.com.petshow.role.CidadeRole;
 import br.com.petshow.util.PlaceHolderUtil;
 
@@ -20,7 +19,7 @@ public class CidadeConverter  implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		CidadeRole role = new ClassPathXmlApplicationContext("spring-context.xml").getBean(CidadeRole.class);
+		CidadeRole role =  FacesContextUtils.getWebApplicationContext(context).getBean(CidadeRole.class);
 		Cidade cidade;
 		try {
 			if(!value.trim().equals("") && !value.trim().equals(PlaceHolderUtil.getSelCidade())){
