@@ -35,21 +35,24 @@
 						value="#{anuncioBean.anuncio.dataVencimento}"
 						pattern="dd/MM/yyyy HH:mm:ss" />
 						
+					<p:separator />
 					<h:outputLabel value="FOTO" for="txtInputFoto"/>
 					<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
-					
-					<h:commandButton action="#{anuncioBean.novo}" type="submit" value="Novo"   update="messages"  id="btNovo"/>
-					
-					<h:commandButton action="#{anuncioBean.salvarAnuncio}" 	type="submit" value="Salvar"   update="messages,grid" id="btSalvar"/>
-						
-						
-						<h:commandButton action="#{anuncioBean.excluirAnuncio}" type="submit" value="Excluir"  update="messages"  id="btExcluir"/>
-
-				</h:panelGrid>
-					<h:panelGrid columns="1">
-						<h:graphicImage url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"      id="visualizacao" alt="Visualização do anuncio"  />
+					<p:separator />
+					<h:panelGrid columns="6">
+							<h:commandButton action="#{anuncioBean.novo}" type="submit" value="Novo"   update="messages"  id="btNovo"/>
+						 	<h:commandButton action="#{anuncioBean.salvarAnuncio}" 	type="submit" value="Salvar"   update="messages,grid" id="btSalvar"/>
+							<h:commandButton action="#{anuncioBean.excluirAnuncio}" type="submit" value="Excluir"  update="messages"  id="btExcluir"/>
 					</h:panelGrid>
+					
+					
+					
+				</h:panelGrid>        
+				<h:panelGrid columns="1">
+					<h:graphicImage url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"      id="visualizacao" alt="Visualização do anuncio"  />
 				</h:panelGrid>
+			</h:panelGrid>
+				
 				<p:dataTable var="anuncio" value="#{anuncioBean.anuncios}"
 					paginator="#{anuncioBean.anuncios.size() > 12}" rows="13"
 					paginatorPosition="bottom" id="grid">

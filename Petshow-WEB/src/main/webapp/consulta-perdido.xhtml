@@ -19,10 +19,8 @@
 
 			<h:form id="form">
 				<h:panelGrid columns="2">
+					<p:panel header="FILTRO">
 					<h:panelGrid columns="1">
-
-						
-
 						<h:outputLabel value="Estado:" for="cbEstado" />
 						<p:selectOneMenu id="cbEstado"
 							value="#{consultaPerdidoBean.estado}"
@@ -38,7 +36,6 @@
 								update="cbCidade,cbBairro" />
 
 						</p:selectOneMenu>
-
 
 						<h:outputLabel value="Cidade" for="cbCidade" />
 						<p:selectOneMenu id="cbCidade"
@@ -84,17 +81,15 @@
     						<f:selectItem itemLabel="Perdido" 	itemValue="P" />
 						</p:selectOneMenu>
 
-
+						<p:separator />
 						<h:commandButton
 							action="#{consultaPerdidoBean.getPerdidosBanco}" type="submit"
 							value="Consultar" update="messages" id="btConsulta" />
 
-
-
-
 						<input type="hidden" name="${_csrf.parameterName}"
 							value="${_csrf.token}" />
 					</h:panelGrid>
+				</p:panel>
 					<h:panelGrid columns="1">
 						<p:dataScroller value="#{consultaPerdidoBean.perdidos}" var="animal" chunkSize="10" mode="inline" scrollHeight="500">
 							<f:facet name="header">
