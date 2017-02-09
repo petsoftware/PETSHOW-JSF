@@ -9,28 +9,31 @@ import javax.faces.convert.FacesConverter;
 
 import org.springframework.web.jsf.FacesContextUtils;
 
+import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Cidade;
+import br.com.petshow.model.Estado;
 import br.com.petshow.role.CidadeRole;
 import br.com.petshow.util.PlaceHolderUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 @FacesConverter("cidadeConverter")
 public class CidadeConverter  implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		CidadeRole role =  FacesContextUtils.getWebApplicationContext(context).getBean(CidadeRole.class);
+		
 		Cidade cidade;
 		try {
 			if(!value.trim().equals("") && !value.trim().equals(PlaceHolderUtil.getSelCidade())){
-				cidade = role.find(Long.parseLong(value));	
+				cidade = RestUtilCall.getEntity("endereco/consulta/cidade/"+value,Cidade.class);
 			}else{
 				cidade=null;
 			}
 			
-		} catch (NumberFormatException | ExceptionValidation e) {
+		} catch (NumberFormatException | ExceptionValidation |ExceptionErroCallRest e) {
 			 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Não é uma Cidade valida."));
-		}
+		} 
 		return cidade;
 		
 		

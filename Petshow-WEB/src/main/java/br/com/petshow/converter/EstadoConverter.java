@@ -9,10 +9,13 @@ import javax.faces.convert.FacesConverter;
 
 import org.springframework.web.jsf.FacesContextUtils;
 
+import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Anuncio;
 import br.com.petshow.model.Estado;
 import br.com.petshow.role.EstadoRole;
 import br.com.petshow.util.PlaceHolderUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 @FacesConverter(value ="estadoConverter")
 public class EstadoConverter  implements Converter{
@@ -22,15 +25,15 @@ public class EstadoConverter  implements Converter{
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 
-		estadoRole = FacesContextUtils.getWebApplicationContext(context).getBean(EstadoRole.class);
+		
 		Estado estado;
 		try {
 			if(!value.trim().equals("") && !value.trim().equals(PlaceHolderUtil.getSelEstado()) ){
-				estado = estadoRole.find(Long.parseLong(value));
+				estado = RestUtilCall.getEntity("endereco/consulta/estado/"+value,Estado.class);
 			}else{
 				estado=null;
 			}
-		} catch (NumberFormatException | ExceptionValidation e) {
+		} catch (NumberFormatException | ExceptionValidation | ExceptionErroCallRest e) {
 			 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Não é um Estado valido."));
 		}
 		return estado;

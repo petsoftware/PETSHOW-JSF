@@ -43,7 +43,7 @@ public class NotificacaoBean  {
 		System.out.println("criado o NotificacaoBean:"+ new Date().getTime());
 	}
 
-	
+	private int situacao;
 	private String autoCompleteUsuario;
 	private Usuario usuario;
 	private CallAnimalRest callRestAnimal;
@@ -58,7 +58,24 @@ public class NotificacaoBean  {
 	private Servico servico;
 	private boolean mostrarComboBoxAnimal;
 	private boolean mostrarLabelAnimal;
+    private Date horaSituacao;
 
+
+	public Date getHoraSituacao() {
+		return horaSituacao;
+	}
+
+	public void setHoraSituacao(Date horaSituacao) {
+		this.horaSituacao = horaSituacao;
+	}
+
+	public int getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(int situacao) {
+		this.situacao = situacao;
+	}
 
 	public void setMostrarComboBoxAnimal(boolean mostrarComboBoxAnimal) {
 		this.mostrarComboBoxAnimal = mostrarComboBoxAnimal;
@@ -87,6 +104,10 @@ public class NotificacaoBean  {
 	 
 	 
 	 }
+	public void eventoConsultaAnimais2(SelectEvent event) {
+	    	String a = event.toString();
+	   	 String b="";
+	   	 }
 
 
 	public void getAnimaisBanco(long  id){
@@ -130,7 +151,13 @@ public class NotificacaoBean  {
 	}
 
 	public void enviarNotificacao(){
-		try {
+		
+		
+		System.out.println("enviada notificacao");
+		
+		
+		
+	/*	try {
 			HashMap<String, String> parametros = new HashMap<String,String>();
 			parametros.put("idUsuario", "1");
 			parametros.put("idAnimal", "1");
@@ -146,7 +173,7 @@ public class NotificacaoBean  {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
-
+*/
 	}
 	
 	
@@ -295,5 +322,12 @@ public class NotificacaoBean  {
 
 	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
+	}
+	
+	public boolean mostrarTxtHora(){
+		if(situacao==3 ||situacao==4){
+			return true;
+		}
+		return false;
 	}
 }

@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+
+
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content">
+		
+		
+			<h:form enctype="multipart/form-data">
+				<p:messages id="messages" infoStyle="color:darkgreen"
+					showDetail="true" autoUpdate="true" closable="true" />
+				<h:panelGrid columns="1">
+
+					
+					<h:outputLabel value="ID:" for="txtID" />
+					<p:inputText id="txtID" value="#{tarefaBean.tarefa.id}"	 />
+
+					<h:outputLabel value="Data:" for="txtData" />
+					
+						<p:calendar readonly="true" disabled="true" id="txtInicio"
+						value="#{tarefaBean.tarefa.dataCriacao}"
+						pattern="dd/MM/yyyy HH:mm:ss"/>
+					
+					<h:outputLabel value="STATUS:" for="txtStatus" />
+					<p:inputText  readonly="true"  id="txtStatus" value="#{tarefaBean.tarefa.status}" />
+				
+								
+					<h:outputLabel value="Descreva a tarefa:" for="txtDesc" />
+					<p:inputTextarea rows="6" cols="33" id="txtDesc"  style="width:70%" maxlength="6000" 
+					    value="#{tarefaBean.tarefa.descTarefa}"/>
+			
+					<h:outputLabel value="Criador:" for="cbCriador" />
+					<p:selectOneMenu id="cbCriador" value="#{tarefaBean.tarefa.criador}">
+						<f:selectItem itemLabel="Selecione o Desenvolvedor" 	itemValue="" noSelectionOption="true" />
+    					<f:selectItems value="#{tarefaBean.criadores}"/>
+					</p:selectOneMenu>	
+					
+					<h:outputLabel value="Tipo:" for="cbTipo" />
+					<p:selectOneMenu id="cbTipo" value="#{tarefaBean.tarefa.tipo}">
+						<f:selectItem itemLabel="Selecione o tipo" 	itemValue="" noSelectionOption="true" />
+    					<f:selectItems value="#{tarefaBean.tipos}"/>
+					</p:selectOneMenu>	
+					
+					<h:outputLabel value="Prioridade:" for="cbPrioridade" />
+					<p:selectOneMenu id="cbPrioridade" value="#{tarefaBean.tarefa.prioridade}">
+						<f:selectItem itemLabel="Selecione a Prioridade" 	itemValue="" noSelectionOption="true" />
+    					<f:selectItems value="#{tarefaBean.prioridades}"/>
+					</p:selectOneMenu>	
+					<h:outputLabel value="Alocada:" for="cbAlocada" />
+					<p:selectOneMenu id="cbAlocada" value="#{tarefaBean.tarefa.desenvAlocado}">
+						<f:selectItem itemLabel="Selecione o Desenvolvedor" 	itemValue="" noSelectionOption="true" />
+    					<f:selectItems value="#{tarefaBean.criadores}"/>
+					</p:selectOneMenu>	
+					
+				
+				
+				<h:panelGrid columns="2">
+				<h:panelGrid columns="2">
+				<h:outputLabel value="Descreva a observação:" for="txtObs" />
+					<p:inputTextarea rows="6" cols="80" id="txtObs" maxlength="6000" 
+					    value="#{tarefaBean.observacao}"/>
+				</h:panelGrid>	    
+					    	<h:commandButton action="#{tarefaBean.adicionarObservacao}"
+						type="submit" value="Salvar Observação" update="messages,grid" id="btSalvarObs" />
+					    
+				</h:panelGrid>
+						<p:dataTable id="grid"
+							var="linha" value="#{tarefaBean.tarefa.observacao}"
+							 style="margin-bottom:0">
+							
+							
+							<p:column headerText="Observações">
+								<h:outputText value="#{linha}" />
+							</p:column>
+							
+						</p:dataTable>
+				<h:panelGrid columns="7">
+						<h:commandButton action="#{tarefaBean.novo}" type="submit" value="Novo" update="messages" id="btNovo" />
+						<h:commandButton action="#{tarefaBean.salvarTarefa}" type="submit" value="Salvar" update="messages" id="btSalvar" />
+						<h:commandButton action="#{tarefaBean.consultarTarefa}"	type="submit" value="Consultar" update="messages" id="btConsultar" />
+						<h:commandButton action="#{tarefaBean.cancelar}" type="submit" value="Cancelar" update="messages" id="btCancelar" />
+						<h:commandButton action="#{tarefaBean.reabrir}" type="submit" value="Reabrir" update="messages" id="btReabrir" />
+						<h:commandButton action="#{tarefaBean.postergar}" 	type="submit" value="Postergar" update="messages" id="btPostergar" />
+						<h:commandButton action="#{tarefaBean.finalizar}" type="submit" value="Finalizar" update="messages" id="brFinalizar" />	
+					</h:panelGrid>	
+
+
+
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+				</h:panelGrid>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+

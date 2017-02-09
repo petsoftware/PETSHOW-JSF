@@ -9,20 +9,23 @@ import javax.faces.convert.FacesConverter;
 
 import org.springframework.web.jsf.FacesContextUtils;
 
+import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
+import br.com.petshow.model.Bairro;
 import br.com.petshow.role.AnimalRole;
+import br.com.petshow.web.util.RestUtilCall;
 
 @FacesConverter("animalConverter")
 public class AnimalConverter  implements Converter{
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 
-		AnimalRole role = FacesContextUtils.getWebApplicationContext(context).getBean(AnimalRole.class);
+		
 		Animal animal;
 		try {
-			animal = role.find(Long.parseLong(value));
-		} catch (NumberFormatException | ExceptionValidation e) {
+			animal =  RestUtilCall.getEntity("animal/"+value,Animal.class);
+		} catch (NumberFormatException | ExceptionValidation  |ExceptionErroCallRest e) {
 			 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid Animal."));
 		}
 		return animal;

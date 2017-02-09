@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PETSHOW</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/page-anuncio.css" />
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/PageLayout.xhtml">
+
+		<ui:define name="content">
+
+			<h:form id="form">
+				
+					
+			
+
+
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
+					
+					<h:panelGrid columns="1">
+
+						<p:dataTable var="tarefa" widgetVar="tabelaTable" value="#{consultaTarefaBean.tarefas}" filteredValue="#{consultaTarefaBean.tarefasFiltradas}" style="margin-bottom:40px">
+        					<f:facet name="header">   Tarefas   </f:facet>
+        						<p:column headerText="Ver" style="width:2%">
+            						<h:commandButton action="tarefa" >
+            						
+										<f:param name="id" value="#{tarefa.id}"></f:param>
+									</h:commandButton>
+        						</p:column>
+        						<p:column headerText="Id" sortBy="#{tarefa.id}"  style="width:3%">
+        							<h:outputText value="#{tarefa.id}" />
+        						</p:column>
+        						<p:column headerText="Status" sortBy="#{tarefa.status}" style="width:5%">
+            						<h:outputText value="#{tarefa.status}" />
+        						</p:column>
+        						<p:column headerText="Data" sortBy="#{tarefa.dataCriacao}"  style="width:5%">
+            						<h:outputText value="#{tarefa.dataCriacao}" >
+            						<f:convertDateTime pattern="dd/MM/yyyy" 	timeZone="America/Recife" />
+            						</h:outputText>
+        						</p:column>
+        						<p:column headerText="Criador" sortBy="#{tarefa.criador}"  filterBy="#{tarefa.criador}" filterMatchMode="in" style="width:5%">
+        							<f:facet name="filter">
+                						<p:selectCheckboxMenu  onchange="PF('tabelaTable').filter()" panelStyle="width:125px" scrollHeight="150">
+                    						<f:selectItems value="#{consultaTarefaBean.criadores}" />
+                						</p:selectCheckboxMenu>
+            						</f:facet>
+            						<h:outputText value="#{tarefa.criador}" />
+        						</p:column>
+        						<p:column headerText="Tipo" sortBy="#{tarefa.tipo}" style="width:7%">
+            						<h:outputText value="#{tarefa.tipo}" />
+        						</p:column>
+        						<p:column headerText="Prioridade" sortBy="#{tarefa.prioridade}" style="width:8%">
+            						<h:outputText value="#{tarefa.prioridade}" />
+        						</p:column>
+        						<p:column headerText="Alocada" sortBy="#{tarefa.desenvAlocado}" style="width:5%">
+            						<h:outputText value="#{tarefa.desenvAlocado}" />
+        						</p:column>
+        						<p:column headerText="Descrição" style="width:53%">
+            						<h:outputText value="#{tarefa.descTarefa}" />
+        						</p:column>
+        						
+ 
+    					</p:dataTable>
+					
+
+
+
+					</h:panelGrid>
+			
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
+
