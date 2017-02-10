@@ -32,8 +32,7 @@
         					<f:facet name="header">   Tarefas   </f:facet>
         						<p:column headerText="Ver" style="width:2%">
             						<h:commandButton action="tarefa" >
-            						
-										<f:param name="id" value="#{tarefa.id}"></f:param>
+            							<f:param name="id" value="#{tarefa.id}"></f:param>
 									</h:commandButton>
         						</p:column>
         						<p:column headerText="Id" sortBy="#{tarefa.id}"  style="width:3%">
@@ -47,12 +46,15 @@
             						<f:convertDateTime pattern="dd/MM/yyyy" 	timeZone="America/Recife" />
             						</h:outputText>
         						</p:column>
-        						<p:column headerText="Criador" sortBy="#{tarefa.criador}"  filterBy="#{tarefa.criador}" filterMatchMode="in" style="width:5%">
-        							<f:facet name="filter">
-                						<p:selectCheckboxMenu  onchange="PF('tabelaTable').filter()" panelStyle="width:125px" scrollHeight="150">
-                    						<f:selectItems value="#{consultaTarefaBean.criadores}" />
-                						</p:selectCheckboxMenu>
-            						</f:facet>
+<!--         						<p:column headerText="Criador" sortBy="#{tarefa.criador}"  filterBy="#{tarefa.criador}" filterMatchMode="in" style="width:5%"> -->
+<!--         							<f:facet name="filter"> -->
+<!--                 						<p:selectCheckboxMenu  onchange="PF('tabelaTable').filter()" panelStyle="width:125px" scrollHeight="150"> -->
+<!--                     						<f:selectItems value="#{consultaTarefaBean.criadores}" /> -->
+<!--                 						</p:selectCheckboxMenu> -->
+<!--             						</f:facet> -->
+<!--             						<h:outputText value="#{tarefa.criador}" /> -->
+<!--         						</p:column> -->
+								<p:column headerText="Criador" sortBy="#{tarefa.criador}"   style="width:5%">
             						<h:outputText value="#{tarefa.criador}" />
         						</p:column>
         						<p:column headerText="Tipo" sortBy="#{tarefa.tipo}" style="width:7%">
@@ -64,7 +66,7 @@
         						<p:column headerText="Alocada" sortBy="#{tarefa.desenvAlocado}" style="width:5%">
             						<h:outputText value="#{tarefa.desenvAlocado}" />
         						</p:column>
-        						<p:column headerText="Descrição" style="width:53%">
+        						<p:column headerText="Descrição" style="width:50%">
             						<h:outputText value="#{tarefa.descTarefa}" />
         						</p:column>
         						
