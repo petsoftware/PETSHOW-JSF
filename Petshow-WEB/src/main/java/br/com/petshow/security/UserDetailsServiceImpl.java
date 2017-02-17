@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
       return entityManager.createNamedQuery(Usuario.FIND_POR_NOME_LOGIN, Usuario.class).setParameter("nmLogin", nmLogin).getSingleResult();
       
     }catch (NoResultException e) {
-      throw new UsernameNotFoundException("Usuario n„o encontrado!");
+      throw new UsernameNotFoundException("Usuario n√£o encontrado!");
     }
   }
 }

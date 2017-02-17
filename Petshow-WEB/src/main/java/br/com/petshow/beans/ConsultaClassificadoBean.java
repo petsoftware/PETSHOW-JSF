@@ -47,7 +47,6 @@ public class ConsultaClassificadoBean {
 	}
 	public ConsultaClassificadoBean (){
 		super();
-		System.out.println("criado o ConsultaClassificadoBean:"+ new Date().getTime());
 	}
 
 	
@@ -63,7 +62,6 @@ public class ConsultaClassificadoBean {
 	}
 	public List<Venda> getVendasBanco() {
 		try {
-			System.out.println("trace descobrir lentidao: chamou bean:"+new Date().toString());
 			long idEstado=0;
 			long idCidade=0;
 			if(estado!=null){

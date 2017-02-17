@@ -1,7 +1,5 @@
 package br.com.petshow.beans;
 
-import java.util.Date;
-
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.ws.rs.core.Response;
@@ -16,7 +14,6 @@ public class EventoBean extends SuperBean {
 	private Evento evento;
 	public EventoBean (){
 		super();
-		System.out.println("criado o EventoBean:"+ new Date().getTime());
 	}
 
 	
@@ -34,8 +31,8 @@ public class EventoBean extends SuperBean {
 			throw new RuntimeException("Failed : HTTP error code : "
 	                          + response.getStatus());
 		}
-		System.out.println("Server response : \n");
-		System.out.println(response.readEntity(String.class));
+//		System.out.println("Server response : \n");
+//		System.out.println(response.readEntity(String.class));
 		return null;
 	}
 

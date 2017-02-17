@@ -29,7 +29,6 @@ public class DesaparecidosBean {//extends SuperBean{
 
 	public DesaparecidosBean (){
 		super();
-		System.out.println("criado o DesaparecidosBean:"+ new Date().getTime());
 	}
 
 	
@@ -76,9 +75,9 @@ public class DesaparecidosBean {//extends SuperBean{
     				throw new RuntimeException("Failed : HTTP error code : "
     		                          + response.getStatus());
     			}
-    			System.out.println("Server response : \n");
-    			System.out.println(response.readEntity(String.class));
-    			//response.close();
+//    			System.out.println("Server response : \n");
+//    			System.out.println(response.readEntity(String.class));
+//    			//response.close();
                 //System.out.println(base64AsString);
                 //desaparecidosRole.insert(desaparecidos);
          } catch (IOException e) {

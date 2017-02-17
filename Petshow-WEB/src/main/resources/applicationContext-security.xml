@@ -10,11 +10,22 @@
     <http use-expressions="true" auto-config="true" > 
     
         <!-- <intercept-url pattern="/pages/**" access="isAuthenticated()" /> -->
-         <intercept-url pattern="/pages/**" access="permitAll" />
+        <!-- 
+        *********************************************************
+        		DESCRIÇÃO DAS CONFIGURAÇÕES
+        *********************************************************
+        @ - pattern : Indica o Padrão de URL que será interceptado pelo Spring Security. A forme de identificação
+        do padrão foi definido pelo atributo path-type.
+        @ - method  : Metodo de requisição que será considerada válida para permitir o acesso ao recurso. Os valores
+        são GET. DELETE, HEAD, OPTIONS e POST. Por padrão qualquer método será aceito.
+        @ - acess   : Lista separada por vírgula dos nomes de permissão (ROLE) que serão aceitos para permitir acesso ao
+        recruso.
+        @ - requires-channel : Permite indicar um protocolo obrigatório para o acesso ao recurso. Os valores pos´oveis
+        são: any, http e https. O valor padrão é any  
+         -->
+        <intercept-url pattern="/pages/**" access="permitAll" />
         <intercept-url pattern="/**" access="permitAll" />
-       
         <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml" />
-        
         <!-- <access-denied-handler error-page="/semPermissao.xhtml" />-->
 
     </http>

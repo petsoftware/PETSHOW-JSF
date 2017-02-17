@@ -48,7 +48,6 @@ public class CallEnderecoRest extends RestUtilCall{
 	
 	}
 	public  List<Cidade> getListCidadeIDEstado(String id) throws ExceptionErroCallRest, ExceptionValidation{
-		System.out.println("trace descobrir lentidao:entrou call rest:"+new Date().toString());
 		client = new ResteasyClientBuilder().build();
 		
 		target= client.target(URL_BASE+"endereco/consulta/cidade/estado/id/"+id);
@@ -71,8 +70,6 @@ public class CallEnderecoRest extends RestUtilCall{
 				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
 			}
 		}
-		
-		System.out.println("trace descobrir lentidao:entrou call rest:"+new Date().toString());
 		
 		return (List<Cidade>)entidades;
 	

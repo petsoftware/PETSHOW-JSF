@@ -43,7 +43,6 @@ public class AutoCompleteBean implements Serializable{
 
 	public AutoCompleteBean (){
 		super();
-		System.out.println("criado o AutoCompleteBean:"+ new Date().getTime());
 	}
 
 
@@ -52,7 +51,6 @@ public class AutoCompleteBean implements Serializable{
 
 	@PostConstruct
 	public void init() {
-		System.out.println("chamou bean autocomplete");
 		restCallAuto = new CallAutoComplete();
 		restCallEndereco = new CallEnderecoRest();
 		cidades = new ArrayList<Cidade>();
@@ -105,17 +103,11 @@ public class AutoCompleteBean implements Serializable{
 	}
 	
 	public void onEstadoChange(Estado estado) {
-
-		System.out.println("chamou estado trocado");
-		System.out.println("trace descobrir lentidao:entrou bean:"+new Date().toString());
 		consultaCidades(estado);
 
 	}
 	
 	public void onCidadeChange(Cidade cidade) {
-
-		System.out.println("chamou cidade trocado");
-		System.out.println("trace descobrir lentidao:entrou call rest:"+new Date().toString());
 		consultaBairros(cidade);
 	}
 	

@@ -11,7 +11,6 @@ public class AdocaoBean extends SuperBean{
 
 	public AdocaoBean (){
 		super();
-		System.out.println("criado o adocaoBean:"+ new Date().getTime());
 	}
 	public String send() {
 
@@ -24,8 +23,8 @@ public class AdocaoBean extends SuperBean{
 				throw new RuntimeException("Failed : HTTP error code : "
 		                          + response.getStatus());
 			}
-			System.out.println("Server response : \n");
-			System.out.println(response.readEntity(String.class));
+//			System.out.println("Server response : \n");
+//			System.out.println(response.readEntity(String.class));
 			response.close();
 		} catch (Exception e) {
 			e.printStackTrace();

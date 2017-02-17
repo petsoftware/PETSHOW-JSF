@@ -29,7 +29,6 @@ import br.com.petshow.web.util.RestUtilCall;
 public class AnuncioBean  {
 	public AnuncioBean (){
 		super();
-		System.out.println("criado o anuncio:"+ new Date().getTime());
 	}
 
 	private Anuncio anuncio;

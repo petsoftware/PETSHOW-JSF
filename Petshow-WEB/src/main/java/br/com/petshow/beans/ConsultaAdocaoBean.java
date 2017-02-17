@@ -59,7 +59,6 @@ public class ConsultaAdocaoBean implements Serializable{
 	}
 	public ConsultaAdocaoBean (){
 		super();
-		System.out.println("criado o ConsultaClassificadoBean:"+ new Date().getTime());
 	}
 
 	
