@@ -20,18 +20,18 @@ public class CallUsuarioRest  extends RestUtilCall {
 	public  List<Usuario> getListClienteAutoComplete(long idEstabelecimento,String parteNome) throws ExceptionErroCallRest, ExceptionValidation{
 
 		client = new ResteasyClientBuilder().build();
-		
+
 		target= client.target(URL_BASE+"usuario/consulta/clientes/"+idEstabelecimento+"/"+parteNome);
-		
-		
+
+
 		Object entidades = null;
 		try{
 			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Usuario>>() {});
-			
+
 		}catch(Exception ex){
- 
+
 			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
-			
+
 		}
 		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
 			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
@@ -41,28 +41,28 @@ public class CallUsuarioRest  extends RestUtilCall {
 				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
 			}
 		}
-		
-		
-		
+
+
+
 		return (List<Usuario>)entidades;
-	
+
 	}
-	
+
 	public  List<Usuario> getListCliente(long idEstabelecimento) throws ExceptionErroCallRest, ExceptionValidation{
 
 		client = new ResteasyClientBuilder().build();
-		
+
 		target= client.target(URL_BASE+"usuario/consulta/clientes/"+idEstabelecimento);
-		
-		
+
+
 		Object entidades = null;
 		try{
 			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Usuario>>() {});
-			
+
 		}catch(Exception ex){
- 
+
 			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
-			
+
 		}
 		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
 			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
@@ -72,11 +72,41 @@ public class CallUsuarioRest  extends RestUtilCall {
 				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
 			}
 		}
-		
-		
-		
+
+
+
 		return (List<Usuario>)entidades;
-	
+
 	}
-	
+
+	public  Usuario getUserByLoginName(String nmLogin) throws ExceptionErroCallRest, ExceptionValidation{
+
+		client = new ResteasyClientBuilder().build();
+
+		target= client.target(URL_BASE+"usuario/consulta/login/"+nmLogin);
+
+
+		Object entidades = null;
+		try{
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<Usuario>() {});
+
+		}catch(Exception ex){
+
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+
+		}
+		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
+			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}else{
+				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
+			}
+		}
+
+		return (Usuario)entidades;
+
+	}
+
+
 }

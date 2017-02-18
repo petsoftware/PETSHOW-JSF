@@ -9,6 +9,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.petshow.security.*;
+import br.com.petshow.util.MD5EncriptUtil;
 
 @ManagedBean
 @RequestScoped
@@ -31,7 +32,7 @@ public class LoginBean {
 	boolean success = authenticationService.login(usuario, senha);
     
     if (!success) {
-      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Usu�rio ou senha inv�lidos!"));
+      FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Usuário ou senha inválidos!"));
       return "";
     }
     
@@ -65,11 +66,13 @@ public String getSenha() {
 }
 
 public void setSenha(String senha) {
-	this.senha = senha;
+	this.senha = MD5EncriptUtil.toMD5(senha) ;
 }
+
 public void chamar(){
 	System.out.println("chamou");
 }
+
 
   
 }
