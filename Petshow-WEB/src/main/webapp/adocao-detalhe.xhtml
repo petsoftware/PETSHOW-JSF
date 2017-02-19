@@ -1,34 +1,35 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="templates/main.xhtml">
 
-<h:head>
-	<title>PETSHOW</title>
-	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="resources/css/page-anuncio.css" />
-</h:head>
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="bullhorn" />
+	<ui:param name="pageTitle" value="DETALHES DA ADOÇÃO" />
 
-<h:body>
-	<ui:composition template="templates/PageLayout.xhtml">
+	<ui:define name="header">
 
-		<ui:define name="content">
-<h:outputScript library="js" name="jquery.mask.min.js" />
+	</ui:define>
 
-
-			<script type="text/javascript">
+	<ui:define name="body">
+		<script type="text/javascript">
     	jQuery(function($){
 
     	   $("input.txtTel").mask("99999999999");
 
     	});
     	</script>
-				<h:form  enctype="multipart/form-data">
-				<p:messages id="messages" infoStyle="color:darkgreen" showDetail="true" autoUpdate="true" closable="true" />
-				<h:panelGrid columns="2">
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+
+									<h:panelGrid columns="2">
 				
 				
 					<h:panelGrid columns="1">
@@ -107,12 +108,14 @@
 					</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGrid>
-				<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-			</h:form>
 
-		</ui:define>
-	</ui:composition>
-</h:body>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
+
 </html>
 

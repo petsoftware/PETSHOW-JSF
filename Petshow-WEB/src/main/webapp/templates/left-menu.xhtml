@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+       
+    <ui:composition>
+        	
+    	<div id="sidebar-wrapper">
+    		<div class="sidebar-brand">
+             	<a href="#"><img alt="Logomarca" src="#{request.contextPath}/resources/images/logomarca.svg"></img></a>
+           	</div>
+           	<div class="sidebar-content">
+           		<div id="sidebar-body">
+		    		<ul class="sidebar-nav">
+			      		<li>		      		
+			            	<p:link id="anuncio" styleClass="#{activeAnuncio}" title="Anúcio" outcome="anuncio" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-bullhorn"></i>
+		                			</div>
+		                			<div class="media-body">ANÚNCIO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="adocao" styleClass="#{activeAnuncio}" title="Adoção" outcome="adocao" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-address-card-o"></i>
+		                			</div>
+		                			<div class="media-body">ADOÇÃO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="desaparecidos" styleClass="#{activeAnuncio}" title="Desaparecidos" outcome="desaparecidos" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-address-book-o"></i>
+		                			</div>
+		                			<div class="media-body">DESAPARECIDOS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="classificados" styleClass="#{activeAnuncio}" title="Classificados" outcome="classificados" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-qq"></i>
+		                			</div>
+		                			<div class="media-body">CLASSIFICADOS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="evento" styleClass="#{activeAnuncio}" title="Eventos" outcome="evento" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-calendar-check-o"></i>
+		                			</div>
+		                			<div class="media-body">EVENTOS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="usuario" styleClass="#{activeAnuncio}" title="Editar Usuário" outcome="usuario" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-user-circle"></i>
+		                			</div>
+		                			<div class="media-body">USUÁRIO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>				      					      	
+			        </ul>
+			   	</div>
+		   	</div>	        
+        </div>        
+    </ui:composition>
+    
+</html>

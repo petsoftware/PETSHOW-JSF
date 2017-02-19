@@ -26,8 +26,16 @@ public class LoginBean {
 
   private String usuario;
   private String senha;
+  private boolean isLogado = false;
+  public boolean isLogado() {
+	return isLogado;
+}
 
-  public String login() {
+public void setLogado(boolean isLogado) {
+	this.isLogado = isLogado;
+}
+
+public String login() {
 	  System.out.println("entrou login");
 	boolean success = authenticationService.login(usuario, senha);
     

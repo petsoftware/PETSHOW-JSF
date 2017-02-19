@@ -1,132 +1,145 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="templates/main.xhtml">
 
-<h:head>
-	<title>PETSHOW</title>
-	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="resources/css/page-anuncio.css" />
-</h:head>
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="address-card-o" />
+	<ui:param name="pageTitle" value="CONSULTA ADOÇÃO" />
 
-<h:body>
-	<ui:composition template="templates/PageLayout.xhtml">
+	<ui:define name="header">
 
-		<ui:define name="content">
+	</ui:define>
 
-			<h:form id="form">
-				<h:panelGrid columns="2">
-					<h:panelGrid columns="1">
+	<ui:define name="body">
 
-						
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
 
-						<h:outputLabel value="Estado:" for="cbEstado" />
-						<p:selectOneMenu id="cbEstado"
-							value="#{consultaAdocaoBean.estado}"
-							converter="estadoConverter">
-
-							<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
-								itemValue=" " noSelectionOption="true" />
-							<f:selectItems
-								value="#{consultaAdocaoBean.autoCompleteBean.estados}"
-								var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
-							<p:ajax
-								listener="#{consultaAdocaoBean.autoCompleteBean.onEstadoChange(consultaAdocaoBean.estado)}"
-								update="cbCidade" />
-
-						</p:selectOneMenu>
-
-
-						<h:outputLabel value="Cidade" for="cbCidade" />
-						<p:selectOneMenu id="cbCidade"
-							value="#{consultaAdocaoBean.cidade}"
-							converter="cidadeConverter">
-							<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
-								itemValue="" noSelectionOption="true" />
-							<f:selectItems
-								value="#{consultaAdocaoBean.autoCompleteBean.cidades}"
-								var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
-						
-
-						</p:selectOneMenu>
-
-						<h:outputLabel value="Animal" for="cbAnimal" />
-						
-						<p:selectOneMenu id="cbAnimal" value="#{consultaAdocaoBean.animal}">
-							<f:selectItem itemLabel="#{placeHolderBean.selAnimal}" 	itemValue="" noSelectionOption="true" />
-    						<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}"/>
-						</p:selectOneMenu>
-
-						<h:outputLabel value="Gênero" for="cbSexo" />
-						<p:selectOneMenu id="cbSexo" value="#{consultaAdocaoBean.sexo}">
-							<f:selectItem itemLabel="#{placeHolderBean.selSexo}" 	itemValue="" noSelectionOption="true" />
-    						<f:selectItems value="#{consultaAdocaoBean.sexos}"/>
-						</p:selectOneMenu> 
-
-						<h:outputLabel value="Fase" for="cbFase" />
-						<p:selectOneMenu id="cbFase" value="#{consultaAdocaoBean.fase}">
-							<f:selectItem itemLabel="#{placeHolderBean.selFase}" 	itemValue="" noSelectionOption="true" />	
-    						<f:selectItems value="#{consultaAdocaoBean.fases}"/>
-						</p:selectOneMenu>
-
-
-						<h:commandButton
-							action="#{consultaAdocaoBean.getAdocaoBanco}" type="submit"
-							value="Consultar" update="messages" id="btConsulta" />
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="1">
 
 
 
+							<h:outputLabel value="Estado:" for="cbEstado" />
+							<p:selectOneMenu id="cbEstado"
+								value="#{consultaAdocaoBean.estado}" converter="estadoConverter">
 
-						<input type="hidden" name="${_csrf.parameterName}"
-							value="${_csrf.token}" />
-					</h:panelGrid>
-					<h:panelGrid columns="1">
-						<p:dataScroller value="#{consultaAdocaoBean.adocoes}" var="adocao" chunkSize="10" mode="inline" scrollHeight="500">
-							<f:facet name="header">
+								<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
+									itemValue=" " noSelectionOption="true" />
+								<f:selectItems
+									value="#{consultaAdocaoBean.autoCompleteBean.estados}"
+									var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
+								<p:ajax
+									listener="#{consultaAdocaoBean.autoCompleteBean.onEstadoChange(consultaAdocaoBean.estado)}"
+									update="cbCidade" />
+
+							</p:selectOneMenu>
+
+
+							<h:outputLabel value="Cidade" for="cbCidade" />
+							<p:selectOneMenu id="cbCidade"
+								value="#{consultaAdocaoBean.cidade}" converter="cidadeConverter">
+								<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems
+									value="#{consultaAdocaoBean.autoCompleteBean.cidades}"
+									var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+
+
+							</p:selectOneMenu>
+
+							<h:outputLabel value="Animal" for="cbAnimal" />
+
+							<p:selectOneMenu id="cbAnimal"
+								value="#{consultaAdocaoBean.animal}">
+								<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="Gênero" for="cbSexo" />
+							<p:selectOneMenu id="cbSexo" value="#{consultaAdocaoBean.sexo}">
+								<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{consultaAdocaoBean.sexos}" />
+							</p:selectOneMenu>
+
+							<h:outputLabel value="Fase" for="cbFase" />
+							<p:selectOneMenu id="cbFase" value="#{consultaAdocaoBean.fase}">
+								<f:selectItem itemLabel="#{placeHolderBean.selFase}"
+									itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{consultaAdocaoBean.fases}" />
+							</p:selectOneMenu>
+
+
+							<h:commandButton action="#{consultaAdocaoBean.getAdocaoBanco}"
+								type="submit" value="Consultar" update="messages"
+								id="btConsulta" />
+
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<p:dataScroller value="#{consultaAdocaoBean.adocoes}"
+								var="adocao" chunkSize="10" mode="inline" scrollHeight="500">
+								<f:facet name="header">
             					Animais para adoção
         					</f:facet>
 
-							<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail" >
-								
+								<h:panelGrid columns="2" style="width:100%"
+									columnClasses="logo,detail">
 
-								<p:outputPanel>
 
-									<h:panelGrid columns="2" style="border-bottom: 1px solid #a8a8a8;    padding: 25px 10px;">
-										<h:panelGrid columns="1">
-											<h:graphicImage url="data:image/jpg;base64,#{adocao.foto}" 	id="visualizacao"  />
-										</h:panelGrid>
+									<p:outputPanel>
 
-										<h:panelGrid columns="1" cellpadding="5" >
-											<h:outputText value="#{adocao.descAdocao}" style="font-weight: bold" />
-											<h:panelGrid columns="3" cellpadding="5" border="2">
-												<h:outputText value="Castrado:#{beanUtil.getBooleanoPT(adocao.castrado)}" style="font-weight: bold" />
-												<h:outputText value="Vermifugado:#{beanUtil.getBooleanoPT(adocao.flVermifugado)}" style="font-weight: bold" />
-												<h:outputText value="Vacinado:#{beanUtil.getBooleanoPT(adocao.flVacinado)}" style="font-weight: bold" />
+										<h:panelGrid columns="2"
+											style="border-bottom: 1px solid #a8a8a8;    padding: 25px 10px;">
+											<h:panelGrid columns="1">
+												<h:graphicImage url="data:image/jpg;base64,#{adocao.foto}"
+													id="visualizacao" />
 											</h:panelGrid>
-											
 
-											<h:commandButton value ="ver detalhe" action="adocao-detalhe" >
-											     <f:param name="id" value="#{adocao.id}"></f:param>
-											</h:commandButton>
+											<h:panelGrid columns="1" cellpadding="5">
+												<h:outputText value="#{adocao.descAdocao}"
+													style="font-weight: bold" />
+												<h:panelGrid columns="3" cellpadding="5" border="2">
+													<h:outputText
+														value="Castrado:#{beanUtil.getBooleanoPT(adocao.castrado)}"
+														style="font-weight: bold" />
+													<h:outputText
+														value="Vermifugado:#{beanUtil.getBooleanoPT(adocao.flVermifugado)}"
+														style="font-weight: bold" />
+													<h:outputText
+														value="Vacinado:#{beanUtil.getBooleanoPT(adocao.flVacinado)}"
+														style="font-weight: bold" />
+												</h:panelGrid>
+
+
+												<h:commandButton value="ver detalhe" action="adocao-detalhe">
+													<f:param name="id" value="#{adocao.id}"></f:param>
+												</h:commandButton>
+											</h:panelGrid>
 										</h:panelGrid>
-									</h:panelGrid>
-								</p:outputPanel>
-							</h:panelGrid>
-						</p:dataScroller>
+									</p:outputPanel>
+								</h:panelGrid>
+							</p:dataScroller>
 
-						
-
-
-
+						</h:panelGrid>
 					</h:panelGrid>
-				</h:panelGrid>
-			</h:form>
+				</div>
+			</div>
+		</div>
 
-		</ui:define>
-	</ui:composition>
-</h:body>
+	</ui:define>
+
+</ui:composition>
+
 </html>
+
 

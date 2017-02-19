@@ -130,11 +130,16 @@ public class UsuarioBean {
 			return "CNPJ:";
 		}else{
 			String cnpjFormatado=usuario.getCnpjCpf();
-			for(int i =usuario.getCnpjCpf().length();i<14;++i){
-				cnpjFormatado="0"+cnpjFormatado;
+			if(cnpjFormatado!=null){	
+				for(int i =usuario.getCnpjCpf().length();i<14;++i){
+					cnpjFormatado="0"+cnpjFormatado;
+				}
+				return "CNPJ:"+cnpjFormatado.substring(0, 2) + "." + cnpjFormatado.substring(2, 5) + "." + cnpjFormatado.substring(5, 8 ) + "/" + cnpjFormatado.substring(8, 12) + "-" + cnpjFormatado.substring(12, 14);
+			}else{
+				return "CNPJ:";
 			}
 			
-			return "CNPJ:"+cnpjFormatado.substring(0, 2) + "." + cnpjFormatado.substring(2, 5) + "." + cnpjFormatado.substring(5, 8 ) + "/" + cnpjFormatado.substring(8, 12) + "-" + cnpjFormatado.substring(12, 14);
+			
 		}
 	}
 

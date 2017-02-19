@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:p="http://primefaces.org/ui">
+ 
+    <ui:composition>
+	    <script type="text/javascript">
+	    	jQuery(function($){
+	    	   $("input.txtCEP").mask("99999-999", {reverse: true});
+	    	  
+	    	});
+	    </script>
+    	<h:form id="formHeader" prependId="false"> 
+    		    		
+	        <div class="navbar" role="navigation">
+	                    
+		        <div class="navbar-header">
+		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">	            
+		                <span class="sr-only">Toggle navigation</span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		            </button>
+		        </div>
+		        
+		        <div class="navbar-collapse collapse" style="padding: 0;">
+		        	
+		        	<pe:tooltip global="true" />
+		        													
+					<div class="nav navbar-nav navbar-left">					
+						<p:commandLink id="menu-toggle" styleClass="btn btn-default navbar-toggle">
+	                		<i class="fa fa-angle-double-left"></i>
+	                	</p:commandLink>						
+			        </div>
+			   
+			<br />    
+			<!-- Só vai ficar aqui por enquanto -->
+			    
+	            <p:inputText style="margin-right:20px" placeholder="Usuario" value="#{loginBean.usuario}"/>
+	            <p:password style="margin-right:10px" placeholder="Senha" value="#{loginBean.senha}"/>
+	            
+	             <h:commandButton id="btnLogar" action="#{loginBean.login}" styleClass="btn btn-primary" value="Logar" update="growlMessage" />
+	             <h:commandButton id="btnNovoUsuario" action="solicita-novo-usuario" styleClass="btn btn-info" value="Quero me cadastrar"  />
+	             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
+      		           
+		            <ul class="nav navbar-nav navbar-right menu-top" style="margin: 0;">
+		                      		                                
+		                <li>
+		                	<div class="dropdown" hidden="#{loginBean.logado}">		                	
+								<button id="dropdownMenu1"
+									class="btn btn-default dropdown-toggle"
+									type="button"
+									data-toggle="dropdown"
+									aria-haspopup="true"
+									aria-expanded="true">
+							    	<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							    	<h:outputText value="#{loginBean.usuario}" />
+							    	<span class="caret"></span>
+							  	</button>
+							  	
+							  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							    	<li>
+							    		<p:link onclick="paceStart();">
+				                			<i class="fa fa-user" aria-hidden="true"></i>
+							    			USUÁRIO
+				                		</p:link>
+							    	</li>							    							    	
+							    	<li role="separator" class="divider"></li>							    	
+							    	<li>
+							    		<p:commandLink onstart="paceStart();"
+							    			process="@this"
+							    			action="#{loginBean.logout}">
+				                			<i class="fa fa-sign-out"></i>
+				                			SAIR
+				                		</p:commandLink>
+				                	</li>
+							  	</ul>							  							  	
+							</div>	                	
+		                </li>
+		                
+		                <li>		                
+		                	<p:commandLink id="lnkSair"	                		
+		                		title="Sair?"
+		                		onstart="paceStart();"
+		                		process="@this"
+		                		action="#{loginBean.logout}">
+		                		<i class="fa fa-sign-out" style="margin-right: 0;"></i>
+		                	</p:commandLink>
+		                	<pe:tooltip for="lnkSair" atPosition="bottom center" myPosition="top center" />		                	
+		                </li>
+		                		                
+		            </ul>
+		            		            
+		      	 </div>	
+		      	 	      	 
+	        </div>
+	        
+		</h:form>
+        
+    </ui:composition>
+    
+</html>
