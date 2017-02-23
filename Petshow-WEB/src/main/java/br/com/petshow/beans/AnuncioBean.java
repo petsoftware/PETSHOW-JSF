@@ -1,11 +1,12 @@
 package br.com.petshow.beans;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -26,7 +27,15 @@ import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
-public class AnuncioBean  {
+public class AnuncioBean implements Serializable {
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8172991893429328152L;
+
+
 	public AnuncioBean (){
 		super();
 	}

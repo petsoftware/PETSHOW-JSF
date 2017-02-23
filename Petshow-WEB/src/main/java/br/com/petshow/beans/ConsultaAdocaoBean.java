@@ -2,7 +2,6 @@ package br.com.petshow.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.Part;
 
 import br.com.petshow.enums.EnumFaseVida;
 import br.com.petshow.enums.EnumSexo;
@@ -19,16 +17,9 @@ import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Adocao;
-import br.com.petshow.model.Bairro;
 import br.com.petshow.model.Cidade;
 import br.com.petshow.model.Estado;
-import br.com.petshow.model.Usuario;
-import br.com.petshow.model.Venda;
-import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.CallAnimalRest;
-import br.com.petshow.web.util.CallVendaRest;
-import br.com.petshow.web.util.ImagemUtil;
-import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped

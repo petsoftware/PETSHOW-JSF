@@ -29,6 +29,8 @@
         <!-- <access-denied-handler error-page="/semPermissao.xhtml" />-->
 
     </http>
+    
+     
 
     <authentication-manager alias="authenticationManager" >
         <authentication-provider user-service-ref="userDetailsService" />

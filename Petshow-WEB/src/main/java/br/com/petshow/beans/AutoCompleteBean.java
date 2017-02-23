@@ -2,7 +2,6 @@ package br.com.petshow.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -33,6 +32,35 @@ public class AutoCompleteBean implements Serializable{
 	private CallAutoComplete restCallAuto;
 	private Usuario usuario;
 	
+
+	public String getEstadoUltimaConsulta() {
+		return estadoUltimaConsulta;
+	}
+
+
+
+
+
+	public void setEstadoUltimaConsulta(String estadoUltimaConsulta) {
+		this.estadoUltimaConsulta = estadoUltimaConsulta;
+	}
+
+
+
+
+
+	public CallEnderecoRest getRestCallEndereco() {
+		return restCallEndereco;
+	}
+
+
+
+
+
+	public void setRestCallEndereco(CallEnderecoRest restCallEndereco) {
+		this.restCallEndereco = restCallEndereco;
+	}
+
 
 	private String estadoUltimaConsulta;
 
