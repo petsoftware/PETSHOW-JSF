@@ -1,9 +1,6 @@
 package br.com.petshow.beans;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -14,10 +11,8 @@ import javax.servlet.http.Part;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Anuncio;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.role.UsuarioRole;
-import br.com.petshow.web.util.CallAnuncioRest;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
@@ -27,7 +22,7 @@ public class UsuarioBean {
 
 	public UsuarioBean (){
 		super();
-		System.out.println("criado o UsuarioBean:"+ new Date().getTime());
+		
 	}
 	private Usuario usuario;
 

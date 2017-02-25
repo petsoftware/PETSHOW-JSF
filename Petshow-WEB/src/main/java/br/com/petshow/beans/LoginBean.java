@@ -1,14 +1,12 @@
 package br.com.petshow.beans;
 
-import java.util.Date;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petshow.security.*;
+import br.com.petshow.security.AuthenticationService;
 import br.com.petshow.util.MD5EncriptUtil;
 
 @ManagedBean
@@ -16,7 +14,6 @@ import br.com.petshow.util.MD5EncriptUtil;
 public class LoginBean {
 	public LoginBean (){
 		super();
-		System.out.println("criado o LoginBean:"+ new Date().getTime());
 	}
 
 	

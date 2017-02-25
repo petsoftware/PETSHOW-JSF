@@ -3,33 +3,25 @@ package br.com.petshow.beans;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.event.ValueChangeEvent;
-import javax.servlet.http.Part;
 
 import org.primefaces.event.SelectEvent;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
-import br.com.petshow.model.Anuncio;
 import br.com.petshow.model.Servico;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.role.UsuarioRole;
-import br.com.petshow.web.util.CallAnuncioRest;
+import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.CallServicoRest;
 import br.com.petshow.web.util.CallUsuarioRest;
-import br.com.petshow.web.util.CallAnimalRest;
-import br.com.petshow.web.util.ImagemUtil;
-import br.com.petshow.web.util.RestUtilCall;
 
 
 
@@ -40,7 +32,6 @@ public class NotificacaoBean  {
 
 	public NotificacaoBean (){
 		super();
-		System.out.println("criado o NotificacaoBean:"+ new Date().getTime());
 	}
 
 	private int situacao;

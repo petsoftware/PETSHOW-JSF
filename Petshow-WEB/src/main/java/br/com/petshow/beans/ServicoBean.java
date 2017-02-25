@@ -1,7 +1,6 @@
 package br.com.petshow.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +14,6 @@ import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Servico;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.role.UsuarioRole;
-
 import br.com.petshow.web.util.CallServicoRest;
 import br.com.petshow.web.util.RestUtilCall;
 
@@ -26,7 +24,6 @@ public class ServicoBean  {
 
 	public ServicoBean (){
 		super();
-		System.out.println("criado o ServicoBean:"+ new Date().getTime());
 	}
 
 	private Servico servico;

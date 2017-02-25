@@ -1,23 +1,9 @@
 package br.com.petshow.beans;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-
-import br.com.petshow.exceptions.ExceptionErroCallRest;
-import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Adocao;
-import br.com.petshow.model.Perdido;
-import br.com.petshow.model.Venda;
-import br.com.petshow.web.util.CallAnimalRest;
-import br.com.petshow.web.util.CallVendaRest;
 
 @ManagedBean
 @ViewScoped
@@ -26,7 +12,6 @@ public class InicialBean {
 	
 	public InicialBean (){
 		super();
-		System.out.println("criado o InicialBean:"+ new Date().getTime());
 	}
 	
 	

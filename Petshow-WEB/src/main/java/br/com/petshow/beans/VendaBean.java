@@ -1,7 +1,6 @@
 package br.com.petshow.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,12 +11,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
-
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Bairro;
 import br.com.petshow.model.Cidade;
-import br.com.petshow.model.Estado;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.model.Venda;
 import br.com.petshow.role.UsuarioRole;
@@ -30,7 +27,7 @@ import br.com.petshow.web.util.RestUtilCall;
 public class VendaBean {
 	public VendaBean (){
 		super();
-		System.out.println("criado o VendaBean:"+ new Date().getTime());
+		
 	}
 	private Venda venda;
 	private List<Venda> vendas;
