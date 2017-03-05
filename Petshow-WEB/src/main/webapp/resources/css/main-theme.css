@@ -4,6 +4,8 @@
 	background: -o-linear-gradient(bottom right, #3BAFDA, #0E9948);
 	background: -moz-linear-gradient(bottom right, #3BAFDA, #0E9948);
 	background: linear-gradient(bottom right, #3BAFDA, #0E9948);
+	/*background: -webkit-linear-gradient(bottom right, #2f192d, #ef7ce1);*/
+	/*background: #2a3548;*/
 }
 .sidebar-brand {	
 	background: none;

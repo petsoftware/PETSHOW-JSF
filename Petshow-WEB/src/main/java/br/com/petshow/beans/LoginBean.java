@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.petshow.model.Usuario;
 import br.com.petshow.security.AuthenticationService;
 import br.com.petshow.util.MD5EncriptUtil;
 
@@ -23,14 +24,23 @@ public class LoginBean {
 
   private String usuario;
   private String senha;
-  private boolean isLogado = false;
-  public boolean isLogado() {
-	return isLogado;
-}
+  
+  	public String getUserName() {
+  		return getUsuarioLogado().getNome();
+	}
 
-public void setLogado(boolean isLogado) {
-	this.isLogado = isLogado;
-}
+public boolean isLogado() {
+	  String userName = getUsuarioLogado().getUsername();
+		if(userName!=null && !userName.isEmpty()){
+			return true;
+		}else{
+			return false;
+		}
+  }
+
+//public void setLogado(boolean isLogado) {
+//	LoginBean.isLogado = isLogado;
+//}
 
 public String login() {
 	  System.out.println("entrou login");
@@ -40,7 +50,6 @@ public String login() {
       FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Usuário ou senha inválidos!"));
       return "";
     }
-    
     return "sucessoLogin";
   }
 
@@ -49,8 +58,13 @@ public String login() {
     return "login";
   }
   
-  public String getUsuarioLogado(){
-    return authenticationService.getUsuarioLogado().getUsername();
+  public Usuario getUsuarioLogado(){
+    Usuario user = authenticationService.getUsuarioLogado();
+    if(user!=null){
+    	return user;
+    }else{
+    	return new Usuario();
+    }
   }
 
   

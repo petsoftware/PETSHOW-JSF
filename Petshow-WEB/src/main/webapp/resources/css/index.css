@@ -1,0 +1,77 @@
+.navbar {
+	border-radius: 0 !important;
+    margin-bottom: 0 !important;
+}
+.navbar-btn {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+    margin-right: 0 !important;
+}
+.usuario-logado {
+	padding: 14px 0 14px 0 !important;
+	font-size: 16px;
+}
+.usuario-logado > i {
+	margin-right: 10px !important;
+}
+.lnk-sair {
+	padding: 15px 0 15px 15px !important;
+	font-size: 16px;
+}
+.exibir {
+	display: block !important;
+}
+.nao-exibir {
+	display: none !important;
+}
+.owl-theme .owl-nav {
+	position: absolute;
+    top: 0;
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+.owl-theme .owl-nav .owl-prev,
+.owl-theme .owl-nav .owl-next {
+	position: absolute;
+    margin: 0;
+    border-radius: 0;
+    background: transparent;
+    height: 100%;
+    display: table;
+    opacity: 0.5;
+}
+.owl-carousel .owl-nav .owl-prev {
+	left: 0;
+}
+.owl-carousel .owl-nav .owl-next {
+	right: 0;
+}
+.owl-theme .owl-nav .owl-prev > i,
+.owl-theme .owl-nav .owl-next > i {
+    font-size: 7vw;
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    width: 25%;
+}
+.owl-theme .owl-nav .owl-prev:hover,
+.owl-theme .owl-nav .owl-next:hover {
+	opacity: 1;
+	background: transparent;
+}
+.owl-theme .owl-dots {
+	position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.owl-theme .owl-dots .owl-dot span {
+	width: 1vw;
+    height: 1vw;
+    background: transparent;
+    border: 1px solid #FFF;
+}
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+    background: #FFF;
+}

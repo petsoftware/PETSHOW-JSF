@@ -25,6 +25,7 @@ public class AdocaoBean extends SuperBean{
 			}
 //			System.out.println("Server response : \n");
 //			System.out.println(response.readEntity(String.class));
+			System.out.println(Adocao.class);;
 			response.close();
 		} catch (Exception e) {
 			e.printStackTrace();

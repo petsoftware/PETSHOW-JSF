@@ -12,7 +12,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
+import br.com.petshow.web.util.CallUsuarioRest;
 
 
 
@@ -42,7 +45,26 @@ public class AuthenticationService {
   }
 
   public Usuario getUsuarioLogado() {
-    return (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    
+	  Object aut = SecurityContextHolder.getContext().getAuthentication();
+	  if(aut == null){
+		  return new Usuario();
+	  }
+	  Object object = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	  Usuario user  = null;
+	  if(object instanceof java.lang.String){
+		  user = new Usuario();
+		  user.setNmLogin((String)object);
+	  }else if(object instanceof Usuario){
+		  user = (Usuario)object;
+	  }
+	  
+	  if(user.getNmLogin().equalsIgnoreCase(Usuario.ANONYMOUS_USER)){
+		  //NOTE: O usuario nao esta logado
+		  return new Usuario();
+	  }
+	  return user;
+	  
   }
 
   private void invalidateSession() {

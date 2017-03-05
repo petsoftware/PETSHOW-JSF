@@ -23,10 +23,10 @@ legend {
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 	background-color: none;
 	color: #434a54;
-    border-color: #cccccc !important;
+    border-color: #cccccc;
 }
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
-    border-color: #eed3d7 !important;
+    border-color: #eed3d7;
 }
 .ui-datatable-header {
 	background-color: #fff !important;
@@ -96,21 +96,25 @@ legend {
     border-color: #aab2bd !important;
 }
 .btn-default {
-  	color: #434a54 !important;
+  	/*color: #434a54 !important;*/
+  	color: #656D78 !important;
+  	border-color: #656D78 !important;
 }
 .btn-default:hover,
 .btn-default:focus,
 .btn-default.focus,
 .btn-default:active,
 .btn-default.active {
-  	background-color: #434a54 !important;
-  	border-color: #434a54 !important;  	
+  	/*background-color: #434a54 !important;
+  	border-color: #434a54 !important;*/
+  	background-color: #656D78 !important;
+  	border-color: #656D78 !important;
 }
 .btn-default,
 .btn-default.disabled,
 .btn-default[disabled],
 .btn-default.ui-state-disabled {
-  	background-color: #fff !important;
+  	background-color: transparent !important; /*#fff !important;*/
 }
 .btn-default.disabled,
 .btn-default[disabled],
@@ -388,6 +392,10 @@ fieldset[disabled] .btn-primary.active {
 }
 .ui-dialog.ui-widget-content .ui-dialog-content {
 	background: rgb(241, 242, 246) !important;
+}
+.ui-dialog .ui-dialog-buttonpane,
+.ui-dialog .ui-dialog-footer {
+    background: rgb(241, 242, 246) !important;
 }
 .ui-datepicker-today .ui-state-highlight {
 	background-color: #26C281 !important;
