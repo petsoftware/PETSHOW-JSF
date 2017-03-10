@@ -74,10 +74,9 @@
 .navbar {
 	margin-bottom: 0;
 	border: none;
-	border-bottom-width: 2px;
-    border-bottom-style: solid;
 	border-radius: 0;
 	z-index: 1000;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .2);
 }
 .navbar li > a {
 	border-radius: 0;
@@ -129,8 +128,11 @@
 }
 .header {
 	margin: 0 0 10px 0;
-    padding: 20px;
-    box-shadow: 0 2px 1px rgba(0,0,0,.2);
+    padding: 15px;
+    box-shadow: none;
+    background-color: transparent;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
 }
 .header .titulo {
 	font-size: 25px;

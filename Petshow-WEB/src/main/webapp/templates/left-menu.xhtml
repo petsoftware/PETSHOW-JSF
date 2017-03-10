@@ -7,11 +7,22 @@
         	
     	<div id="sidebar-wrapper">
     		<div class="sidebar-brand">
-             	<a href="#"><img alt="Logomarca" src="#{request.contextPath}/resources/images/logomarca.svg"></img></a>
+             	<a href="#"><img alt="Logomarca" src="#{request.contextPath}/resources/images/logo.jpg"></img></a>
            	</div>
            	<div class="sidebar-content">
            		<div id="sidebar-body">
 		    		<ul class="sidebar-nav">
+			      		<li>		      		
+			            	<p:link id="inicio" styleClass="#{activeAnuncio}" title="Início do sistema" outcome="inicio" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-home"></i>
+		                			</div>
+		                			<div class="media-body">INÍCIO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
 			      		<li>		      		
 			            	<p:link id="anuncio" styleClass="#{activeAnuncio}" title="Anúcio" outcome="anuncio" onclick="paceStart();">				            			                			
 		                		<div class="media media-left-menu">
@@ -24,23 +35,23 @@
 	                		
 			      		</li>
 			      		<li>		      		
-			            	<p:link id="adocao" styleClass="#{activeAnuncio}" title="Adoção" outcome="adocao" onclick="paceStart();">				            			                			
+			            	<p:link id="servicos" styleClass="#{activeAnuncio}" title="Serviços do Petshop ou da ONG" outcome="servicos" onclick="paceStart();">				            			                			
 		                		<div class="media media-left-menu">
 		                			<div class="media-left">
-		                				<i class="fa fa-address-card-o"></i>
+		                				<i class="fa fa-cogs"></i>
 		                			</div>
-		                			<div class="media-body">ADOÇÃO</div>
+		                			<div class="media-body">SERVIÇOS</div>
 		                		</div>
 	                		</p:link>
 	                		
 			      		</li>
 			      		<li>		      		
-			            	<p:link id="desaparecidos" styleClass="#{activeAnuncio}" title="Desaparecidos" outcome="desaparecidos" onclick="paceStart();">				            			                			
+			            	<p:link id="notificacao" styleClass="#{activeAnuncio}" title="Notificações" outcome="notificacoes" onclick="paceStart();">				            			                			
 		                		<div class="media media-left-menu">
 		                			<div class="media-left">
-		                				<i class="fa fa-address-book-o"></i>
+		                				<i class="fa fa-bell-o"></i>
 		                			</div>
-		                			<div class="media-body">DESAPARECIDOS</div>
+		                			<div class="media-body">NOTIFICAÇÃO</div>
 		                		</div>
 	                		</p:link>
 	                		
@@ -48,21 +59,10 @@
 			      		<li>		      		
 			            	<p:link id="classificados" styleClass="#{activeAnuncio}" title="Classificados" outcome="classificados" onclick="paceStart();">				            			                			
 		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-qq"></i>
+		                			<div class="media-left"> 		
+			      						<i class="fa fa-qq"></i>
 		                			</div>
 		                			<div class="media-body">CLASSIFICADOS</div>
-		                		</div>
-	                		</p:link>
-	                		
-			      		</li>
-			      		<li>		      		
-			            	<p:link id="evento" styleClass="#{activeAnuncio}" title="Eventos" outcome="evento" onclick="paceStart();">				            			                			
-		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-calendar-check-o"></i>
-		                			</div>
-		                			<div class="media-body">EVENTOS</div>
 		                		</div>
 	                		</p:link>
 	                		

@@ -43,6 +43,11 @@
 	    <param-name>primefaces.THEME</param-name>
 	    <param-value>bootstrap</param-value>
 	</context-param>
+	<context-param>
+		<description>To enable primefaces uses awesome icons on butons</description>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
 	
 	<!-- Spring Security 3 -->
 	<filter>

@@ -30,13 +30,13 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>adocao</from-outcome>
-			<to-view-id>/consulta-adocao.xhtml</to-view-id>
+			<from-outcome>inicio</from-outcome>
+			<to-view-id>/inicio.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>desaparecidos</from-outcome>
-			<to-view-id>/PageCadDesaparecidos.xhtml</to-view-id>
+			<from-outcome>notificacoes</from-outcome>
+			<to-view-id>/notificacao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
@@ -50,8 +50,8 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>evento</from-outcome>
-			<to-view-id>/PageEvento.xhtml</to-view-id>
+			<from-outcome>servicos</from-outcome>
+			<to-view-id>/servico.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>

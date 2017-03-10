@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+ 
+    <h:head>
+    
+        <f:facet name="first">
+                 
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        	<meta name="viewport" content="width=device-width, initial-scale=1" />
+        	
+        	<link rel="icon" type="image/png" href="#{resource['images/icon.png']}" />
+        	
+        	<title>PETSHOW</title>
+        	
+        </f:facet>
+ 
+        <f:facet name="middle">
+        
+        	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"></link>
+        	
+            <h:outputStylesheet name="css/normalize.css" />
+			<h:outputStylesheet name="css/bootstrap.min.css" />
+			<h:outputStylesheet name="css/bootflat.min.css" />
+			<h:outputStylesheet name="css/pace-theme.css" />
+			<h:outputStylesheet name="css/simple-sidebar.css" />
+			<h:outputStylesheet name="css/animate.css" />
+			<h:outputStylesheet name="css/owl.carousel.min.css" />
+			<h:outputStylesheet name="css/owl.theme.default.min.css" />
+			<h:outputStylesheet name="css/default.css" />			
+            <h:outputStylesheet name="css/default-theme.css" />
+            <h:outputStylesheet name="css/index.css" />            
+            <h:outputStylesheet name="css/index-theme.css" />
+                        
+			<h:outputScript name="js/bootstrap.min.js" target="body" />	
+					
+        </f:facet>
+        
+        <f:facet name="last">
+        
+			<h:outputScript name="js/pace.min.js" />
+			<h:outputScript name="js/owl.carousel.min.js" />
+        	<h:outputScript name="js/common.js" />
+        	<h:outputScript name="js/index.js" />
+        	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css"></link>
+ 			 			 			
+        </f:facet>
+        	    
+    </h:head>
+              
+    <h:body styleClass="container-fluid">
+		
+		<div class="row">
+							    	
+	    	<div id="lightbox" class="ui-widget-overlay">
+				<div class="ui-spinner">
+	    			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
+				</div>
+	    	</div>
+	    	
+	    	<h:form id="form" prependId="false"> 
+    		    
+    		    <nav class="navbar navbar-default navbar-fixed-top">
+  					<div class="container-fluid">
+				        				                    
+				        <div class="navbar-header">
+				            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">	            
+				                <span class="sr-only">Toggle navigation</span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+				                <span class="icon-bar"></span>
+				            </button>
+				            <a class="navbar-brand" href="#">
+				            	<!--<img class="img-responsive" alt="Logomarca" src="#{request.contextPath}/resources/img/logomarca.svg"></img>-->
+				            	PetShow
+				            </a>
+				        </div>
+				        
+				        <div class="navbar-collapse collapse">			        					        			           
+				            <ul class="nav navbar-nav navbar-right">			            		                		                                
+				                <li class="#{false ? 'nao-exibir' : 'exibir'}" style="margin-right: 15px;">			                	
+								  	<p:commandButton id="entrar"
+										styleClass="btn btn-entrar btn-lg navbar-btn"
+					  					value="Entrar"
+					  					process="@this"
+			                    		update="formEntrar:entrarDialog"
+			                    		oncomplete="PF('edlg').show();">
+			                    		<p:ajax update="formEntrar:entrarDialog" resetValues="true" />
+					  				</p:commandButton>
+				                </li>
+				                
+				                <li class="#{false ? 'nao-exibir' : 'exibir'}">			                	
+								  	<p:commandButton id="cadastrar"
+										styleClass="btn btn-cadastrar btn-lg navbar-btn"
+					  					value="Cadastrar"
+					  					process="@this"
+			                    		update="formCadastrar:cadastrarDialog"
+			                    		oncomplete="PF('cdlg').show();">
+			                    		<p:ajax update="formCadastrar:cadastrarDialog" resetValues="true" />
+					  				</p:commandButton>
+				                </li>
+				                
+				                <li class="#{false ? 'exibir' : 'nao-exibir'}" style="margin-right: 15px;">
+				                	<div class="usuario-logado">
+					                	<i class="fa fa-user-circle-o"></i>
+								    	<h:outputText value="#{bean.usuario}" />
+							    	</div>
+				                </li>
+				                
+				                <li class="#{false ? 'exibir' : 'nao-exibir'}">		                
+				                	<p:commandLink id="sair"
+				                		styleClass="lnk-sair"	                		
+				                		title="Sair?"
+				                		process="@this"
+				                		action="#{bean.logout}">
+				                		<i class="fa fa-sign-out"></i>
+				                	</p:commandLink>	                	
+				                </li>
+				            </ul>			            		            
+				      	 </div>      	 
+				        
+				   	</div>
+				</nav>
+				
+				<div class="owl-carousel owl-theme">
+					<div class="item"><img src="#{request.contextPath}/resources/images/banner/banner-2.jpg"></img></div>
+					<div class="item"><img src="#{request.contextPath}/resources/images/banner/banner-3.jpg"></img></div>
+				</div>
+		        
+			</h:form>
+			
+			<h:form id="formEntrar">
+		    
+		    	<p:dialog id="entrarDialog"
+		    		header="Entrar"
+		    		widgetVar="edlg"
+		    		modal="true"
+		    		showEffect="fade"
+		    		hideEffect="fade"
+		    		width="400"
+		    		resizable="false"
+		    		responsive="true">
+		    		
+		    		<p:messages id="entrarMsgsDialog" styleClass="ui-messages-dialog" showSummary="true" showDetail="true" closable="true" showIcon="false" />
+			    	
+			    	<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					   			<div class="inputTextGroupLeft">
+									<p:inputText id="usuario"
+										style="width:100%;"	
+										label="Usuário"
+										placeholder="Usuário"							
+										title="Usuário"
+										value=""
+										required="true">
+									</p:inputText>
+									<i class="fa fa-user"></i>
+						     	</div>
+					   		</div>					   		
+					   	</div>
+						<div class="ui-grid-row">
+			   				<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<p:password id="senha"
+										style="width:100%;"
+										label="Senha"
+										placeholder="Senha"
+										title="Senha"
+										value=""
+										required="true">
+									</p:password>
+									<i class="fa fa-lock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<f:facet name="footer">
+					
+						<p:commandButton id="sair"							
+							styleClass="btn btn-default btn-lg"
+							style="margin-right:4px"
+							icon="fa fa-times"
+							value="Sair"							
+							process="@this"
+							oncomplete="PF('edlg').hide();" />
+							 
+						<p:commandButton id="confirmar"
+							styleClass="btn btn-info btn-lg"
+							icon="fa fa-check"
+							value="Confirmar"							
+							update="usuario,senha" />
+
+					</f:facet>
+								
+		  		</p:dialog>
+			    			    			  		    
+		    </h:form>
+		    
+		    <h:form id="formCadastrar">
+		    
+		    	<p:dialog id="cadastrarDialog"
+		    		header="Cadastrar"
+		    		widgetVar="cdlg"
+		    		modal="true"
+		    		showEffect="fade"
+		    		hideEffect="fade"
+		    		width="400"
+		    		resizable="false"
+		    		responsive="true">
+		    		
+		    		<p:messages id="cadastrarMsgsDialog" styleClass="ui-messages-dialog" showSummary="true" showDetail="true" closable="true" showIcon="false" />
+			    	
+			    	<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					   			<div class="inputTextGroupLeft">
+									<p:inputText id="usuario"
+										style="width:100%;"	
+										label="Usuário"
+										placeholder="Usuário"							
+										title="Usuário"
+										value=""
+										required="true">
+									</p:inputText>
+									<i class="fa fa-user"></i>
+						     	</div>
+					   		</div>					   		
+					   	</div>
+					   	<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+					   			<div class="inputTextGroupLeft">
+									<p:inputText id="email"
+										style="width:100%;"	
+										label="E-mail"
+										placeholder="E-mail"							
+										title="E-mail"
+										value=""
+										required="true">
+									</p:inputText>
+									<i class="fa fa-envelope"></i>
+						     	</div>
+					   		</div>					   		
+					   	</div>
+						<div class="ui-grid-row">
+			   				<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<p:password id="senha"
+										style="width:100%;"
+										label="Senha"
+										placeholder="Senha"
+										title="Senha"
+										value=""
+										autocomplete="new-password"
+										required="true">
+									</p:password>
+									<i class="fa fa-lock"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				
+					<f:facet name="footer">
+					
+						<p:commandButton id="sair"							
+							styleClass="btn btn-default btn-lg"
+							style="margin-right:4px"
+							icon="fa fa-times"
+							value="Sair"							
+							process="@this"
+							oncomplete="PF('cdlg').hide();" />
+							 
+						<p:commandButton id="confirmar"
+							styleClass="btn btn-info btn-lg"
+							icon="fa fa-check"
+							value="Confirmar"							
+							update="usuario,senha" />
+
+					</f:facet>
+								
+		  		</p:dialog>
+			    			    			  		    
+		    </h:form>
+	    	
+	    </div>
+	    
+	 </h:body>
+</html>

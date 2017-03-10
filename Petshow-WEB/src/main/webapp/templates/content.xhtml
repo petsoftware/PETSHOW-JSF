@@ -6,24 +6,25 @@
  	 	
     <ui:composition>
     	                  
-        <h:form id="form" enctype="multipart/form-data">
+        
         
 			<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
-        	<div class="header">
-	        	<div class="row">
-	   				<div class="col-md-6" style="line-height:30px;">
-	        			<span class="titulo"><i class="fa fa-#{pageIcon}"></i> #{pageTitle}</span>
-	        		</div>
-	        		<div class="col-md-6 text-right" style="line-height:30px;">
-		        		<ui:insert name="header" />
-		        	</div>
-	        	</div>
-        	</div>
+        	
         	<div id="content">
+        		<div class="header">
+		        	<div class="row">
+		   				<div class="col-md-6" style="line-height:30px;">
+		        			<span class="titulo"><i class="fa fa-#{pageIcon}"></i> #{pageTitle}</span>
+		        		</div>
+		        		<div class="col-md-6 text-right" style="line-height:30px;">
+			        		<ui:insert name="header" />
+			        	</div>
+		        	</div>
+	        	</div>     
         		<p:messages id="msgs" styleClass="msgsMain" showSummary="true" showDetail="true" closable="true" showIcon="false" />	        	
    				<ui:insert name="body" />
    			</div>
-   		</h:form>
+   		
 
     </ui:composition>
     

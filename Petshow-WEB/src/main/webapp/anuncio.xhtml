@@ -12,104 +12,212 @@
 	   	<ui:param name="activeAnuncio" value="active" />
 	   	<ui:param name="pageIcon" value="bullhorn" />
 	   	<ui:param name="pageTitle" value="ANÚNCIO" />
-	   		  
-	   	<ui:remove> 	   		   		   	
-		   	<ui:define name="js">
-				<h:outputScript name="js/anuncio.js" />
-			</ui:define>
-	   	</ui:remove>
+	   	
 	   	<ui:define name="header">	   	
-   				   		
+   			<p:commandButton id="btnLimpar"
+   				style="margin-right:4px"
+   				styleClass="btn btn-primary btn-lg"
+   				icon="fa fa-refresh"
+   				title="Limpar Anúncio?"
+   				value="Limpar" 
+   				action="#{anuncioBean.novo}" 
+   				type="submit"
+   				ajax="false"
+   				/>
+   				
+	   		<p:commandButton id="btnSalvar"
+   				style="margin-right:4px"
+   				styleClass="btn btn-info btn-lg"
+   				icon="fa fa-floppy-o"
+   				title="Salvar Anúncio?"
+   				value="Salvar" 
+   				action="#{anuncioBean.salvarAnuncio}"
+				type="submit"
+				ajax="false"
+				onstart="paceStart();"
+				onclick="paceStart();"
+				oncomplete="Pace.restart();"
+   				/>
+   				
+   			<p:commandButton id="btnExcluir"
+   				styleClass="btn btn-danger btn-lg"
+   				icon="fa fa-trash-o"
+   				title="Excluir Anúncio?"
+   				value="Excluir" 
+   				action="#{anuncioBean.excluirAnuncio}"
+   				ajax="false"
+   				/>
    		</ui:define>
 	   	
 	   	<ui:define name="body">
 	   		
-	   		<div class="ui-grid ui-grid-responsive">
-				<div class="ui-grid-row ui-grid-row-custom">
-					<div class="ui-grid-col-12">
-						
-						<h:panelGrid columns="2">
-							<h:panelGrid columns="1">
-								<h:outputLabel value="Descreva o seu anúncio:" for="txtDesc" />
-								<p:inputTextarea rows="6" cols="33" id="txtDesc"
-									value="#{anuncioBean.anuncio.descricao}" />
-
-								<h:outputLabel value="Data inicial do anúncio ativo:"
-									for="txtInicio" />
-								<p:calendar id="txtInicio"
-									value="#{anuncioBean.anuncio.dataInicial}"
-									pattern="dd/MM/yyyy HH:mm:ss" required="true" />
-
-								<h:outputLabel value="Data final do anúncio ativo:" for="txtFim" />
-								<p:calendar id="txtFim"
-									value="#{anuncioBean.anuncio.dataVencimento}"
-									pattern="dd/MM/yyyy HH:mm:ss" />
-
-								<p:separator />
-								<h:outputLabel value="FOTO" for="txtInputFoto" />
-								<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
-								<p:separator />
-								<h:panelGrid columns="6">
-									<h:commandButton action="#{anuncioBean.novo}" type="submit"
-										value="Novo" update="messages" id="btNovo" />
-									<h:commandButton action="#{anuncioBean.salvarAnuncio}"
-										type="submit" value="Salvar" update="messages,grid"
-										id="btSalvar" />
-									<h:commandButton action="#{anuncioBean.excluirAnuncio}"
-										type="submit" value="Excluir" update="messages" id="btExcluir" />
-								</h:panelGrid>
-
-
-
-							</h:panelGrid>
-							<h:panelGrid columns="1">
-								<h:graphicImage
-									url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"
-									id="visualizacao" alt="Visualização do anuncio" />
-							</h:panelGrid>
-						</h:panelGrid>
-
-						<p:dataTable var="anuncio" value="#{anuncioBean.anuncios}"
-							paginator="#{anuncioBean.anuncios.size() > 12}" rows="13"
-							paginatorPosition="bottom" id="grid">
-
-							<p:column headerText="Descrição" style="width:50%">
-								<h:outputText value="#{anuncio.descricao}" />
-							</p:column>
-
-							<p:column headerText="Data inicial" style="width:10%">
-								<h:outputText value="#{anuncio.dataInicial}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"
-										timeZone="America/Recife" />
-								</h:outputText>
-							</p:column>
-
-							<p:column headerText="Data Final" style="width:10%">
-								<h:outputText value="#{anuncio.dataVencimento}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-										timeZone="America/Recife" />
-								</h:outputText>
-
-							</p:column>
-
-							<p:column headerText="Data Cadastro" style="width:10%">
-								<h:outputText value="#{anuncio.dataCadastro}">
-									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-										timeZone="America/Recife" />
-								</h:outputText>
-							</p:column>
-
-
-							<p:column headerText="Edição" style="width:20%">
-								<h:commandButton action="#{anuncioBean.selecionar(anuncio)}"
-									type="submit" value="Editar" />
-								<h:commandButton
-									action="#{anuncioBean.excluirAnuncio(anuncio.id)}"
-									type="submit" value="Excluir" />
-							</p:column>
-						</p:dataTable>
-				</div>
-				</div>			
+	   		<div class="ui-grid ui-grid-responsive">	   		
+	   			<div class="ui-grid-row ui-grid-row-custom">
+					<div class="ui-grid-col-12">									
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-6" style="padding-right:5px;">				  				
+					           	<div class="ui-grid-row">
+					  				<div class="ui-grid-col-12">					  				
+										<div class="ui-grid-row ui-grid-row-custom">
+											<div class="ui-grid-col-12">
+											    <div class="ui-grid-row">
+											        <p:outputLabel for="descricao" value="Descrição" />
+											    </div>
+											   	<div class="ui-grid-row">
+										 	     	<p:inputTextarea id="descricao"
+										 	     		style="width:100%;"
+										 	     		value="#{anuncioBean.anuncio.descricao}"
+										 	     		/>
+												</div>
+											</div>
+										</div>
+										
+										<div class="ui-grid-row ui-grid-row-custom">
+						          			<div class="ui-grid-col-6" style="padding-right:5px;">
+									   			<div class="ui-grid-row">
+											        <p:outputLabel for="dataInicio" value="Data Início" />
+											    </div>
+									   			<div class="ui-grid-row">
+									   				<div class="inputTextGroup">
+														<p:calendar id="dataInicio"
+															style="width:100%;"
+															label="Data Início"								
+															locale="pt"
+															pattern="dd/MM/yyyy HH:mm:ss"
+															mask="true" 
+															value="#{anuncioBean.anuncio.dataInicial}"
+									 						required="true" 
+															/>
+														<i class="fa fa-calendar"></i>
+											     	</div>
+									   			</div>
+									   		</div>
+									   		
+									   		<div class="ui-grid-col-6" style="padding-left:5px;">
+									   			<div class="ui-grid-row">
+											        <p:outputLabel for="dataFim" value="Data Fim" />
+											    </div>
+									   			<div class="ui-grid-row">
+									   				<div class="inputTextGroup">
+														<p:calendar id="dataFim"
+															style="width:100%;"
+															label="Data Fim"								
+															locale="pt"
+															value="#{anuncioBean.anuncio.dataVencimento}"
+															pattern="dd/MM/yyyy HH:mm:ss"
+															mask="true" />
+														<i class="fa fa-calendar"></i>
+											     	</div>
+									   			</div>
+									   		</div>
+									   	</div>
+									   	
+									   	<div class="ui-grid-row ui-grid-row-custom">
+											<div class="ui-grid-col-12">
+											    <div class="ui-grid-row">
+											        <p:outputLabel value="FOTO" />
+											    </div>
+											   	<div class="ui-grid-row">
+										 	     	<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
+												</div>
+											</div>
+										</div>
+					          		</div>
+					          	</div>				          		
+					        </div>
+					        
+					        <div class="ui-grid-col-6" style="padding-left:5px;">				  				
+					           	<div class="ui-grid-row">
+							        <p:outputLabel value="Visualização" />
+							    </div>
+							   	<div class="ui-grid-row">
+				          			<div class="ui-upload-img" style="height: 215px;">
+										<h:graphicImage style="width:100%;height:100%;display:#{true ? 'none' : 'inline-block'}"
+											stream="false"
+											cache="false" 
+											url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"
+											id="visualizacao" 
+											alt="Visualização do anuncio"
+											/>
+										<span style="font-size:58px;display:#{true ? 'inline-block' : 'none'}" class="fa-stack fa-lg">
+										  <i class="fa fa-camera fa-stack-1x"></i>
+										  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+										</span>
+									</div>
+								</div>
+					        </div>
+			  			</div>
+			  						  			
+			  			<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<p:dataTable id="grid"
+						   			var="anuncio"
+						   			emptyMessage="Nenhum Anúncio."
+						   			
+						   			
+						   			scrollHeight="157"
+									scrollable="true"
+					                
+					                resizableColumns="true"
+					                value="#{anuncioBean.anuncios}"
+					                paginator="#{anuncioBean.anuncios.size() > 12}" 
+					                rows="13"
+					                paginatorPosition="bottom" 
+							        tabindex="-1">
+							        
+					                <f:facet name="header">
+					                	<p:outputLabel value="Anúncios" />
+					                </f:facet>
+					                
+							        <p:column headerText="Descrição"
+							        	width="300"
+							        	>
+							        	<h:outputText value="#{anuncio.descricao}" />
+							        </p:column>
+							        
+							        <p:column headerText="Data inicial" width="100">
+										<h:outputText value="#{anuncio.dataInicial}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"
+												timeZone="America/Recife" />
+										</h:outputText>
+									</p:column>
+							        
+							        <p:column headerText="Data Final" width="100">
+										<h:outputText value="#{anuncio.dataVencimento}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+												timeZone="America/Recife" />
+										</h:outputText>
+		
+									</p:column>
+							        
+							        <p:column headerText="Data Cadastro" width="100">
+										<h:outputText value="#{anuncio.dataCadastro}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+												timeZone="America/Recife" />
+										</h:outputText>
+									</p:column>
+							        <p:column headerText="Edição" style="width:20%">
+										<h:commandButton action="#{anuncioBean.selecionar(anuncio)}"
+											type="submit" value="Editar" />
+										<h:commandButton
+											action="#{anuncioBean.excluirAnuncio(anuncio.id)}"
+											type="submit" value="Excluir" />
+									</p:column>
+							        <p:column style="text-align:center;" width="125">
+										
+										<p:commandButton id="btnVisualizar"
+											style="margin-right:4px"
+						              		styleClass="btn btn-info"
+						              		icon="fa fa-search">
+					                    </p:commandButton>
+					                    
+									</p:column>
+							  									        							        																        					                		                		               	
+							    </p:dataTable>
+					        </div>
+					  	</div>
+			  		</div>
+			  	</div>
 			</div>
 			
 	   	</ui:define>

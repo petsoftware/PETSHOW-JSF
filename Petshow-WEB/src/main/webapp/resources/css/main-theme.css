@@ -1,11 +1,5 @@
-#sidebar-wrapper {	
-	background: -webkit-gradient(linear, left top, right bottom, color-stop(30%,#0E9948), color-stop(70%,#3BAFDA));
-	background: -webkit-linear-gradient(bottom right, #3BAFDA, #0E9948);
-	background: -o-linear-gradient(bottom right, #3BAFDA, #0E9948);
-	background: -moz-linear-gradient(bottom right, #3BAFDA, #0E9948);
-	background: linear-gradient(bottom right, #3BAFDA, #0E9948);
-	/*background: -webkit-linear-gradient(bottom right, #2f192d, #ef7ce1);*/
-	/*background: #2a3548;*/
+#sidebar-wrapper {
+	background: #37bc9b;
 }
 .sidebar-brand {	
 	background: none;
@@ -15,26 +9,25 @@
 }
 .sidebar-nav li a.active,
 .sidebar-nav li a:active {
-	background-color: rgba(255, 255, 255, 0.1);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 .sidebar-nav li a:hover,
 .sidebar-nav li a:focus {
     color: #fff;
-    background: rgba(255, 255, 255 ,0.2);
+    background: rgba(0, 0, 0 , 0.1);
 }
 .navbar {
 	background-color: #FFF;
-	border-bottom-color: #CCCCCC;
 }
 .navbar li > a:hover,
 .navbar li > a:focus {
-	background: rgba(14, 153, 72, 0.2) !important;
+	background: rgba(244, 125, 48, .6) !important;
 }
 .menu-top li > a {
 	color: #383838;    
 }
 .menu-top li > a.active {
-	background-color: rgba(255, 255, 255, 0.1);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 .navbar-toggle {
 	background: transparent !important;	
@@ -49,7 +42,7 @@
 }
 .navbar-toggle:hover,
 .navbar-toggle:focus {
-	background: rgba(14, 153, 72, 0.2) !important;
+	background: rgba(244, 125, 48, .6) !important;
 }
 .dropdown-menu {
     background-color: #FFF;
@@ -68,10 +61,10 @@
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
-	background: rgba(14, 153, 72, 0.2) !important;
+	background: rgba(244, 125, 48, .6) !important;
 }
 .header {
-    background-color: #fff;
+    border-bottom-color: #F47D30;
 }
 .header .titulo {
 	color: #383838;
@@ -87,7 +80,7 @@
 }
 .dropdown-toggle:hover,
 .dropdown-toggle:focus {
-	background: rgba(14, 153, 72, 0.2) !important;
+	background: rgba(244, 125, 48, .6) !important;
 	color: #383838 !important;
 }
 #sidebar-body::-webkit-scrollbar {

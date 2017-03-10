@@ -77,7 +77,7 @@ public class AnuncioBean implements Serializable {
 		}
 	}
 */
-	public void salvarAnuncio(){
+	public String salvarAnuncio(){
 		try {
 			
 			anuncio.setFoto(ImagemUtil.transformBase64AsString(imagem));
@@ -96,7 +96,7 @@ public class AnuncioBean implements Serializable {
 		}
 
 
-
+		return null;
 
 
 	}

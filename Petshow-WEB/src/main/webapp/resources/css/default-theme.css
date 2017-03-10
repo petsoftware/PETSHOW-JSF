@@ -1,12 +1,13 @@
 body {
-	background: rgb(241, 242, 246);
+	background: #FFF3EA;
+	color: #383838;
 }
 legend {	
 	border-color: #ccc !important;
 	color: #33333 !important;
 }
 #lightbox .ui-spinner i {	
-    color: #034C27 !important;
+    color: #F47D30 !important;
 }
 .outputlabel-custom {
 	color: #656D78 !important;
@@ -20,26 +21,34 @@ legend {
 .ui-inputswitch .ui-inputswitch-handle {
 	border-color: #cccccc !important;
 }
+.ui-inputfield.ui-state-focus, .ui-widget-content .ui-inputfield.ui-state-focus, .ui-widget-header .ui-inputfield.ui-state-focus {
+   	border-color: #37bc9b;
+   	box-shadow: none;
+}
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-	background-color: none;
-	color: #434a54;
+	color: #383838;
     border-color: #cccccc;
+    background-color: #fff;
 }
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
     border-color: #eed3d7;
 }
 .ui-datatable-header {
-	background-color: #fff !important;
+	background-color: #383838 !important;
+	color: #FFF;
 	border-bottom-color: #e6e9ed !important;
 }
+.ui-datatable-header label {
+	font-size: 16px !important;
+}
 .ui-datatable-data {
-	color: #434a54 !important;
+	color: #383838 !important;
     border-color: #e6e9ed !important;
 }
 .ui-datatable .ui-datatable-data tr.ui-state-hover {		
 	border-color: #e6e9ed !important;
 	background-color: #EDEDED !important;
-	color: #434a54 !important;
+	color: #383838 !important;
 }
 .ui-datatable tr.ui-state-highlight {
     background-color: #6B716E !important;
@@ -54,7 +63,7 @@ legend {
     border-color: #e6e9ed !important;    
 }
 .ui-datatable tbody tr.ui-datatable-empty-message {
-	color: #26C281 !important;
+	color: #F47D30 !important;
 }
 .ui-datatable tbody td {
 	border-color: #e6e9ed !important;
@@ -63,7 +72,7 @@ legend {
 	background-color: #fff !important;
 }
 .ui-paginator {
-	color: #434a54 !important;
+	color: #383838 !important;
     background-color: #fff !important;    
 }
 .ui-paginator.ui-paginator-top {
@@ -96,7 +105,6 @@ legend {
     border-color: #aab2bd !important;
 }
 .btn-default {
-  	/*color: #434a54 !important;*/
   	color: #656D78 !important;
   	border-color: #656D78 !important;
 }
@@ -105,8 +113,6 @@ legend {
 .btn-default.focus,
 .btn-default:active,
 .btn-default.active {
-  	/*background-color: #434a54 !important;
-  	border-color: #434a54 !important;*/
   	background-color: #656D78 !important;
   	border-color: #656D78 !important;
 }
@@ -114,7 +120,7 @@ legend {
 .btn-default.disabled,
 .btn-default[disabled],
 .btn-default.ui-state-disabled {
-  	background-color: transparent !important; /*#fff !important;*/
+  	background-color: transparent !important;
 }
 .btn-default.disabled,
 .btn-default[disabled],
@@ -140,8 +146,8 @@ fieldset[disabled] .btn-default:active,
 .btn-default[disabled].active,
 .btn-default.ui-state-disabled.active,
 fieldset[disabled] .btn-default.active {
- 	color: #434a54 !important;
-  	border-color: #434a54 !important;
+ 	color: #383838 !important;
+  	border-color: #383838 !important;
 }
 .btn-info,
 .btn-info:active,
@@ -385,7 +391,7 @@ fieldset[disabled] .btn-primary.active {
 	color: #fff !important;
 }
 .ui-chkbox-all .ui-chkbox-icon.ui-icon-check {
-	color: #434a54 !important;
+	color: #383838 !important;
 }
 .ui-dialog.ui-widget-content .ui-dialog-title {	
     color: #383838;
@@ -400,6 +406,17 @@ fieldset[disabled] .btn-primary.active {
 .ui-datepicker-today .ui-state-highlight {
 	background-color: #26C281 !important;
 	color: #fff !important;
+}
+.ui-datepicker .ui-datepicker-header {
+	background: #F47D30;
+	color: #fff !important;
+}
+.ui-datepicker .ui-datepicker-prev-hover, 
+.ui-datepicker .ui-datepicker-next-hover {
+	background: #F47D30;
+}
+.ui-datepicker td {
+    background-color: #FFFFFF !important;
 }
 .ui-password-panel.ui-state-highlight {
 	background-color: #26C281 !important;
@@ -432,6 +449,10 @@ fieldset[disabled] .btn-primary.active {
 }
 .ui-upload-img {	
 	border-color: #cccccc !important;
+	background-color: #FFF;
+}
+input[type=file]:focus {
+	outline-color: #37bc9b !important;
 }
 .ui-dashboard-panel-label {	
     color: #0E9948;    

@@ -1,137 +1,140 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui" template="templates/main.xhtml">
 
-<h:head>
-	<title>PETSHOW</title>
-	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
-	<link rel="stylesheet" type="text/css"
-		href="resources/css/page-servico.css" />
-</h:head>
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="bullhorn" />
+	<ui:param name="pageTitle" value="ANÚNCIO" />
 
-<h:body>
-	<ui:composition template="templates/PageLayout.xhtml">
+	<ui:define name="header">
 
-		<ui:define name="content">
+	</ui:define>
 
-			<h:form enctype="multipart/form-data">
-				<p:messages id="messages" infoStyle="color:darkgreen"
-					showDetail="true" autoUpdate="true" closable="true" />
-				<h:panelGrid columns="1">
+	<ui:define name="body">
 
-					<!-- 					<p:outputLabel value="Informe o dono:" for="donoCB" /> -->
-					<!-- 					<p:inputText id="donoCB"   value="#{notificacaoBean.usuarioSel}" valueChangeListener="#{notificacaoBean.eventoConsultaAnimais}" maxlength="30" >  -->
-					<!--  							<p:ajax event="change" update="animalCB,animalCBL,animalL" listener="#{notificacaoBean.eventoConsultaAnimais}" /> -->
-					<!--        				 </p:inputText> -->
-					<p:outputLabel value="Usuario:" for="autoUsuario" />
-					<p:autoComplete id="autoUsuario" value="#{notificacaoBean.usuario}"
-						completeMethod="#{notificacaoBean.getclientes}" var="usuario"
-						itemLabel="#{usuario.nome}" queryDelay="1000"
-						itemValue="#{usuario}" minQueryLength="3"
-						emptyMessage="Não existem clientes com esse nome!"
-						converter="usuarioConverter" size="50"
-						placeholder="Consulte o cliente" forceSelection="true">
-						<p:column>
-							<h:graphicImage url="data:image/jpg;base64,#{usuario.foto}" />
-						</p:column>
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
 
-						<p:column>
-							<h:outputText value="#{usuario.nome}" />
-						</p:column>
+					<h:panelGrid columns="1">
 
-						<p:ajax event="itemSelect"
-							listener="#{notificacaoBean.eventoConsultaAnimais}"
-							update="panelGrid,panelAnimalUnico" />
-					</p:autoComplete>
-
-
-					<h:panelGroup id="panelGrid">
-						<p:dataTable id="checkboxDT"
-							rendered="#{notificacaoBean.mostrarGrid()}" var="animal"
-							value="#{notificacaoBean.animais}"
-							selection="#{notificacaoBean.animaisSelecionados}"
-							rowKey="#{animal.id}" style="margin-bottom:0">
-							<f:facet name="header">    Animais  </f:facet>
-							<p:column selectionMode="multiple"
-								style="width:16px;text-align:center" />
-							<p:column headerText="Nome">
-								<h:outputText value="#{animal.nome}" />
+						<p:outputLabel value="Usuario:" for="autoUsuario" />
+						<p:autoComplete id="autoUsuario"
+							value="#{notificacaoBean.usuario}"
+							completeMethod="#{notificacaoBean.getclientes}" var="usuario"
+							itemLabel="#{usuario.nome}" queryDelay="1000"
+							itemValue="#{usuario}" minQueryLength="3"
+							emptyMessage="Não existem clientes com esse nome!"
+							converter="usuarioConverter" size="50"
+							placeholder="Consulte o cliente" forceSelection="true">
+							<p:column>
+								<h:graphicImage url="data:image/jpg;base64,#{usuario.foto}" />
 							</p:column>
-							<p:column headerText="Tipo">
-								<h:outputText value="#{animal.tipo}" />
+
+							<p:column>
+								<h:outputText value="#{usuario.nome}" />
 							</p:column>
-							<p:column headerText="Raça">
-								<h:outputText value="#{animal.raca}" />
-							</p:column>
-						</p:dataTable>
-					</h:panelGroup>
-					<h:panelGroup id="panelAnimalUnico">
-						<h:panelGrid columns="2"
-							rendered="#{notificacaoBean.mostrarlabel()}">
-							<p:outputLabel value="Dados do Animal" />
-							<p:outputLabel value="Nome:" for="lblnome" />
-							<p:outputLabel value="#{notificacaoBean.animalSelecionado.nome}"
-								id="lblnome" />
-							<p:outputLabel value="Tipo:" for="lblTipo" />
-							<p:outputLabel value="#{notificacaoBean.animalSelecionado.tipo}"
-								id="lblTipo" />
-							<p:outputLabel value="Raça:" for="lblRaca" />
-							<p:outputLabel value="#{notificacaoBean.animalSelecionado.raca}"
-								id="lblRaca" />
-						</h:panelGrid>
-					</h:panelGroup>
+
+							<p:ajax event="itemSelect"
+								listener="#{notificacaoBean.eventoConsultaAnimais}"
+								update="panelGrid,panelAnimalUnico" />
+						</p:autoComplete>
 
 
-					<h:outputLabel value="Serviço:" for="cbServico" />
-						<p:selectOneMenu id="cbServico"
-							value="#{notificacaoBean.servico}"
+						<h:panelGroup id="panelGrid">
+							<p:dataTable id="checkboxDT"
+								rendered="#{notificacaoBean.mostrarGrid()}" var="animal"
+								value="#{notificacaoBean.animais}"
+								selection="#{notificacaoBean.animaisSelecionados}"
+								rowKey="#{animal.id}" style="margin-bottom:0">
+								<f:facet name="header">    Animais  </f:facet>
+								<p:column selectionMode="multiple"
+									style="width:16px;text-align:center" />
+								<p:column headerText="Nome">
+									<h:outputText value="#{animal.nome}" />
+								</p:column>
+								<p:column headerText="Tipo">
+									<h:outputText value="#{animal.tipo}" />
+								</p:column>
+								<p:column headerText="Raça">
+									<h:outputText value="#{animal.raca}" />
+								</p:column>
+							</p:dataTable>
+						</h:panelGroup>
+						<h:panelGroup id="panelAnimalUnico">
+							<h:panelGrid columns="2"
+								rendered="#{notificacaoBean.mostrarlabel()}">
+								<p:outputLabel value="Dados do Animal" />
+								<p:outputLabel value="Nome:" for="lblnome" />
+								<p:outputLabel value="#{notificacaoBean.animalSelecionado.nome}"
+									id="lblnome" />
+								<p:outputLabel value="Tipo:" for="lblTipo" />
+								<p:outputLabel value="#{notificacaoBean.animalSelecionado.tipo}"
+									id="lblTipo" />
+								<p:outputLabel value="Raça:" for="lblRaca" />
+								<p:outputLabel value="#{notificacaoBean.animalSelecionado.raca}"
+									id="lblRaca" />
+							</h:panelGrid>
+						</h:panelGroup>
+
+
+						<h:outputLabel value="Serviço:" for="cbServico" />
+						<p:selectOneMenu id="cbServico" value="#{notificacaoBean.servico}"
 							converter="servicoConverter">
 
 							<f:selectItem itemLabel="#{placeHolderBean.selServico}"
 								itemValue=" " noSelectionOption="true" />
-							<f:selectItems
-								value="#{notificacaoBean.servicos}"
-								var="servico" itemLabel="#{servico.nmServico}" itemValue="#{servico}" />
-						
+							<f:selectItems value="#{notificacaoBean.servicos}" var="servico"
+								itemLabel="#{servico.nmServico}" itemValue="#{servico}" />
+
 						</p:selectOneMenu>
-					
-					<h:outputLabel value="Situação:" for="opSituacao" />
-   						
-        					
-        <p:selectOneRadio  columns="2" id="opSituacao" value="#{notificacaoBean.situacao}">
-            <f:selectItem itemLabel="Pronto para Entrega" itemValue="1" />
-            <f:selectItem itemLabel="Entrando em Observação" itemValue="2" />
-            <f:selectItem itemLabel="Entregue no horario" itemValue="3" />
-            <f:selectItem itemLabel="Entregue em casa no horario" itemValue="4" />
-            
-            <p:ajax event="change"  process="@this" update="panelHora" />
-        </p:selectOneRadio>
-    
-<h:panelGroup id="panelHora">
- <p:outputLabel for="txtHora" value="Horário:"  rendered="#{notificacaoBean.mostrarTxtHora()}"/>
-        <p:calendar id="txtHora" value="#{notificacaoBean.horaSituacao}" rendered="#{notificacaoBean.mostrarTxtHora()}" pattern="HH:mm" timeOnly="true"  />
 
-	</h:panelGroup>			
-	
-		
+						<h:outputLabel value="Situação:" for="opSituacao" />
 
 
-					<h:commandButton action="#{notificacaoBean.enviarNotificacao}"
-						type="submit" value="Enviar" update="messages" id="btEnviar" />
-				</h:panelGrid>
+						<p:selectOneRadio columns="2" id="opSituacao"
+							value="#{notificacaoBean.situacao}">
+							<f:selectItem itemLabel="Pronto para Entrega" itemValue="1" />
+							<f:selectItem itemLabel="Entrando em Observação" itemValue="2" />
+							<f:selectItem itemLabel="Entregue no horario" itemValue="3" />
+							<f:selectItem itemLabel="Entregue em casa no horario"
+								itemValue="4" />
+
+							<p:ajax event="change" process="@this" update="panelHora" />
+						</p:selectOneRadio>
+
+						<h:panelGroup id="panelHora">
+							<p:outputLabel for="txtHora" value="Horário:"
+								rendered="#{notificacaoBean.mostrarTxtHora()}" />
+							<p:calendar id="txtHora" value="#{notificacaoBean.horaSituacao}"
+								rendered="#{notificacaoBean.mostrarTxtHora()}" pattern="HH:mm"
+								timeOnly="true" />
+
+						</h:panelGroup>
 
 
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
 
 
-			</h:form>
+						<h:commandButton action="#{notificacaoBean.enviarNotificacao}"
+							type="submit" value="Enviar" update="messages" id="btEnviar" />
+					</h:panelGrid>
 
-		</ui:define>
-	</ui:composition>
-</h:body>
+
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
+
 </html>
+
 
