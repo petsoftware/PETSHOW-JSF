@@ -45,11 +45,20 @@
    				title="Excluir Anúncio?"
    				value="Excluir" 
    				action="#{anuncioBean.excluirAnuncio}"
-   				ajax="false"
-   				/>
+   				ajax="true"
+   			>
+   				<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+   			</p:commandButton>
    		</ui:define>
 	   	
 	   	<ui:define name="body">
+	   		
+	   		<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade" severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade" appendToBody="true" ajax="false">
+		        
+			        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes btn btn-info btn-lg" icon="ui-icon-check" />
+			        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no btn btn-danger btn-lg" icon="ui-icon-close" />
+		        
+    		</p:confirmDialog>
 	   		
 	   		<div class="ui-grid ui-grid-responsive">	   		
 	   			<div class="ui-grid-row ui-grid-row-custom">
@@ -118,7 +127,15 @@
 											        <p:outputLabel value="FOTO" />
 											    </div>
 											   	<div class="ui-grid-row">
-										 	     	<h:inputFile id="txtInputFoto" value="#{anuncioBean.imagem}" />
+											   		<p:fileUpload style="width:100%"
+														mode="simple"
+														cache="false"
+														fileLimit="1"
+														dragDropSupport="true"													
+		                          						sizeLimit="10000000"
+		                          						allowTypes="/(\.|\/)(gif|jpg|jpeg|png)$/" 
+		                          						id="txtInputFoto" value="#{anuncioBean.uploadedFile}"/>
+										 	     	
 												</div>
 											</div>
 										</div>
@@ -132,14 +149,14 @@
 							    </div>
 							   	<div class="ui-grid-row">
 				          			<div class="ui-upload-img" style="height: 215px;">
-										<h:graphicImage style="width:100%;height:100%;display:#{true ? 'none' : 'inline-block'}"
+										<h:graphicImage style="width:100%;height:100%;display:#{anuncioBean.hasPhoto ? 'inline-block' : 'none'}"
 											stream="false"
 											cache="false" 
 											url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"
 											id="visualizacao" 
 											alt="Visualização do anuncio"
 											/>
-										<span style="font-size:58px;display:#{true ? 'inline-block' : 'none'}" class="fa-stack fa-lg">
+										<span style="font-size:58px;display:#{anuncioBean.hasPhoto ? 'none' : 'inline-block' }" class="fa-stack fa-lg">
 										  <i class="fa fa-camera fa-stack-1x"></i>
 										  <i class="fa fa-ban fa-stack-2x text-danger"></i>
 										</span>
@@ -196,18 +213,38 @@
 												timeZone="America/Recife" />
 										</h:outputText>
 									</p:column>
-							        <p:column headerText="Edição" style="width:20%">
-										<h:commandButton action="#{anuncioBean.selecionar(anuncio)}"
-											type="submit" value="Editar" />
-										<h:commandButton
+							        <p:column headerText="Opções" style="text-align:center;width:20%">
+										<p:commandButton 
+											action="#{anuncioBean.selecionar(anuncio)}"
+											type="submit" 
+											styleClass="btn btn-info btn-lg"
+   											icon="fa fa-pencil-square-o" 
+   											title="Clique aqui para alterar alguma informação"
+   											ajax="true"
+   											process="@this"
+   											update="@form"
+   											>
+   												<f:ajax execute="@all" render="@form"/>
+   											</p:commandButton>
+										<p:commandButton
 											action="#{anuncioBean.excluirAnuncio(anuncio.id)}"
-											type="submit" value="Excluir" />
+											type="submit" 
+											styleClass="btn btn-danger btn-lg"
+   											icon="fa fa-trash-o"
+   											title="Excluir o registro na grid"
+   											ajax="true"
+   											process="@this"
+											 >
+											 	<f:ajax execute="@all" render="@form"/>
+											 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+											</p:commandButton>
 									</p:column>
+									
 							        <p:column style="text-align:center;" width="125">
 										
 										<p:commandButton id="btnVisualizar"
 											style="margin-right:4px"
-						              		styleClass="btn btn-info"
+						              		styleClass="btn btn-info btn-lg"
 						              		icon="fa fa-search">
 					                    </p:commandButton>
 					                    

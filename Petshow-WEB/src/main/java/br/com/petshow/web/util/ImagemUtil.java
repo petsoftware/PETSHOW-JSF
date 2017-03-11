@@ -21,4 +21,9 @@ public class ImagemUtil {
 		String base64AsString = new String(Base64.encode(imageAsByte));
 		return base64AsString;
 	}
+	
+	public static String transformBase64AsString(byte[] imageAsByte){
+		String base64AsString = new String(Base64.encode(imageAsByte));
+		return base64AsString;
+	}
 }

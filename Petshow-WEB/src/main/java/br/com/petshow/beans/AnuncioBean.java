@@ -13,6 +13,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
+import org.primefaces.model.UploadedFile;
+
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Anuncio;
@@ -34,8 +36,23 @@ public class AnuncioBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -8172991893429328152L;
+	private boolean hasPhoto = false;
 
-
+	public boolean isHasPhoto() {
+		if(anuncio != null){
+			if(anuncio.getFoto() != null && !anuncio.getFoto().isEmpty()){
+				hasPhoto = true;
+			}else{
+				hasPhoto = false;
+			}
+		}else{
+			hasPhoto = false;
+		}
+		return hasPhoto;
+	}
+	public void setHasPhoto(boolean hasPhoto) {
+		this.hasPhoto = hasPhoto;
+	}
 	public AnuncioBean (){
 		super();
 	}
@@ -46,8 +63,15 @@ public class AnuncioBean implements Serializable {
 	private Usuario usuarioLogado;
 
 	private Part imagem;
+	private UploadedFile uploadedFile;
 
 
+	public UploadedFile getUploadedFile() {
+		return uploadedFile;
+	}
+	public void setUploadedFile(UploadedFile uploadedFile) {
+		this.uploadedFile = uploadedFile;
+	}
 	@PostConstruct
 	public void init() {
 		this.anuncio = new Anuncio();
@@ -80,7 +104,8 @@ public class AnuncioBean implements Serializable {
 	public String salvarAnuncio(){
 		try {
 			
-			anuncio.setFoto(ImagemUtil.transformBase64AsString(imagem));
+//			anuncio.setFoto(ImagemUtil.transformBase64AsString(imagem));
+			anuncio.setFoto(ImagemUtil.transformBase64AsString(uploadedFile.getContents()) );
 			anuncio.setDataCadastro(new Date());
 			anuncio = (Anuncio) RestUtilCall.postEntity(anuncio, "anuncio/salvar",Anuncio.class);
 			getAnunciosBanco(); 
@@ -106,6 +131,7 @@ public class AnuncioBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na Exclusão:", "Nenhum Anúncio foi selecionado !"));
 		}else{
 			excluirAnuncio(anuncio.getId());
+			novo();
 		}
 	}
 
