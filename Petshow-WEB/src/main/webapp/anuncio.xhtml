@@ -37,6 +37,7 @@
 				onstart="paceStart();"
 				onclick="paceStart();"
 				oncomplete="Pace.restart();"
+				update="@form"
    				/>
    				
    			<p:commandButton id="btnExcluir"
@@ -46,6 +47,7 @@
    				value="Excluir" 
    				action="#{anuncioBean.excluirAnuncio}"
    				ajax="true"
+   				update="grid,@form"
    			>
    				<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
    			</p:commandButton>
@@ -215,7 +217,7 @@
 									</p:column>
 							        <p:column headerText="Opções" style="text-align:center;width:20%">
 										<p:commandButton 
-											action="#{anuncioBean.selecionar(anuncio)}"
+											actionListener="#{anuncioBean.selecionar(anuncio)}"
 											type="submit" 
 											styleClass="btn btn-info btn-lg"
    											icon="fa fa-pencil-square-o" 
@@ -224,7 +226,7 @@
    											process="@this"
    											update="@form"
    											>
-   												<f:ajax execute="@all" render="@form"/>
+   												<f:ajax render="@form"/>
    											</p:commandButton>
 										<p:commandButton
 											action="#{anuncioBean.excluirAnuncio(anuncio.id)}"
@@ -234,6 +236,7 @@
    											title="Excluir o registro na grid"
    											ajax="true"
    											process="@this"
+   											update="grid"
 											 >
 											 	<f:ajax execute="@all" render="@form"/>
 											 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
