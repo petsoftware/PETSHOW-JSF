@@ -64,11 +64,11 @@ public class ServicoBean  {
 	}
 */
 	
-	public void salvarServico(){
+	public String salvarServico(){
 	
 
 		salvarServico(this.servico);
-
+		return null;
 	}
 	
 	
@@ -96,12 +96,13 @@ public class ServicoBean  {
 
 	}
 
-	public void excluirServico(){
+	public String excluirServico(){
 		if(servico.getId() ==0){
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na Exclusão:", "Nenhum Serviço foi selecionado !"));
 		}else{
 			excluirServico(servico.getId());
 		}
+		return null;
 	}
 
 	public void excluirServico(long id){
@@ -124,7 +125,7 @@ public class ServicoBean  {
 
 	}
 
-	public void novo(){
+	public String novo(){
 		try{
 
 			servico = new Servico();
@@ -136,7 +137,7 @@ public class ServicoBean  {
 			e.printStackTrace();
 		}
 
-
+		return null;
 	}
 
 	public void selecionar(Servico servico){

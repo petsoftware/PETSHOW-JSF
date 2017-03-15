@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -10,11 +12,31 @@
 	xmlns:p="http://primefaces.org/ui" template="templates/main.xhtml">
 
 	<ui:param name="activeAnuncio" value="active" />
-	<ui:param name="pageIcon" value="bullhorn" />
-	<ui:param name="pageTitle" value="ANÚNCIO" />
+	<ui:param name="pageIcon" value="cogs" />
+	<ui:param name="pageTitle" value="SERVIÇOS" />
 
 	<ui:define name="header">
 
+		<p:commandButton id="btnLimpar" style="margin-right:4px"
+			styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
+			title="Limpar a Tela?" value="Limpar" action="#{servicoBean.novo}"
+			type="submit" ajax="false" />
+
+		<p:commandButton id="btnSalvar" style="margin-right:4px"
+			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+			title="Salvar Serviço?" value="Salvar"
+			action="#{servicoBean.salvarServico}" type="submit" ajax="false"
+			onstart="paceStart();" onclick="paceStart();"
+			oncomplete="Pace.restart();" update="@form" />
+
+		<p:commandButton id="btnExcluir" styleClass="btn btn-danger btn-lg"
+			icon="fa fa-trash-o" title="Excluir Serviço" value="Excluir"
+			action="#{servicoBean.excluirServico}" ajax="true"
+			update="grid,@form">
+			<p:confirm header="Confirme a exclusão"
+				message="Você tem certeza que deseja excluir este registro?"
+				icon="fa fa-exclamation-triangle" />
+		</p:commandButton>
 	</ui:define>
 
 	<ui:define name="body">
@@ -23,64 +45,120 @@
 			<div class="ui-grid-row ui-grid-row-custom">
 				<div class="ui-grid-col-12">
 
-					
 
 
-				<h:panelGrid columns="1">
-				
-					<h:outputLabel value="Nome do serviço:" for="txtNMServico" />
-					<p:inputText id="txtNMServico"   value="#{servicoBean.servico.nmServico}" maxlength="30"/>
-					    
-					    
-					<h:outputLabel value="Descreva o seu serviço:" for="txtDesc" />
-					<p:inputTextarea rows="6" cols="33" id="txtDesc"    value="#{servicoBean.servico.descricao}"  maxlength="255"/>
 
-				
-					<h:outputLabel value="Status:" for="cbAtivo" />
-					 <p:selectOneMenu id="cbAtivo" value="#{servicoBean.servico.flAtivo}" style="width:125px">
-            			<f:selectItem itemLabel="Ativo" itemValue="true" />
-            			<f:selectItem itemLabel="Inativo" itemValue="false" />
-            			
-        			</p:selectOneMenu>		
+					<h:panelGrid columns="1">
+
+						<h:outputLabel value="Nome do serviço:" for="txtNMServico" />
+						<p:inputText id="txtNMServico"
+							value="#{servicoBean.servico.nmServico}" maxlength="30" />
+
+
+						<h:outputLabel value="Descreva o seu serviço:" for="txtDesc" />
+						<p:inputTextarea rows="6" cols="33" id="txtDesc"
+							value="#{servicoBean.servico.descricao}" maxlength="255" />
+
+
+						<h:outputLabel value="Status:" for="cbAtivo" />
+						<p:selectOneMenu id="cbAtivo"
+							value="#{servicoBean.servico.flAtivo}" style="width:125px">
+							<f:selectItem itemLabel="Ativo" itemValue="true" />
+							<f:selectItem itemLabel="Inativo" itemValue="false" />
+
+						</p:selectOneMenu>
+
+
+
+
+
+					</h:panelGrid>
+					<div class="ui-grid-row ui-grid-row-custom">
+						<div class="ui-grid-col-12">
+							<p:dataTable
+								emptyMessage="Nenhum Anúncio."
+					   			scrollHeight="157"
+								scrollable="true"
+				                resizableColumns="true" 
+								var="servico" 
+								value="#{servicoBean.servicos}"
+								paginator="#{servicoBean.servicos.size() > 12}" 
+								rows="13"
+								paginatorPosition="bottom" 
+								id="grid"
+								tabindex="-1">
+								
+							 	<f:facet name="header">
+				                	<p:outputLabel value="Serviços" />
+				             	</f:facet>
+								
+								<p:column headerText="Nome" style="width:25%">
+									<h:outputText value="#{servico.nmServico}" />
+								</p:column>
+
+								<p:column headerText="Descrição" style="width:35%">
+									<h:outputText value="#{servico.descricao}" />
+								</p:column>
+
+								<p:column headerText="Ativo" style="width:10%;text-align: center;">
+									<p:graphicImage
+										rendered="#{servico.flAtivo}">
+										<i class="fa fa-check-circle fa-2x fa-color-green"/>	
+									</p:graphicImage>	
+									<p:graphicImage
+										rendered="#{not servico.flAtivo}" >
+										<i class="fa fa-times fa-2x fa-color-red"/>
+									</p:graphicImage>
+								</p:column>
+
+								<p:column style="width:15%;text-align: center;">
 									
-					<h:commandButton action="#{servicoBean.novo}" type="submit" value="Novo"   update="messages"  id="btNovo"/>
-					<h:commandButton action="#{servicoBean.salvarServico}" 	type="submit" value="Salvar"   update="messages,grid" id="btSalvar"/>
-				
-					<h:commandButton action="#{servicoBean.excluirServico}" type="submit" value="Excluir"  update="messages"  id="btExcluir"/>
+									<p:commandButton actionListener="#{servicoBean.ativarServico(servico)}"
+										type="submit" value="Ativar" id="btnAtivar" styleClass="btn btn-primary"
+										rendered="#{not servico.flAtivo}" title="Ativar esse serviço" 
+										ajax="true"
+   										process="@this"
+   										update="grid"
+										/>
+									<p:commandButton
+										actionListener="#{servicoBean.inativarServico(servico)}" type="submit"
+										value="Inativar" id="btInativar" styleClass="btn btn-danger" title="Desativar esse serviço"
+										rendered="#{servico.flAtivo}" 
+										ajax="true"
+   										process="@this"
+   										update="grid"
+										/>
+									
+								</p:column>
 
-				
-				
-				</h:panelGrid>
-				<p:dataTable var="servico" value="#{servicoBean.servicos}"
-					paginator="#{servicoBean.servicos.size() > 12}" rows="13"
-					paginatorPosition="bottom" id="grid">
+								<p:column headerText="Opções" style="width:10%">
+									<p:commandButton 
+										action="#{servicoBean.selecionar(servico)}"
+										type="submit" 
+										styleClass="btn btn-info btn-lg"
+   										icon="fa fa-pencil-square-o" 
+   										title="Clique aqui para alterar alguma informação"
+   										ajax="true"
+   										process="@this"
+   										update="@form" />
+									
+									
+									<p:commandButton
+										actionListener="#{servicoBean.excluirServico(servico.id)}"
+										type="submit" 
+											styleClass="btn btn-danger btn-lg"
+   											icon="fa fa-trash-o"
+   											title="Excluir o registro na grid"
+   											ajax="true"
+   											process="@this"
+   											update="grid" />
 
+								</p:column>
+								
+							</p:dataTable>
+						</div>
+					</div>
 
-					<p:column headerText="Nome" style="width:25%">
-						<h:outputText value="#{servico.nmServico}" />
-					</p:column>
-
-					<p:column headerText="Descrição" style="width:50%">
-						<h:outputText value="#{servico.descricao}" />
-					</p:column>
-					
-					<p:column headerText="Ativo" style="width:5%">
-						<p:graphicImage value="/resources/images/OK.png" rendered="#{servico.flAtivo}"/>
-   						<p:graphicImage value="/resources/images/error.png"  rendered="#{not servico.flAtivo}"/>		
-					</p:column>
-
-					
-					
-					<p:column headerText="Edição" style="width:20%">
-						<h:commandButton action="#{servicoBean.selecionar(servico)}" type="submit" value="Editar" />
-						<h:commandButton action="#{servicoBean.ativarServico(servico)}" type="submit" value="Ativar"  update="messages"  id="btAtivar"  rendered="#{not servico.flAtivo}"/>
-						<h:commandButton action="#{servicoBean.inativarServico(servico)}" type="submit" value="Inativar"  update="messages"  id="btInativar"  rendered="#{servico.flAtivo}"/>
-						<h:commandButton action="#{servicoBean.excluirServico(servico.id)}" type="submit"	value="Excluir" />
-						
-					</p:column>
-				</p:dataTable>
-
-					
 
 				</div>
 			</div>
@@ -92,4 +170,4 @@
 
 </html>
 
-	
+
