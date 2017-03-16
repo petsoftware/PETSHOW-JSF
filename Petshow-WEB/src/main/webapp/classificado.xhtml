@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -14,122 +16,275 @@
 	<ui:param name="pageTitle" value="CLASSIFICADOS" />
 
 	<ui:define name="header">
+		<p:commandButton id="btnLimpar" style="margin-right:4px"
+			styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
+			title="Limpar Anúncio?" value="Limpar" action="#{vendaBean.novo}"
+			type="submit" ajax="false" />
+
+		<p:commandButton id="btnSalvar" style="margin-right:4px"
+			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+			title="Salvar Anúncio?" value="Salvar"
+			action="#{vendaBean.salvarVenda}" type="submit" ajax="false"
+			onstart="paceStart();" onclick="paceStart();"
+			oncomplete="Pace.restart();" update="@form" />
+
+		<p:commandButton id="btnExcluir" styleClass="btn btn-danger btn-lg"
+			icon="fa fa-trash-o" title="Excluir Anúncio?" value="Excluir"
+			action="#{vendaBean.excluirVenda}" ajax="true" update="grid,@form">
+			<p:confirm header="Confirme a exclusão"
+				message="Você tem certeza que deseja excluir este registro?"
+				icon="fa fa-exclamation-triangle" />
+		</p:commandButton>
 
 	</ui:define>
 
 	<ui:define name="body">
+
+		<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade"
+			severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade"
+			appendToBody="true" ajax="false">
+			<p:commandButton value="Sim" type="button"
+				styleClass="ui-confirmdialog-yes btn btn-info btn-lg"
+				icon="ui-icon-check" />
+			<p:commandButton value="Não" type="button"
+				styleClass="ui-confirmdialog-no btn btn-danger btn-lg"
+				icon="ui-icon-close" />
+		</p:confirmDialog>
 		<script type="text/javascript">
-    	jQuery(function($){
-    	   
-    	   $("input.txtCelularDDD").mask("99");
-    	   $("input.txtCelularTel").mask("999999999");
-    	   $("input.txtResidencialDDD").mask("99");
-    	   $("input.txtResidencialTel").mask("99999999");
-    	   
-		
-    	});
-    	</script>
+			jQuery(function($) {
+
+				$("input.txtCelularDDD").mask("99");
+				$("input.txtCelularTel").mask("999999999");
+				$("input.txtResidencialDDD").mask("99");
+				$("input.txtResidencialTel").mask("99999999");
+
+			});
+		</script>
 		<div class="ui-grid ui-grid-responsive">
 			<div class="ui-grid-row ui-grid-row-custom">
 				<div class="ui-grid-col-12">
+					<div class="ui-grid-row ui-grid-row-custom">
+						<div class="ui-grid-col-6" style="padding-right: 5px;">
 
-				<h:panelGrid columns="2">
-				
-					<h:panelGrid columns="1">
-						<h:outputLabel value="Nome do produto/serviço:" for="txtNMVenda" />
-						<p:inputText id="txtNMVenda"   value="#{vendaBean.venda.descResumida}" maxlength="30" required="#{!empty param['form:btSalvar']}"
-							requiredMessage="Informe o campo de Nome do produto/serviço!"/>   
-						
-						
-						<h:outputLabel value="Descrição:" for="txtDesc" />
-						<p:inputTextarea rows="6" cols="33" id="txtDesc"     value="#{vendaBean.venda.descricao}" required="#{!empty param['form:btSalvar']}"
-							requiredMessage="Informe o campo de Descrição!"/>
-						
-						<h:outputLabel value="Estado" for="cbEstado" />
-						
-					
-						<p:selectOneMenu id="cbEstado"  value="#{vendaBean.venda.estado}"  converter="estadoConverter"> 
-			               	
-	    	           		 <f:selectItem itemLabel="#{placeHolderBean.selEstado}" itemValue="" noSelectionOption="true"  /> 
-		               		<f:selectItems value="#{vendaBean.autoCompleteBean.estados}" var="estado"  itemLabel="#{estado.nome}" itemValue="#{estado}" />
-	            		 		<p:ajax listener="#{vendaBean.autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}"  update="cbCidade,cbBairro"/>	
-	            		 		
-	           			 </p:selectOneMenu>
-	
-						
-						<h:outputLabel value="Cidade" for="cbCidade" />
-						<p:selectOneMenu  id ="cbCidade" value="#{vendaBean.venda.cidade}" converter="cidadeConverter"> 
-	   						  <f:selectItem itemLabel="#{placeHolderBean.selCidade}" itemValue="" noSelectionOption="true"  /> 
-	   						 <f:selectItems value="#{vendaBean.autoCompleteBean.cidades}" var="cidade"      itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
-	   						 <p:ajax event="change" listener="#{vendaBean.autoCompleteBean.onCidadeChange(vendaBean.venda.cidade)}" update="cbBairro"  /> 
-	   						   
-						</p:selectOneMenu>
-						
-						<h:outputLabel value="Bairro" for="cbBairro" />
-						<p:selectOneMenu value="#{vendaBean.venda.bairro}"  id ="cbBairro" converter="bairroConverter">
-						 <f:selectItem itemLabel="#{placeHolderBean.selBairro}" itemValue="" noSelectionOption="true"  /> 
-	   						 <f:selectItems value="#{vendaBean.autoCompleteBean.bairros}" var="bairro"      itemLabel="#{bairro.nome}" itemValue="#{bairro}" />
-	   						   
-	   					</p:selectOneMenu>
-						
-						<h:outputLabel value="Telefone Residencial" for="txtResidencialDDD" />
-						<p:inputText styleClass="txtResidencialDDD" id="txtResidencialDDD"     value="#{vendaBean.venda.dddResidencial}" maxlength="2"/>
-						<p:inputText styleClass="txtResidencialTel" id="txtResidencialTel"     value="#{vendaBean.venda.telefoneResidencial}" maxlength="9"/>
-						
-						<h:outputLabel value="Telefone Celular" for="txtCelularDDD" />
-						<p:inputText  styleClass="txtCelularDDD" id="txtCelularDDD"     value="#{vendaBean.venda.dddCelular}" maxlength="2"/>
-						<p:inputText  styleClass="txtCelularTel" id="txtCelularTel"     value="#{vendaBean.venda.telefoneCelular}" maxlength="9"/>
-						
-						<h:outputLabel value="Valor" for="txtValor" />
-						<p:inputText  id="txtValor"   validator="numeroValidator"  value="#{vendaBean.venda.vlVenda}" validatorMessage="Campo de valor aceita somente numericos!"/>
-	
-						<h:outputLabel value="FOTO" for="txtInputFoto1"/>
-						<h:inputFile id="txtInputFoto1" value="#{vendaBean.imagem1}" />
-						
-						<h:outputLabel value="FOTO" for="txtInputFoto2"/>
-						<h:inputFile id="txtInputFoto2" value="#{vendaBean.imagem2}" />
-						
-						<h:outputLabel value="FOTO" for="txtInputFoto3"/>
-						<h:inputFile id="txtInputFoto3" value="#{vendaBean.imagem3}" />
-						
-						
-						<h:commandButton action="#{vendaBean.novo}" type="submit" value="Novo"   update="messages"  id="btNovo"/>
-						
-						<h:commandButton action="#{vendaBean.salvarVenda}" 	type="submit" value="Salvar"   update="messages,grid" id="btSalvar"/>
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="Nome do produto/serviço:"
+											for="txtNMVenda" />
+									</div>
+									<div class="ui-grid-row">
+										<p:inputText id="txtNMVenda"
+											value="#{vendaBean.venda.descResumida}" maxlength="30"
+											required="#{!empty param['form:btSalvar']}"
+											requiredMessage="Informe o campo de Nome do produto/serviço!" />
+									</div>
+								</div>
+							</div>
+
+
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="Descrição:" for="txtDesc" />
+									</div>
+									<div class="ui-grid-row">
+										<p:inputTextarea rows="6" cols="33" id="txtDesc"
+											value="#{vendaBean.venda.descricao}"
+											required="#{!empty param['form:btnSalvar']}"
+											requiredMessage="Informe o campo de Descrição!" />
+									</div>
+								</div>
+							</div>
+
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="Estado" for="cbEstado" />
+									</div>
+									<div class="ui-grid-row">
+										<p:selectOneMenu id="cbEstado"
+											value="#{vendaBean.venda.estado}" converter="estadoConverter">
+
+											<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems value="#{vendaBean.autoCompleteBean.estados}"
+												var="estado" itemLabel="#{estado.nome}"
+												itemValue="#{estado}" />
+											<p:ajax
+												listener="#{vendaBean.autoCompleteBean.onEstadoChange(vendaBean.venda.estado)}"
+												update="cbCidade,cbBairro" />
+
+										</p:selectOneMenu>
+									</div>
+								</div>
+							</div>
+
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="Cidade" for="cbCidade" />
+									</div>
+									<div class="ui-grid-row">
+										<p:selectOneMenu id="cbCidade"
+											value="#{vendaBean.venda.cidade}" converter="cidadeConverter">
+											<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems value="#{vendaBean.autoCompleteBean.cidades}"
+												var="cidade" itemLabel="#{cidade.nome}"
+												itemValue="#{cidade}" />
+											<p:ajax event="change"
+												listener="#{vendaBean.autoCompleteBean.onCidadeChange(vendaBean.venda.cidade)}"
+												update="cbBairro" />
+
+										</p:selectOneMenu>
+									</div>
+								</div>
+							</div>
+
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="Bairro" for="cbBairro" />
+									</div>
+									<div class="ui-grid-row">
+										<p:selectOneMenu value="#{vendaBean.venda.bairro}"
+											id="cbBairro" converter="bairroConverter">
+											<f:selectItem itemLabel="#{placeHolderBean.selBairro}"
+												itemValue="" noSelectionOption="true" />
+											<f:selectItems value="#{vendaBean.autoCompleteBean.bairros}"
+												var="bairro" itemLabel="#{bairro.nome}"
+												itemValue="#{bairro}" />
+
+										</p:selectOneMenu>
+									</div>
+								</div>
+							</div>
 							
-						<h:commandButton action="#{vendaBean.excluirVenda}" type="submit" value="Excluir"  update="messages,grid"  id="btExcluir"/>
-	
-					</h:panelGrid>
-					<h:panelGrid columns="1">
-<!-- 						<h:graphicImage url="data:image/jpg;base64,#{anuncioBean.anuncio.foto}"      id="visualizacao" alt="Visualização do anuncio"  /> -->
-					</h:panelGrid>
-				</h:panelGrid>
-				<p:dataTable var="venda" value="#{vendaBean.vendas}"
-					paginator="#{vendaBean.vendas.size() > 12}" rows="13"
-					paginatorPosition="bottom" id="grid">
+																			
+		
+							<h:outputLabel value="FOTO" for="txtInputFoto1" />
+							<p:fileUpload fileUploadListener="#{vendaBean.enviaImagem}"
+                              update="galeria"
+                              ajax="true"
+                              cancelLabel="Cancelar"
+                              fileLimit="100000"
+                              fileLimitMessage="Imagem muito grande"
+                              label="Selecionar"
+                              invalidFileMessage="Tipo de imagem inválido"
+                              invalidSizeMessage="Imagem muito grande"
+                              uploadLabel="Enviar"
+                              allowTypes="/(\.|\/)(jpe?g|png)$/">
+ 
+                			</p:fileUpload>
+                			<!-- 
+							<h:inputFile id="txtInputFoto1" value="#{vendaBean.imagem1}" />
+							 -->
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12" align="center">
+									<div class="ui-grid-row">
+										<p:galleria id="galeria" value="#{vendaBean.tempList}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+			    							<p:graphicImage   
+			    								title="Imagem"
+			    								url="data:image/jpg;base64,#{image}"
+												stream="false"
+												cache="false"  
+												alt="Foto"
+			    								/>
+										</p:galleria>
+									</div>
+								</div>
+							</div>
 
-					<p:column headerText="Produto/Serviço" style="width:20%">
-						<h:outputText value="#{venda.descResumida}" />
-					</p:column>
+						</div>
+						<div class="ui-grid-col-6" style="padding-right: 5px;">
+						
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="DDD / Contato" for="txtResidencialDDD" />
+									</div>
+									<div class="ui-grid-row">
+										<p:inputText style="width:40px" id="txtResidencialDDD"
+											value="#{vendaBean.venda.dddResidencial}" maxlength="2" />
+										<p:outputLabel value="/" />
+										<p:inputText styleClass="txtResidencialTel"
+											id="txtResidencialTel"
+											value="#{vendaBean.venda.telefoneResidencial}" maxlength="9" />
+									</div>
+								</div>
+							</div>
 
-					<p:column headerText="Descrição" style="width:70%">
-						<h:outputText value="#{venda.descricao}" />
-					</p:column>
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="DDD / Celular" for="txtCelularDDD" />
+									</div>
+									<div class="ui-grid-row">
+										<p:inputText styleClass="txtCelularDDD" id="txtCelularDDD"
+											style="width:40px" value="#{vendaBean.venda.dddCelular}"
+											maxlength="2" />
+										<p:outputLabel value="/" />
+										<p:inputText styleClass="txtCelularTel" id="txtCelularTel"
+											value="#{vendaBean.venda.telefoneCelular}" maxlength="9" />
+									</div>
+								</div>
+							</div>
 
-					
-					<p:column headerText="Data Cadastro" style="width:10%">
-						<h:outputText value="#{venda.dataCadastro}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-								timeZone="America/Recife" />
-						</h:outputText>
-					</p:column>
-					
-					
-					<p:column headerText="Edição" style="width:20%">
-						<h:commandButton action="#{vendaBean.selecionar(venda)}" type="submit" value="Editar" id="gridEditar" />
-						<h:commandButton action="#{vendaBean.excluirVenda(venda.id)}" type="submit"	value="Excluir" immediate="true"/>
-					</p:column>
-				</p:dataTable>
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<h:outputLabel value="Valor" for="txtValor" />
+									</div>
+									<div class="ui-grid-row">
+										<p:inputText id="txtValor" validator="numeroValidator"
+											value="#{vendaBean.venda.vlVenda}"
+											validatorMessage="Campo de valor aceita somente numericos!" />
+									</div>
+								</div>
+							</div>
+							
+							
+						</div>
+					</div>
+					<div class="ui-grid-row ui-grid-row-custom">
+						<div class="ui-grid-col-12">
+							<p:dataTable var="venda" value="#{vendaBean.vendas}"
+								paginator="#{vendaBean.vendas.size() > 12}" 
+								rows="13"
+								paginatorPosition="bottom" id="grid"
+								emptyMessage="Nenhum Anúncio."
+								>
+								
+								<f:facet name="header">
+				                	<p:outputLabel value="Classificados" />
+				                </f:facet>
+								
+								<p:column headerText="Produto/Serviço" style="width:20%">
+									<h:outputText value="#{venda.descResumida}" />
+								</p:column>
+
+								<p:column headerText="Descrição" style="width:70%">
+									<h:outputText value="#{venda.descricao}" />
+								</p:column>
+
+
+								<p:column headerText="Data Cadastro" style="width:10%">
+									<h:outputText value="#{venda.dataCadastro}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+											timeZone="America/Recife" />
+									</h:outputText>
+								</p:column>
+
+
+								<p:column headerText="Edição" style="width:20%">
+									<h:commandButton action="#{vendaBean.selecionar(venda)}"
+										type="submit" value="Editar" id="gridEditar" />
+									<h:commandButton action="#{vendaBean.excluirVenda(venda.id)}"
+										type="submit" value="Excluir" immediate="true" />
+								</p:column>
+							</p:dataTable>
+						</div>
+					</div>
 
 				</div>
 			</div>

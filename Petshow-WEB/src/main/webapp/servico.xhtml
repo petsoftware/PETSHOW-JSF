@@ -40,13 +40,15 @@
 	</ui:define>
 
 	<ui:define name="body">
+	
+		<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade" severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade" appendToBody="true" ajax="false">
+	        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes btn btn-info btn-lg" icon="ui-icon-check" />
+	        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no btn btn-danger btn-lg" icon="ui-icon-close" />
+   		</p:confirmDialog>
 
 		<div class="ui-grid ui-grid-responsive">
 			<div class="ui-grid-row ui-grid-row-custom">
 				<div class="ui-grid-col-12">
-
-
-
 
 					<h:panelGrid columns="1">
 
@@ -67,10 +69,6 @@
 							<f:selectItem itemLabel="Inativo" itemValue="false" />
 
 						</p:selectOneMenu>
-
-
-
-
 
 					</h:panelGrid>
 					<div class="ui-grid-row ui-grid-row-custom">
@@ -127,8 +125,9 @@
 										ajax="true"
    										process="@this"
    										update="grid"
-										/>
-									
+										>
+										<p:confirm header="Inativar Serviço" message="Você tem certeza que desativar esse Serviço?" icon="fa fa-exclamation-triangle" />
+									</p:commandButton>
 								</p:column>
 
 								<p:column headerText="Opções" style="width:10%">
@@ -151,7 +150,9 @@
    											title="Excluir o registro na grid"
    											ajax="true"
    											process="@this"
-   											update="grid" />
+   											update="grid" >
+   											<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+   									</p:commandButton>
 
 								</p:column>
 								

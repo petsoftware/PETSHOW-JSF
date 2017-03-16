@@ -1,5 +1,6 @@
 package br.com.petshow.beans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,9 +8,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
+
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -23,7 +29,6 @@ import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
-@ViewScoped
 public class VendaBean {
 	public VendaBean (){
 		super();
@@ -39,6 +44,17 @@ public class VendaBean {
 	private Part imagem1;
 	private Part imagem2;
 	private Part imagem3;
+	private StreamedContent imagem = new DefaultStreamedContent();
+	private List<String> tempList = new ArrayList<>();
+
+	public List<String> getTempList() {
+		return tempList;
+	}
+
+
+	public void setTempList(List<String> tempList) {
+		this.tempList = tempList;
+	}
 
 
 	@PostConstruct
@@ -117,9 +133,21 @@ public class VendaBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
-
-
 	}
+	
+	public void enviaImagem(FileUploadEvent event) {
+        try {
+            imagem = new DefaultStreamedContent(event.getFile().getInputstream());
+            if(this.venda!=null){
+            	//venda.getFotos().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+            	getTempList().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+            }
+//            foto.setEvento(eventoSelecionado);
+//            foto.setImagem(event.getFile().getContents());
+        } catch (IOException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 	
 	public void novo(){
 		try{
