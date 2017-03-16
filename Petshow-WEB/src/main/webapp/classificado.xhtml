@@ -39,6 +39,8 @@
 	</ui:define>
 
 	<ui:define name="body">
+	
+		
 
 		<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade"
 			severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade"
@@ -173,6 +175,7 @@
                               invalidFileMessage="Tipo de imagem inválido"
                               invalidSizeMessage="Imagem muito grande"
                               uploadLabel="Enviar"
+                              multiple="true"
                               allowTypes="/(\.|\/)(jpe?g|png)$/">
  
                 			</p:fileUpload>
@@ -182,13 +185,14 @@
 							<div class="ui-grid-row ui-grid-row-custom">
 								<div class="ui-grid-col-12" align="center">
 									<div class="ui-grid-row">
-										<p:galleria id="galeria" value="#{vendaBean.tempList}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+										<p:galleria id="galeria" value="#{vendaBean.venda.fotos}" var="foto" panelWidth="500" panelHeight="313" showCaption="true">
 			    							<p:graphicImage   
 			    								title="Imagem"
-			    								url="data:image/jpg;base64,#{image}"
+			    								url="data:image/jpg;base64,#{foto}"
 												stream="false"
 												cache="false"  
 												alt="Foto"
+												id="idfoto"
 			    								/>
 										</p:galleria>
 									</div>
@@ -256,19 +260,19 @@
 								>
 								
 								<f:facet name="header">
-				                	<p:outputLabel value="Classificados" />
+				                	<p:outputLabel value="Classificados já cadastrados" />
 				                </f:facet>
 								
 								<p:column headerText="Produto/Serviço" style="width:20%">
 									<h:outputText value="#{venda.descResumida}" />
 								</p:column>
 
-								<p:column headerText="Descrição" style="width:70%">
+								<p:column headerText="Descrição" style="width:50%">
 									<h:outputText value="#{venda.descricao}" />
 								</p:column>
 
 
-								<p:column headerText="Data Cadastro" style="width:10%">
+								<p:column headerText="Data Cadastro" style="width:15%">
 									<h:outputText value="#{venda.dataCadastro}">
 										<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
 											timeZone="America/Recife" />
@@ -276,11 +280,29 @@
 								</p:column>
 
 
-								<p:column headerText="Edição" style="width:20%">
-									<h:commandButton action="#{vendaBean.selecionar(venda)}"
-										type="submit" value="Editar" id="gridEditar" />
-									<h:commandButton action="#{vendaBean.excluirVenda(venda.id)}"
-										type="submit" value="Excluir" immediate="true" />
+								<p:column headerText="Opções" style="width:25%;text-align: center;">
+								<p:commandButton 
+										actionListener="#{vendaBean.selecionar(venda)}"
+										type="submit" 
+										styleClass="btn btn-info btn-lg"
+   										icon="fa fa-pencil-square-o" 
+   										title="Clique aqui para alterar alguma informação"
+   										ajax="true"
+   										process="@this"
+   										update="@form" />
+									
+									
+									<p:commandButton
+										actionListener="#{vendaBean.excluirVenda(venda.id)}"
+										type="submit" 
+											styleClass="btn btn-danger btn-lg"
+   											icon="fa fa-trash-o"
+   											title="Excluir o registro na grid"
+   											ajax="true"
+   											process="@this"
+   											update="grid" >
+   											<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+   									</p:commandButton>
 								</p:column>
 							</p:dataTable>
 						</div>
