@@ -10,11 +10,21 @@
 	xmlns:p="http://primefaces.org/ui" template="templates/main.xhtml">
 
 	<ui:param name="activeAnuncio" value="active" />
-	<ui:param name="pageIcon" value="bullhorn" />
-	<ui:param name="pageTitle" value="ANÚNCIO" />
+	<ui:param name="pageIcon" value="bell-o" />
+	<ui:param name="pageTitle" value="NOTIFICAÇÃO" />
 
 	<ui:define name="header">
-
+		<p:commandButton id="btnEnviar"
+ 				style="margin-right:4px"
+ 				styleClass="btn btn-primary btn-lg"
+ 				icon="fa fa-refresh"
+ 				title="Enviar notificação"
+ 				value="Enviar" 
+ 				action="#{notificacaoBean.enviarNotificacao}" 
+ 				type="submit"
+ 				ajax="false"
+ 				update="msgs"
+ 				/>
 	</ui:define>
 
 	<ui:define name="body">
@@ -25,7 +35,7 @@
 
 					<h:panelGrid columns="1">
 
-						<p:outputLabel value="Usuario:" for="autoUsuario" />
+						<p:outputLabel value="Cliente:" for="autoUsuario" />
 						<p:autoComplete id="autoUsuario"
 							value="#{notificacaoBean.usuario}"
 							completeMethod="#{notificacaoBean.getclientes}" var="usuario"
@@ -122,8 +132,7 @@
 
 
 
-						<h:commandButton action="#{notificacaoBean.enviarNotificacao}"
-							type="submit" value="Enviar" update="messages" id="btEnviar" />
+						
 					</h:panelGrid>
 
 

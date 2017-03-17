@@ -50,6 +50,7 @@ public class NotificacaoBean  {
 	private boolean mostrarComboBoxAnimal;
 	private boolean mostrarLabelAnimal;
     private Date horaSituacao;
+    
 
 
 	public Date getHoraSituacao() {
@@ -85,9 +86,6 @@ public class NotificacaoBean  {
 		restServico = new CallServicoRest();
 		animais = new ArrayList<Animal>();
 		getServicosBanco();
-		//teste
-		//usuarioSel="1";
-		//getAnimaisBanco();
 	}
 
 	public void eventoConsultaAnimais(SelectEvent event) {
@@ -95,10 +93,6 @@ public class NotificacaoBean  {
 	 
 	 
 	 }
-	public void eventoConsultaAnimais2(SelectEvent event) {
-	    	String a = event.toString();
-	   	 String b="";
-	   	 }
 
 
 	public void getAnimaisBanco(long  id){
@@ -141,30 +135,49 @@ public class NotificacaoBean  {
 		return usuarios;
 	}
 
-	public void enviarNotificacao(){
+	public String enviarNotificacao(){
 		
 		
 		System.out.println("enviada notificacao");
 		
 		
 		
-	/*	try {
-			HashMap<String, String> parametros = new HashMap<String,String>();
-			parametros.put("idUsuario", "1");
-			parametros.put("idAnimal", "1");
-			parametros.put("idServico", "1");
-			RestUtilCall.post(parametros, "notificacao/entrega"); 
-
-		} catch (ExceptionErroCallRest  e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-
-		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-			e.printStackTrace();
-		}
-*/
+//	 try {
+//			HashMap<String, String> parametros = new HashMap<String,String>();
+//			parametros.put("idUsuario", "1");
+//			parametros.put("idAnimal", "1");
+//			parametros.put("idServico", "1");
+//			RestUtilCall.post(parametros, "notificacao/entrega"); 
+//			
+//			RestUtilCall.postEntity(anuncio, "notificacao/entrega", N.class)
+//
+//		} catch (ExceptionErroCallRest  e) {
+//			FacesContext.getCurrtry {
+//		HashMap<String, String> parametros = new HashMap<String,String>();
+//		parametros.put("idUsuario", "1");
+//		parametros.put("idAnimal", "1");
+//		parametros.put("idServico", "1");
+//		RestUtilCall.post(parametros, "notificacao/entrega"); 
+//		
+//		RestUtilCall.postEntity(anuncio, "notificacao/entrega", N.class)
+//
+//	} catch (ExceptionErroCallRest  e) {
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+//
+//	} catch (ExceptionValidation e) {
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+//	} catch (Exception e) {
+//		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+//		e.printStackTrace();
+//	}entInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+//
+//		} catch (ExceptionValidation e) {
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+//		} catch (Exception e) {
+//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+//			e.printStackTrace();
+//		}
+		return null;
 	}
 	
 	

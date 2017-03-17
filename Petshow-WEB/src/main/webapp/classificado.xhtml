@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
@@ -166,7 +167,7 @@
 		
 							<h:outputLabel value="FOTO" for="txtInputFoto1" />
 							<p:fileUpload fileUploadListener="#{vendaBean.enviaImagem}"
-                              update="galeria"
+                              update="@form,msgs"
                               ajax="true"
                               cancelLabel="Cancelar"
                               fileLimit="100000"
@@ -179,25 +180,6 @@
                               allowTypes="/(\.|\/)(jpe?g|png)$/">
  
                 			</p:fileUpload>
-                			<!-- 
-							<h:inputFile id="txtInputFoto1" value="#{vendaBean.imagem1}" />
-							 -->
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12" align="center">
-									<div class="ui-grid-row">
-										<p:galleria id="galeria" value="#{vendaBean.venda.fotos}" var="foto" panelWidth="500" panelHeight="313" showCaption="true">
-			    							<p:graphicImage   
-			    								title="Imagem"
-			    								url="data:image/jpg;base64,#{foto}"
-												stream="false"
-												cache="false"  
-												alt="Foto"
-												id="idfoto"
-			    								/>
-										</p:galleria>
-									</div>
-								</div>
-							</div>
 
 						</div>
 						<div class="ui-grid-col-6" style="padding-right: 5px;">
@@ -250,6 +232,43 @@
 							
 						</div>
 					</div>
+					
+							<div class="ui-grid-col -->-6" align="center">
+									<div class="ui-grid-row">
+										<ui:repeat var="foto" value="#{vendaBean.venda.fotos}" >
+											
+												<div class="ui-grid-col-4">
+													<div class="ui-grid-row">
+														<div class="ui-upload-img" style="height: 215px;">
+															<h:graphicImage style="width:80%;height:80%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
+																stream="false"
+																cache="false" 
+																url="data:image/jpg;base64,#{foto}"
+																id="visualizacao" 
+																alt="Visualização do anuncio"
+																/>
+															<span style="font-size:58px;display:#{foto.isEmpty() ? 'inline-block' : 'none'  }" class="fa-stack fa-lg">
+															  <i class="fa fa-camera fa-stack-1x"></i>
+															  <i class="fa fa-ban fa-stack-2x text-danger"></i>
+															</span>
+														</div>
+														<p:commandButton
+															actionListener="#{vendaBean.removePhoto(foto)}"
+															styleClass="btn btn-danger btn-lg"
+				   											icon="fa fa-trash-o"
+				   											title="Excluir foto à esquerda"
+				   											ajax="true"
+				   											process="@this"
+				   											update="@form" >
+					   											<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+					   									</p:commandButton>
+													</div>
+												</div>
+											
+										</ui:repeat>
+									</div>
+								</div>
+					
 					<div class="ui-grid-row ui-grid-row-custom">
 						<div class="ui-grid-col-12">
 							<p:dataTable var="venda" value="#{vendaBean.vendas}"

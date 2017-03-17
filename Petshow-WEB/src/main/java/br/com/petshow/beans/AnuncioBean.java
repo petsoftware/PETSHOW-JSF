@@ -83,28 +83,10 @@ public class AnuncioBean implements Serializable {
 		getAnunciosBanco(); 
 
 	}
-	/*
-	@PreDestroy
-	public void destroy() {
-		System.out.println("Spring Container is destroy! Customer clean up");
-		try {
-			anuncios=restAnuncio.getListAnuncio(anuncio.getUsuario().getId());
-
-		} catch (ExceptionErroCallRest  e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-
-		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-			e.printStackTrace();
-		}
-	}
-*/
+	
 	public String salvarAnuncio(){
 		try {
 			
-//			anuncio.setFoto(ImagemUtil.transformBase64AsString(imagem));
 			anuncio.setFoto(ImagemUtil.transformBase64AsString(uploadedFile.getContents()) );
 			anuncio.setDataCadastro(new Date());
 			anuncio = (Anuncio) RestUtilCall.postEntity(anuncio, "anuncio/salvar",Anuncio.class);

@@ -20,6 +20,7 @@ import br.com.petshow.model.Cidade;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.model.Venda;
 import br.com.petshow.role.UsuarioRole;
+import br.com.petshow.util.CollectionUtil;
 import br.com.petshow.web.util.CallVendaRest;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
@@ -134,8 +135,11 @@ public class VendaBean {
 	public void enviaImagem(FileUploadEvent event) {
             
             if(this.venda!=null){
-            	venda.getFotos().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
-            	//getTempList().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+            	if(venda.getFotos().size() >= 5){
+            		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de imagens excedido", "Só é permitido por até 5 imagens!"));
+            	}else{
+            		venda.getFotos().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+            	}
             }
     }
 	
@@ -266,6 +270,14 @@ public class VendaBean {
 
 	public void setAutoCompleteBean(AutoCompleteBean autoCompleteBean) {
 		this.autoCompleteBean = autoCompleteBean;
+	}
+	
+	public void removePhoto(String photoInBase64) {
+		if(this.venda != null){
+			if(this.venda.getFotos().isEmpty() == false){
+				this.venda.setFotos(CollectionUtil.removeItem(this.venda.getFotos(), photoInBase64));
+			}
+		}
 	}
 	
 }
