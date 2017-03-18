@@ -42,6 +42,49 @@
 					<div class="ui-grid-row">
 						<h:outputLabel value="#{usuarioBean.lblEmail}" />
 					</div>
+					<div class="ui-grid-row">
+						<h:outputLabel value="Nome:" for="txtNome" />
+					</div>
+					<div class="ui-grid-row">
+						<p:inputText id="txtNome" size="40"
+							value="#{usuarioBean.usuario.nome}" maxlength="50"
+							required="true" requiredMessage="Informe o campo de nome!" />
+					</div>
+
+					<div class="ui-grid-row">
+						<h:outputLabel value="Razão social:" for="txtRazaoSocial" />
+					</div>
+					<div class="ui-grid-row">
+						<p:inputText id="txtRazaoSocial" size="40"
+							value="#{usuarioBean.usuario.razaoSocial}" maxlength="100"
+							required="true" requiredMessage="Informe o campo de Razão social" />
+					</div>
+
+					<div class="ui-grid-row">
+						<h:outputLabel value="DDD / Contato :" for="txtTel1,txtDDD1" />
+					</div>
+					<div class="ui-grid-row">
+						<p:inputText id="txtDDD1" value="#{usuarioBean.usuario.ddd}"
+							maxlength="2" size="2" />
+						<p:outputLabel value="/" />
+						<p:inputText id="txtTel1" size="9"
+							value="#{usuarioBean.usuario.telefone}" maxlength="9" />
+					</div>
+
+
+					<div class="ui-grid-row">
+						<h:outputLabel value="DDD / Contato :" for="txtTel2,txtDDD2" />
+					</div>
+					<div class="ui-grid-row">
+						<p:inputText id="txtDDD2" size="2"
+							value="#{usuarioBean.usuario.ddd2}" maxlength="2" />
+						<p:outputLabel value="/" />
+						<p:inputText id="txtTel2" size="9"
+							value="#{usuarioBean.usuario.telefone2}" maxlength="9" />
+					</div>
+
+
+
 				</div>
 
 				<div class="ui-grid-col-6" style="padding-left: 5px;">
@@ -56,7 +99,7 @@
 								url="data:image/jpg;base64,#{usuarioBean.usuario.foto}"
 								id="visualizacao" alt="Visualização do anuncio" />
 							<span
-								style="font-size: 58px; display: #{usuarioBean.usuario.foto.isEmpty()?'inline-block': 'none'}"
+								style="font-size: 58px; display: #{usuarioBean.usuario.foto.isEmpty()?'inline-block': 'none' }"
 								class="fa-stack fa-lg"> <i
 								class="fa fa-camera fa-stack-1x"></i> <i
 								class="fa fa-ban fa-stack-2x text-danger"></i>
@@ -64,17 +107,11 @@
 						</div>
 					</div>
 					<p:fileUpload fileUploadListener="#{usuarioBean.enviaImagem}"
-                              
-                              auto="true"
-                              update="visualizacao"
-                              id="upldFoto"                           
-                              label="Escolha uma foto"
-                              skinSimple="true"
-                              multiple="false"
-                               
-                              allowTypes="/(\.|\/)(jpe?g|png)$/" />
-                			
-					
+						auto="true" update="visualizacao" id="upldFoto"
+						label="Escolha uma foto" skinSimple="true" multiple="false"
+						allowTypes="/(\.|\/)(jpe?g|png)$/" />
+
+
 				</div>
 			</div>
 			<div class="ui-grid-row ui-grid-row-custom">
@@ -84,68 +121,7 @@
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-12">
 
-
-
-
-
-									<div class="ui-grid-row ui-grid-row-custom">
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="Nome:" for="txtNome" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtNome" size="40"
-													value="#{usuarioBean.usuario.nome}" maxlength="50"
-													required="true" requiredMessage="Informe o campo de nome!" />
-											</div>
-										</div>
-									</div>
-
-									<div class="ui-grid-row ui-grid-row-custom">
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="Razão social:" for="txtRazaoSocial" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtRazaoSocial" size="40"
-													value="#{usuarioBean.usuario.razaoSocial}" maxlength="100"
-													required="true"
-													requiredMessage="Informe o campo de Razão social" />
-											</div>
-										</div>
-									</div>
-
-									<div class="ui-grid-row ui-grid-row-custom">
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="DDD / Contato :" for="txtTel1,txtDDD1" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtDDD1" value="#{usuarioBean.usuario.ddd}"
-													maxlength="2" size="2" />
-												<p:outputLabel value="/" />
-												<p:inputText id="txtTel1" size="9"
-													value="#{usuarioBean.usuario.telefone}" maxlength="9" />
-											</div>
-										</div>
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="DDD / Contato :" for="txtTel2,txtDDD2" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtDDD2" size="2"
-													value="#{usuarioBean.usuario.ddd2}" maxlength="2" />
-												<p:outputLabel value="/" />
-												<p:inputText id="txtTel2" size="9"
-													value="#{usuarioBean.usuario.telefone2}" maxlength="9" />
-											</div>
-										</div>
-
-									</div>
-
-
-
-
+								<p:panel header="Endereço" id="pnlEndereco">
 									<div class="ui-grid-row ui-grid-row-custom">
 										<div class="ui-grid-col-12">
 											<div class="ui-grid-row">
@@ -210,6 +186,7 @@
 											</div>
 										</div>
 									</div>
+									</p:panel>
 
 									<div class="ui-grid-row ui-grid-row-custom">
 										<div class="ui-grid-col-12">
@@ -226,7 +203,7 @@
 												<h:outputLabel value="Tipo:" for="cbTipo" />
 											</div>
 											<div class="ui-grid-row">
-												<p:selectOneMenu id="cbTipo"  
+												<p:selectOneMenu id="cbTipo"
 													value="#{usuarioBean.usuario.flTpEstabelecimento}">
 													<f:selectItem itemLabel="Selecione" itemValue="" />
 													<f:selectItem itemLabel="PETSHOP" itemValue="P" />
@@ -237,9 +214,7 @@
 										</div>
 									</div>
 
-									<div class="ui-grid-row ui-grid-row-custom">
-										
-									</div>
+									<div class="ui-grid-row ui-grid-row-custom"></div>
 								</div>
 							</div>
 						</div>
