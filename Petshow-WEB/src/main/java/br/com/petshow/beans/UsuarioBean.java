@@ -9,6 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
+import org.primefaces.event.FileUploadEvent;
+
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
@@ -77,7 +79,7 @@ public class UsuarioBean {
 		try {
 
 			//usuario.setFoto(ImagemUtil.transformBase64AsString(imagem));
-			usuario.setFoto(ImagemUtil.transformBase64AsString(imagem));
+			//usuario.setFoto(ImagemUtil.transformBase64AsString(imagem));
 			usuario = RestUtilCall.postEntity(usuario, "usuario/salvar",Usuario.class);
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Alteração efetuada com sucesso!"));
@@ -162,5 +164,12 @@ public class UsuarioBean {
 	public void setImagem(Part imagem) {
 		this.imagem = imagem;
 	}
+	
+	public void enviaImagem(FileUploadEvent event) {
+        
+        if(this.usuario!=null){
+        	this.usuario.setFoto(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+        }
+}
 
 }

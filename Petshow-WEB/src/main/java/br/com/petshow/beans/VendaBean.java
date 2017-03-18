@@ -32,6 +32,7 @@ public class VendaBean {
 		super();
 		
 	}
+	
 	private Venda venda;
 	private List<Venda> vendas;
 	private CallVendaRest restVenda;
@@ -278,6 +279,17 @@ public class VendaBean {
 				this.venda.setFotos(CollectionUtil.removeItem(this.venda.getFotos(), photoInBase64));
 			}
 		}
+	}
+	
+	public boolean isComFoto() {
+		if(this.venda != null){
+			if(this.venda.getFotos().isEmpty()){
+				return false;
+			}else{
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

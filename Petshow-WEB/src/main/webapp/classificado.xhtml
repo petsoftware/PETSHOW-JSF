@@ -120,9 +120,6 @@
 										</p:selectOneMenu>
 									</div>
 								</div>
-							</div>
-
-							<div class="ui-grid-row ui-grid-row-custom">
 								<div class="ui-grid-col-12">
 									<div class="ui-grid-row">
 										<h:outputLabel value="Cidade" for="cbCidade" />
@@ -141,10 +138,9 @@
 
 										</p:selectOneMenu>
 									</div>
+									
 								</div>
-							</div>
-
-							<div class="ui-grid-row ui-grid-row-custom">
+								
 								<div class="ui-grid-col-12">
 									<div class="ui-grid-row">
 										<h:outputLabel value="Bairro" for="cbBairro" />
@@ -162,12 +158,22 @@
 									</div>
 								</div>
 							</div>
+
+							<div class="ui-grid-row ui-grid-row-custom">
+								
+								
+								
+							</div>
+
+							<div class="ui-grid-row ui-grid-row-custom">
+								
+							</div>
 							
 																			
 		
 							<h:outputLabel value="FOTO" for="txtInputFoto1" />
 							<p:fileUpload fileUploadListener="#{vendaBean.enviaImagem}"
-                              update="@form,msgs"
+                              update="pnlFotos,msgs"
                               ajax="true"
                               cancelLabel="Cancelar"
                               fileLimit="100000"
@@ -232,15 +238,15 @@
 							
 						</div>
 					</div>
-					
+						<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
 							<div class="ui-grid-col -->-6" align="center">
+								<p:panel header="FOTOS" id="pnlFotos" >
 									<div class="ui-grid-row">
 										<ui:repeat var="foto" value="#{vendaBean.venda.fotos}" >
-											
 												<div class="ui-grid-col-4">
 													<div class="ui-grid-row">
 														<div class="ui-upload-img" style="height: 215px;">
-															<h:graphicImage style="width:80%;height:80%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
+															<h:graphicImage style="width:100%;height:100%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
 																stream="false"
 																cache="false" 
 																url="data:image/jpg;base64,#{foto}"
@@ -252,22 +258,27 @@
 															  <i class="fa fa-ban fa-stack-2x text-danger"></i>
 															</span>
 														</div>
-														<p:commandButton
-															actionListener="#{vendaBean.removePhoto(foto)}"
-															styleClass="btn btn-danger btn-lg"
-				   											icon="fa fa-trash-o"
-				   											title="Excluir foto à esquerda"
-				   											ajax="true"
-				   											process="@this"
-				   											update="@form" >
-					   											<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
-					   									</p:commandButton>
-													</div>
+														</div>
+														<div class="ui-grid-row">
+															<p:commandButton style="width:100%;height:100%;"
+																actionListener="#{vendaBean.removePhoto(foto)}"
+																styleClass="btn btn-danger btn-lg"
+					   											icon="fa fa-trash-o"
+					   											title="Excluir foto à esquerda"
+					   											ajax="true"
+					   											update="@form"
+					   											>
+						   											<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+						   									</p:commandButton>
+						   								</div>
+													
 												</div>
 											
 										</ui:repeat>
 									</div>
+									</p:panel>
 								</div>
+							</div>
 					
 					<div class="ui-grid-row ui-grid-row-custom">
 						<div class="ui-grid-col-12">
