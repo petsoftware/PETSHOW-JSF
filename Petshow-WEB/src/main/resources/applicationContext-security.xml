@@ -25,7 +25,8 @@
          -->
         <intercept-url pattern="/pages/**" access="permitAll" />
         <intercept-url pattern="/**" access="permitAll" />
-        <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml" />
+        <form-login login-page="/public/login.xhtml" 
+        authentication-failure-url="/semPermissao.xhtml" />
         <!-- <access-denied-handler error-page="/semPermissao.xhtml" />-->
 
     </http>

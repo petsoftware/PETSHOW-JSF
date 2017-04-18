@@ -34,37 +34,47 @@
 	 <from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>anuncio</from-outcome>
-			<to-view-id>/anuncio.xhtml</to-view-id>
+			<to-view-id>/admin/anuncio.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>inicio</from-outcome>
-			<to-view-id>/inicio.xhtml</to-view-id>
+			<to-view-id>/admin/inicio.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>notificacoes</from-outcome>
-			<to-view-id>/notificacao.xhtml</to-view-id>
+			<to-view-id>/admin/notificacao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>classificados</from-outcome>
-			<to-view-id>/classificado.xhtml</to-view-id>
+			<to-view-id>/admin/classificado.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>usuario</from-outcome>
-			<to-view-id>/editar-usuario.xhtml</to-view-id>
+			<to-view-id>/admin/editar-usuario.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>servicos</from-outcome>
-			<to-view-id>/servico.xhtml</to-view-id>
+			<to-view-id>/admin/servico.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>sucessoLogin</from-outcome>
-			<to-view-id>/login.xhtml</to-view-id>
+			<to-view-id>/admin/inicio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cad-perdido</from-outcome>
+			<to-view-id>/admin/perdido-cadastro.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>cad-adocao</from-outcome>
+			<to-view-id>/admin/adocao-cadastro.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -82,24 +92,5 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-
-	<!-- 
-	<navigation-rule>
-		<from-view-id>/index.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>cliente</from-outcome>
-			<to-view-id>private/PagCadCliente.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-
-	<navigation-rule>
-		<from-view-id>/public/PagLogin.xhtml</from-view-id>
-		<navigation-case>
-			<from-outcome>cadUsuario</from-outcome>
-			<to-view-id>/public/PagCadUsuario.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	 -->
-	
 	
 </faces-config>

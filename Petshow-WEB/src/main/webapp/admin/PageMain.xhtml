@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<!-- Page Content -->
+	<div class="container">
+
+		<!-- Introduction Row -->
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="container">
+					<h1 class="page-header">
+						PETSHOW <small>Mostre seu PET</small>
+					</h1>
+
+				</div>
+				<p:separator />
+				<p>A PETSHOW é uma plataforma para ajudar animais, ONG's,
+					Tutores e PetShops a se encontrarem e manterem um relação de
+					parceria mandendo uma relação forte e insolúvel. Nós oferecemos o
+					melhor que temos para manter seus laços com os PETs cada vez mais
+					forte. Você não precisa pagar na por este serviço, por isso fique a
+					vontade. Juntos podemos fazer muito pelos animais do que você
+					imagina.</p>
+				<p:separator />
+			</div>
+
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-6">
+				<h2 class="page-header">PERDIDOS</h2>
+				<h4>Você anunciou 432 animais este ano </h4>
+				<div align="right">
+
+					<p:commandButton id="btnAnunciarPerdido" style="margin-right:4px"
+						styleClass="btn btn-default btn-lg" icon="fa fa-bullhorn"
+						title="Anunciar um animal perdido?" value="ANUNCIAR" action="cad-perdido"
+						type="submit" ajax="false" />
+
+				</div>
+				<p:separator />
+			</div>
+			
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6">
+				<h2 class="page-header">ADOÇÃO</h2> <br />
+				<h4>Você anunciou 123 animais este ano </h4>
+				<div align="right">
+					<p:commandButton id="btnAnunciarAdocao" style="margin-right:4px"
+						styleClass="btn btn-default btn-lg" icon="fa fa-bullhorn"
+						title="Anunciar um animal Adoção?" value="ANUNCIAR" action="cad-adocao"
+						type="submit" ajax="false" />
+				</div>
+				<p:separator />
+			</div>
+
+		</div>
+
+		<hr />
+	</div>
+</ui:composition>
+</html>
