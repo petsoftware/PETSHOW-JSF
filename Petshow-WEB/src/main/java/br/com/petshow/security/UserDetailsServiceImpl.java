@@ -52,7 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService,Authentication
 			return new UsernamePasswordAuthenticationToken(authentication.getName(),
 							authentication.getCredentials(), AUTHORITIES);
 		}
-		throw new BadCredentialsException("Bad Credentials"	);
+		throw new BadCredentialsException("Usuário ou senha inválidos!"	);
 	}
 
 	
