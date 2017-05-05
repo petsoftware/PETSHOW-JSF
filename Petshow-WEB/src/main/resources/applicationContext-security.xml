@@ -28,7 +28,14 @@
         <form-login login-page="/public/login.xhtml" 
         authentication-failure-url="/semPermissao.xhtml" />
         <!-- <access-denied-handler error-page="/semPermissao.xhtml" />-->
-
+		
+		
+		<session-management>
+			<!-- This  his  will  prevent  a  user  from  logging  in  multiple  times  -  a  second  
+			login  will  cause  the  first  to  be invalidated. Often you would prefer to prevent a 
+			second login, in which case you can use -->
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+		</session-management>
     </http>
     
      
