@@ -24,7 +24,7 @@
         são: any, http e https. O valor padrão é any  
          -->
         <intercept-url pattern="/pages/**" access="permitAll" />
-        <intercept-url pattern="/**" access="permitAll" />
+        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
         <form-login login-page="/public/login.xhtml" 
         authentication-failure-url="/semPermissao.xhtml" />
         <!-- <access-denied-handler error-page="/semPermissao.xhtml" />-->
