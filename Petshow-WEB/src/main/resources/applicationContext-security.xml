@@ -22,12 +22,28 @@
         recruso.
         @ - requires-channel : Permite indicar um protocolo obrigatório para o acesso ao recurso. Os valores pos´oveis
         são: any, http e https. O valor padrão é any  
+        
+        <intercept-url pattern="/categorias" access="hasAnyRole('ADMIN', 'GERENTE', 'COORDENADOR') and isAuthenticated()" />
          -->
         <intercept-url pattern="/pages/**" access="permitAll" />
-        <intercept-url pattern="/admin/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/" access="permitAll" />
+		
+		
+        <!-- 
+        <intercept-url pattern="/admin/**" access="hasRoles('ADMIN') and isAuthenticated()" />
+         -->
+         <!-- 
+          <intercept-url pattern="/admin/**" access="permitAll"  />
+         <intercept-url pattern="/admin/anuncio.xhtml" access="isAuthenticated() and hasRole('ADMIN')"  />
+         <intercept-url pattern="/private/**" access="hasRole('PRIVATE') and isAuthenticated()"  />
+          -->
+           
+         <intercept-url pattern="/admin/*" access="isAuthenticated() and hasRole('ADMIN')"  />
+         <intercept-url pattern="/private/**" access="hasRole('PRIVATE') and isAuthenticated()"  />
+        
         <form-login login-page="/public/login.xhtml" 
         authentication-failure-url="/semPermissao.xhtml" />
-        <!-- <access-denied-handler error-page="/semPermissao.xhtml" />-->
+        
 		
 		
 		<session-management>
