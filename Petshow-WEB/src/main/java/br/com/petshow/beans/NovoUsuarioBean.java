@@ -27,12 +27,16 @@ public class NovoUsuarioBean {
 	
 	public void solicitarCadastro(){
 		try {
-			usuario.setNmLogin(usuario.getEmail());
-			usuario.setNome("MUDAR O NOME POR FAVOR");
-			usuario.setPassword(MD5EncriptUtil.toMD5(getSenha()));
-			usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
-
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Usuário Cadastrado com sucesso!"));
+			String validate = validate();
+				if(validate.trim().isEmpty()){
+				usuario.setNmLogin(usuario.getEmail());
+				usuario.setNome("MUDAR O NOME POR FAVOR");
+				usuario.setPassword(MD5EncriptUtil.toMD5(getSenha()));
+				usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Usuário Cadastrado com sucesso!"));
+			}else{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informações incorretas:", validate));
+			}
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 
@@ -42,6 +46,24 @@ public class NovoUsuarioBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
+	}
+	
+	private String validate() {
+		String result = "";
+		if(usuario!=null){
+			if(usuario.getEmail().trim().isEmpty()){
+				result = "O nome do usuário não pode ser em branco.";
+			}else if(getSenha().trim().isEmpty()){
+				result = "A senha de cadastro não pode ser em branco.";
+			}else if(getConfSenha().trim().isEmpty()){
+				result = "A confirmação da senha não pode ser em branco";
+			}else if(!getSenha().equals(getConfSenha())){
+				result = "As senhas não conferem. Coloque a senha depois confirme com a mesma senha.";
+			}
+		}else{
+			result = "Usuário não informado ou nulo";
+		}
+		return result;
 	}
 
 	public Usuario getUsuario() {
