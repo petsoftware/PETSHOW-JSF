@@ -75,7 +75,7 @@
 			</div>
 			<div class="ui-g-4">
 				<p:inputText id="email" style="width:50%;"
-					placeholder="E-mail" value="#{loginBean.usuario}" >
+					placeholder="E-mail" value="#{novoUsuarioBean.usuario.email}" >
 				</p:inputText>
 				<i class="fa fa-envelope"></i>
 			</div>
@@ -85,7 +85,7 @@
 			</div>
 			<div class="ui-g-4">
 				<p:password id="senhaCad" style="width:30%;" label="Senha"
-					placeholder="Senha" value="#{loginBean.senha}" >
+					placeholder="Senha" value="#{novoUsuarioBean.senha}" >
 				</p:password>
 				<i class="fa fa-lock"></i>
 			</div>
@@ -94,7 +94,7 @@
 			</div>
 			<div class="ui-g-4">
 				<p:password id="confSenhaCad" style="width:30%;" placeholder="Senha"
-					value="#{loginBean.senha}" >
+					value="#{novoUsuarioBean.confSenha}" >
 				</p:password>
 				<i class="fa fa-lock"></i>
 			</div>
@@ -102,9 +102,9 @@
 			<div class="ui-g-4">
 
 				<p:commandButton id="cadastrar"
-					styleClass="btn btn-cadastrar btn-lg navbar-btn" value="Cadastrar"
-					process="@this" title="Solicitar cadastro de usuário"
-					oncomplete="PF('cdlg').show();">
+					styleClass="btn btn-cadastrar btn-lg navbar-btn" value="Cadastrar" type="submit"
+					 title="Solicitar cadastro de usuário" action="#{novoUsuarioBean.solicitarCadastro}"
+					>
 
 				</p:commandButton>
 				<pe:tooltip for="cadastrar" />

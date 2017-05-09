@@ -17,6 +17,8 @@ import br.com.petshow.web.util.RestUtilCall;
 public class NovoUsuarioBean {
 
 	private Usuario usuario;
+	private String senha;
+	private String confSenha;
 	
 	@PostConstruct
 	private void init() {
@@ -25,12 +27,9 @@ public class NovoUsuarioBean {
 	
 	public void solicitarCadastro(){
 		try {
-
-			//usuario.setFoto(ImagemUtil.transformBase64AsString(imagem));
 			usuario.setNmLogin(usuario.getEmail());
 			usuario.setNome("MUDAR O NOME POR FAVOR");
-			usuario.setPassword(MD5EncriptUtil.toMD5(usuario.getPassword()));
-			
+			usuario.setPassword(MD5EncriptUtil.toMD5(getSenha()));
 			usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Usuário Cadastrado com sucesso!"));
@@ -43,5 +42,29 @@ public class NovoUsuarioBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getConfSenha() {
+		return confSenha;
+	}
+
+	public void setConfSenha(String confSenha) {
+		this.confSenha = confSenha;
 	}
 }
