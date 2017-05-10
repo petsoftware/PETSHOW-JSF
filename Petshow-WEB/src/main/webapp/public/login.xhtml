@@ -22,7 +22,7 @@
 	</ui:define>
 
 	<ui:define name="body">
-
+		<p:focus id="focus" for="#{]"/>
 		<div style="width: 50%; float: left;">
 			<div class="ui-g">
 				<div class="ui-g-8 ui-g-nopad">
@@ -51,12 +51,10 @@
 							<i class="fa fa-lock"></i>
 						</div>
 						<div class="ui-g-4">
-
-
 							<p:commandButton id="confirmar" styleClass="btn btn-info btn-lg"
 								icon="fa fa-check" type="submit" action="#{loginBean.login}"
 								title="Informe o usuário e a senha e depois clique neste botão para efetuar o login"
-								value="Confirmar" update="usuario,senha" />
+								value="Confirmar" update="msgs" />
 							<pe:tooltip for="confirmar" />
 						</div>
 					</div>
