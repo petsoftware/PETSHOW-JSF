@@ -11,6 +11,7 @@ import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.util.MD5EncriptUtil;
 import br.com.petshow.web.util.RestUtilCall;
+import br.com.tafera.enums.EnumFlTpEstabelecimento;
 
 @ManagedBean
 @ViewScoped
@@ -20,22 +21,29 @@ public class NovoUsuarioBean {
 	private String senha;
 	private String confSenha;
 	
+	
 	@PostConstruct
 	private void init() {
 		this.usuario = new Usuario();
 	}
 	
-	public void solicitarCadastro(){
+	public EnumFlTpEstabelecimento[] getTipos() {
+		return EnumFlTpEstabelecimento.values();
+	}
+	public String solicitarCadastro(){
 		try {
 			String validate = validate();
-				if(validate.trim().isEmpty()){
+			if(validate.trim().isEmpty()){
 				usuario.setNmLogin(usuario.getEmail());
 				usuario.setNome("MUDAR O NOME POR FAVOR");
 				usuario.setPassword(MD5EncriptUtil.toMD5(getSenha()));
+				usuario.setFlPreCadastro(true);
 				usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Usuário Cadastrado com sucesso!"));
+				return null;
 			}else{
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informações incorretas:", validate));
+				return null;
 			}
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
@@ -46,6 +54,7 @@ public class NovoUsuarioBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	private String validate() {
@@ -59,6 +68,8 @@ public class NovoUsuarioBean {
 				result = "A confirmação da senha não pode ser em branco";
 			}else if(!getSenha().equals(getConfSenha())){
 				result = "As senhas não conferem. Coloque a senha depois confirme com a mesma senha.";
+			}else if(usuario.getCnpjCpf() != null && usuario.getCnpjCpf().trim().isEmpty()){
+				result = "CNPJ deve ser informado.";
 			}
 		}else{
 			result = "Usuário não informado ou nulo";

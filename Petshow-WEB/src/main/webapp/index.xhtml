@@ -238,9 +238,9 @@
 									<p:inputText id="usuario"
 										style="width:100%;"	
 										label="Usuário"
-										placeholder="Usuário"							
+										placeholder="Seu nome"							
 										title="Usuário"
-										value=""
+										value="#{novoUsuarioBean.usuario.nome}"
 										required="true">
 									</p:inputText>
 									<i class="fa fa-user"></i>
@@ -255,22 +255,65 @@
 										label="E-mail"
 										placeholder="E-mail"							
 										title="E-mail"
-										value=""
+										value="#{novoUsuarioBean.usuario.email}"
 										required="true">
 									</p:inputText>
 									<i class="fa fa-envelope"></i>
 						     	</div>
 					   		</div>					   		
 					   	</div>
-						<div class="ui-grid-row">
+					   	<div class="ui-grid-row ui-grid-row-custom">
+			   				<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<p:inputText id="txtCNPJ"
+										style="width:100%;"
+										label="CNPJ"
+										value="#{novoUsuarioBean.usuario.cnpjCpf}"
+										placeholder="CNPJ"
+										title="CNPJ"
+										required="true">
+										<f:validator validatorId="br.com.petshow.validator.CnpjValidator" />
+									</p:inputText>
+									<i class="fa fa-cube"></i>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
+			   				<div class="ui-grid-col-12">
+			   					Quem eu sou?
+								<div class="inputTextGroupLeft">
+									<p:selectOneMenu value="#{novoUsuarioBean.usuario.flTpEstabelecimento}" 
+									style="width:50%;" id="cboTpEstabelecimento">
+									    <f:selectItems value="#{novoUsuarioBean.tipos}" />
+									</p:selectOneMenu>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
 			   				<div class="ui-grid-col-12">
 								<div class="inputTextGroupLeft">
 									<p:password id="senha"
-										style="width:100%;"
+										style="width:50%;"
 										label="Senha"
 										placeholder="Senha"
 										title="Senha"
-										value=""
+										value="#{novoUsuarioBean.senha}"
+										autocomplete="new-password"
+										required="true">
+									</p:password>
+									<i class="fa fa-lock"></i>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
+			   				<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<p:password id="txtConfSenha"
+										style="width:50%;"
+										label="Senha"
+										placeholder="Confirme a senha"
+										title="Senha"
+										value="#{novoUsuarioBean.confSenha}"
 										autocomplete="new-password"
 										required="true">
 									</p:password>
@@ -290,15 +333,18 @@
 							process="@this"
 							oncomplete="PF('cdlg').hide();" />
 							 
-						<p:commandButton id="confirmar"
+						<p:commandButton id="btnConfNovoUsu"
 							styleClass="btn btn-info btn-lg"
 							icon="fa fa-check"
-							value="Confirmar"							
-							update="usuario,senha" 
-							action="#"/>
+							value="Confirmar"	
+							type="submit"	
+							ajax="false"
+							title="Confirme após informar todos os dados"				
+							update="cadastrarMsgsDialog" 
+							action="#{novoUsuarioBean.solicitarCadastro}"/>
 
 					</f:facet>
-								
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>			
 		  		</p:dialog>
 			    			    			  		    
 		    </h:form>
