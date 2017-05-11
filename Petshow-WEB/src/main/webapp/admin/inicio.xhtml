@@ -7,10 +7,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:p="http://primefaces.org/ui" template="templates/main.xhtml">
+	xmlns:p="http://primefaces.org/ui" template="#{pageHelperBean.mainTemplate}">
 
 	<ui:param name="activeAnuncio" value="active" />
-	<ui:param name="pageIcon" value="bullhorn" />
+	<ui:param name="pageIcon" value="home" />
 	<ui:param name="pageTitle" value="INÍCIO" />
 
 	<ui:define name="header">
@@ -23,7 +23,7 @@
 			<div class="ui-grid-row ui-grid-row-custom">
 				<div class="ui-grid-col-12">
 
-					<ui:include src="/PageMain.xhtml" />
+					<ui:include src="PageMain.xhtml" />
 
 				</div>
 			</div>

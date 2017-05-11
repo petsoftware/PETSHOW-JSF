@@ -22,12 +22,36 @@
         recruso.
         @ - requires-channel : Permite indicar um protocolo obrigatório para o acesso ao recurso. Os valores pos´oveis
         são: any, http e https. O valor padrão é any  
+        
+        <intercept-url pattern="/categorias" access="hasAnyRole('ADMIN', 'GERENTE', 'COORDENADOR') and isAuthenticated()" />
          -->
         <intercept-url pattern="/pages/**" access="permitAll" />
-        <intercept-url pattern="/**" access="permitAll" />
-        <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml" />
-        <!-- <access-denied-handler error-page="/semPermissao.xhtml" />-->
-
+        <intercept-url pattern="/" access="permitAll" />
+		
+		
+        <!-- 
+        <intercept-url pattern="/admin/**" access="hasRoles('ADMIN') and isAuthenticated()" />
+         -->
+         <!-- 
+          <intercept-url pattern="/admin/**" access="permitAll"  />
+         <intercept-url pattern="/admin/anuncio.xhtml" access="isAuthenticated() and hasRole('ADMIN')"  />
+         <intercept-url pattern="/private/**" access="hasRole('PRIVATE') and isAuthenticated()"  />
+          -->
+           
+         <intercept-url pattern="/admin/*" access="isAuthenticated() and hasRole('ADMIN')"  />
+         <intercept-url pattern="/private/**" access="hasRole('PRIVATE') and isAuthenticated()"  />
+        
+        <form-login login-page="/public/login.xhtml" 
+        authentication-failure-url="/semPermissao.xhtml" />
+        
+		
+		
+		<session-management>
+			<!-- This  his  will  prevent  a  user  from  logging  in  multiple  times  -  a  second  
+			login  will  cause  the  first  to  be invalidated. Often you would prefer to prevent a 
+			second login, in which case you can use -->
+			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+		</session-management>
     </http>
     
      

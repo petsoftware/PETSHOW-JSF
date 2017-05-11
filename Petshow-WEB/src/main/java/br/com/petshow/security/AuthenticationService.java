@@ -12,10 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import br.com.petshow.exceptions.ExceptionErroCallRest;
-import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
-import br.com.petshow.web.util.CallUsuarioRest;
 
 
 
@@ -27,16 +24,16 @@ public class AuthenticationService {
   private AuthenticationManager authenticationManager;
 
   public boolean login(String username, String password) {
-    try {
-      UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
-      Authentication authenticate = authenticationManager.authenticate(token);
-      if (authenticate.isAuthenticated()) {
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
-        return true;
-      }
-    }
-    catch (AuthenticationException e) {e.printStackTrace();}
-    return false;
+	  try {
+		  UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+		  Authentication authenticate = authenticationManager.authenticate(token);
+		  if (authenticate.isAuthenticated()) {
+			  SecurityContextHolder.getContext().setAuthentication(authenticate);
+			  return true;
+		  }
+	  }
+	  catch (AuthenticationException e) {e.printStackTrace();}
+	  return false;
   }
 
   public void logout() {

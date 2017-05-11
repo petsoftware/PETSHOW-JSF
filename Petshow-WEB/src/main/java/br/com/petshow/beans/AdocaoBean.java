@@ -1,7 +1,9 @@
 package br.com.petshow.beans;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.ws.rs.core.Response;
 
@@ -9,9 +11,36 @@ import br.com.petshow.model.Adocao;
 @ManagedBean
 public class AdocaoBean extends SuperBean{
 
+	private Adocao adocao;
+	private List<Adocao> adocoes;
+	
+	public List<Adocao> getAdocoes() {
+		return adocoes;
+	}
+
+	public void setAdocoes(List<Adocao> adocoes) {
+		this.adocoes = adocoes;
+	}
+
 	public AdocaoBean (){
 		super();
 	}
+	
+	public Adocao getAdocao() {
+		return adocao;
+	}
+
+	public void setAdocao(Adocao adocao) {
+		this.adocao = adocao;
+	}
+
+	@PostConstruct
+	public void init() {
+		if(adocao == null){
+			adocao = new Adocao();
+		}
+	}
+	
 	public String send() {
 
 		Adocao adocao = new Adocao();

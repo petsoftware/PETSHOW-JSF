@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="#{pageHelperBean.mainTemplate}">
+
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="bullhorn" />
+	<ui:param name="pageTitle" value="LOGIN" />
+
+	<ui:define name="header">
+
+	</ui:define>
+
+	<ui:define name="body">
+		<p:focus id="focus" for="#{]"/>
+		<div style="width: 50%; float: left;">
+			<div class="ui-g">
+				<div class="ui-g-8 ui-g-nopad">
+					<div class="ui-g-4">
+						Login
+						<p:separator />
+						<div class="ui-g-4">
+							<p:outputLabel value="Usuário" for="usuario" />
+						</div>
+						<div class="ui-g-4">
+							<p:inputText id="usuario" style="width:50%;" label="Usuário"
+								placeholder="Usuário" title="Usuário"
+								value="#{loginBean.usuario}" >
+							</p:inputText>
+							<i class="fa fa-user"></i>
+						</div>
+
+						<div class="ui-g-4">
+							<p:outputLabel value="Senha:" for="senha" />
+						</div>
+						<div class="ui-g-4">
+							<p:password id="senha" style="width:30%;" label="Senha"
+								placeholder="Senha" title="Senha" value="#{loginBean.senha}"
+								>
+							</p:password>
+							<i class="fa fa-lock"></i>
+						</div>
+						<div class="ui-g-4">
+							<p:commandButton id="confirmar" styleClass="btn btn-info btn-lg"
+								icon="fa fa-check" type="submit" action="#{loginBean.login}"
+								title="Informe o usuário e a senha e depois clique neste botão para efetuar o login"
+								value="Confirmar" update="msgs" />
+							<pe:tooltip for="confirmar" />
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<div style="width: 50%; float: right;" align="left">
+			<div class="ui-g-4">Cadastre-se</div>
+
+			<p:separator />
+
+			<div class="ui-g-4">
+				<p:outputLabel value="E-mail" for="email" />
+			</div>
+			<div class="ui-g-4">
+				<p:inputText id="email" style="width:50%;"
+					placeholder="E-mail" value="#{novoUsuarioBean.usuario.email}" >
+				</p:inputText>
+				<i class="fa fa-envelope"></i>
+			</div>
+
+			<div class="ui-g-4">
+				<p:outputLabel value="Senha:" for="senhaCad" />
+			</div>
+			<div class="ui-g-4">
+				<p:password id="senhaCad" style="width:30%;" label="Senha"
+					placeholder="Senha" value="#{novoUsuarioBean.senha}" >
+				</p:password>
+				<i class="fa fa-lock"></i>
+			</div>
+			<div class="ui-g-4">
+				<p:outputLabel value="Confirme senha:" for="confSenhaCad" />
+			</div>
+			<div class="ui-g-4">
+				<p:password id="confSenhaCad" style="width:30%;" placeholder="Senha"
+					value="#{novoUsuarioBean.confSenha}" >
+				</p:password>
+				<i class="fa fa-lock"></i>
+			</div>
+
+			<div class="ui-g-4">
+
+				<p:commandButton id="cadastrar"
+					styleClass="btn btn-cadastrar btn-lg navbar-btn" value="Cadastrar" type="submit"
+					update="msgs"
+					 title="Solicitar cadastro de usuário" action="#{novoUsuarioBean.solicitarCadastro}"
+					>
+
+				</p:commandButton>
+				<pe:tooltip for="cadastrar" />
+
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>
