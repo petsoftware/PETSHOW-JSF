@@ -35,7 +35,6 @@ public class NovoUsuarioBean {
 			String validate = validate();
 			if(validate.trim().isEmpty()){
 				usuario.setNmLogin(usuario.getEmail());
-				usuario.setNome("MUDAR O NOME POR FAVOR");
 				usuario.setPassword(MD5EncriptUtil.toMD5(getSenha()));
 				usuario.setFlPreCadastro(true);
 				usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
