@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	 template="../templates/main.xhtml">
+
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="bullhorn" />
+	<ui:param name="pageTitle" value="VALIDAÇÃO DE NOVO USUÁRIO" />
+
+	<ui:define name="header">
+
+	</ui:define>
+	<f:metadata>
+		<f:viewParam name="seckey" value="#{beanValidateNewUser.seckey}"/>
+		<f:viewParam name="lg" value="#{beanValidateNewUser.lg}"/>
+		<f:viewAction action="#{beanValidateNewUser.onLoad}" />
+	</f:metadata>
+	<ui:define name="body">
+
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+
+					<p:outputLabel value="#{beanValidateNewUser.alert}" />
+
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
