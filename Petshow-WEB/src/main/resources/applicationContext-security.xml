@@ -39,7 +39,7 @@
           -->
            
          <intercept-url pattern="/admin/*" access="isAuthenticated() and hasRole('ADMIN')"  />
-         <intercept-url pattern="/private/**" access="hasRole('PRIVATE') and isAuthenticated()"  />
+         <intercept-url pattern="/private/**" access="permitAll"  />
         
         <form-login login-page="/public/login.xhtml" 
         authentication-failure-url="/semPermissao.xhtml" />

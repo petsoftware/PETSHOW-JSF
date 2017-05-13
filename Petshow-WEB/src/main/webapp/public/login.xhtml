@@ -22,7 +22,7 @@
 	</ui:define>
 
 	<ui:define name="body">
-		<p:focus id="focus" for="#{]"/>
+
 		<div style="width: 50%; float: left;">
 			<div class="ui-g">
 				<div class="ui-g-8 ui-g-nopad">
@@ -35,7 +35,7 @@
 						<div class="ui-g-4">
 							<p:inputText id="usuario" style="width:50%;" label="Usuário"
 								placeholder="Usuário" title="Usuário"
-								value="#{loginBean.usuario}" >
+								value="#{loginBean.usuario}">
 							</p:inputText>
 							<i class="fa fa-user"></i>
 						</div>
@@ -45,11 +45,11 @@
 						</div>
 						<div class="ui-g-4">
 							<p:password id="senha" style="width:30%;" label="Senha"
-								placeholder="Senha" title="Senha" value="#{loginBean.senha}"
-								>
+								placeholder="Senha" title="Senha" value="#{loginBean.senha}">
 							</p:password>
 							<i class="fa fa-lock"></i>
 						</div>
+						<div class="ui-g-4"> </div>
 						<div class="ui-g-4">
 							<p:commandButton id="confirmar" styleClass="btn btn-info btn-lg"
 								icon="fa fa-check" type="submit" action="#{loginBean.login}"
@@ -72,18 +72,38 @@
 				<p:outputLabel value="E-mail" for="email" />
 			</div>
 			<div class="ui-g-4">
-				<p:inputText id="email" style="width:50%;"
-					placeholder="E-mail" value="#{novoUsuarioBean.usuario.email}" >
+				<p:inputText id="email" style="width:50%;" placeholder="E-mail"
+					value="#{novoUsuarioBean.usuario.email}" title="Informe um e-mail válido. Ele será o seu Login">
 				</p:inputText>
 				<i class="fa fa-envelope"></i>
 			</div>
-
+			<div class="ui-g-4">
+				<p:outputLabel value="CNPJ:" for="txtCNPJ" />
+			</div>
+			<div class="ui-g-4">
+				<p:inputMask id="txtCNPJ" style="width:50%;" label="CNPJ"
+					value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
+					title="Digite o CNPJ" required="false" mask="99.999.999/9999-99">
+					<f:validator validatorId="br.com.petshow.validator.CnpjValidator" />
+				</p:inputMask>
+				<i class="fa fa-cube"/>
+			</div>
+			<div class="ui-g-4">
+				<p:outputLabel value="Quem sou eu?" for="cboTpEstabelecimento" />
+			</div>
+			<div class="ui-g-4">
+				<p:selectOneMenu
+					value="#{novoUsuarioBean.usuario.flTpEstabelecimento}"
+					style="width:50%;" id="cboTpEstabelecimento" title="Que tipo de empresa ou pessoa você se encaixa?">
+					<f:selectItems value="#{novoUsuarioBean.tipos}" />
+				</p:selectOneMenu>
+			</div>
 			<div class="ui-g-4">
 				<p:outputLabel value="Senha:" for="senhaCad" />
 			</div>
 			<div class="ui-g-4">
-				<p:password id="senhaCad" style="width:30%;" label="Senha"
-					placeholder="Senha" value="#{novoUsuarioBean.senha}" >
+				<p:password id="senhaCad" style="width:30%;" label="Senha" title="Digite a senha."
+					placeholder="Senha" value="#{novoUsuarioBean.senha}">
 				</p:password>
 				<i class="fa fa-lock"></i>
 			</div>
@@ -92,24 +112,22 @@
 			</div>
 			<div class="ui-g-4">
 				<p:password id="confSenhaCad" style="width:30%;" placeholder="Senha"
-					value="#{novoUsuarioBean.confSenha}" >
+					value="#{novoUsuarioBean.confSenha}" title="Confirme a senha que você colocou logo acima">
 				</p:password>
 				<i class="fa fa-lock"></i>
 			</div>
+			<div class="ui-g-4"></div>
 
-			<div class="ui-g-4">
+			<p:commandButton id="cadastrar"
+				styleClass="btn btn-cadastrar btn-lg navbar-btn" value="Cadastrar"
+				type="submit" update="msgs" title="Solicitar cadastro de usuário"
+				action="#{novoUsuarioBean.solicitarCadastro}">
 
-				<p:commandButton id="cadastrar"
-					styleClass="btn btn-cadastrar btn-lg navbar-btn" value="Cadastrar" type="submit"
-					update="msgs"
-					 title="Solicitar cadastro de usuário" action="#{novoUsuarioBean.solicitarCadastro}"
-					>
+			</p:commandButton>
+			<pe:tooltip for="cadastrar" />
 
-				</p:commandButton>
-				<pe:tooltip for="cadastrar" />
-
-			</div>
 		</div>
+
 	</ui:define>
 
 </ui:composition>
