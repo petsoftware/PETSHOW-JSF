@@ -1,17 +1,17 @@
 package br.com.petshow.web.util;
 
+import java.net.URLEncoder;
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 import br.com.petshow.enums.EnumErrosSistema;
-import br.com.petshow.enums.EnumFaseVida;
-import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Adocao;
-import br.com.petshow.model.Animal;
-import br.com.petshow.model.Perdido;
+import br.com.petshow.model.SecurityLogin;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.util.MapErroRetornoRest;
 
@@ -105,6 +105,30 @@ public class CallUsuarioRest  extends RestUtilCall {
 		}
 
 		return (Usuario)entidades;
+
+	}
+	
+	public Usuario validateUser(String key){
+		Usuario usuario = new Usuario();
+		try{
+//			usuario = (Usuario) RestUtilCall.getEntity("usuario/validate/key/"+URLEncoder.encode(key, "UTF-8") ,Usuario.class);
+			SecurityLogin secLogin = new SecurityLogin();
+			secLogin.setKey(key);
+			usuario = (Usuario) RestUtilCall.postEntity(secLogin, "usuario/validate/", Usuario.class);
+			if(usuario!=null){
+				System.out.println(usuario.getNome());
+			}
+			
+		} catch (ExceptionErroCallRest  e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+
+		} catch (ExceptionValidation e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+			e.printStackTrace();
+		}
+		return usuario;
 
 	}
 

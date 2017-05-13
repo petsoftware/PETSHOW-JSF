@@ -1,11 +1,7 @@
 package br.com.petshow.web.util;
 
 import java.util.List;
-
-import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
-import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-
 import br.com.petshow.enums.EnumErrosSistema;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
