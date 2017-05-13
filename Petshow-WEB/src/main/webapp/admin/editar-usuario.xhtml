@@ -203,12 +203,10 @@
 												<h:outputLabel value="Tipo:" for="cbTipo" />
 											</div>
 											<div class="ui-grid-row">
-												<p:selectOneMenu id="cbTipo"
-													value="#{usuarioBean.usuario.flTpEstabelecimento}">
+												<p:selectOneMenu value="#{usuarioBean.usuario.flTpEstabelecimento}" 
+												style="width:50%;" id="cbTipo">
 													<f:selectItem itemLabel="Selecione" itemValue="" />
-													<f:selectItem itemLabel="PETSHOP" itemValue="P" />
-													<f:selectItem itemLabel="ONG" itemValue="O" />
-
+												    <f:selectItems value="#{usuarioBean.tipos}" />
 												</p:selectOneMenu>
 											</div>
 										</div>

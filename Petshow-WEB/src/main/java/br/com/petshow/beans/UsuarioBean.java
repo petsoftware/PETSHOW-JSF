@@ -17,6 +17,7 @@ import br.com.petshow.model.Usuario;
 import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
+import br.com.tafera.enums.EnumFlTpEstabelecimento;
 
 @ManagedBean
 @ViewScoped
@@ -39,6 +40,10 @@ public class UsuarioBean {
 
 	public void setCb(String cb) {
 		this.cb = cb;
+	}
+	
+	public EnumFlTpEstabelecimento[] getTipos() {
+		return EnumFlTpEstabelecimento.values();
 	}
 
 	@PostConstruct
