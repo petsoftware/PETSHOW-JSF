@@ -1,8 +1,8 @@
 package br.com.petshow.security;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
+//import javax.persistence.EntityManager;
+//import javax.persistence.NoResultException;
+//import javax.persistence.PersistenceContext;
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -50,18 +50,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {//,Authentica
 		}
 	}
 	
-	@PersistenceContext
-	private EntityManager entityManager;
-	private Usuario consultaPorNome(String nmLogin) {
-	    try{
-	    	   	    	
-	    	
-	      return entityManager.createNamedQuery(Usuario.FIND_POR_NOME_LOGIN, Usuario.class).setParameter("nmLogin", nmLogin).getSingleResult();
-	      
-	    }catch (NoResultException e) {
-	      throw new UsernameNotFoundException("Usuario não encontrado!");
-	    }
-	  }
+//	@PersistenceContext
+//	private EntityManager entityManager;
+//	private Usuario consultaPorNome(String nmLogin) {
+//	    try{
+//	    	   	    	
+//	    	
+//	      return entityManager.createNamedQuery(Usuario.FIND_POR_NOME_LOGIN, Usuario.class).setParameter("nmLogin", nmLogin).getSingleResult();
+//	      
+//	    }catch (NoResultException e) {
+//	      throw new UsernameNotFoundException("Usuario não encontrado!");
+//	    }
+//	  }
 
 //	@Override
 //	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
