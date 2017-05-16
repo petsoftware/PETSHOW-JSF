@@ -41,7 +41,7 @@ public class AuthenticationService {
     invalidateSession();
   }
 
-  public Usuario getUsuarioLogado() {
+  public static Usuario getUsuarioLogado() {
     
 	  Object aut = SecurityContextHolder.getContext().getAuthentication();
 	  if(aut == null){

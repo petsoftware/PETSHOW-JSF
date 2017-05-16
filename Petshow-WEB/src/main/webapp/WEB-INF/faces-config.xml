@@ -77,6 +77,11 @@
 			<to-view-id>/admin/adocao-cadastro.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	
 	 <navigation-rule>
@@ -91,6 +96,7 @@
 			<to-view-id>/index.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		
 	</navigation-rule>
 	
 </faces-config>

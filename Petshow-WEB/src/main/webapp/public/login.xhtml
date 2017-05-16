@@ -82,8 +82,9 @@
 			</div>
 			<div class="ui-g-4">
 				<p:inputMask id="txtCNPJ" style="width:50%;" label="CNPJ"
+					required="false"
 					value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
-					title="Digite o CNPJ" required="false" mask="99.999.999/9999-99">
+					title="Digite o CNPJ"  mask="99.999.999/9999-99">
 					<f:validator validatorId="br.com.petshow.validator.CnpjValidator" />
 				</p:inputMask>
 				<i class="fa fa-cube"/>

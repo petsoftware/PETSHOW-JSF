@@ -17,20 +17,23 @@ import org.primefaces.event.SelectEvent;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
+import br.com.petshow.model.Notificacao;
 import br.com.petshow.model.Servico;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.CallServicoRest;
 import br.com.petshow.web.util.CallUsuarioRest;
+import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
+import br.com.tafera.enums.EnumFlTpEstabelecimento;
 
 
 
 
 @ManagedBean
 @ViewScoped
-public class NotificacaoBean  {
+public class NotificacaoBean  extends SuperBean<Notificacao>{
 
 	public NotificacaoBean (){
 		super();
@@ -39,6 +42,7 @@ public class NotificacaoBean  {
 	private int situacao;
 	private String autoCompleteUsuario;
 	private Usuario usuario;
+	private Usuario userLogado;
 	private CallAnimalRest callRestAnimal;
 	private CallUsuarioRest callRestUsuariol;
 	private CallServicoRest restServico;
@@ -48,6 +52,7 @@ public class NotificacaoBean  {
 	private List<Servico> servicos;
 	private Animal animalSelecionado;
 	private String usuarioSel;
+	private String fieldFocusId = "autoUsuario";
 	private Servico servico;
 	private boolean mostrarComboBoxAnimal;
 	private boolean mostrarLabelAnimal;
@@ -82,18 +87,17 @@ public class NotificacaoBean  {
 	@PostConstruct
 	public void init() {
 		this.autoCompleteUsuario="";
-		usuario = new Usuario();
-		callRestAnimal= new CallAnimalRest();
+		userLogado 		= getUsuarioLogado(); 
+		usuario 		= new Usuario();
+		callRestAnimal	= new CallAnimalRest();
 		callRestUsuariol= new CallUsuarioRest();
-		restServico = new CallServicoRest();
-		animais = new ArrayList<Animal>();
+		restServico 	= new CallServicoRest();
+		animais 		= new ArrayList<Animal>();
 		getServicosBanco();
 	}
 
 	public void eventoConsultaAnimais(SelectEvent event) {
     	getAnimaisBanco(((Usuario) event.getObject()).getId());
-	 
-	 
 	 }
 
 
@@ -118,11 +122,9 @@ public class NotificacaoBean  {
 
 	}
 	
-	
 	public List<Usuario> getclientes(String parteNome){
 		try {
-			//usuarios= callRestUsuariol.getListClienteAutoComplete(UsuarioRole.getUsuarioLogado().getId(), parteNome);
-			usuarios= callRestUsuariol.getListClienteAutoComplete(12, parteNome);
+			usuarios= callRestUsuariol.getListClienteAutoComplete(userLogado.getId(), parteNome);
 		} catch (ExceptionErroCallRest  e) {
 			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
@@ -137,30 +139,48 @@ public class NotificacaoBean  {
 		return usuarios;
 	}
 
+	private boolean validate() {
+		if(usuario!=null && usuario.getId() == 0){
+			MessagesBeanUtil.erroMessage("O dono do animal não foi informado");
+			setFieldFocusId("autoUsuario");
+			return false;
+		}else if(userLogado!=null && userLogado.getId() == 0){
+			MessagesBeanUtil.erroMessage("Usuário não está logado!");
+			return false;
+		}if(animalSelecionado!=null && animalSelecionado.getId() == 0){
+			MessagesBeanUtil.erroMessage("Por favor selecione um animal");
+			return false;
+		}if(servico!=null && servico.getId() == 0){
+			MessagesBeanUtil.erroMessage("Por favor selecione um serviço");
+			setFieldFocusId("cbServico");
+			return false;
+		}
+		return true;
+	}
+	
 	public String enviarNotificacao(){
-		
-
-		
-		
-		
 	 try {
-			HashMap<String, String> parametros = new HashMap<String,String>();
-			parametros.put("idUsuarioDestinatario", "21");
-			parametros.put("idUsuarioRemetente", "12");
-			parametros.put("idAnimal", "5");
-			parametros.put("idServico", "1");
-			RestUtilCall.post(parametros, "notificacao/entrega"); 
-			
-			
+		 	if(validate()){
+		 		enviarEntrega();
+		 	}
 		} catch (ExceptionErroCallRest  e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+			MessagesBeanUtil.exception(e);
 		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			MessagesBeanUtil.exception(e);
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-			e.printStackTrace();
+			MessagesBeanUtil.exception(e);
 		}
 		return null;
+	}
+
+	private void enviarEntrega() throws ExceptionErroCallRest, ExceptionValidation {
+		HashMap<String, String> parametros = new HashMap<String,String>();
+		parametros.put("idUsuarioDestinatario"	, ""+usuario.getId());
+		parametros.put("idUsuarioRemetente"		, ""+userLogado.getId());
+		parametros.put("idAnimal"				, ""+animalSelecionado.getId());
+		parametros.put("idServico"				, ""+servico.getId());
+		RestUtilCall.post(parametros, "notificacao/entrega");
+		MessagesBeanUtil.infor("Notificação enviada!");
 	}
 	
 	
@@ -316,5 +336,37 @@ public class NotificacaoBean  {
 			return true;
 		}
 		return false;
+	}
+	
+	public String getDescricao() {
+		String result = "Não foi possível determinar";
+		if(userLogado!=null){
+			EnumFlTpEstabelecimento tipo = userLogado.getFlTpEstabelecimento();
+			String userName = userLogado.getNome();
+			if(tipo == EnumFlTpEstabelecimento.PETSHOP){
+				result = "PETSHOP " + userName;
+			}else if(tipo == EnumFlTpEstabelecimento.ONG){
+				result = "ONG " + userName;
+			}else if (tipo == EnumFlTpEstabelecimento.USER){
+				result = "Usuário " + userName;
+			}
+		}
+		return result;
+	}
+
+	public Usuario getUserLogado() {
+		return userLogado;
+	}
+
+	public void setUserLogado(Usuario userLogado) {
+		this.userLogado = userLogado;
+	}
+
+	public String getFieldFocusId() {
+		return fieldFocusId;
+	}
+
+	public void setFieldFocusId(String fieldFocusId) {
+		this.fieldFocusId = fieldFocusId;
 	}
 }

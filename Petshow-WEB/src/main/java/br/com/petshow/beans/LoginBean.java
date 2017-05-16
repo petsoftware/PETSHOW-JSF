@@ -73,7 +73,7 @@ public class LoginBean {
 
 	public String logout() {
 		authenticationService.logout();
-		return "login";
+		return "logout";
 	}
 
 	public Usuario getUsuarioLogado(){
