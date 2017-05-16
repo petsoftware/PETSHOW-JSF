@@ -9,13 +9,17 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
 import br.com.petshow.model.Entidade;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.security.AuthenticationService;
 import br.com.petshow.util.FileApplicationUtil;
 
-public class SuperBean {
+public class SuperBean <T>{
 	
 	protected static ResteasyClient client;
 	protected static ResteasyWebTarget target;
 	public static final String URL_BASE = FileApplicationUtil.getUrlBaseREST();
+	
+	private static AuthenticationService authenticationService;
 	
 	static{
 		client = new ResteasyClientBuilder().build();
@@ -26,6 +30,43 @@ public class SuperBean {
 		target = client.target(URL_BASE+url);
 		Response response = target.request().post(Entity.entity(entidade, MediaType.APPLICATION_JSON));
 		return response;
+	}
+
+	public Usuario getUsuarioLogado(){
+		if(authenticationService!=null){
+			Usuario user = authenticationService.getUsuarioLogado();
+			if(user!=null){
+				return user;
+			}else{
+				return new Usuario();
+			}
+		}else{
+			return new Usuario();
+		}
+	}
+
+	public static ResteasyClient getClient() {
+		return client;
+	}
+
+	public static void setClient(ResteasyClient client) {
+		SuperBean.client = client;
+	}
+
+	public static ResteasyWebTarget getTarget() {
+		return target;
+	}
+
+	public static void setTarget(ResteasyWebTarget target) {
+		SuperBean.target = target;
+	}
+
+	public static AuthenticationService getAuthenticationService() {
+		return authenticationService;
+	}
+
+	public static void setAuthenticationService(AuthenticationService authenticationService) {
+		SuperBean.authenticationService = authenticationService;
 	}
 
 }

@@ -1,5 +1,6 @@
 package br.com.petshow.beans;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
@@ -11,17 +12,20 @@ import javax.servlet.http.Part;
 
 import org.primefaces.event.FileUploadEvent;
 
+import br.com.petshow.enums.EnumTipoUser;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
+import br.com.petshow.model.UsuarioCliente;
 import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.ImagemUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 import br.com.tafera.enums.EnumFlTpEstabelecimento;
 
 @ManagedBean
 @ViewScoped
-public class UsuarioBean {
+public class UsuarioBean extends SuperBean<Usuario>{
 
 	public UsuarioBean (){
 		super();
@@ -77,6 +81,32 @@ public class UsuarioBean {
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
+		}
+	}
+
+	public void salvarUsuarioEstabelecimento(){
+		try {
+			
+			
+			
+			usuario.setTipoUser(EnumTipoUser.USER);
+			usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.USER);
+			usuario = RestUtilCall.postEntity(usuario, "usuario/salvar",Usuario.class);
+			
+			UsuarioCliente userCli = new UsuarioCliente();
+			userCli.setCliente(usuario);
+			userCli.setEstabelecimento(getUsuarioLogado());
+			userCli.setDataCadastro(new Date());
+			
+			String result = RestUtilCall.postEntity(userCli, "usuario/salvar/usercli",String.class);
+			
+			MessagesBeanUtil.infor("Usuário salvo com sucesso", result);
+		} catch (ExceptionErroCallRest  e) {
+			MessagesBeanUtil.exception(e);
+		} catch (ExceptionValidation e) {
+			MessagesBeanUtil.exception(e);
+		} catch (Exception e) {
+			MessagesBeanUtil.exception(e);
 		}
 	}
 

@@ -7,13 +7,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import org.springframework.web.jsf.FacesContextUtils;
-
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Animal;
 import br.com.petshow.model.Usuario;
-import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.RestUtilCall;
 
 @FacesConverter("usuarioConverter")

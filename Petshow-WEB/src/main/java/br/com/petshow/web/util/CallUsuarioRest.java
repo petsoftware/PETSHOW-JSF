@@ -1,6 +1,5 @@
 package br.com.petshow.web.util;
 
-import java.net.URLEncoder;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -78,47 +77,31 @@ public class CallUsuarioRest  extends RestUtilCall {
 		return (List<Usuario>)entidades;
 
 	}
-
+	/**
+	 * Realiza o REST para obter o usuario do login
+	 * @param nmLogin
+	 * @return
+	 * @throws ExceptionErroCallRest
+	 * @throws ExceptionValidation
+	 */
 	public  Usuario getUserByLoginName(String nmLogin) throws ExceptionErroCallRest, ExceptionValidation{
-
-		client = new ResteasyClientBuilder().build();
-
-		target= client.target(URL_BASE+"usuario/consulta/login/"+nmLogin);
-
-
-		Object entidades = null;
-		try{
-			entidades =  target.request().get(new javax.ws.rs.core.GenericType<Usuario>() {});
-
-		}catch(Exception ex){
-
-			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
-
-		}
-		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
-			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
-			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
-				throw new ExceptionValidation(erro.getMessage());
-			}else{
-				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
-			}
-		}
-
-		return (Usuario)entidades;
-
+		return getEntity("usuario/consulta/login/"+nmLogin, Usuario.class);
 	}
 	
+	/**
+	 * Realiza a validação do usuário para saber se o mesmo se autenticou pelo email.
+	 * @param key
+	 * @return
+	 */
 	public Usuario validateUser(String key){
 		Usuario usuario = new Usuario();
 		try{
-//			usuario = (Usuario) RestUtilCall.getEntity("usuario/validate/key/"+URLEncoder.encode(key, "UTF-8") ,Usuario.class);
 			SecurityLogin secLogin = new SecurityLogin();
 			secLogin.setKey(key);
 			usuario = (Usuario) RestUtilCall.postEntity(secLogin, "usuario/validate/", Usuario.class);
 			if(usuario!=null){
 				System.out.println(usuario.getNome());
 			}
-			
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 

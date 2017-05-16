@@ -9,6 +9,7 @@ import javax.faces.context.FacesContext;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.security.AuthenticationService;
 import br.com.petshow.util.MD5EncriptUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 
 @ManagedBean
 @RequestScoped
@@ -49,7 +50,7 @@ public class LoginBean {
 			boolean success = authenticationService.login(usuario, senha);
 
 			if (!success) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", "Usuário ou senha inválidos!"));
+				MessagesBeanUtil.erroMessage("Falha no login!", "Usuário ou senha inválidos! Ou o usuário pode não ter sido validado pelo E-mail");
 				return "";
 			}
 			return "sucessoLogin";

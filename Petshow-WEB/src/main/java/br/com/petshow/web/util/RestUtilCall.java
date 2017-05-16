@@ -4,6 +4,7 @@ package br.com.petshow.web.util;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.Entity;
 
 import javax.ws.rs.core.MediaType;
@@ -120,7 +121,16 @@ public class RestUtilCall {
 		Object entidade=null;
 		try{
 			Response response = target.request().get();
-			entidade = response.readEntity(type);
+			if(response.getStatus() == HttpServletResponse.SC_OK){
+				entidade = response.readEntity(type);
+			}else if(response.getStatus() == HttpServletResponse.SC_NO_CONTENT){
+				entidade = response.readEntity(String.class);
+			}else if(response.getStatus() == HttpServletResponse.SC_BAD_REQUEST){
+				System.out.println(response.toString());
+				entidade = response.readEntity(MapErroRetornoRest.class);
+			}
+				
+			
 		}catch(Exception ex){
 			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
 		}
@@ -155,35 +165,9 @@ public class RestUtilCall {
 			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
 				throw new ExceptionValidation(erro.getMessage());
 			}
-		}
-		
-		
+		}	
 		WriteConsoleUtil.write("Retornado:"+JsonUtil.getJSON(entidade));
 		return (HashMap<String,String>)entidade;
 	}
-	
-	
-	
-	/*
-	public static <T> T getList(String url,Class<T> type) throws ExceptionErroCallRest{
-
-		ResteasyClient client = new ResteasyClientBuilder().build();
-		
-		ResteasyWebTarget target= client.target(URL_BASE+url);
-		
-		
-		Object entidades = null;
-		try{
-			entidades =  target.request().get(new javax.ws.rs.core.GenericType<T>() {});
-			WriteConsoleUtil.write("Enviado:"+JsonUtil.getJSON(entidades));
-		}catch(Exception ex){
-			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
-			
-		}
-		return type.cast(entidades);
-	
-	}
-	*/
-		
 	
 }
