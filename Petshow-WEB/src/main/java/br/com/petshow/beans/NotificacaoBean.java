@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
+import br.com.petshow.enums.EnumFlTpEstabelecimento;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
@@ -26,7 +27,7 @@ import br.com.petshow.web.util.CallServicoRest;
 import br.com.petshow.web.util.CallUsuarioRest;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
-import br.com.tafera.enums.EnumFlTpEstabelecimento;
+
 
 
 

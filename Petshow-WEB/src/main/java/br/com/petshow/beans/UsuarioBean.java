@@ -12,6 +12,7 @@ import javax.servlet.http.Part;
 
 import org.primefaces.event.FileUploadEvent;
 
+import br.com.petshow.enums.EnumFlTpEstabelecimento;
 import br.com.petshow.enums.EnumTipoUser;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -21,7 +22,7 @@ import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
-import br.com.tafera.enums.EnumFlTpEstabelecimento;
+
 
 @ManagedBean
 @ViewScoped

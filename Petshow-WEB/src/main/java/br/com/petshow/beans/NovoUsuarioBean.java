@@ -6,12 +6,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.petshow.enums.EnumFlTpEstabelecimento;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.util.MD5EncriptUtil;
 import br.com.petshow.web.util.RestUtilCall;
-import br.com.tafera.enums.EnumFlTpEstabelecimento;
+
 
 @ManagedBean
 @ViewScoped
