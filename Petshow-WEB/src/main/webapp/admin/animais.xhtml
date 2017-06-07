@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="#{pageHelperBean.mainTemplate}">
+
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="hand-lizard-o" />
+	<ui:param name="pageTitle" value="ANIMAIS" />
+
+	<ui:define name="header">
+	
+	<p:commandButton id="btnSalvar" style="margin-right:4px"
+			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+			title="Salvar Animal?" value="Salvar" action="#{animalBean.salvar}" type="submit"
+			ajax="false" onstart="paceStart();" onclick="paceStart();"
+			oncomplete="Pace.restart();" update="@form" />
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row ui-grid-row-custom">
+						<div class="ui-grid-col-6" style="padding-right: 5px;">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row ui-grid-row-custom">
+										<div class="ui-grid-col-12">
+
+											<!-- *********************************************************************************************************** -->
+											<!-- O layout da Tela comeca aqui -->
+											<!-- Template para criar campo e lable 
+												<div class="ui-grid-row">
+											    
+											    </div>
+											   	<div class="ui-grid-row">
+										 	     
+												</div>
+											
+											-->
+											<div class="ui-grid-row ui-grid-row-custom">
+												<div class="ui-grid-col-12">
+													<div class="ui-grid-row">
+														<p:outputLabel value="Nome" />
+													</div>
+													<div class="ui-grid-row">
+														<p:inputText placeholder="Nome do animal" value="#{animalBean.animal.nome}"/>
+													</div>
+												</div>
+											</div>
+
+											<div class="ui-grid-row ui-grid-row-custom">
+												<div class="ui-grid-col-12">
+													<div class="ui-grid-row">
+														<p:outputLabel value="Cliente:" for="autoUsuario" />
+													</div>
+													<div class="ui-grid-row">
+														<p:autoComplete id="autoUsuario"
+															value="#{animalBean.cliente}"
+															completeMethod="#{notificacaoBean.getclientes}"
+															var="usuario" itemLabel="#{usuario.nome}"
+															queryDelay="1000" itemValue="#{usuario}"
+															minQueryLength="3"
+															emptyMessage="Não existem clientes com esse nome!"
+															converter="usuarioConverter" size="50"
+															placeholder="Consulte o cliente" forceSelection="true">
+															<p:column>
+																<h:graphicImage
+																	url="data:image/jpg;base64,#{usuario.foto}" />
+															</p:column>
+
+															<p:column>
+																<h:outputText value="#{usuario.nome}" />
+															</p:column>
+															<ui:remove>
+																<p:ajax event="itemSelect"
+																	listener="#{notificacaoBean.eventoConsultaAnimais}"
+																	update="panelGrid,panelAnimalUnico" />
+															</ui:remove>
+														</p:autoComplete>
+													</div>
+												</div>
+											</div>
+
+											<div class="ui-grid-row ui-grid-row-custom">
+												<div class="ui-grid-col-12">
+													<div class="ui-grid-row">
+														<h:outputLabel value="Vacina" for="vacina" />
+													</div>
+													<div class="ui-grid-row">
+														<p:selectOneMenu id="tpAnimal"
+															value="#{animalBean.animal.tipo}">
+															<f:selectItems value="#{animalBean.tipoAnimal}" />
+														</p:selectOneMenu>
+													</div>
+												</div>
+											</div>
+
+
+											<!-- Fim das divs que definem os layouts  -->
+											<!-- ************************************************************************************************************** -->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

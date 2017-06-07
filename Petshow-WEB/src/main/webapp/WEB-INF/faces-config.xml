@@ -38,6 +38,11 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>animais</from-outcome>
+			<to-view-id>/admin/animais.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>inicio</from-outcome>
 			<to-view-id>/admin/inicio.xhtml</to-view-id>
 			<redirect />

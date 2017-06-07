@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
-
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:p="http://primefaces.org/ui"
+	>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	
 	template="#{pageHelperBean.mainTemplate}">
 
 	<ui:param name="activeAnuncio" value="active" />
@@ -17,7 +19,7 @@
 	<ui:define name="header">
 		<p:commandButton id="btnSalvar" style="margin-right:4px"
 			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
-			title="Salvar Anúncio?" value="Salvar" action="#" type="submit"
+			title="Salvar vacina?" value="Salvar" action="#{vacinaBean.salvar}" type="submit"
 			ajax="false" onstart="paceStart();" onclick="paceStart();"
 			oncomplete="Pace.restart();" update="@form" />
 
@@ -67,16 +69,16 @@
 													</p:column>
 
 													<p:ajax event="itemSelect"
-														listener="#{notificacaoBean.eventoConsultaAnimais}"
+														listener="#{vacinaBean.eventoConsultaAnimais}"
 														update="panelGrid,panelAnimalUnico" />
 												</p:autoComplete>
 
 											</div>
 											<h:panelGroup id="panelGrid">
 												<p:dataTable id="checkboxDT"
-													rendered="#{notificacaoBean.mostrarGrid()}" var="animal"
-													value="#{notificacaoBean.animais}"
-													selection="#{notificacaoBean.animaisSelecionados}"
+													rendered="#{vacinaBean.mostrarGrid()}" var="animal"
+													value="#{vacinaBean.animais}"
+													selection="#{vacinaBean.animaisSelecionados}"
 													rowKey="#{animal.id}" style="margin-bottom:0">
 													<f:facet name="header">    Animais  </f:facet>
 													<p:column selectionMode="multiple"
@@ -94,33 +96,49 @@
 											</h:panelGroup>
 											<h:panelGroup id="panelAnimalUnico">
 												<h:panelGrid columns="2"
-													rendered="#{notificacaoBean.mostrarlabel()}">
+													rendered="#{vacinaBean.mostrarlabel()}">
 													<p:outputLabel value="Dados do Animal" />
 													<p:outputLabel value="Nome:" for="lblnome" />
 													<p:outputLabel
-														value="#{notificacaoBean.animalSelecionado.nome}"
+														value="#{vacinaBean.animalSelecionado.nome}"
 														id="lblnome" />
 													<p:outputLabel value="Tipo:" for="lblTipo" />
 													<p:outputLabel
-														value="#{notificacaoBean.animalSelecionado.tipo}"
+														value="#{vacinaBean.animalSelecionado.tipo}"
 														id="lblTipo" />
 													<p:outputLabel value="Raça:" for="lblRaca" />
 													<p:outputLabel
-														value="#{notificacaoBean.animalSelecionado.raca}"
+														value="#{vacinaBean.animalSelecionado.raca}"
 														id="lblRaca" />
 												</h:panelGrid>
 											</h:panelGroup>
+											
+											
+											<div class="ui-grid-row ui-grid-row-custom">
+												<div class="ui-grid-col-12">
+													<div class="ui-grid-row">
+											    		 <h:outputLabel value="Vacina" for="vacina"/>
+													</div>
+													<div class="ui-grid-row">
+												 	     <p:selectOneMenu id="vacio" value="#{vacinaBean.vacina.tpVacina}" >
+														    <f:selectItems value="#{vacinaBean.vacinas}" />
+														</p:selectOneMenu>
+													</div>
+												</div>
+											</div>
+					
+											
+											
 											<div class="ui-grid-row ui-grid-row-custom">
 												<div class="ui-grid-col-6" style="padding-right: 5px;">
 													<div class="ui-grid-row">
-														<p:outputLabel for="dataInicio" value="Data Início" />
+														<p:outputLabel for="dataInicio" value="Data" />
 													</div>
 													<div class="ui-grid-row">
 														<div class="inputTextGroup">
 															<p:calendar id="dataInicio" style="width:100%;"
-																label="Data Início" locale="pt"
-																pattern="dd/MM/yyyy" mask="true"
-																value="#{vacinaBean.vermifugo.data}"
+																label="Data:" locale="pt" pattern="dd/MM/yyyy"
+																mask="true" value="#{vacinaBean.vacina.data}"
 																required="true" />
 															<i class="fa fa-calendar"></i>
 														</div>
@@ -128,8 +146,30 @@
 												</div>
 											</div>
 
-												<!-- Fim das divs que definem os layouts  -->
+											<div class="ui-grid-row ui-grid-row-custom">
+												<div class="ui-grid-col-12">
+													<div class="ui-grid-row">
+											    		 <h:outputLabel value="Foi aplicada?" for="chkAplicada"/>
+													</div>
+													<div class="ui-grid-row">
+												 	     <p:selectBooleanCheckbox label="Aplicada" value="#{vacinaBean.vacina.flAplicada}" id="chkAplicada"/>
+													</div>
+												</div>
 											</div>
+											
+											
+											<div class="ui-grid-row ui-grid-row-custom">
+												<div class="ui-grid-col-12">
+													<div class="ui-grid-row">
+											    		 <h:outputLabel value="Data da Próxima" for="chkAplicada"/>
+													</div>
+													<div class="ui-grid-row">
+												 	     <p:outputLabel value="08/09/2017"/>
+													</div>
+												</div>
+											</div>
+
+											<!-- Fim das divs que definem os layouts  -->
 										</div>
 									</div>
 								</div>
@@ -138,6 +178,7 @@
 					</div>
 				</div>
 			</div>
+		</div>
 	</ui:define>
 
 </ui:composition>
