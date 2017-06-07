@@ -76,7 +76,7 @@
 											</div>
 											<h:panelGroup id="panelGrid">
 												<p:dataTable id="checkboxDT"
-													rendered="#{vacinaBean.mostrarGrid()}" var="animal"
+													rendered="#{vacinaBean.mostrarGrid}" var="animal"
 													value="#{vacinaBean.animais}"
 													selection="#{vacinaBean.animaisSelecionados}"
 													rowKey="#{animal.id}" style="margin-bottom:0">
@@ -97,7 +97,7 @@
 											<h:panelGroup id="panelAnimalUnico">
 												<h:panelGrid columns="2"
 													rendered="#{vacinaBean.mostrarlabel()}">
-													<p:outputLabel value="Dados do Animal" />
+													
 													<p:outputLabel value="Nome:" for="lblnome" />
 													<p:outputLabel
 														value="#{vacinaBean.animalSelecionado.nome}"
@@ -164,7 +164,7 @@
 											    		 <h:outputLabel value="Data da Próxima" for="chkAplicada"/>
 													</div>
 													<div class="ui-grid-row">
-												 	     <p:outputLabel value="08/09/2017"/>
+												 	     <p:outputLabel value="#{vacinaBean.dtProxVacina}"/>
 													</div>
 												</div>
 											</div>

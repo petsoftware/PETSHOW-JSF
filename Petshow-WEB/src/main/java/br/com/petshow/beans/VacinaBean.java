@@ -1,10 +1,12 @@
 package br.com.petshow.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
@@ -15,12 +17,14 @@ import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.model.Vacina;
+import br.com.petshow.util.DateUtil;
 import br.com.petshow.util.WriteConsoleUtil;
 import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
+@ViewScoped
 public class VacinaBean extends SuperBean<Vacina> {
 
 	public Vacina vacina;
@@ -30,7 +34,8 @@ public class VacinaBean extends SuperBean<Vacina> {
 	private List<Animal> animaisSelecionados;
 	private Animal animalSelecionado;
 	private CallAnimalRest callRestAnimal;
-
+	private boolean mostrarGrid;
+	private String dtProxVacina;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -42,8 +47,11 @@ public class VacinaBean extends SuperBean<Vacina> {
 
 	@PostConstruct
 	public void init() {
-		vacina = new Vacina();
-		callRestAnimal	= new CallAnimalRest();
+		System.out.println("PostConstruct " + this.getClass().getName());
+		vacina 				= new Vacina();
+		callRestAnimal		= new CallAnimalRest();
+		animais				= new ArrayList<>();
+		animaisSelecionados = new ArrayList<>();
 	}
 
 	public void eventoConsultaAnimais(SelectEvent event) {
@@ -90,7 +98,11 @@ public class VacinaBean extends SuperBean<Vacina> {
 	public void salvar() {
 		try {
 			WriteConsoleUtil.write("Salvar vacina");
-			RestUtilCall.postEntity(vacina, vacinaURL, Vacina.class);
+			vacina.setAnimal(animalSelecionado);
+			Vacina nextOneVaccine = RestUtilCall.postEntity(vacina, vacinaURL, Vacina.class);
+			if(nextOneVaccine!=null){
+				setDtProxVacina(DateUtil.formatar(nextOneVaccine.getPrevisaoProxima(), DateUtil.DD_MM_YYYY));
+			}
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			// TODO Auto-generated catch block
 			MessagesBeanUtil.erroMessage("Erro ao tentar salvar o registro", e.getMessage());
@@ -137,5 +149,22 @@ public class VacinaBean extends SuperBean<Vacina> {
 			return false;
 		}
 
+	}
+
+	public boolean isMostrarGrid() {
+		mostrarGrid = mostrarGrid();
+		return mostrarGrid;
+	}
+
+	public void setMostrarGrid(boolean mostrarGrid) {
+		this.mostrarGrid = mostrarGrid;
+	}
+
+	public String getDtProxVacina() {
+		return dtProxVacina;
+	}
+
+	public void setDtProxVacina(String dtProxVacina) {
+		this.dtProxVacina = dtProxVacina;
 	}
 }
