@@ -1,63 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-             xmlns:beans="http://www.springframework.org/schema/beans"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
 
-      <global-method-security secured-annotations="enabled" jsr250-annotations="enabled"  />
+	<global-method-security secured-annotations="enabled"
+		jsr250-annotations="enabled" />
 
-    <http use-expressions="true" auto-config="true" > 
-    
-        <!-- <intercept-url pattern="/pages/**" access="isAuthenticated()" /> -->
-        <!-- 
-        *********************************************************
-        		DESCRIÇÃO DAS CONFIGURAÇÕES
-        *********************************************************
-        @ - pattern : Indica o Padrão de URL que será interceptado pelo Spring Security. A forme de identificação
-        do padrão foi definido pelo atributo path-type.
-        @ - method  : Metodo de requisição que será considerada válida para permitir o acesso ao recurso. Os valores
-        são GET. DELETE, HEAD, OPTIONS e POST. Por padrão qualquer método será aceito.
-        @ - acess   : Lista separada por vírgula dos nomes de permissão (ROLE) que serão aceitos para permitir acesso ao
-        recruso.
-        @ - requires-channel : Permite indicar um protocolo obrigatório para o acesso ao recurso. Os valores pos´oveis
-        são: any, http e https. O valor padrão é any  
-        
-        <intercept-url pattern="/categorias" access="hasAnyRole('ADMIN', 'GERENTE', 'COORDENADOR') and isAuthenticated()" />
-         -->
-        <intercept-url pattern="/pages/**" access="permitAll" />
-        <intercept-url pattern="/" access="permitAll" />
-		
-		
-        <!-- 
-        <intercept-url pattern="/admin/**" access="hasRoles('ADMIN') and isAuthenticated()" />
-         -->
-         <!-- 
-          <intercept-url pattern="/admin/**" access="permitAll"  />
-         <intercept-url pattern="/admin/anuncio.xhtml" access="isAuthenticated() and hasRole('ADMIN')"  />
-         <intercept-url pattern="/private/**" access="hasRole('PRIVATE') and isAuthenticated()"  />
-          -->
-           
-         <intercept-url pattern="/admin/*" access="isAuthenticated() and hasRole('ADMIN')"  />
-         <intercept-url pattern="/private/**" access="permitAll"  />
-        
-        <form-login login-page="/public/login.xhtml" 
-        authentication-failure-url="/semPermissao.xhtml" />
-        
-		
-		
-		<session-management>
-			<!-- This  his  will  prevent  a  user  from  logging  in  multiple  times  -  a  second  
-			login  will  cause  the  first  to  be invalidated. Often you would prefer to prevent a 
-			second login, in which case you can use -->
-			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
+	<http use-expressions="true" auto-config="true">
+
+
+
+		<form-login login-page="/public/login.xhtml"
+			authentication-failure-url="/public/login.xhtml" />
+		<!-- <custom-filter position="CONCURRENT_SESSION_FILTER" ref="concurrencyFilter" 
+			/> <custom-filter position="FORM_LOGIN_FILTER" ref="myAuthFilter" /> -->
+		<session-management invalid-session-url="/public/login.xhtml"
+			session-authentication-error-url="/public/login.xhtml">
+			<concurrency-control expired-url="/public/login.xhtml"
+				max-sessions="10" error-if-maximum-exceeded="true" />
 		</session-management>
-    </http>
-    
-     
+		<logout delete-cookies="JSESSIONID" />
 
-    <authentication-manager alias="authenticationManager" >
-        <authentication-provider user-service-ref="userDetailsService" />
-    </authentication-manager>
 
+		<!-- <intercept-url pattern="/pages/**" access="isAuthenticated()" /> -->
+		<!-- ********************************************************* DESCRIÇÃO 
+			DAS CONFIGURAÇÕES ********************************************************* 
+			@ - pattern : Indica o Padrão de URL que será interceptado pelo Spring Security. 
+			A forme de identificação do padrão foi definido pelo atributo path-type. 
+			@ - method : Metodo de requisição que será considerada válida para permitir 
+			o acesso ao recurso. Os valores são GET. DELETE, HEAD, OPTIONS e POST. Por 
+			padrão qualquer método será aceito. @ - acess : Lista separada por vírgula 
+			dos nomes de permissão (ROLE) que serão aceitos para permitir acesso ao recruso. 
+			@ - requires-channel : Permite indicar um protocolo obrigatório para o acesso 
+			ao recurso. Os valores pos´oveis são: any, http e https. O valor padrão é 
+			any <intercept-url pattern="/categorias" access="hasAnyRole('ADMIN', 'GERENTE', 
+			'COORDENADOR') and isAuthenticated()" /> -->
+		<intercept-url pattern="/pages/**" access="permitAll" />
+		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/admin/*"
+			access="isAuthenticated() and hasRole('ADMIN')" />
+		<intercept-url pattern="/private/**" access="permitAll" />
+
+	</http>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsService" />
+	</authentication-manager>
+	<!-- <beans:bean id="concurrencyFilter" class="org.springframework.security.web.session.ConcurrentSessionFilter"> 
+		<beans:property name="sessionRegistry" ref="sessionRegistry" /> <beans:property 
+		name="expiredUrl" value="/session-expired.htm" /> </beans:bean> <beans:bean 
+		id="myAuthFilter" class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter"> 
+		<beans:property name="sessionAuthenticationStrategy" ref="sas" /> <beans:property 
+		name="authenticationManager" ref="authenticationManager" /> </beans:bean> 
+		<beans:bean id="sas" class="org.springframework.security.web.authentication.session.CompositeSessionAuthenticationStrategy"> 
+		<beans:constructor-arg> <beans:list> <beans:bean class="org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy"> 
+		<beans:constructor-arg ref="sessionRegistry" /> <beans:property name="maximumSessions" 
+		value="1" /> <beans:property name="exceptionIfMaximumExceeded" value="true" 
+		/> </beans:bean> <beans:bean class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy"> 
+		</beans:bean> <beans:bean class="org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy"> 
+		<beans:constructor-arg ref="sessionRegistry" /> </beans:bean> </beans:list> 
+		</beans:constructor-arg> </beans:bean> <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" 
+		/> -->
 </beans:beans>
+ 
