@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="#{pageHelperBean.mainTemplate}">
+
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="pencil-square-o" />
+	<ui:param name="pageTitle" value="VACINAS" />
+
+	<ui:define name="header">
+		<p:commandButton id="btnSalvar" style="margin-right:4px"
+			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+			title="Salvar Anúncio?" value="Salvar" action="#" type="submit"
+			ajax="false" onstart="paceStart();" onclick="paceStart();"
+			oncomplete="Pace.restart();" update="@form" />
+
+	</ui:define>
+
+	<ui:define name="body">
+
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row ui-grid-row-custom">
+						<div class="ui-grid-col-6" style="padding-right: 5px;">
+							<div class="ui-grid-row">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row ui-grid-row-custom">
+										<div class="ui-grid-col-12">
+											<!-- O layout da Tela comeca aqui -->
+											<!-- Template para criar campo e lable 
+												<div class="ui-grid-row">
+											    
+											    </div>
+											   	<div class="ui-grid-row">
+										 	     
+												</div>
+											
+											-->
+
+											<div class="ui-grid-row">
+												<p:outputLabel value="Cliente:" for="autoUsuario" />
+											</div>
+											<div class="ui-grid-row">
+												<p:autoComplete id="autoUsuario"
+													value="#{vacinaBean.usuario}"
+													completeMethod="#{notificacaoBean.getclientes}"
+													var="usuario" itemLabel="#{usuario.nome}" queryDelay="1000"
+													itemValue="#{usuario}" minQueryLength="3"
+													emptyMessage="Não existem clientes com esse nome!"
+													converter="usuarioConverter" size="50"
+													placeholder="Consulte o cliente" forceSelection="true">
+													<p:column>
+														<h:graphicImage
+															url="data:image/jpg;base64,#{usuario.foto}" />
+													</p:column>
+
+													<p:column>
+														<h:outputText value="#{usuario.nome}" />
+													</p:column>
+
+													<p:ajax event="itemSelect"
+														listener="#{notificacaoBean.eventoConsultaAnimais}"
+														update="panelGrid,panelAnimalUnico" />
+												</p:autoComplete>
+
+											</div>
+											<h:panelGroup id="panelGrid">
+												<p:dataTable id="checkboxDT"
+													rendered="#{notificacaoBean.mostrarGrid()}" var="animal"
+													value="#{notificacaoBean.animais}"
+													selection="#{notificacaoBean.animaisSelecionados}"
+													rowKey="#{animal.id}" style="margin-bottom:0">
+													<f:facet name="header">    Animais  </f:facet>
+													<p:column selectionMode="multiple"
+														style="width:16px;text-align:center" />
+													<p:column headerText="Nome">
+														<h:outputText value="#{animal.nome}" />
+													</p:column>
+													<p:column headerText="Tipo">
+														<h:outputText value="#{animal.tipo}" />
+													</p:column>
+													<p:column headerText="Raça">
+														<h:outputText value="#{animal.raca}" />
+													</p:column>
+												</p:dataTable>
+											</h:panelGroup>
+											<h:panelGroup id="panelAnimalUnico">
+												<h:panelGrid columns="2"
+													rendered="#{notificacaoBean.mostrarlabel()}">
+													<p:outputLabel value="Dados do Animal" />
+													<p:outputLabel value="Nome:" for="lblnome" />
+													<p:outputLabel
+														value="#{notificacaoBean.animalSelecionado.nome}"
+														id="lblnome" />
+													<p:outputLabel value="Tipo:" for="lblTipo" />
+													<p:outputLabel
+														value="#{notificacaoBean.animalSelecionado.tipo}"
+														id="lblTipo" />
+													<p:outputLabel value="Raça:" for="lblRaca" />
+													<p:outputLabel
+														value="#{notificacaoBean.animalSelecionado.raca}"
+														id="lblRaca" />
+												</h:panelGrid>
+											</h:panelGroup>
+											<div class="ui-grid-row ui-grid-row-custom">
+												<div class="ui-grid-col-6" style="padding-right: 5px;">
+													<div class="ui-grid-row">
+														<p:outputLabel for="dataInicio" value="Data Início" />
+													</div>
+													<div class="ui-grid-row">
+														<div class="inputTextGroup">
+															<p:calendar id="dataInicio" style="width:100%;"
+																label="Data Início" locale="pt"
+																pattern="dd/MM/yyyy" mask="true"
+																value="#{vacinaBean.vermifugo.data}"
+																required="true" />
+															<i class="fa fa-calendar"></i>
+														</div>
+													</div>
+												</div>
+											</div>
+
+												<!-- Fim das divs que definem os layouts  -->
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>
