@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
@@ -39,6 +37,7 @@ public class VacinaBean extends SuperBean<Vacina> {
 	private boolean mostrarGrid;
 	private String dtProxVacina;
 	private VacinaDataModel vacinasModel;
+	private Vacina vacinaSelecionada;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -75,13 +74,11 @@ public class VacinaBean extends SuperBean<Vacina> {
 			}
 
 		} catch (ExceptionErroCallRest  e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-
+			MessagesBeanUtil.exception(e);
 		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			MessagesBeanUtil.exception(e);
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-			e.printStackTrace();
+			MessagesBeanUtil.exception(e);
 		}
 
 	}
@@ -201,4 +198,32 @@ public class VacinaBean extends SuperBean<Vacina> {
 	public void setVacinasModel(VacinaDataModel vacinasModel) {
 		this.vacinasModel = vacinasModel;
 	}
+
+	public Vacina getVacinaSelecionada() {
+		return vacinaSelecionada;
+	}
+
+	public void setVacinaSelecionada(Vacina vacinaSelecionada) {
+		if(vacinaSelecionada!=null){
+			vacina = vacinaSelecionada;
+		}
+		this.vacinaSelecionada = vacinaSelecionada;
+	}
+	
+	public void onRowSelect(SelectEvent event) {
+//        FacesMessage msg = new FacesMessage("Car Selected", ((Vacina) event.getObject()).getId());
+//        FacesContext.getCurrentInstance().addMessage(null, msg);
+		try{
+			vacinasModel = (VacinaDataModel) event.getObject();
+		}catch(Exception e){
+			
+		}
+		try {
+			vacina = (Vacina) event.getObject();
+		} catch(Exception e){
+			// TODO: handle finally clause
+		}
+		
+		setVacinaSelecionada(vacinasModel.getRowData());
+    }
 }
