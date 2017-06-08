@@ -19,6 +19,7 @@ import br.com.petshow.model.Usuario;
 import br.com.petshow.model.Vacina;
 import br.com.petshow.util.DateUtil;
 import br.com.petshow.util.WriteConsoleUtil;
+import br.com.petshow.web.datamodel.VacinaDataModel;
 import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
@@ -37,6 +38,7 @@ public class VacinaBean extends SuperBean<Vacina> {
 	private CallAnimalRest callRestAnimal;
 	private boolean mostrarGrid;
 	private String dtProxVacina;
+	private VacinaDataModel vacinasModel;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -59,6 +61,9 @@ public class VacinaBean extends SuperBean<Vacina> {
 		getAnimaisBanco(((Usuario) event.getObject()).getId());
 	}
 
+	public String getTpVacinaDescription(EnumVacina tpVacina) {
+		return tpVacina.getNome();
+	}
 
 	public void getAnimaisBanco(long  id){
 		try {
@@ -107,7 +112,7 @@ public class VacinaBean extends SuperBean<Vacina> {
 			}
 			MessagesBeanUtil.infor("Vacina salva com sucesso","Data da próxima aplicação " + getDtProxVacina());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
-			// TODO Auto-generated catch block
+			
 			MessagesBeanUtil.erroMessage("Erro ao tentar salvar o registro", e.getMessage());
 		}
 	}
@@ -173,11 +178,11 @@ public class VacinaBean extends SuperBean<Vacina> {
 
 	public List<Vacina> getVacinasDoAnimal() {
 		if(animalSelecionado!=null){
-			String url = "vacina/animal/"+animalSelecionado.getId();
+			String url = "animal/vacina/animal/"+animalSelecionado.getId();
 			try {
-				RestUtilCall.getEntityList(url, Vacina.class);
+				vacinasDoAnimal = RestUtilCall.getEntityList(url, Vacina.class);
 			} catch (ExceptionErroCallRest | ExceptionValidation e) {
-				// TODO Auto-generated catch block
+				
 				vacinasDoAnimal = new ArrayList<>();
 			}
 		}
@@ -186,5 +191,14 @@ public class VacinaBean extends SuperBean<Vacina> {
 
 	public void setVacinasDoAnimal(List<Vacina> vacinasDoAnimal) {
 		this.vacinasDoAnimal = vacinasDoAnimal;
+	}
+
+	public VacinaDataModel getVacinasModel() {
+		vacinasModel = new VacinaDataModel(getVacinasDoAnimal());
+		return vacinasModel;
+	}
+
+	public void setVacinasModel(VacinaDataModel vacinasModel) {
+		this.vacinasModel = vacinasModel;
 	}
 }

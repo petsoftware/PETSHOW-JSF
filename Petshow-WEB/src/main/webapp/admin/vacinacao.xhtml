@@ -19,7 +19,7 @@
 			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
 			title="Salvar vacina?" value="Salvar" action="#{vacinaBean.salvar}"
 			type="submit" ajax="false" onstart="paceStart();"
-			onclick="paceStart();" oncomplete="Pace.restart();" update="@form" />
+			onclick="paceStart();" oncomplete="Pace.restart();" update="@form,grid" />
 
 	</ui:define>
 
@@ -68,7 +68,7 @@
 
 													<p:ajax event="itemSelect"
 														listener="#{vacinaBean.eventoConsultaAnimais}"
-														update="panelGrid,panelAnimalUnico" />
+														update="panelGrid,panelAnimalUnico,grid" />
 												</p:autoComplete>
 
 											</div>
@@ -167,75 +167,7 @@
 											</div>
 
 											<div class="ui-grid-row ui-grid-row-custom">
-												<div class="ui-grid-col-12">
-													<p:dataTable id="grid" var="anuncio"
-														emptyMessage="Nenhuma Vacina Cadastrada." scrollHeight="130"
-														scrollable="true" resizableColumns="true" value="#{vacinaBean.vacinasDoAnimal}"
-														paginator="#{vacinaBean.vacinasDoAnimal.size() > 12}" rows="13"
-														paginatorPosition="bottom" tabindex="-1">
-
-														<f:facet name="header">
-															<p:outputLabel value="Vacinas do #{vacinaBean.animalSelecionado.nome}" />
-														</f:facet>
-
-														<p:column headerText="Descrição" width="300">
-															<h:outputText value="#{anuncio.descricao}" />
-														</p:column>
-
-														<p:column headerText="Data inicial" width="100">
-															<h:outputText value="#{anuncio.dataInicial}">
-																<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"
-																	timeZone="America/Recife" />
-															</h:outputText>
-														</p:column>
-
-														<p:column headerText="Data Final" width="100">
-															<h:outputText value="#{anuncio.dataVencimento}">
-																<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-																	timeZone="America/Recife" />
-															</h:outputText>
-
-														</p:column>
-
-														<p:column headerText="Data Cadastro" width="100">
-															<h:outputText value="#{anuncio.dataCadastro}">
-																<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-																	timeZone="America/Recife" />
-															</h:outputText>
-														</p:column>
-														<p:column headerText="Opções"
-															style="text-align:center;width:20%">
-															<p:commandButton
-																actionListener="#{anuncioBean.selecionar(anuncio)}"
-																type="submit" styleClass="btn btn-info btn-lg"
-																icon="fa fa-pencil-square-o"
-																title="Clique aqui para alterar alguma informação"
-																ajax="true" process="@this" update="@form">
-																<f:ajax render="@form" />
-															</p:commandButton>
-															<p:commandButton
-																action="#{anuncioBean.excluirAnuncio(anuncio.id)}"
-																type="submit" styleClass="btn btn-danger btn-lg"
-																icon="fa fa-trash-o" title="Excluir o registro na grid"
-																ajax="true" process="@this" update="grid">
-																<f:ajax execute="@all" render="@form" />
-																<p:confirm header="Confirme a exclusão"
-																	message="Você tem certeza que deseja excluir este registro?"
-																	icon="fa fa-exclamation-triangle" />
-															</p:commandButton>
-														</p:column>
-
-														<p:column style="text-align:center;" width="125">
-
-															<p:commandButton id="btnVisualizar"
-																style="margin-right:4px"
-																styleClass="btn btn-info btn-lg" icon="fa fa-search">
-															</p:commandButton>
-
-														</p:column>
-
-													</p:dataTable>
-												</div>
+												<div class="ui-grid-col-12"></div>
 											</div>
 
 											<!-- Fim das divs que definem os layouts  -->
@@ -244,6 +176,63 @@
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row ui-grid-row-custom">
+						<p:dataTable id="grid" var="vacina"
+							emptyMessage="Nenhuma Vacina Cadastrada." scrollHeight="130"
+							scrollable="true" resizableColumns="true"
+							value="#{vacinaBean.vacinasModel}"
+							paginator="#{vacinaBean.vacinasDoAnimal.size() > 12}" rows="13"
+							paginatorPosition="bottom" tabindex="-1" selectionMode="single" 
+							selection="#{vacinaBean.vacina}"
+	
+							>
+
+							<p:ajax event="rowSelect" update="@form" />
+							<f:facet name="header">
+								<p:outputLabel
+									value="Vacinas do #{vacinaBean.animalSelecionado.nome}" />
+							</f:facet>
+
+							<p:column headerText="Vacina" width="250">
+								<h:outputText value="#{vacinaBean.getTpVacinaDescription(vacina.tpVacina)}" />
+							</p:column>
+
+							<p:column headerText="Data Aplicaço" width="100">
+								<h:outputText value="#{vacina.data}">
+									<f:convertDateTime pattern="dd/MM/yyyy"
+										 />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Data Proxima" width="100">
+								<h:outputText value="#{vacina.previsaoProxima}">
+									<f:convertDateTime type="date" pattern="dd/MM/yyyy"
+										 />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Foi Aplicada"
+								style="width:10%;text-align: center;">
+								<p:graphicImage rendered="#{vacina.flAplicada}">
+									<i class="fa fa-check-circle fa-2x fa-color-green" />
+								</p:graphicImage>
+								<p:graphicImage rendered="#{not vacina.flAplicada}">
+									<i class="fa fa-times fa-2x fa-color-red" />
+								</p:graphicImage>
+							</p:column>
+						</p:dataTable>
+
+
+
 					</div>
 				</div>
 			</div>
