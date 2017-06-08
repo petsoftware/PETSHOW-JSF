@@ -32,6 +32,7 @@ public class VacinaBean extends SuperBean<Vacina> {
 	private String vacinaURL = "animal/vacina/salvar";
 	private List<Animal> animais;
 	private List<Animal> animaisSelecionados;
+	private List<Vacina> vacinasDoAnimal;
 	private Animal animalSelecionado;
 	private CallAnimalRest callRestAnimal;
 	private boolean mostrarGrid;
@@ -99,10 +100,12 @@ public class VacinaBean extends SuperBean<Vacina> {
 		try {
 			WriteConsoleUtil.write("Salvar vacina");
 			vacina.setAnimal(animalSelecionado);
+			vacina.setPrevisaoProxima(DateUtil.addMonths(vacina.getData(), 3));
 			Vacina nextOneVaccine = RestUtilCall.postEntity(vacina, vacinaURL, Vacina.class);
 			if(nextOneVaccine!=null){
 				setDtProxVacina(DateUtil.formatar(nextOneVaccine.getPrevisaoProxima(), DateUtil.DD_MM_YYYY));
 			}
+			MessagesBeanUtil.infor("Vacina salva com sucesso","Data da próxima aplicação " + getDtProxVacina());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			// TODO Auto-generated catch block
 			MessagesBeanUtil.erroMessage("Erro ao tentar salvar o registro", e.getMessage());
@@ -166,5 +169,22 @@ public class VacinaBean extends SuperBean<Vacina> {
 
 	public void setDtProxVacina(String dtProxVacina) {
 		this.dtProxVacina = dtProxVacina;
+	}
+
+	public List<Vacina> getVacinasDoAnimal() {
+		if(animalSelecionado!=null){
+			String url = "vacina/animal/"+animalSelecionado.getId();
+			try {
+				RestUtilCall.getEntityList(url, Vacina.class);
+			} catch (ExceptionErroCallRest | ExceptionValidation e) {
+				// TODO Auto-generated catch block
+				vacinasDoAnimal = new ArrayList<>();
+			}
+		}
+		return vacinasDoAnimal;
+	}
+
+	public void setVacinasDoAnimal(List<Vacina> vacinasDoAnimal) {
+		this.vacinasDoAnimal = vacinasDoAnimal;
 	}
 }

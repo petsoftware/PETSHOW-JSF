@@ -3,10 +3,10 @@ package br.com.petshow.web.util;
 
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.Entity;
-
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -17,7 +17,6 @@ import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 import br.com.petshow.enums.EnumErrosSistema;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-
 import br.com.petshow.model.Entidade;
 import br.com.petshow.util.FileApplicationUtil;
 import br.com.petshow.util.JsonUtil;
@@ -29,9 +28,9 @@ public class RestUtilCall {
 	
 	public static final String URL_BASE = FileApplicationUtil.getUrlBaseREST();
 	
-	public ResteasyClient client;
+	public static ResteasyClient client;
 	
-	public ResteasyWebTarget target;
+	public static ResteasyWebTarget target;
 	
 	 
 	public static <T> T postEntity(Entidade entidade, String url,Class<T> type) throws ExceptionErroCallRest,ExceptionValidation{
@@ -169,5 +168,45 @@ public class RestUtilCall {
 		WriteConsoleUtil.write("Retornado:"+JsonUtil.getJSON(entidade));
 		return (HashMap<String,String>)entidade;
 	}
+	
+	/**
+	 * Retorna uma lista de objetos do Tipo T
+	 * @param url
+	 * @param type
+	 * @return
+	 * @throws ExceptionErroCallRest
+	 * @throws ExceptionValidation
+	 */
+	public static <T> List<T> getEntityList(String url, Class<T> type) throws ExceptionErroCallRest, ExceptionValidation{
+		buildClientREST();
+		target = client.target(URL_BASE+url);
+		Object entidades = null;
+		try{
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<T>>() {});
+			
+		}catch(Exception ex){
+ 
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+			
+		}
+		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
+			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}else{
+				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
+			}
+		}
+		return (List<T>)entidades;
+	
+	}
+
+
+	private static void buildClientREST() {
+		if(client==null){
+			client = new ResteasyClientBuilder().build();
+		}
+	}
+
 	
 }
