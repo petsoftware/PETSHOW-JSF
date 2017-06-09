@@ -1,7 +1,9 @@
 package br.com.petshow.beans;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -213,17 +215,31 @@ public class VacinaBean extends SuperBean<Vacina> {
 	public void onRowSelect(SelectEvent event) {
 //        FacesMessage msg = new FacesMessage("Car Selected", ((Vacina) event.getObject()).getId());
 //        FacesContext.getCurrentInstance().addMessage(null, msg);
-		try{
-			vacinasModel = (VacinaDataModel) event.getObject();
-		}catch(Exception e){
-			
-		}
-		try {
-			vacina = (Vacina) event.getObject();
-		} catch(Exception e){
-			// TODO: handle finally clause
-		}
+//		try{
+//			vacinasModel = ((VacinaDataModel) event.getObject();
+//		}catch(Exception e){
+//			
+//		}
+//		try {
+//			vacina = (Vacina) event.getObject();
+//		} catch(Exception e){
+//			// TODO: handle finally clause
+//		}
 		
 		setVacinaSelecionada(vacinasModel.getRowData());
     }
+	
+	public void selecionar(Vacina vacina) {
+		this.vacina = vacina;
+	}
+	
+	public void selecionar(LinkedHashMap<String, Properties> list) {
+		LinkedHashMap<String, Properties> obj = list;
+		for (Animal animal : animais) {
+			
+		}
+	}
+	public void excluir(long id) {
+		
+	}
 }

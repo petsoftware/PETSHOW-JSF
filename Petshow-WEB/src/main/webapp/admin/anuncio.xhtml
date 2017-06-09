@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:p="http://primefaces.org/ui"
+      >
 		          
 	<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
 	                xmlns:h="http://java.sun.com/jsf/html"  
-	                xmlns:f="http://java.sun.com/jsf/core"  
-	                xmlns:ui="http://java.sun.com/jsf/facelets"
-					xmlns:pe="http://primefaces.org/ui/extensions"
-	                xmlns:p="http://primefaces.org/ui" template="#{pageHelperBean.mainTemplate}">
+	                template="#{pageHelperBean.mainTemplate}">
 	   	
 	   	<ui:param name="activeAnuncio" value="active" />
 	   	<ui:param name="pageIcon" value="bullhorn" />
@@ -131,8 +133,11 @@
 											   	<div class="ui-grid-row">
 											   		<p:fileUpload style="width:100%"
 														mode="simple"
+														update="visualizacao"
 														cache="false"
 														fileLimit="1"
+														label="Selecione um arquivo"
+														uploadLabel="Escolha"
 														dragDropSupport="true"													
 		                          						sizeLimit="10000000"
 		                          						allowTypes="/(\.|\/)(gif|jpg|jpeg|png)$/" 

@@ -19,7 +19,8 @@
 			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
 			title="Salvar vacina?" value="Salvar" action="#{vacinaBean.salvar}"
 			type="submit" ajax="false" onstart="paceStart();"
-			onclick="paceStart();" oncomplete="Pace.restart();" update="@form,grid" />
+			onclick="paceStart();" oncomplete="Pace.restart();"
+			update="@form,grid" />
 
 	</ui:define>
 
@@ -189,27 +190,23 @@
 						<p:dataTable id="grid" var="varVacina"
 							emptyMessage="Nenhuma Vacina Cadastrada." scrollHeight="200"
 							scrollable="true" resizableColumns="true"
-							value="#{vacinaBean.vacinasModel}"
+							value="#{vacinaBean.vacinasDoAnimal}"
 							paginator="#{vacinaBean.vacinasDoAnimal.size() > 12}" rows="13"
-							paginatorPosition="bottom" tabindex="-1" selectionMode="single" 
-							rowKey="#{varVacina.id}"
-							>
+							paginatorPosition="bottom" tabindex="-1" >
 
-							<p:ajax event="rowSelect" listener="#{vacinaBean.onRowSelect}" update="grid" />
-							 
 							<f:facet name="header">
 								<p:outputLabel
 									value="Vacinas do #{vacinaBean.animalSelecionado.nome}" />
 							</f:facet>
 
-							<p:column headerText="Vacina" width="250">
-								<h:outputText value="#{vacinaBean.getTpVacinaDescription(varVacina.tpVacina)}" />
+							<p:column headerText="Vacina" width="160">
+								<h:outputText
+									value="#{vacinaBean.getTpVacinaDescription(varVacina.tpVacina)}" />
 							</p:column>
 
 							<p:column headerText="Data Aplicaço" width="100">
 								<h:outputText value="#{varVacina.data}">
-									<f:convertDateTime pattern="dd/MM/yyyy"
-										 />
+									<f:convertDateTime pattern="dd/MM/yyyy" />
 								</h:outputText>
 							</p:column>
 
@@ -222,6 +219,32 @@
 									<i class="fa fa-times fa-2x fa-color-red" />
 								</p:graphicImage>
 							</p:column>
+							<p:column headerText="Opções" style="text-align:center;width:20%">
+								<p:commandButton
+									actionListener="#{vacinaBean.selecionar(varVacina)}"
+									type="submit" styleClass="btn btn-info btn-lg"
+									icon="fa fa-pencil-square-o"
+									title="Clique aqui para alterar alguma informação" ajax="true"
+									process="@this" update="@form">
+									<f:ajax render="@form" />
+								</p:commandButton>
+								<!-- 
+										<p:commandButton
+											action="#{anuncioBean.excluirAnuncio(anuncio.id)}"
+											type="submit" 
+											styleClass="btn btn-danger btn-lg"
+   											icon="fa fa-trash-o"
+   											title="Excluir o registro na grid"
+   											ajax="true"
+   											process="@this"
+   											update="grid"
+											 >
+											 	<f:ajax execute="@all" render="@form"/>
+											 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+											</p:commandButton>
+										 -->
+							</p:column>
+
 						</p:dataTable>
 
 
