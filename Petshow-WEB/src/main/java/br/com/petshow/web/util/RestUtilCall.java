@@ -14,6 +14,8 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
+//import com.google.gson.reflect.TypeToken;
+
 import br.com.petshow.enums.EnumErrosSistema;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -183,7 +185,7 @@ public class RestUtilCall {
 		Object entidades = null;
 		try{
 			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<T>>() {});
-			
+//			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<TypeToken<T>>>() {});
 		}catch(Exception ex){
  
 			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());

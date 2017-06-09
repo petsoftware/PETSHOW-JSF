@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 import br.com.petshow.enums.EnumVacina;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
@@ -21,6 +22,7 @@ import br.com.petshow.util.DateUtil;
 import br.com.petshow.util.WriteConsoleUtil;
 import br.com.petshow.web.datamodel.VacinaDataModel;
 import br.com.petshow.web.util.CallAnimalRest;
+import br.com.petshow.web.util.CallVacinaRest;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
@@ -33,6 +35,7 @@ public class VacinaBean extends SuperBean<Vacina> {
 	private String vacinaURL = "animal/vacina/salvar";
 	private List<Animal> animais;
 	private List<Animal> animaisSelecionados;
+	private Animal selectedAnimal;
 	private List<Vacina> vacinasDoAnimal;
 	private Animal animalSelecionado;
 	private CallAnimalRest callRestAnimal;
@@ -101,6 +104,10 @@ public class VacinaBean extends SuperBean<Vacina> {
 	}
 
 	public void salvar() {
+		salvarVacina();
+	}
+
+	private void salvarVacina() {
 		try {
 			WriteConsoleUtil.write("Salvar vacina");
 			vacina.setAnimal(animalSelecionado);
@@ -111,7 +118,7 @@ public class VacinaBean extends SuperBean<Vacina> {
 			}
 			MessagesBeanUtil.infor("Vacina salva com sucesso","Data da próxima aplicação " + getDtProxVacina());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
-			
+
 			MessagesBeanUtil.erroMessage("Erro ao tentar salvar o registro", e.getMessage());
 		}
 	}
@@ -177,9 +184,10 @@ public class VacinaBean extends SuperBean<Vacina> {
 
 	public List<Vacina> getVacinasDoAnimal() {
 		if(animalSelecionado!=null){
-			String url = "animal/vacina/animal/"+animalSelecionado.getId();
+			//String url = "animal/vacina/animal/"+animalSelecionado.getId();
 			try {
-				vacinasDoAnimal = RestUtilCall.getEntityList(url, Vacina.class);
+				//vacinasDoAnimal = RestUtilCall.getEntityList(url, Vacina.class);
+				vacinasDoAnimal = CallVacinaRest.getListVacinasPorAnimal(animalSelecionado.getId());
 			} catch (ExceptionErroCallRest | ExceptionValidation e) {
 				
 				vacinasDoAnimal = new ArrayList<>();
@@ -213,19 +221,6 @@ public class VacinaBean extends SuperBean<Vacina> {
 	}
 	
 	public void onRowSelect(SelectEvent event) {
-//        FacesMessage msg = new FacesMessage("Car Selected", ((Vacina) event.getObject()).getId());
-//        FacesContext.getCurrentInstance().addMessage(null, msg);
-//		try{
-//			vacinasModel = ((VacinaDataModel) event.getObject();
-//		}catch(Exception e){
-//			
-//		}
-//		try {
-//			vacina = (Vacina) event.getObject();
-//		} catch(Exception e){
-//			// TODO: handle finally clause
-//		}
-		
 		setVacinaSelecionada(vacinasModel.getRowData());
     }
 	
@@ -233,13 +228,30 @@ public class VacinaBean extends SuperBean<Vacina> {
 		this.vacina = vacina;
 	}
 	
-	public void selecionar(LinkedHashMap<String, Properties> list) {
-		LinkedHashMap<String, Properties> obj = list;
-		for (Animal animal : animais) {
-			
-		}
-	}
 	public void excluir(long id) {
 		
 	}
+
+	public Animal getSelectedAnimal() {
+		return selectedAnimal;
+	}
+
+	public void setSelectedAnimal(Animal selectedAnimal) {
+		this.selectedAnimal = selectedAnimal;
+	}
+	
+	public void onRowSelectAnimal(SelectEvent event) {
+		try {
+			setAnimalSelecionado(((Animal) event.getObject()));
+			getVacinasDoAnimal();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}   
+	}
+	 
+	    public void onRowUnselectAnimal(UnselectEvent event) {
+	        //FacesMessage msg = new FacesMessage("Car Unselected", ((Car) event.getObject()).getId());
+	        //FacesContext.getCurrentInstance().addMessage(null, msg);
+	    	//Do nothing, only if necessary.
+	    }
 }
