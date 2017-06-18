@@ -26,7 +26,7 @@ import br.com.petshow.util.MapErroRetornoRest;
 import br.com.petshow.util.WriteConsoleUtil;
 
 
-public class RestUtilCall {
+public class RestUtilCall <T extends Entidade>{
 	
 	public static final String URL_BASE = FileApplicationUtil.getUrlBaseREST();
 	
@@ -179,7 +179,7 @@ public class RestUtilCall {
 	 * @throws ExceptionErroCallRest
 	 * @throws ExceptionValidation
 	 */
-	public static <T> List<T> getEntityList(String url, Class<T> type) throws ExceptionErroCallRest, ExceptionValidation{
+	public List<T> getEntityList(String url, Class<T> type) throws ExceptionErroCallRest, ExceptionValidation{
 		buildClientREST();
 		target = client.target(URL_BASE+url);
 		Object entidades = null;

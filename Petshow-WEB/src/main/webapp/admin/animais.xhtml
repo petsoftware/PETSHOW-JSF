@@ -15,12 +15,12 @@
 	<ui:param name="pageTitle" value="ANIMAIS" />
 
 	<ui:define name="header">
-	
-	<p:commandButton id="btnSalvar" style="margin-right:4px"
+
+		<p:commandButton id="btnSalvar" style="margin-right:4px"
 			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
-			title="Salvar Animal?" value="Salvar" action="#{animalBean.salvar}" type="submit"
-			ajax="false" onstart="paceStart();" onclick="paceStart();"
-			oncomplete="Pace.restart();" update="@form" />
+			title="Salvar Animal?" value="Salvar" action="#{animalBean.salvar}"
+			type="submit" ajax="false" onstart="paceStart();"
+			onclick="paceStart();" oncomplete="Pace.restart();" update="@form" />
 
 	</ui:define>
 
@@ -53,7 +53,8 @@
 														<p:outputLabel value="Nome" />
 													</div>
 													<div class="ui-grid-row">
-														<p:inputText placeholder="Nome do animal" value="#{animalBean.animal.nome}"/>
+														<p:inputText placeholder="Nome do animal"
+															value="#{animalBean.animal.nome}" />
 													</div>
 												</div>
 											</div>
@@ -117,6 +118,61 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="ui-grid-row ui-grid-row-custom">
+			<div class="ui-grid-col-12">
+				<p:dataTable id="grid" var="animal" emptyMessage="Nenhum Animal."
+					scrollHeight="157" scrollable="true" resizableColumns="true"
+					value="#{animalBean.animais}"
+					paginatorPosition="bottom" tabindex="-1">
+
+					<f:facet name="header">
+						<p:outputLabel value="Animais" />
+					</f:facet>
+
+					<p:column headerText="Nome" width="300">
+						<h:outputText value="#{animal.nome}" />
+					</p:column>
+
+					<p:column headerText="Data Nascimento" width="100">
+						<h:outputText value="#{animal.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy"
+								timeZone="America/Recife" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Opções" style="text-align:center;width:20%">
+						<p:commandButton
+							actionListener="#{animalBean.selecionar(animal)}" type="submit"
+							styleClass="btn btn-info btn-lg" icon="fa fa-pencil-square-o"
+							title="Clique aqui para alterar alguma informação" ajax="true"
+							process="@this" update="@form">
+							<f:ajax render="@form" />
+						</p:commandButton>
+						<p:commandButton
+							action="#{anuncioBean.excluirAnuncio(anuncio.id)}" type="submit"
+							styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
+							title="Excluir o registro na grid" ajax="true" process="@this"
+							update="grid">
+							<f:ajax execute="@all" render="@form" />
+							<p:confirm header="Confirme a exclusão"
+								message="Você tem certeza que deseja excluir este registro?"
+								icon="fa fa-exclamation-triangle" />
+						</p:commandButton>
+					</p:column>
+
+					<p:column style="text-align:center;" width="125">
+
+						<p:commandButton id="btnVisualizar" style="margin-right:4px"
+							styleClass="btn btn-info btn-lg" icon="fa fa-search">
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+			</div>
+		</div>
+
 
 	</ui:define>
 
