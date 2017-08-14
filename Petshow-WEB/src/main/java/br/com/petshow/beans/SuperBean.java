@@ -22,8 +22,6 @@ public class SuperBean <T>{
 	protected static ResteasyWebTarget target;
 	public static final String URL_BASE = FileApplicationUtil.getUrlBaseREST();
 	
-//	private static AuthenticationService authenticationService;
-	
 	static{
 		client = new ResteasyClientBuilder().build();
 		
@@ -40,16 +38,6 @@ public class SuperBean <T>{
 	}
 
 	public Usuario getUsuarioLogado(){
-//		if(authenticationService!=null){
-//			Usuario user = authenticationService.getUsuarioLogado();
-//			if(user!=null){
-//				return user;
-//			}else{
-//				return new Usuario();
-//			}
-//		}else{
-//			return new Usuario();
-//		}
 		return AuthenticationService.getUsuarioLogado();
 	}
 
@@ -68,13 +56,5 @@ public class SuperBean <T>{
 	public static void setTarget(ResteasyWebTarget target) {
 		SuperBean.target = target;
 	}
-
-//	public static AuthenticationService getAuthenticationService() {
-//		return authenticationService;
-//	}
-//
-//	public static void setAuthenticationService(AuthenticationService authenticationService) {
-//		SuperBean.authenticationService = authenticationService;
-//	}
 
 }
