@@ -92,6 +92,11 @@
 			<to-view-id>/index.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>perfil-adocao</from-outcome>
+			<to-view-id>/private/PagPerfilAdocao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	
 	 <navigation-rule>

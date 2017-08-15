@@ -223,3 +223,10 @@
 	}
 		
 }
+
+.selectonemenu{
+     width: 50% !important;
+}
+.selectonemenu-label{
+     width: 100% !important;
+}

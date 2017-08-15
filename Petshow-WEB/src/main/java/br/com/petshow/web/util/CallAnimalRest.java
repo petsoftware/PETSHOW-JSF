@@ -5,8 +5,6 @@ import java.util.List;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 import br.com.petshow.enums.EnumErrosSistema;
-import br.com.petshow.enums.EnumFaseVida;
-import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Adocao;

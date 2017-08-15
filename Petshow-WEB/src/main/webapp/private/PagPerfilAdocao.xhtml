@@ -11,11 +11,26 @@
 	 template="#{pageHelperBean.mainTemplate}">
 
 	<ui:param name="activeAnuncio" value="active" />
-	<ui:param name="pageIcon" value="bullhorn" />
-	<ui:param name="pageTitle" value="ANÚNCIO" />
+	<ui:param name="pageIcon" value="star-half-o" />
+	<ui:param name="pageTitle" value="PERFIL DE ADOÇÃO" />
 
 	<ui:define name="header">
 
+		<p:commandButton id="btnSalvar"
+   				style="margin-right:4px"
+   				styleClass="btn btn-info btn-lg"
+   				icon="fa fa-floppy-o"
+   				title="Salvar Perfil de adoção?"
+   				value="Salvar" 
+   				action="#{perfilAdocaoBean.salvar}"
+				type="submit"
+				ajax="false"
+				onstart="paceStart();"
+				onclick="paceStart();"
+				oncomplete="Pace.restart();"
+				update="@form"
+   				/>
+   				
 	</ui:define>
 
 	<ui:define name="body">
@@ -34,31 +49,39 @@
 											<!-- O layout da Tela comeca aqui -->
 											<!-- Template para criar campo e lable -->
 												<div class="ui-grid-row">
+											    	<p:outputLabel value="Sexo do animal" />
+											    </div>
+											   	<div class="ui-grid-row">
+										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.sexo}" id="cboSexoAnimal" styleClass="selectonemenu">
+										 	     		<f:selectItems value="#{perfilAdocaoBean.sexoAnimal}"/>
+										 	     	</p:selectOneMenu>
+												</div>
+												<div class="ui-grid-row">
 											    	<p:outputLabel value="Tipo de animal" />
 											    </div>
 											   	<div class="ui-grid-row">
-										 	     	<p:selectOneMenu>
-										 	     	
+										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.tipoAnimal}" id="cboTipoAnimal" styleClass="selectonemenu">
+										 	     		<f:selectItems value="#{perfilAdocaoBean.tiposDeAnimal}"/>
 										 	     	</p:selectOneMenu>
 												</div>
 												
 												<div class="ui-grid-row">
-											    	<p:outputLabel value="Tipo de animal" />
+											    	<p:outputLabel value="Fase da vida:" />
 											    </div>
 											   	<div class="ui-grid-row">
-										 	     
+										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.faseVida}" id="cboFaseVida" styleClass="selectonemenu">
+										 	     		<f:selectItems value="#{perfilAdocaoBean.fasesVida}"/>
+										 	     	</p:selectOneMenu>
 												</div>
 												
 												<div class="ui-grid-row">
-											    	<p:outputLabel value="Tipo de animal" />
+											    	<p:outputLabel value="Porte do animal" />
 											    </div>
-											   	<div class="ui-grid-row">
-										 	     
+											   	<div class="ui-grid-row" >
+										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.porteAnimal}" id="cboPorteAnimal" styleClass="selectonemenu">
+										 	     		<f:selectItems value="#{perfilAdocaoBean.portesDosAnimais}"/>
+										 	     	</p:selectOneMenu>
 												</div>
-											
-											
-											
-											
 											<!-- Fim das divs que definem os layouts  -->								
 											</div>
 										</div>
