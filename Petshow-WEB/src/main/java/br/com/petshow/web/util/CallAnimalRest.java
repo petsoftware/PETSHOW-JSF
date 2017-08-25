@@ -12,7 +12,7 @@ import br.com.petshow.model.Animal;
 import br.com.petshow.model.Perdido;
 import br.com.petshow.util.MapErroRetornoRest;
 
-public class CallAnimalRest  extends RestUtilCall {
+public class CallAnimalRest  extends RestUtilCall<Animal> {
 
 	public  List<Animal> getListAnimal(long usuarioId) throws ExceptionErroCallRest, ExceptionValidation{
 

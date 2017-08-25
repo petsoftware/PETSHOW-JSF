@@ -45,24 +45,6 @@ public class ServicoBean  {
 		getServicosBanco(); 
 
 	}
-	/*
-	@PreDestroy
-	public void destroy() {
-		System.out.println("Spring Container is destroy! Customer clean up");
-		try {
-			anuncios=restAnuncio.getListAnuncio(anuncio.getUsuario().getId());
-
-		} catch (ExceptionErroCallRest  e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-
-		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
-		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-			e.printStackTrace();
-		}
-	}
-*/
 	
 	public String salvarServico(){
 	
@@ -74,26 +56,18 @@ public class ServicoBean  {
 	
 	public void salvarServico(Servico servico){
 		try {
-			
-			
-			
 			servico = (Servico) RestUtilCall.postEntity(servico, "servico/salvar",Servico.class);
 			getServicosBanco(); 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Serviço foi salvo com sucesso!"));
+			novo();
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-
 		} catch (ExceptionValidation e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
-
-
-
-
-
 	}
 
 	public String excluirServico(){
@@ -107,8 +81,6 @@ public class ServicoBean  {
 
 	public void excluirServico(long id){
 		try{
-
-
 			RestUtilCall.delete("servico/"+id);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Anuncio foi excluido com sucesso!"));
 			getServicosBanco(); 

@@ -1,8 +1,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:p="http://primefaces.org/ui">
-<ui:composition xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+<ui:composition >
 	<!-- Page Content -->
 	<div class="container">
 
@@ -23,7 +24,7 @@
 
 		</div>
 
-
+		<ui:remove>
 		<div class="row">
 				<!-- Inicio div dos baloes  -->
 				<div class="col-lg-6">
@@ -49,6 +50,8 @@
 					</div>
 				</div>
 			</div>
+			</ui:remove>
+			
 			<div class="row">
 				<!-- perdidos -->
 				<div class="col-lg-6">
@@ -56,25 +59,21 @@
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-tasks fa-5x"></i>
+									<i class="fa fa-bullhorn fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">12</div>
-									<div>Animais Perdidos</div>
+									<div class="huge"> <p:outputLabel value="#{mainPageBean.estatistica.numeroDeAnuncios}"/> </div>
+									<div>Anúncios Ativos</div>
 								</div>
 							</div>
 						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">Detalhes</span> <span class="pull-right"><i
-									class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
 					</div>
 				</div>
 			
 			</div>
+		
+			
+			
 			<div class="row">
 				<!-- Anúncios -->
 				<div class="col-lg-6">
@@ -82,21 +81,14 @@
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-bullhorn fa-5x"></i>
+									<i class="fa fa-qq fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">124</div>
-									<div>Anúncios Vistos!</div>
+									<div class="huge"> <p:outputLabel value="#{mainPageBean.estatistica.numeroDeVendas}"/> </div>
+									<div>Total de Classificados</div>
 								</div>
 							</div>
 						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">Detalhes</span> <span class="pull-right"><i
-									class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
 					</div>
 				</div>
 				</div>
@@ -107,21 +99,15 @@
 						<div class="panel-heading">
 							<div class="row">
 								<div class="col-xs-3">
-									<i class="fa fa-support fa-5x"></i>
+									<i class="fa fa-cogs fa-5x"></i>
 								</div>
 								<div class="col-xs-9 text-right">
-									<div class="huge">13</div>
-									<div>Adoções Realizadas!</div>
+									<div class="huge"><p:outputLabel value="#{mainPageBean.estatistica.numeroDeServicos}"/></div>
+									<div>Serviços Ativos!</div>
 								</div>
 							</div>
 						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">Detalhes</span> <span class="pull-right"><i
-									class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
+						
 					</div>
 				</div>
 
