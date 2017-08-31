@@ -11,6 +11,7 @@ import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Animal;
+import br.com.petshow.model.Tutor;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
@@ -26,7 +27,9 @@ public class AnimalBean extends SuperBean<Animal> {
 	public List<Animal> getAnimais() {
 		
 		try {
-			animais = rest.getEntityList("animal/consulta/usuario/2", Animal.class);
+			if(cliente != null){
+				animais = rest.getEntityList("animal/consulta/usuario/"+cliente.getId(), Animal.class);
+			}
 		} catch (ExceptionErroCallRest e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +79,16 @@ public class AnimalBean extends SuperBean<Animal> {
 			animal.setFrequenciaVermifugacao(EnumFrequenciaVermifugacao.ANUAL);
 			animal.setTemReforco(false);
 			animal.setFlSexo("M");
-			
+			if(cliente != null){
+				Tutor tutor = new Tutor();
+				tutor.setAnimal(null);
+				tutor.setDonoAtual(true);
+				tutor.setUsuario(cliente);
+				animal.setTutor(tutor);
+			}else{
+				MessagesBeanUtil.erroMessage("Favor informar o cliente!");
+				return null;
+			}
 			animal = RestUtilCall.postEntity(animal, "animal/salvar/", Animal.class);
 			MessagesBeanUtil.infor("Animal Salvo com sucesso!");
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {

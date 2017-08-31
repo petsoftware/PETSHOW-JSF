@@ -70,11 +70,6 @@ public class VendaBean {
 	public void salvarVenda(){
 		try {
 			
-			// ver fotos
-			//venda.setFoto(ImagemUtil.transformBase64AsString(imagem1));
-			//venda.setFoto(ImagemUtil.transformBase64AsString(imagem2));
-			//venda.setFoto(ImagemUtil.transformBase64AsString(imagem3));
-			
 			List<String> fotos = venda.getFotos();
 			if(fotos ==null){
 				fotos = new ArrayList<String>();
@@ -90,7 +85,6 @@ public class VendaBean {
 				fotos.add(ImagemUtil.transformBase64AsString(imagem3));
 			}
 			venda.setFotos(fotos);
-			//venda.getFotos().add(ImagemUtil.transformBase64AsString(imagem3));
 			
 			venda =  RestUtilCall.postEntity(venda, "venda/salvar",Venda.class);
 			getVendasBanco(); 
