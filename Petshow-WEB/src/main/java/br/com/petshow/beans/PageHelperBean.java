@@ -7,7 +7,8 @@ import javax.faces.bean.ManagedBean;
 @ApplicationScoped
 public class PageHelperBean {
 
-	private String mainTemplate = "../templates/main.xhtml";
+	private String mainTemplate 	= "../templates/main.xhtml";
+	private String mainTemplateSite = "/templates/site/main.xhtml";
 
 	public String getMainTemplate() {
 		return mainTemplate;
@@ -15,6 +16,14 @@ public class PageHelperBean {
 
 	public void setMainTemplate(String mainTemplate) {
 		this.mainTemplate = mainTemplate;
+	}
+
+	public String getMainTemplateSite() {
+		return mainTemplateSite;
+	}
+
+	public void setMainTemplateSite(String mainTemplateSite) {
+		this.mainTemplateSite = mainTemplateSite;
 	}
 	
 }

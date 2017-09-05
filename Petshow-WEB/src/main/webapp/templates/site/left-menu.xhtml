@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+       
+    <ui:composition>
+        	
+    	<div id="sidebar-wrapper">
+    		<div class="sidebar-brand">
+             	<a href="#"><img alt="Logomarca" src="#{request.contextPath}/resources/images/logo.jpg"></img></a>
+           	</div>
+           	<div class="sidebar-content">
+           		<div id="sidebar-body">
+		    		<ul class="sidebar-nav">
+			      		<li>		      		
+			            	<p:link id="inicio" styleClass="#{activeAnuncio}" title="Início do sistema" outcome="inicio" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-home"></i>
+		                			</div>
+		                			<div class="media-body">INÍCIO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="anuncio" styleClass="#{activeAnuncio}" title="Anúcio" outcome="anuncio" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-bullhorn"></i>
+		                			</div>
+		                			<div class="media-body">ANÚNCIO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="servicos" styleClass="#{activeAnuncio}" title="Serviços do Petshop ou da ONG" outcome="servicos" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-cogs"></i>
+		                			</div>
+		                			<div class="media-body">SERVIÇOS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="notificacao" styleClass="#{activeAnuncio}" title="Notificações" outcome="notificacoes" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-bell-o"></i>
+		                			</div>
+		                			<div class="media-body">NOTIFICAÇÃO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="classificados" styleClass="#{activeAnuncio}" title="Classificados" outcome="classificados" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left"> 		
+			      						<i class="fa fa-qq"></i>
+		                			</div>
+		                			<div class="media-body">CLASSIFICADOS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="vacinas" styleClass="#{activeAnuncio}" title="Vacinas dos Animais" outcome="vacinas" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-pencil-square-o"></i>
+		                			</div>
+		                			<div class="media-body">VACINAS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		
+			      		<li>		      		
+			            	<p:link id="animais" styleClass="#{activeAnuncio}" title="Animais" outcome="animais" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-hand-lizard-o"></i>
+		                			</div>
+		                			<div class="media-body">ANIMAIS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		
+			      		<li>		      		
+			            	<p:link id="perfilAdocao" styleClass="#{activeAnuncio}" title="Perfil de Adoção" outcome="perfil-adocao" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-star-half-o"></i>
+		                			</div>
+		                			<div class="media-body">PERFIL ADOÇÃO</div>
+		                		</div>
+	                		</p:link>
+			      		</li>
+			      		
+			      		<li>		      		
+			            	<p:link id="usuario" styleClass="#{activeAnuncio}" title="Editar Usuário" outcome="usuario" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-user-circle"></i>
+		                			</div>
+		                			<div class="media-body">USUÁRIO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>				      					      	
+			        </ul>
+			   	</div>
+		   	</div>	        
+        </div>        
+    </ui:composition>
+    
+</html>

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -6,515 +8,225 @@
 	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:p="http://primefaces.org/ui">
 
+
 <h:head>
-
-	<meta charset="utf-8" />
-	<meta name="viewport"
-		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="description" content="" />
-	<meta name="author" content="Rafael Rocha" />
-
-	<title>PETSHOW - A plataforma para o seu pet</title>
-
-	<h:outputStylesheet name="vendor/bootstrap/css/bootstrap.min.css" />
-	<h:outputStylesheet name="vendor/font-awesome/css/font-awesome.min.css" />
-	<h:outputStylesheet name="css/index.css" />
-	<h:outputStylesheet name="css/index-theme.css" />
-
-		
-	<link
-		href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
-		rel="stylesheet" type="text/css" />
-	<h:outputStylesheet name="css/landing-page.css" />
-	
-	<f:facet name="last">
-        
-			<h:outputScript name="js/pace.min.js" />
-			<h:outputScript name="js/owl.carousel.min.js" />
-        	<h:outputScript name="js/common.js" />
-        	<h:outputScript name="js/index.js" />
-        	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css"></link>
- 			 			 			
-        </f:facet>
-
 </h:head>
+	<h:body>
 
-<h:body>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+		<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+			xmlns:h="http://java.sun.com/jsf/html"
+			template="#{pageHelperBean.mainTemplateSite}">
+			
+		<ui:define name="body">
+			<!-- Header -->
+			<header class="intro-header">
+				<div class="container">
+					<div class="intro-message">
+						<h1>PET SHOW</h1>
+						<h3>Conecte-se ao seu PET</h3>
+						<hr class="intro-divider" />
+						<ul class="list-inline intro-social-buttons">
+							<li class="list-inline-item"
+								title="Veja aqui os animais perdidos anunciados no site"><a
+								href="#" class="btn btn-secondary btn-lg"> <i
+									class="fa fa-question-circle fa-fw"></i> <span
+									class="network-name">Perdidos</span>
+							</a></li>
+							<li class="list-inline-item" title="Adode um animal"><a
+								href="consulta-adocao-site.xhtml" class="btn btn-secondary btn-lg"> <i
+									class="fa fa-info fa-fw"></i> <span class="network-name">Adoção</span>
+							</a></li>
+							<li class="list-inline-item"
+								title="Se você é um PETSHOP anuncie conosco."><a href="#"
+								class="btn btn-secondary btn-lg"> <i
+									class="fa fa-bullhorn fa-fw"></i> <span class="network-name">Anúncios</span>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</header>
 
-		<!--  Botoes de cima -->
-		<div class="row">
-			<h:form id="form" prependId="false">
-				<ul class="navbar-nav ml-auto">
-					<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}"
-						style="margin-right: 15px;">
-						
-						<p:commandButton id="entrar"
-							styleClass="btn btn-entrar btn-lg navbar-btn"
-							 value="Fazer Login" process="@this"
-							update="formEntrar:entrarDialog" oncomplete="PF('edlg').show();"
-							title="Entrar no sistema de gestão">
-							<p:ajax update="formEntrar:entrarDialog" resetValues="true" />
-
-						</p:commandButton> <pe:tooltip for="entrar" /></li>
-
-					<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}">
-					
-						<p:commandButton
-							styleClass="btn btn-cadastrar btn-lg navbar-btn"
-							id="cadastrar" 
-							value="Quero me Cadastrar" process="@this"
-							update="formCadastrar:cadastrarDialog"
-							title="Solicitar cadastro de usuário"
-							oncomplete="PF('cdlg').show();" >
-							<p:ajax update="formCadastrar:cadastrarDialog" resetValues="true" />
-						</p:commandButton> <pe:tooltip for="cadastrar" /></li>
-
-					<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}"
-						style="margin-right: 15px;">
-						<div class="usuario-logado">
-							<i class="fa fa-user-circle-o"></i>
-							<h:outputText value="#{loginBean.userName}" />
+			<section class="content-section-estados">
+				<div class="container">
+					<div class="row">
+						<div>
+							<ui:include src="content-lista-estados.xhtml" />
 						</div>
-					</li>
+					</div>
+				</div>
+			</section>
+			<!-- Page Content -->
+			<section class="content-section-a">
 
-					<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}"><p:commandLink
-							id="sair" styleClass="lnk-sair" title="Sair?" process="@this"
-							action="#{bean.logout}">
-							<i class="fa fa-sign-out"></i>
-						</p:commandLink></li>
-				</ul>
-
-
-
-
-
-			</h:form>
-
-			<h:form id="formEntrar">
-
-				<p:dialog id="entrarDialog" header="Entrar" widgetVar="edlg"
-					modal="true" showEffect="fade" hideEffect="fade" width="300"
-					resizable="false" responsive="true">
-
-					<p:messages id="entrarMsgsDialog" styleClass="ui-messages-dialog"
-						showSummary="true" showDetail="true" closable="true"
-						showIcon="false" />
-
-					<div class="ui-grid ui-grid-responsive">
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:inputText id="usuario" style="width:100%;" label="Usuário"
-										placeholder="Usuário" title="Usuário"
-										value="#{loginBean.usuario}" required="true">
-									</p:inputText>
-									<i class="fa fa-user"></i>
-								</div>
-							</div>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-5 ml-auto">
+							<hr class="section-heading-spacer" />
+							<div class="clearfix"></div>
+							<h2 class="section-heading">
+								Adote um animal<br />
+							</h2>
+							<p class="lead">
+								No Brasil muitos animais são rejeitados e abandonados por dia.
+								Você pode fazer a diferença <a target="_blank"
+									href="http://join.deathtothestockphoto.com/">Veja como isso
+									é possível.</a> Caso não tenha condições, por favor indique o
+								animalzinho para seus amigos
+							</p>
 						</div>
-						<div class="ui-grid-row">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:password id="senha" style="width:100%;" label="Senha"
-										placeholder="Senha" title="Senha" value="#{loginBean.senha}"
-										required="true">
-									</p:password>
-									<i class="fa fa-lock"></i>
-								</div>
-							</div>
+						<div class="col-lg-5 mr-auto">
+							<img class="img-fluid"
+								src="#{request.contextPath}/resources/images/dog_adopt_tags.jpg" />
 						</div>
 					</div>
 
-					<f:facet name="footer">
+				</div>
+				<!-- /.container -->
+			</section>
 
-						<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
-							style="margin-right:4px" icon="fa fa-times" value="Sair"
-							process="@this" title="Fecha a janela sem efetuar o login"
-							oncomplete="PF('edlg').hide();" />
-						<pe:tooltip for="sair" />
+			<section class="content-section-b">
 
-						<p:commandButton id="confirmar" styleClass="btn btn-entrar btn-lg navbar-btn"
-							icon="fa fa-check" type="submit" action="#{loginBean.login}"
-							title="Informe o usuário e a senha e depois clique neste botão para efetuar o login"
-							value="Confirmar" update="usuario,senha,entrarMsgsDialog"
-							onclick="paceStart();" oncomplete="Pace.restart();" />
-						<pe:tooltip for="confirmar" />
-					</f:facet>
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				</p:dialog>
+				<div class="container">
 
-			</h:form>
-
-			<h:form id="formCadastrar">
-
-				<p:dialog id="cadastrarDialog" header="Cadastrar" widgetVar="cdlg"
-					modal="true" showEffect="fade" hideEffect="fade" width="400"
-					resizable="false" responsive="true">
-
-					<p:messages id="cadastrarMsgsDialog"
-						styleClass="ui-messages-dialog" showSummary="true"
-						showDetail="true" closable="true" showIcon="false" />
-
-					<div class="ui-grid ui-grid-responsive">
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:inputText id="usuario" style="width:100%;" label="Usuário"
-										placeholder="Seu nome" title="Usuário"
-										value="#{novoUsuarioBean.usuario.nome}" required="true">
-									</p:inputText>
-									<i class="fa fa-user"></i>
-								</div>
-							</div>
+					<div class="row">
+						<div class="col-lg-5 mr-auto order-lg-2">
+							<hr class="section-heading-spacer" />
+							<div class="clearfix"></div>
+							<h2 class="section-heading">
+								Perdeu seu PET?<br />
+							</h2>
+							<p class="lead">
+								E agora, por onde começar a procurar? O primeiro passo é
+								divulgar o sumisso do seu PET. <a target="_blank"
+									href="http://www.psdcovers.com/"> Você pode fazer aqui no
+									site mesmo</a>! Nossa rede de usuários pode ajudá-lo nessa tarefa.
+								Preencha o formulário com fotos e caracteristicas. Fica a dica,
+								sempres ponha uma colera com identificação e o indereço, assim
+								facilita na localização do dono.
+							</p>
 						</div>
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:inputText id="email" style="width:100%;" label="E-mail"
-										placeholder="E-mail" title="E-mail"
-										value="#{novoUsuarioBean.usuario.email}" required="true">
-									</p:inputText>
-									<i class="fa fa-envelope"></i>
-								</div>
-							</div>
-						</div>
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:inputText id="txtCNPJ" style="width:100%;" label="CNPJ"
-										value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
-										title="CNPJ" required="true">
-										<f:validator
-											validatorId="br.com.petshow.validator.CnpjValidator" />
-									</p:inputText>
-									<i class="fa fa-cube"></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:password id="senha" style="width:50%;" label="Senha"
-										placeholder="Senha" title="Senha"
-										value="#{novoUsuarioBean.senha}" autocomplete="new-password"
-										required="true">
-									</p:password>
-									<i class="fa fa-lock"></i>
-								</div>
-							</div>
-						</div>
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:password id="txtConfSenha" style="width:50%;" label="Senha"
-										placeholder="Confirme a senha" title="Senha"
-										value="#{novoUsuarioBean.confSenha}"
-										autocomplete="new-password" required="true">
-									</p:password>
-									<i class="fa fa-lock"></i>
-								</div>
-							</div>
+						<div class="col-lg-5 ml-auto order-lg-1">
+							<img class="img-fluid"
+								src="#{request.contextPath}/resources/images/lupa_vermelha_300.png" />
 						</div>
 					</div>
 
-					<f:facet name="footer">
-
-						<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
-							style="margin-right:4px" icon="fa fa-times" value="Sair"
-							process="@this" oncomplete="PF('cdlg').hide();" />
-
-						<p:commandButton id="btnConfNovoUsu"
-							styleClass="btn btn-info btn-lg" icon="fa fa-check"
-							value="Confirmar" type="submit"
-							title="Confirme após informar todos os dados"
-							update="cadastrarMsgsDialog"
-							action="#{novoUsuarioBean.solicitarCadastro}" />
-
-					</f:facet>
-					<input type="hidden" name="${_csrf.parameterName}"
-						value="${_csrf.token}" />
-				</p:dialog>
-
-			</h:form>
-
-		</div>
-
-
-
-
-		<div class="container">
-
-			<button class="navbar-toggler" type="button" data-toggle="collapse"
-				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="#quem-somos">Quem
-							somos?</a></li>
-					<li class="nav-item"><a class="nav-link" href="#ongs">ONG's</a></li>
-					<li class="nav-item"><a class="nav-link" href="#contato">Contate-nos</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-
-	<!-- Header -->
-	<header class="intro-header">
-		<div class="container">
-			<div class="intro-message">
-				<h1>PET SHOW</h1>
-				<h3>Conecte-se ao seu PET</h3>
-				<hr class="intro-divider" />
-				<ul class="list-inline intro-social-buttons">
-					<li class="list-inline-item" title="Veja aqui os animais perdidos anunciados no site"><a href="#"
-						class="btn btn-secondary btn-lg"> <i
-							class="fa fa-question-circle fa-fw"></i> <span class="network-name">Perdidos</span>
-					</a></li>
-					<li class="list-inline-item" title="Adode um animal"><a href="#"
-						class="btn btn-secondary btn-lg"> <i
-							class="fa fa-info fa-fw"></i> <span class="network-name">Adoção</span>
-					</a></li>
-					<li class="list-inline-item" title="Se você é um PETSHOP anuncie conosco."><a href="#"
-						class="btn btn-secondary btn-lg"> <i
-							class="fa fa-bullhorn fa-fw"></i> <span class="network-name">Anúncios</span>
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</header>
-
-	<section class="content-section-estados">
-		<div class="container">
-			<div class="row">
-				<div >
-					<ui:include src="content-lista-estados.xhtml" />
 				</div>
-			</div>
-		</div>
-	</section>
-	<!-- Page Content -->
-	<section class="content-section-a">
+				<!-- /.container -->
 
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5 ml-auto">
-					<hr class="section-heading-spacer" />
-					<div class="clearfix"></div>
-					<h2 class="section-heading">
-						Adote um animal<br />
-					</h2>
-					<p class="lead">
-						No Brasil muitos animais são rejeitados e abandonados por dia.
-						Você pode fazer a diferença <a target="_blank"
-							href="http://join.deathtothestockphoto.com/">Veja como isso é possível.</a> 
-							Caso não tenha condições, por favor indique o animalzinho para seus amigos
-					</p>
+			</section>
+			<!-- /.content-section-b -->
+
+			<section class="content-section-a">
+
+				<div class="container">
+
+					<div class="row">
+						<div class="col-lg-5 ml-auto">
+							<hr class="section-heading-spacer" />
+							<div class="clearfix"></div>
+							<h2 class="section-heading">
+								Use nossos aplicativos<br /> e pontencialize suas conexões
+							</h2>
+							<p class="lead">
+								Você já percebeu que o mundo anda cada vez mais conectado?
+								Pensando nisso criamos uma rede social exclusivo para donos de
+								pet. Aqui podemos compartilhar fotos, divulgar eventos e se
+								conectar com seus amigos que utilizam o mesmo aplicativo. <a
+									target="_blank" href="http://www.google.com/fonts">PetSHOW
+									mobile </a>,disponível para <a target="_blank"
+									href="http://fontawesome.io"> Android </a> e <a target="_blank"
+									href="http://fontawesome.io"> iOS</a>.
+							</p>
+						</div>
+						<div class="col-lg-5 mr-auto ">
+							<img class="img-fluid"
+								src="#{request.contextPath}/resources/images/phones.png" />
+						</div>
+					</div>
+
 				</div>
-				<div class="col-lg-5 mr-auto">
-					<img class="img-fluid"
-						src="#{request.contextPath}/resources/images/dog_adopt_tags.jpg" />
+				<!-- /.container -->
+
+			</section>
+			<!-- /.content-section-a -->
+			<!-- Section quem somos -->
+			<section class="content-section-b" id="quem-somos">
+
+				<div class="container">
+
+					<div class="row">
+						<div class="col-lg-5 mr-auto order-lg-2">
+							<hr class="section-heading-spacer" />
+							<div class="clearfix"></div>
+							<h2 class="section-heading">
+								Quem somos?<br />
+							</h2>
+							<p class="lead">Dois amigos e colegas de trabalho se uniram
+								para formar uma plataforma para ajudar a melhorar a relação
+								entre pets e seus donos. Daí surgiu a plataforma PETSHOW que é
+								uma combinação das tecnologias WEB e Mobile. Aqui ajudamos as
+								ONG's, os donos e os PETSHOPS se relacionarem também entre si.
+								Também é um abiemte para descontração e diversão, converse com
+								seus colegas que também tem pets, troque conhecimento com outros
+								criadores.</p>
+						</div>
+						<div class="col-lg-5 ml-auto order-lg-1">
+							<img class="img-fluid"
+								src="#{request.contextPath}/resources/images/who_are_we.jpg" />
+						</div>
+					</div>
+
 				</div>
-			</div>
+				<!-- /.container -->
 
-		</div>
-		<!-- /.container -->
-	</section>
+			</section>
 
-	<section class="content-section-b">
 
-		<div class="container">
 
-			<div class="row">
-				<div class="col-lg-5 mr-auto order-lg-2">
-					<hr class="section-heading-spacer" />
-					<div class="clearfix"></div>
-					<h2 class="section-heading">
-						Perdeu seu PET?<br />
-					</h2>
-					<p class="lead">
-						E agora, por onde começar a procurar? O primeiro passo é divulgar o sumisso do seu PET. <a target="_blank"
-							href="http://www.psdcovers.com/"> Você pode fazer aqui no site mesmo</a>! 
-						Nossa rede de usuários pode ajudá-lo nessa tarefa. Preencha o formulário com fotos e caracteristicas. Fica a dica,
-						sempres ponha uma colera com identificação e o indereço, assim facilita na localização do dono.
-					</p>
+			<section class="content-section-a" id="ongs">
+
+				<div class="container">
+
+					<div class="row">
+						<div class="col-lg-5 mr-auto">
+							<hr class="section-heading-spacer" />
+							<div class="clearfix"></div>
+							<h2 class="section-heading">
+								ONG's<br />
+							</h2>
+							<p class="lead">
+								Se você é uma ONG que desempenha um trabalho com animais você já
+								tem um lugar garantido na PETSHOW. Entre em contato pelo nosso
+								formulário, que entraremos em contato por e-mail com as
+								instrução para criar o seu espaço. Para ONG's isso é feito sem
+								nenhum custo. <a target="_blank" href="#contato"> Formulário
+									aqui</a>
+							</p>
+						</div>
+						<div class="col-lg-5 ml-auto">
+							<img class="img-fluid"
+								src="#{request.contextPath}/resources/images/site-ong.jpg" />
+						</div>
+					</div>
+
 				</div>
-				<div class="col-lg-5 ml-auto order-lg-1">
-					<img class="img-fluid"
-						src="#{request.contextPath}/resources/images/lupa_vermelha_300.png" />
+				<!-- /.container -->
+
+			</section>
+
+			<section class="content-section-a" id="contato">
+				<div>
+					<ui:include src="content-contato.xhtml" />
 				</div>
-			</div>
+			</section>
+			
+			</ui:define>
 
-		</div>
-		<!-- /.container -->
+		</ui:composition>
 
-	</section>
-	<!-- /.content-section-b -->
 
-	<section class="content-section-a">
-
-		<div class="container">
-
-			<div class="row">
-				<div class="col-lg-5 ml-auto">
-					<hr class="section-heading-spacer" />
-					<div class="clearfix"></div>
-					<h2 class="section-heading">
-						Use nossos aplicativos<br /> e pontencialize suas conexões
-					</h2>
-					<p class="lead">
-						Você já percebeu que o mundo anda cada vez mais conectado? Pensando nisso criamos uma rede social
-						exclusivo para donos de pet. Aqui podemos compartilhar fotos, divulgar eventos e se conectar com seus amigos que
-						utilizam o mesmo aplicativo. <a
-							target="_blank" href="http://www.google.com/fonts">PetSHOW mobile
-							</a>,disponível para <a target="_blank"
-							href="http://fontawesome.io"> Android </a> e
-							<a target="_blank"
-							href="http://fontawesome.io"> iOS</a>.
-					</p>
-				</div>
-				<div class="col-lg-5 mr-auto ">
-					<img class="img-fluid"
-						src="#{request.contextPath}/resources/images/phones.png" />
-				</div>
-			</div>
-
-		</div>
-		<!-- /.container -->
-
-	</section>
-	<!-- /.content-section-a -->
-	<!-- Section quem somos -->
-	<section class="content-section-b" id="quem-somos">
-
-		<div class="container">
-
-			<div class="row">
-				<div class="col-lg-5 mr-auto order-lg-2">
-					<hr class="section-heading-spacer" />
-					<div class="clearfix"></div>
-					<h2 class="section-heading">
-						Quem somos?<br />
-					</h2>
-					<p class="lead">
-						Dois amigos e colegas de trabalho se uniram para formar uma plataforma para ajudar a melhorar a relação entre pets e seus donos. 
-						Daí surgiu a plataforma PETSHOW que é uma combinação das tecnologias WEB e Mobile. Aqui ajudamos as ONG's, os donos e os PETSHOPS
-						se relacionarem também entre si. Também é um abiemte para descontração e diversão, converse com seus colegas que também tem pets,
-						troque conhecimento com outros criadores. 
-						
-					</p>
-				</div>
-				<div class="col-lg-5 ml-auto order-lg-1">
-					<img class="img-fluid"
-						src="#{request.contextPath}/resources/images/who_are_we.jpg" />
-				</div>
-			</div>
-
-		</div>
-		<!-- /.container -->
-
-	</section>
+	</h:body>
 	
-
-	
-	<section class="content-section-a" id="ongs">
-
-		<div class="container">
-
-			<div class="row">
-				<div class="col-lg-5 mr-auto">
-					<hr class="section-heading-spacer" />
-					<div class="clearfix"></div>
-					<h2 class="section-heading">
-						ONG's<br />
-					</h2>
-					<p class="lead">
-						Se você é uma ONG que desempenha um trabalho com animais você já tem um lugar garantido na PETSHOW.
-						Entre em contato pelo nosso formulário, que entraremos em contato por e-mail com as instrução para 
-						criar o seu espaço. Para ONG's isso é feito sem nenhum custo. <a target="_blank"
-							href="#contato"> Formulário aqui</a>
-					</p>
-				</div>
-				<div class="col-lg-5 ml-auto">
-					<img class="img-fluid"
-						src="#{request.contextPath}/resources/images/site-ong.jpg" />
-				</div>
-			</div>
-
-		</div>
-		<!-- /.container -->
-
-	</section>
-	
-	<section class="content-section-a" id="contato">
-		<div >
-			<ui:include src="content-contato.xhtml" />
-		</div>	
-	</section>
-
-	<aside class="banner">
-
-		<div class="container">
-
-			<div class="row">
-				<div class="col-lg-6 my-auto">
-					<h2>Comece agora mesmo:</h2>
-				</div>
-				<div class="col-lg-6 my-auto">
-					<ul class="list-inline banner-social-buttons">
-						<li class="list-inline-item" title="Baixe agora mesmo a app para plataforma Android"><a href="#"
-							class="btn btn-secondary btn-lg"> <i
-								class="fa fa-android fa-fw"></i> <span class="network-name">Android</span>
-						</a></li>
-						<li class="list-inline-item"><a href="#"
-							class="btn btn-secondary btn-lg"> <i
-								class="fa fa-apple fa-fw"></i> <span class="network-name">iPhone</span>
-						</a></li>
-						<li class="list-inline-item"><a href="#"
-							class="btn btn-secondary btn-lg"> <i
-								class="fa fa-facebook-official fa-fw"></i> <span class="network-name">facebook</span>
-						</a></li>
-					</ul>
-				</div>
-			</div>
-
-		</div>
-		<!-- /.container -->
-
-	</aside>
-	<!-- /.banner -->
-
-	<!-- Footer -->
-	<footer>
-		<div class="container">
-			<ul class="list-inline">
-				<li class="list-inline-item"><a href="#">HOME</a></li>
-				<li class="footer-menu-divider list-inline-item">&#8901;</li>
-				<li class="list-inline-item"><a href="#about">SOBRE NÓS</a></li>
-				<li class="footer-menu-divider list-inline-item">&#8901;</li>
-				<li class="list-inline-item"><a href="#services">SOU UM PETSHOP</a></li>
-				<li class="footer-menu-divider list-inline-item">&#8901;</li>
-				<li class="list-inline-item"><a href="#contact">CONTATO</a></li>
-			</ul>
-			<p class="copyright text-muted small">Copyright &#169; PetSHOW
-				platform 2016. All Rights Reserved</p>
-		</div>
-	</footer>
-
-	<!-- Bootstrap core JavaScript -->
-	
-	<h:outputScript name="vendor/popper/popper.min.js" />
-	<h:outputScript name="vendor/bootstrap/js/bootstrap.min.js" />
-
-
-
-</h:body>
-
 </html>

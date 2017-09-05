@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui"
+	template="#{pageHelperBean.mainTemplateSite}">
+
+
+
+	<ui:define name="body">
+		<div class="container">
+			<div class="row">
+				<h:panelGrid columns="2">
+					<h:panelGrid columns="1">
+
+						<h:outputLabel value="Estado:" for="cbEstado" />
+						<p:selectOneMenu id="cbEstado"
+							value="#{consultaAdocaoBean.estado}" converter="estadoConverter">
+
+							<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
+								itemValue=" " noSelectionOption="true" />
+							<f:selectItems
+								value="#{consultaAdocaoBean.autoCompleteBean.estados}"
+								var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
+							<p:ajax
+								listener="#{consultaAdocaoBean.autoCompleteBean.onEstadoChange(consultaAdocaoBean.estado)}"
+								update="cbCidade" />
+
+						</p:selectOneMenu>
+
+
+						<h:outputLabel value="Cidade" for="cbCidade" />
+						<p:selectOneMenu id="cbCidade"
+							value="#{consultaAdocaoBean.cidade}" converter="cidadeConverter">
+							<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
+								itemValue="" noSelectionOption="true" />
+							<f:selectItems
+								value="#{consultaAdocaoBean.autoCompleteBean.cidades}"
+								var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+
+
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Animal" for="cbAnimal" />
+
+						<p:selectOneMenu id="cbAnimal"
+							value="#{consultaAdocaoBean.animal}">
+							<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
+								itemValue="" noSelectionOption="true" />
+							<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Gênero" for="cbSexo" />
+						<p:selectOneMenu id="cbSexo" value="#{consultaAdocaoBean.sexo}">
+							<f:selectItem itemLabel="#{placeHolderBean.selSexo}" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{consultaAdocaoBean.sexos}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel value="Fase" for="cbFase" />
+						<p:selectOneMenu id="cbFase" value="#{consultaAdocaoBean.fase}">
+							<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{consultaAdocaoBean.fases}" />
+						</p:selectOneMenu>
+
+
+						<h:commandButton action="#{consultaAdocaoBean.getAdocaoBanco}"
+							type="submit" value="Consultar" update="messages" id="btConsulta" />
+
+					</h:panelGrid>
+
+				</h:panelGrid>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>
+
+

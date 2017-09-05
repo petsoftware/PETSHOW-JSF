@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="Rafael Rocha" />
+
+	<title>PETSHOW - A plataforma para o seu pet</title>
+
+	<h:outputStylesheet name="vendor/bootstrap/css/bootstrap.min.css" />
+	<h:outputStylesheet name="vendor/font-awesome/css/font-awesome.min.css" />
+	<h:outputStylesheet name="css/index.css" />
+	<h:outputStylesheet name="css/index-theme.css" />
+
+		
+	<link
+		href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
+		rel="stylesheet" type="text/css" />
+	<h:outputStylesheet name="css/landing-page.css" />
+	
+	<f:facet name="last">
+        
+			<h:outputScript name="js/pace.min.js" />
+			<h:outputScript name="js/owl.carousel.min.js" />
+        	<h:outputScript name="js/common.js" />
+        	<h:outputScript name="js/index.js" />
+        	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css"></link>
+ 			 			 			
+        </f:facet>
+
+</h:head>
+
+
+<h:body>
+
+
+
+	<h:form id="formMain" enctype="multipart/form-data">
+		<ui:include src="header.xhtml" />
+		<ui:include src="content.xhtml" />
+		<ui:include src="footer.xhtml" />
+	</h:form>
+
+
+
+</h:body>
+</html>
