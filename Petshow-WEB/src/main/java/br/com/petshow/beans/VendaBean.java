@@ -57,9 +57,9 @@ public class VendaBean {
 
 	@PostConstruct
 	public void init() {
-		this.venda= new Venda();
+		this.venda	= new Venda();
 		this.vendas = new ArrayList<Venda>();
-		restVenda = new CallVendaRest();
+		restVenda 	= new CallVendaRest();
 		usuarioLogado=UsuarioRole.getUsuarioLogado();
 		venda.setUsuario(usuarioLogado);
 		

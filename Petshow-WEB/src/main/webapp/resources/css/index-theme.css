@@ -3,6 +3,10 @@
     border-color: transparent;
     padding: 15px;
 }
+
+.nav-color{
+	background-color: #cadec7 !important;
+}
 .btn-cadastrar {
     background-color: #37bc9b !important;
     border-color: #37bc9b !important;
@@ -12,6 +16,22 @@
     background-color: #48CFAD !important;
     border-color: #48CFAD !important;
 }
+
+.btn-consultar {
+    background-color: #0080ff!important;
+    border-color: #37bc9b !important;
+    color: #0000ff
+}
+
+.btn-consultar:focus,
+.btn-consultar:hover {
+    background-color: #0080c0 !important;
+    border-color: #48CFAD !important;
+    color: #ff0000;
+    margin: 0px;
+    padding: 0px;
+}
+
 .btn-entrar {
     background-color: #F47D30 !important;
     border-color: #F47D30 !important;
@@ -27,4 +47,20 @@
 .lnk-sair:focus > i,
 .lnk-sair:hover > i {
     color: #48CFAD !important;
+}
+
+.consulta-col{
+	background-color: transparent !important;
+	border-radius: 10px;
+	padding-top: 20px;
+    padding-right: 5px;
+    padding-bottom: 20px;
+    padding-left: 5px;
+}
+
+.consulta-result{
+	background-color: #f0fff1 !important;
+	border-radius:  10px;
+	padding-top: 	20px;
+	padding-bottom: 25px;
 }

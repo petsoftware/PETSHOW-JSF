@@ -5,12 +5,6 @@
       xmlns:p="http://primefaces.org/ui">
  	 	
     <ui:composition>
-    	                  
-        
-        
-        <ui:remove>
-			<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
-        </ui:remove>	
         	<div id="content">
         		<div class="header">
 		        	<div class="row">
@@ -22,8 +16,11 @@
 			        	</div>
 		        	</div>
 	        	</div>     
-        		<p:messages id="msgs" styleClass="msgsMain" showSummary="true" showDetail="true" closable="true" showIcon="false" />	        	
-   				<ui:insert name="body" />
+        		<p:messages id="msgs" styleClass="msgsMain" showSummary="true" showDetail="true" closable="true" showIcon="false" />	
+        		<h:form id="formContent" enctype="multipart/form-data">  
+        			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>       	
+   					<ui:insert name="body" />
+   				</h:form>
    			</div>
    		
 

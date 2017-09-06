@@ -1,83 +1,158 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
-
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:p="http://primefaces.org/ui"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
 	template="#{pageHelperBean.mainTemplateSite}">
 
 
 
 	<ui:define name="body">
-		<div class="container">
-			<div class="row">
-				<h:panelGrid columns="2">
-					<h:panelGrid columns="1">
+		<section class="content-section-a">
+			<div class="container">
+				<div class="row">
+					
+					<div class="consulta-col col-md-4" >
+						<div class="row">
+							<div class="col-md-12">
+								<h5 class="h5-font">O QUE VOCÊ PROCURA?</h5>
+							</div>
+						</div>
+						<div class="row">
 
-						<h:outputLabel value="Estado:" for="cbEstado" />
-						<p:selectOneMenu id="cbEstado"
-							value="#{consultaAdocaoBean.estado}" converter="estadoConverter">
+							<div class="col-md-12">
+								<p:selectOneMenu id="cbEstado" style="width: 100%;"
+									value="#{consultaAdocaoBean.estado}"
+									converter="estadoConverter">
 
-							<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
-								itemValue=" " noSelectionOption="true" />
-							<f:selectItems
-								value="#{consultaAdocaoBean.autoCompleteBean.estados}"
-								var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
-							<p:ajax
-								listener="#{consultaAdocaoBean.autoCompleteBean.onEstadoChange(consultaAdocaoBean.estado)}"
-								update="cbCidade" />
+									<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
+										itemValue=" " noSelectionOption="true" />
+									<f:selectItems
+										value="#{consultaAdocaoBean.autoCompleteBean.estados}"
+										var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
+									<p:ajax
+										listener="#{consultaAdocaoBean.autoCompleteBean.onEstadoChange(consultaAdocaoBean.estado)}"
+										update="cbCidade" />
 
-						</p:selectOneMenu>
+								</p:selectOneMenu>
+							</div>
 
+						</div>
+						<div class="row">
 
-						<h:outputLabel value="Cidade" for="cbCidade" />
-						<p:selectOneMenu id="cbCidade"
-							value="#{consultaAdocaoBean.cidade}" converter="cidadeConverter">
-							<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
-								itemValue="" noSelectionOption="true" />
-							<f:selectItems
-								value="#{consultaAdocaoBean.autoCompleteBean.cidades}"
-								var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+							<div class="col-md-12">
+								<p:selectOneMenu id="cbCidade" style="width: 100%;"
+									value="#{consultaAdocaoBean.cidade}"
+									converter="cidadeConverter">
+									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems
+										value="#{consultaAdocaoBean.autoCompleteBean.cidades}"
+										var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+								</p:selectOneMenu>
+							</div>
 
+						</div>
 
-						</p:selectOneMenu>
+						<div class="row">
 
-						<h:outputLabel value="Animal" for="cbAnimal" />
+							<div class="col-md-12">
+								<p:selectOneMenu id="cbAnimal" style="width: 100%;"
+									value="#{consultaAdocaoBean.animal}">
+									<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
+								</p:selectOneMenu>
+							</div>
 
-						<p:selectOneMenu id="cbAnimal"
-							value="#{consultaAdocaoBean.animal}">
-							<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
-								itemValue="" noSelectionOption="true" />
-							<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
-						</p:selectOneMenu>
+						</div>
+						<div class="row">
 
-						<h:outputLabel value="Gênero" for="cbSexo" />
-						<p:selectOneMenu id="cbSexo" value="#{consultaAdocaoBean.sexo}">
-							<f:selectItem itemLabel="#{placeHolderBean.selSexo}" itemValue=""
-								noSelectionOption="true" />
-							<f:selectItems value="#{consultaAdocaoBean.sexos}" />
-						</p:selectOneMenu>
+							<div class="col-md-12">
+								<p:selectOneMenu id="cbSexo" value="#{consultaAdocaoBean.sexo}"
+									style="width: 100%;">
+									<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems value="#{consultaAdocaoBean.sexos}" />
+								</p:selectOneMenu>
+							</div>
 
-						<h:outputLabel value="Fase" for="cbFase" />
-						<p:selectOneMenu id="cbFase" value="#{consultaAdocaoBean.fase}">
-							<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
-								noSelectionOption="true" />
-							<f:selectItems value="#{consultaAdocaoBean.fases}" />
-						</p:selectOneMenu>
+						</div>
+						<div class="row">
 
+							<div class="col-md-12">
+								<p:selectOneMenu id="cbFase" value="#{consultaAdocaoBean.fase}"
+									style="width: 100%;">
+									<f:selectItem itemLabel="#{placeHolderBean.selFase}"
+										itemValue="" noSelectionOption="true" />
+									<f:selectItems value="#{consultaAdocaoBean.fases}" />
+								</p:selectOneMenu>
+							</div>
 
-						<h:commandButton action="#{consultaAdocaoBean.getAdocaoBanco}"
-							type="submit" value="Consultar" update="messages" id="btConsulta" />
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-search" 
+									actionListener="#{consultaAdocaoBean.obterAdocoesDisponiveis}" ajax="false"
+									value="BUSCAR" update="panelAdocoes" id="btConsulta" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-pencil-square-o" 
+									action="#{consultaAdocaoBean.chamarTelaDeCadastroDeAdocao}"
+									value="ANUNCIAR ADOÇÃO?"  id="btnCadAdocao" />
+							</div>
+						</div>
+					</div>
+					<div class="consulta-result col-sm-8">
+						<div class="col-sm-12">
+							<div class="row">
+								<h6>TOTAL DE RESULTADOS ENCONTRADOS </h6><h5 style="color: #F47D30">#{consultaAdocaoBean.totalRows}</h5>
+							</div>
+						</div>	
+						<h:panelGroup id="panelAdocoes">
+							<ui:repeat var="adocao"
+								value="#{consultaAdocaoBean.adocoesDisponiveis}">
+								<p:panel
+									header="#{adocao.titulo}   -   (#{adocao.dddCelular})  #{adocao.telefoneCelular}"
+									styleClass="box">
+									<div class="row">
+										<div class="col-md-4">
+											<h:panelGroup  rendered="#{adocao.fotos.size() == 0}">
+												<img class="img-fluid"
+													src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+											</h:panelGroup>
+											<h:graphicImage rendered="#{adocao.fotos.size() > 0}"
+																style="width:100%;height:100%;"
+																stream="false" cache="false"
+																url="data:image/jpg;base64,#{adocao.fotos.get(0)}" id="visualizacao"
+																alt="Visualização do anuncio" />
+												
+										</div>
+										<div class="col-md-8">
+											<h6>#{adocao.descAdocao}</h6>
+											
+										</div>
 
-					</h:panelGrid>
-
-				</h:panelGrid>
+									</div>
+									<div class="row">
+										<div class="col-md-offset-3">
+												<p:commandButton value="mais detalhes"/>
+											</div>
+									</div>
+								</p:panel>
+							</ui:repeat>
+						</h:panelGroup>
+					</div>
+				</div>
 			</div>
-		</div>
+		</section>
 	</ui:define>
 
 </ui:composition>

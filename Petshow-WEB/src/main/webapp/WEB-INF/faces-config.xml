@@ -97,6 +97,11 @@
 			<to-view-id>/private/PagPerfilAdocao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>anunciar-adocao-site</from-outcome>
+			<to-view-id>/adocao-cadastro-site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	
 	 <navigation-rule>
