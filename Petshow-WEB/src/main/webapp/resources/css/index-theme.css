@@ -20,14 +20,16 @@
 .btn-consultar {
     background-color: #0080ff!important;
     border-color: #37bc9b !important;
-    color: #0000ff
+    color: #ffffff;
+    font-size: medium !important;
+    font-family: "Arial Black", Gadget, sans-serif !important;
 }
 
 .btn-consultar:focus,
 .btn-consultar:hover {
     background-color: #0080c0 !important;
     border-color: #48CFAD !important;
-    color: #ff0000;
+    color: #00ffff;
     margin: 0px;
     padding: 0px;
 }

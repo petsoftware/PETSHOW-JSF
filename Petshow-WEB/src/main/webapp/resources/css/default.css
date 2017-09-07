@@ -995,3 +995,15 @@ div.jqplot-table-legend-swatch {
 .ui-fileupload-files td:nth-child(2) {
 	word-break: break-all !important;
 }
+
+.btn-detalhes{
+	background-color: #FE9A2E !important;
+	color: #FFFFFF !important;	
+}
+.btn-detalhes:focus,
+.btn-detalhes:hover{
+	background-color: #FACC2E !important;
+	color: #0000ff !important;
+	font-size: large !important;
+	box-shadow: 10px 10px 5px #8888EE;
+	font-weight: bold;

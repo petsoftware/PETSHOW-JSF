@@ -15,9 +15,9 @@
 			authentication-failure-url="/public/login.xhtml" />
 		<!-- <custom-filter position="CONCURRENT_SESSION_FILTER" ref="concurrencyFilter" 
 			/> <custom-filter position="FORM_LOGIN_FILTER" ref="myAuthFilter" /> -->
-		<session-management invalid-session-url="/public/login.xhtml"
-			session-authentication-error-url="/public/login.xhtml">
-			<concurrency-control expired-url="/public/login.xhtml"
+		<session-management invalid-session-url="/"
+			session-authentication-error-url="/">
+			<concurrency-control expired-url="/"
 				max-sessions="10" error-if-maximum-exceeded="true" />
 		</session-management>
 		<logout delete-cookies="JSESSIONID" />

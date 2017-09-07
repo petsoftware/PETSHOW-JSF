@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+	<meta charset="ISO-8859-1" />
+	<title>Insert title here</title>
+	<f:metadata>
+    	<f:viewParam name="idAdocao" value="#{viewAdocaoDetalheBean.idAdocao}"/>
+	</f:metadata>
+</head>
+<body>
+	<p:galleria value="#{viewAdocaoDetalheBean.fotos}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+    	<p:graphicImage url="data:image/jpg;base64,#{image}" alt="Visualização da fota da adoção"/>
+	</p:galleria>
+</body>
+</html>

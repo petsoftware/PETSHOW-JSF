@@ -2,17 +2,19 @@ package br.com.petshow.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
+
+import org.primefaces.context.RequestContext;
 
 import br.com.petshow.enums.EnumFaseVida;
-import br.com.petshow.enums.EnumNotificationType;
 import br.com.petshow.enums.EnumSexo;
 import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
@@ -33,11 +35,12 @@ public class ConsultaAdocaoBean implements Serializable{
 	private static final long serialVersionUID = -6287940244391936527L;
 	private int totalRows = 0;
 	private List<Adocao> adocoes;
+	private Adocao selectedAdocao;
 	private List<Adocao> adocoesDisponiveis;
 	private CallAnimalRest restAnimal;
 	@ManagedProperty(value="#{autoCompleteBean}")
     private AutoCompleteBean autoCompleteBean;
-
+	private List<String> fotos;
 	private Estado estado;
 	private Cidade cidade;
 	private EnumTipoAnimal animal;
@@ -53,7 +56,6 @@ public class ConsultaAdocaoBean implements Serializable{
 		restAnimal = new CallAnimalRest();
 		obterAdocoesDisponiveis();
 		setTotalRows(getAdocoesDisponiveis().size());
-		//getAdocaoBanco();
 	}
 	public ConsultaAdocaoBean (){
 		super();
@@ -76,32 +78,6 @@ public class ConsultaAdocaoBean implements Serializable{
 		return null;
 	}	
 	
-//	public List<Adocao> getAdocaoBanco() {
-//		try {
-//			
-//			long idEstado=0;
-//			long idCidade=0;
-//			if(estado!=null){
-//				idEstado=estado.getId();
-//			}
-//			if(cidade!=null){
-//				idCidade=cidade.getId();
-//			}
-//			adocoes=restAnimal.getListAnimalAdocao(idEstado, idCidade, animal, fase, sexo);
-//
-//		} catch (ExceptionErroCallRest  e) {
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-//
-//		} catch (ExceptionValidation e) {
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
-//		} catch (Exception e) {
-//			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		return adocoes;
-//	}
 	public EnumTipoAnimal[] getTiposAnimais(){
 		return EnumTipoAnimal.values();
 	}
@@ -174,6 +150,39 @@ public class ConsultaAdocaoBean implements Serializable{
 	}
 	public void setTotalRows(int totalRows) {
 		this.totalRows = totalRows;
+	}
+	
+	public void openGalleryDialog(Adocao adocao) {
+		Map<String, List<String>> params = montarParametros(adocao);
+		Map<String,Object> options = new HashMap<String, Object>();
+		options.put("modal", true);
+		options.put("width", 300);
+		options.put("height", 300);
+		options.put("contentWidth", "100%");
+		options.put("contentHeight", "100%");
+		options.put("headerElement", "customheader");
+
+		RequestContext.getCurrentInstance().openDialog("view-adocao-detalhe", options, params);
+	}
+	
+	private Map<String, List<String>> montarParametros(Adocao adocao) {
+		Map<String, List<String>> params = new HashMap<String, List<String>>();
+		List<String> id = Arrays.asList(String.valueOf(adocao.getId()));
+	    params.put("idAdocao", id);  
+	    return params;
+	}
+	
+	public Adocao getSelectedAdocao() {
+		return selectedAdocao;
+	}
+	public void setSelectedAdocao(Adocao selectedAdocao) {
+		this.selectedAdocao = selectedAdocao;
+	}
+	public List<String> getFotos() {
+		return fotos;
+	}
+	public void setFotos(List<String> fotos) {
+		this.fotos = fotos;
 	}
 	
 }
