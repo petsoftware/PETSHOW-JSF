@@ -1,24 +1,18 @@
 package br.com.petshow.beans;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Adocao;
-import br.com.petshow.model.Anuncio;
-import br.com.petshow.model.Venda;
 import br.com.petshow.util.FormatacaoUtil;
-import br.com.petshow.util.ValidationUtil;
-import br.com.petshow.web.util.CallVendaRest;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
@@ -47,9 +41,13 @@ public class DetalheAdocaoBean {
 	
 	public void getAdocaoBanco(){
 		try {
-			 id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
-			
-			adocao = RestUtilCall.getEntity("adocao/"+id,Adocao.class);
+			Map<String, String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap(); 
+			 id = params.get("id");
+			if(id != null){
+				adocao = RestUtilCall.getEntity("adocao/"+id,Adocao.class);
+			}else{
+				adocao = new Adocao();
+			}
 
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
@@ -188,6 +186,14 @@ public class DetalheAdocaoBean {
 
 	public void setAdocao(Adocao adocao) {
 		this.adocao = adocao;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

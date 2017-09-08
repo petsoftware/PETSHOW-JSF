@@ -162,7 +162,7 @@ public class ConsultaAdocaoBean implements Serializable{
 		options.put("contentHeight", "100%");
 		options.put("headerElement", "customheader");
 
-		RequestContext.getCurrentInstance().openDialog("view-adocao-detalhe", options, params);
+		RequestContext.getCurrentInstance().openDialog("view-adocao-detalhe", options, null);
 	}
 	
 	private Map<String, List<String>> montarParametros(Adocao adocao) {

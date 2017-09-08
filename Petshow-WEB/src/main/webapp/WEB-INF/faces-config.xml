@@ -38,6 +38,11 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>adocao-detalhe</from-outcome>
+			<to-view-id>/adocao-detalhe-site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>animais</from-outcome>
 			<to-view-id>/admin/animais.xhtml</to-view-id>
 			<redirect />
