@@ -22,21 +22,51 @@
 	<h:outputStylesheet name="css/index.css" />
 	<h:outputStylesheet name="css/default.css" />
 	<h:outputStylesheet name="css/index-theme.css" />
+	<!-- 
+	O SDK do Facebook para JavaScript não tem arquivos autônomos que precisam ser baixados ou instalados. 
+	Em vez disso, basta incluir um pequeno trecho de JavaScript comum em seu HTML e ele carregará de forma 
+	assíncrona o SDK em suas páginas. O carregamento assíncrono significa que ele não bloqueia o carregamento 
+	de outros elementos de sua página.
 
-		
+	O seguinte snippet de código fornecerá a versão básica do SDK na qual as opções são definidas de acordo 
+	com seus padrões mais comuns. Insira-o diretamente após a marca <body> de abertura em cada página na qual 
+	você deseja carregá-lo:
+	 -->
+	 
+	<script>
+		//TODO: por o ID da aplicacao
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId : '945090532299696',
+				autoLogAppEvents : true,
+				xfbml : true,
+				version : 'v2.10'
+			});
+			FB.AppEvents.logPageView();
+		};
+
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement(s);
+			js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
 	<link
 		href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic"
 		rel="stylesheet" type="text/css" />
 	<h:outputStylesheet name="css/landing-page.css" />
 	
-	<f:facet name="last">
-        
+		<f:facet name="last">
 			<h:outputScript name="js/pace.min.js" />
 			<h:outputScript name="js/owl.carousel.min.js" />
         	<h:outputScript name="js/common.js" />
         	<h:outputScript name="js/index.js" />
         	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic" rel="stylesheet" type="text/css"></link>
- 			 			 			
         </f:facet>
 
 </h:head>
