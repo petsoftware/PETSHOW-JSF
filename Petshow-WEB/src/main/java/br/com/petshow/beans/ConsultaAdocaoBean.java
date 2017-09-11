@@ -146,6 +146,10 @@ public class ConsultaAdocaoBean implements Serializable{
 		this.fase = fase;
 	}
 	public int getTotalRows() {
+		totalRows = 0;
+		if(getAdocoesDisponiveis() != null){
+			totalRows = getAdocoesDisponiveis().size();
+		}
 		return totalRows;
 	}
 	public void setTotalRows(int totalRows) {

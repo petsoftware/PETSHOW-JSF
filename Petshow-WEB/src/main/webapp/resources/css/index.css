@@ -82,11 +82,11 @@
 
 .box {
 	border:none;
-	background-color:#81F781;
+	background-color: #f0fff1;
 	color: purple;
 	border-radius: 4px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	padding-top: 4px;
+	padding-top: 6px !important;
 	padding-left: 4px;
 }
 
@@ -97,6 +97,17 @@
 	box-shadow: 5px 5px 5px #8888EE;
 	font-weight: bold;
 }
+
+.box-titulo{
+	border:none;
+	background-color:#2E64FE;
+	color: white;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding-top: 4px;
+	padding-left: 4px;
+	
+} 
 
 .box-mensagem {
 	padding-left: 8px;
@@ -109,4 +120,25 @@
 	font-size: 20px;
     font-family:  serif , "Times New Roman", Times;
     width: 100%;
+}
+
+.ui-widget-header{
+	border: 1px solid #eeeeee;
+    background: #cadec7;
+    color: #333333;
+    font-weight: bold;
+}
+
+.div-click { 
+	cursor: pointer; 
+	cursor: hand; 
+	padding-top: 6px; 
+	border-radius: 4px;
+	text-decoration: none !important;
+	
+}
+
+.div-click:hover {
+	box-shadow: 5px 5px 5px #8888EE;
+	text-decoration: none !important;
 }

@@ -92,6 +92,9 @@ label {
     border-width: 1px;
     border-style: solid;
 }
+
+
+
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
     border-width: 1px;
 	border-style: solid;
@@ -997,20 +1000,9 @@ div.jqplot-table-legend-swatch {
 }
 
 .btn-detalhes{
-	background-color: #FE9A2E !important;
 	color: #FFFFFF !important;
-	border-radius:  10px;
-	padding-top: 	5px;
-	padding-bottom: 5px;
-	padding-right: 5px;
-	padding-left: 5px;
 		
 }
 .btn-detalhes:focus,
 .btn-detalhes:hover{
-	background-color: #FACC2E !important;
-	color: #0000ff !important;
-	font-size: large !important;
-	box-shadow: 10px 10px 5px #8888EE;
-	font-weight: bold;
 	text-decoration: none;

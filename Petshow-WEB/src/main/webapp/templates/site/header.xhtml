@@ -182,19 +182,22 @@
 							styleClass="btn btn-entrar btn-lg navbar-btn" value="Fazer Login"
 							process="@this" 
 							oncomplete="PF('edlg').show();"
-							title="Entrar no sistema de gestão">
+							title="Entrar no sistema de gestão"
+							icon="fa fa-fw fa-user">
 							<p:ajax resetValues="true" />
-
+							
 						</p:commandButton> <pe:tooltip for="entrar" /></li>
 
-					<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}"><p:commandButton
+					<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}">
+						<p:commandButton
 							styleClass="btn btn-cadastrar btn-lg navbar-btn" id="cadastrar"
 							value="Quero me Cadastrar" process="@this"
-							
+							icon="fa fa-fw fa-user-plus"
 							title="Solicitar cadastro de usuário"
 							oncomplete="PF('cdlg').show();">
 							<p:ajax resetValues="true" />
-						</p:commandButton> <pe:tooltip for="cadastrar" /></li>
+						</p:commandButton> <pe:tooltip for="cadastrar" />
+					</li>
 
 					<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}"
 						style="margin-right: 15px;">

@@ -113,47 +113,55 @@
 					<div class="consulta-result col-sm-8">
 						<div class="col-sm-12">
 							<div class="row">
-								<h6>TOTAL DE RESULTADOS ENCONTRADOS </h6><h5 style="color: #F47D30">#{consultaAdocaoBean.totalRows}</h5>
+								<h6>TOTAL DE RESULTADOS ENCONTRADOS </h6> <h5 style="color: #F47D30">#{consultaAdocaoBean.totalRows}</h5>
 							</div>
 						</div>	
 						<h:panelGroup id="panelAdocoes">
 							<ui:repeat var="adocao"
 								value="#{consultaAdocaoBean.adocoesDisponiveis}">
-								<p:panel
-									header="#{adocao.titulo}   -   (#{adocao.dddCelular})  #{adocao.telefoneCelular}"
-									styleClass="box">
-									 <f:facet name="actions">
-							            <p:rating value="#" styleClass="ui-panel-titlebar-icon"/>
-							            #{adocao.getTempoDePublicacao} <i class="fa fa-clock-o" aria-hidden="true"></i>
-        							</f:facet>
-									<div class="row">
-										<div class="col-md-4">
-											<h:panelGroup  rendered="#{adocao.fotos.size() == 0}">
-												<img class="img-fluid"
-													src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
-											</h:panelGroup>
-											<h:graphicImage rendered="#{adocao.fotos.size() > 0}"
-																style="width:100%;height:100%;"
-																stream="false" cache="false"
-																url="data:image/jpg;base64,#{adocao.fotos.get(0)}" id="visualizacao"
-																alt="Visualização do anuncio" />
-												
-										</div>
-										<div class="col-md-8">
-											<h6>#{adocao.descAdocao}</h6>
-											
-										</div>
-
+								<p:link outcome="adocao-detalhe" styleClass="btn-detalhes">
+									<f:param name="id" value="#{adocao.id}"></f:param>
+									<div class="div-click" onclick="#">
+										<p:panel
+											header="#{adocao.titulo}   -   (#{adocao.dddCelular})  #{adocao.telefoneCelular}"
+											styleClass="box">
+											 <f:facet name="actions">
+											 	<div class="ui-panel-titlebar-icon">
+									            	#{adocao.getTempoDePublicacao} 
+									            	<i class="fa fa-clock-o" aria-hidden="true"></i>
+									            </div>
+		        							</f:facet>
+											<div class="row">
+												<div class="col-md-4">
+													<h:panelGroup  rendered="#{adocao.fotos.size() == 0}">
+														<img class="img-fluid"
+															src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+													</h:panelGroup>
+													<h:graphicImage rendered="#{adocao.fotos.size() > 0}"
+																		style="width:100%;height:100%;"
+																		stream="false" cache="false"
+																		url="data:image/jpg;base64,#{adocao.fotos.get(0)}" id="visualizacao"
+																		alt="Visualização do anuncio" />
+														
+												</div>
+												<div class="col-md-8">
+													<h6>#{adocao.descAdocao}</h6>
+													
+												</div>
+		
+											</div>
+											<div class="row">
+												<div class="col-md-offset-3" style="padding-top: 	5px">
+													<ui:remove>
+													<p:link value="mais detalhes"  outcome="adocao-detalhe" icon="ui-icon-extlink" styleClass="btn-detalhes">
+														<f:param name="id" value="#{adocao.id}"></f:param>
+													</p:link>
+													</ui:remove>
+												</div>
+											</div>
+										</p:panel>
 									</div>
-									<div class="row">
-										<div class="col-md-offset-3" style="padding-top: 	5px">
-											
-											<p:link value="mais detalhes"  outcome="adocao-detalhe" icon="ui-icon-extlink" styleClass="btn-detalhes">
-												<f:param name="id" value="#{adocao.id}"></f:param>
-											</p:link>
-										</div>
-									</div>
-								</p:panel>
+								</p:link>
 							</ui:repeat>
 						</h:panelGroup>
 					</div>
