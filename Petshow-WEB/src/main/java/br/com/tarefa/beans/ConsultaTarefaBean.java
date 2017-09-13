@@ -11,9 +11,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petshow.enums.EnumPrioridade;
-import br.com.petshow.exceptions.ExceptionErroCallRest;
-import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petmooby.enums.EnumPrioridade;
+import br.com.petmooby.exceptions.ExceptionErroCallRest;
+import br.com.petmooby.exceptions.ExceptionValidation;
 import br.com.tafera.enums.EnumDesenvolvedor;
 import br.com.tafera.enums.EnumTipo;
 import br.com.tarefa.model.Tarefa;

@@ -1,28 +1,37 @@
-package br.com.tarefa.web.util;
+package br.com.petmooby.web.util;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 import br.com.petmooby.enums.EnumErrosSistema;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
+import br.com.petmooby.model.Usuario;
+import br.com.petmooby.role.UsuarioRole;
 import br.com.petmooby.util.MapErroRetornoRest;
-import br.com.petmooby.web.util.RestUtilCall;
-import br.com.tarefa.model.Tarefa;
 
-public class CallTarefaRest  extends RestUtilCall {
 
-	public  List<Tarefa> getListTarefas() throws ExceptionErroCallRest, ExceptionValidation{
+public class CallAutoComplete  extends RestUtilCall {
+	
+	
+	
+
+	
+	public  List<Usuario> getListUsuario(String nome) throws ExceptionErroCallRest, ExceptionValidation{
 
 		client = new ResteasyClientBuilder().build();
 		
-		target= client.target(URL_BASE+"tarefa/todas");
+		target= client.target(URL_BASE+"usuario/consulta/like/nome/"+UsuarioRole.getUsuarioLogado().getId()+"/"+nome+"");
 		
 		
 		Object entidades = null;
 		try{
-			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Tarefa>>() {});
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Usuario>>() {});
 			
 		}catch(Exception ex){
  
@@ -40,9 +49,9 @@ public class CallTarefaRest  extends RestUtilCall {
 		
 		
 		
-		return (List<Tarefa>)entidades;
+		return (List<Usuario>)entidades;
 	
 	}
 	
-	
+	 
 }

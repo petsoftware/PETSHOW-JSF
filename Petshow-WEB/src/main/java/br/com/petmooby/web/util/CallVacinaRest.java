@@ -1,4 +1,4 @@
-package br.com.tarefa.web.util;
+package br.com.petmooby.web.util;
 
 import java.util.List;
 
@@ -7,22 +7,19 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import br.com.petmooby.enums.EnumErrosSistema;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
+import br.com.petmooby.model.Vacina;
 import br.com.petmooby.util.MapErroRetornoRest;
-import br.com.petmooby.web.util.RestUtilCall;
-import br.com.tarefa.model.Tarefa;
 
-public class CallTarefaRest  extends RestUtilCall {
+public class CallVacinaRest extends RestUtilCall{
 
-	public  List<Tarefa> getListTarefas() throws ExceptionErroCallRest, ExceptionValidation{
-
+	public static List<Vacina> getListVacinasPorAnimal(long idAnimal) throws ExceptionErroCallRest, ExceptionValidation{
+		String url = "animal/vacina/animal/"+idAnimal;
 		client = new ResteasyClientBuilder().build();
-		
-		target= client.target(URL_BASE+"tarefa/todas");
-		
+		target= client.target(URL_BASE+url);
 		
 		Object entidades = null;
 		try{
-			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Tarefa>>() {});
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Vacina>>() {});
 			
 		}catch(Exception ex){
  
@@ -40,9 +37,8 @@ public class CallTarefaRest  extends RestUtilCall {
 		
 		
 		
-		return (List<Tarefa>)entidades;
+		return (List<Vacina>)entidades;
 	
 	}
-	
-	
+
 }
