@@ -1,7 +1,6 @@
 package br.com.petshow.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,25 +9,17 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.Part;
 
 import br.com.petshow.enums.EnumFaseVida;
 import br.com.petshow.enums.EnumSexo;
 import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Bairro;
 import br.com.petshow.model.Cidade;
 import br.com.petshow.model.Estado;
 import br.com.petshow.model.Perdido;
-import br.com.petshow.model.Usuario;
-import br.com.petshow.model.Venda;
-import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.web.util.CallAnimalRest;
-import br.com.petshow.web.util.CallVendaRest;
-import br.com.petshow.web.util.ImagemUtil;
-import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
@@ -38,27 +29,21 @@ public class ConsultaPerdidoBean {
 	private CallAnimalRest restAnimal;
 	@ManagedProperty(value="#{autoCompleteBean}")
     private AutoCompleteBean autoCompleteBean;
-
 	private Estado estado;
 	private Cidade cidade;
 	private Bairro bairro;
 	private String animal;
 	private String tpPerdidoAchado;
-	
-	
+	private EnumSexo sexo;
+	private int totalRows = 0;
 	
 	@PostConstruct
 	public void init() {
-		this.perdidos = new ArrayList<Perdido>();
-		restAnimal = new CallAnimalRest();
-		
+		this.perdidos 	= new ArrayList<Perdido>();
+		restAnimal 		= new CallAnimalRest();
 		getPerdidosBanco();
 	}
-	
 
-	
-		
-	
 	public List<Perdido> getPerdidosBanco() {
 		try {
 			
@@ -85,8 +70,7 @@ public class ConsultaPerdidoBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
-		
-		
+
 		return perdidos;
 	}
 	public EnumTipoAnimal[] getTiposAnimais(){
@@ -100,8 +84,7 @@ public class ConsultaPerdidoBean {
 	public EnumSexo[] getSexos(){
 		return EnumSexo.values();
 	}
-	
-	
+
 	public CallAnimalRest getRestAnimal() {
 		return restAnimal;
 	}
@@ -133,49 +116,25 @@ public class ConsultaPerdidoBean {
 		this.animal = animal;
 	}
 
-
-
-
-
 	public List<Perdido> getPerdidos() {
 		return perdidos;
 	}
-
-
-
-
 
 	public void setPerdidos(List<Perdido> perdidos) {
 		this.perdidos = perdidos;
 	}
 
-
-
-
-
 	public Bairro getBairro() {
 		return bairro;
 	}
-
-
-
-
 
 	public void setBairro(Bairro bairro) {
 		this.bairro = bairro;
 	}
 
-
-
-
-
 	public String getTpPerdidoAchado() {
 		return tpPerdidoAchado;
 	}
-
-
-
-
 
 	public void setTpPerdidoAchado(String tpPerdidoAchado) {
 		this.tpPerdidoAchado = tpPerdidoAchado;
@@ -202,6 +161,29 @@ public class ConsultaPerdidoBean {
 		}else{
 			return "Não Informado";
 		}
+	}
+
+	public EnumSexo getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(EnumSexo sexo) {
+		this.sexo = sexo;
+	}
+	
+	public String chamarTelaDeCadastroDePerdido() {
+		return "anunciar-perdido-site";
+	}
+
+	public int getTotalRows() {
+		totalRows = 0;
+		if(getPerdidosBanco() != null){
+			totalRows = getPerdidosBanco().size();
+		}
+		return totalRows;
+	}
+	public void setTotalRows(int totalRows) {
+		this.totalRows = totalRows;
 	}
 	
 }

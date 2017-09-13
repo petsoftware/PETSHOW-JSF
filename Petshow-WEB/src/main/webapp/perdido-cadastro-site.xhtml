@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageHelperBean.mainTemplateSite}">
+
+	<ui:define name="body">
+
+		<section class="content-section-a">
+			<div class="container">
+				<div class="row">
+					<p:commandButton id="btnLimpar" style="margin-right:4px"
+						styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
+						title="Limpar tela?" value="Novo" action="#{perdidoBean.novo}"
+						type="submit" ajax="false" />
+
+					<p:commandButton id="btnSalvar" style="margin-right:4px"
+						styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+						title="Salvar anúncio de perdido?" value="Salvar"
+						action="#{perdidoBean.salvar}" type="submit" ajax="false"
+						onstart="paceStart();" onclick="paceStart();"
+						oncomplete="Pace.restart();" update="@form" />
+
+					<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade"
+						severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade"
+						appendToBody="true" ajax="false">
+
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes btn btn-info btn-lg"
+							icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no btn btn-danger btn-lg"
+							icon="ui-icon-close" />
+
+					</p:confirmDialog>
+
+				</div>
+				<div class="row"></div>
+				<section class="content-section-a">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="row">
+								<div class="form-group">
+									<p:inputText placeholder="NOME DO SEU PET" maxlength="15" value="#{perdidoBean.perdido.nome}"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<p:inputTextarea id="txtMensagem"
+										placeholder="FALE COMO ACONTECEU E CARACTERÍSTICAS PARA AJUDAR A ACHA-LO" rows="8"
+										cols="40" counter="display" maxlength="255"
+										counterTemplate="{0} characters faltando." autoResize="false" value="#{perdidoBean.perdido.descAcontecimento}"/>
+								</div>
+							</div>
+							<div class="row">
+								<p:outputLabel id="display" />
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+										<p:inputText placeholder="DDD" maxlength="2" size="5" value="#{perdidoBean.perdido.dddCelular}"/>
+										<p:inputText placeholder="Número para contato" maxlength="9" value="#{perdidoBean.perdido.telefoneCelular}"/>
+								</div>
+							</div>
+							<div class="row">
+							Que tipo de animal ele é?
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<p:selectOneMenu id="cbAnimal" style="width: 100%;"
+										value="#{perdidoBean.perdido.tpAnimal}">
+										<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
+											itemValue="" noSelectionOption="true" />
+										<f:selectItems value="#{perdidoBean.tiposAnimais}" />
+									</p:selectOneMenu>
+								</div>
+							</div>	
+							<div class="row">
+								Qual seu Estado?
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<p:selectOneMenu id="cbEstado" style="width: 100%;"
+										value="#{perdidoBean.perdido.estado}" required="false"
+										converter="estadoConverter">
+	
+										<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
+											itemValue=" " noSelectionOption="true" />
+										<f:selectItems
+											value="#{consultaPerdidoBean.autoCompleteBean.estados}"
+											var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
+										<p:ajax
+											listener="#{consultaPerdidoBean.autoCompleteBean.onEstadoChange(consultaPerdidoBean.estado)}"
+											update="cbCidade" />
+	
+									</p:selectOneMenu>
+								</div>
+
+							</div>
+							<div class="row">
+								E sua cidade?
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<p:selectOneMenu id="cbCidade" style="width: 100%;"
+										value="#{perdidoBean.perdido.cidade}" required="false"
+										converter="cidadeConverter">
+										<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
+											itemValue="" noSelectionOption="true" />
+										<f:selectItems
+											value="#{consultaPerdidoBean.autoCompleteBean.cidades}"
+											var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+									</p:selectOneMenu>
+								</div>
+	
+							</div>						
+							</div>
+						<div class="col-md-6">
+							<div class="row">
+								Data que se Perdeu
+							</div>
+							<div class="row">
+								<p:calendar id="dtPerdido"
+									style="width:50%;"
+									locale="pt"
+									pattern="dd/MM/yyyy"
+									mask="true" 
+									value="#{perdidoBean.perdido.dtPerdidoAchado}"
+			 						required="true" 
+									/>
+								
+							</div>
+							<h:outputLabel value="FOTO" for="txtInputFoto1" />
+							<p:fileUpload fileUploadListener="#{perdidoBean.enviaImagem}"
+								update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
+								fileLimit="100000" fileLimitMessage="Imagem muito grande"
+								label="Selecionar" invalidFileMessage="Tipo de imagem inválido"
+								invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
+								multiple="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
+
+							</p:fileUpload>
+
+							<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col -->-6" align="center">
+									<p:panel header="FOTOS" id="pnlFotos">
+										<div class="ui-grid-row">
+											<ui:repeat var="foto" value="#{perdidoBean.perdido.fotos}">
+												<div class="ui-grid-col-4">
+													<div class="ui-grid-row">
+														<div class="ui-upload-img" style="height: 215px;">
+															<h:graphicImage
+																style="width:100%;height:100%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
+																stream="false" cache="false"
+																url="data:image/jpg;base64,#{foto}" id="visualizacao"
+																alt="Visualização do anuncio" />
+															<span
+																style="font-size: 58px; display: #{foto.isEmpty()? 'inline-block': 'none'}"
+																class="fa-stack fa-lg"> <i
+																class="fa fa-camera fa-stack-1x"></i> <i
+																class="fa fa-ban fa-stack-2x text-danger"></i>
+															</span>
+														</div>
+													</div>
+													<div class="ui-grid-row">
+														<p:commandButton style="width:100%;height:100%;"
+															actionListener="#{perdidoBean.removePhoto(foto)}"
+															styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
+															title="Excluir foto à esquerda" ajax="true"
+															update="@form">
+															<p:confirm header="Confirme a exclusão"
+																message="Você tem certeza que deseja excluir este registro? Só terá efeito após você clicar no botão salvar"
+																icon="fa fa-exclamation-triangle" />
+														</p:commandButton>
+													</div>
+
+												</div>
+
+											</ui:repeat>
+										</div>
+									</p:panel>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</section>
+			</div>
+		</section>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

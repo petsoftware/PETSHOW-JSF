@@ -43,6 +43,11 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>perdido-detalhe</from-outcome>
+			<to-view-id>/perdido-detalhe-site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>animais</from-outcome>
 			<to-view-id>/admin/animais.xhtml</to-view-id>
 			<redirect />
@@ -105,6 +110,11 @@
 		<navigation-case>
 			<from-outcome>anunciar-adocao-site</from-outcome>
 			<to-view-id>/adocao-cadastro-site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>anunciar-perdido-site</from-outcome>
+			<to-view-id>/perdido-cadastro-site.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

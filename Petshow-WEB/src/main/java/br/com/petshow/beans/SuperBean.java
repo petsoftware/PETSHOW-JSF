@@ -14,6 +14,7 @@ import br.com.petshow.model.Entidade;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.security.AuthenticationService;
 import br.com.petshow.util.FileApplicationUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
 public class SuperBean <T>{
@@ -55,6 +56,18 @@ public class SuperBean <T>{
 
 	public static void setTarget(ResteasyWebTarget target) {
 		SuperBean.target = target;
+	}
+	
+	protected void exibirInforMessage(String message) {
+		MessagesBeanUtil.infor(message);
+	}
+	
+	protected void exibirErroMessage(String erroMessage) {
+		MessagesBeanUtil.erroMessage(erroMessage);
+	}
+	
+	protected void exibirAlertaMessage(String message) {
+		MessagesBeanUtil.alert(message);
 	}
 
 }

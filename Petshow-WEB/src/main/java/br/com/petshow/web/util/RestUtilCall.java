@@ -41,7 +41,7 @@ public class RestUtilCall <T extends Entidade>{
 		
 		ResteasyWebTarget target= client.target(URL_BASE+url);
 		
-		WriteConsoleUtil.write("Enviado:"+JsonUtil.getJSON(entidade));
+		//WriteConsoleUtil.write("Enviado:"+JsonUtil.getJSON(entidade));
 		
 		Response response = target.request().post(Entity.entity(entidade, MediaType.APPLICATION_JSON));
 		
