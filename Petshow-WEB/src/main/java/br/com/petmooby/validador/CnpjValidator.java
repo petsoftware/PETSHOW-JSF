@@ -9,7 +9,7 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator ( value = "br.com.petshow.validator.CnpjValidator")
+@FacesValidator ( value = "br.com.petmooby.validator.CnpjValidator")
 public class CnpjValidator implements Validator{
 
 	@Override

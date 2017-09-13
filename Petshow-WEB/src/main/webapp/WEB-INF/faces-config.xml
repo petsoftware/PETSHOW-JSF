@@ -9,7 +9,7 @@
 	    <renderer>
 	        <component-family>org.primefaces.component</component-family>
 	        <renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
-	        <renderer-class>br.com.petshow.web.util.FileUploadRender</renderer-class>
+	        <renderer-class>br.com.petmooby.web.util.FileUploadRender</renderer-class>
 	    </renderer>
 	</render-kit>
 	<application>

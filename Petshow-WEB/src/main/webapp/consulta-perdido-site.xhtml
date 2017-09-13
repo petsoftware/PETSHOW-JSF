@@ -81,14 +81,13 @@
 									<f:selectItems value="#{consultaPerdidoBean.sexos}" />
 								</p:selectOneMenu>
 							</div>
-
 						</div>
 						
 						<div class="row">
 							<div class="col-md-12">
 								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-search" 
-									actionListener="#{consultaPerdidoBean.perdidosBanco}" ajax="false"
-									value="BUSCAR" update="panelAdocoes" id="btConsulta" />
+									actionListener="#{consultaPerdidoBean.obterAnimaisPerdidos}" ajax="false"
+									value="BUSCAR" update="panelPerdidos" id="btConsulta" />
 							</div>
 						</div>
 						<div class="row">
@@ -105,7 +104,7 @@
 								<h6>TOTAL DE RESULTADOS ENCONTRADOS </h6> <h5 style="color: #F47D30">#{consultaPerdidoBean.totalRows}</h5>
 							</div>
 						</div>	
-						<h:panelGroup id="panelAdocoes">
+						<h:panelGroup id="panelPerdidos">
 							<ui:repeat var="perdido"
 								value="#{consultaPerdidoBean.perdidosBanco}">
 								<p:link outcome="perdido-detalhe" styleClass="btn-detalhes">

@@ -41,10 +41,14 @@ public class ConsultaPerdidoBean {
 	public void init() {
 		this.perdidos 	= new ArrayList<Perdido>();
 		restAnimal 		= new CallAnimalRest();
-		getPerdidosBanco();
+		obterAnimaisPerdidos();
 	}
 
 	public List<Perdido> getPerdidosBanco() {
+		return perdidos;
+	}
+
+	public String obterAnimaisPerdidos() {
 		try {
 			
 			long idEstado=0;
@@ -70,8 +74,7 @@ public class ConsultaPerdidoBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
-
-		return perdidos;
+		return null;
 	}
 	public EnumTipoAnimal[] getTiposAnimais(){
 		return EnumTipoAnimal.values();
