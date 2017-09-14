@@ -93,7 +93,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-pencil-square-o" 
-									action="#{consultaPerdidoBean.chamarTelaDeCadastroDePerdido}"
+									action="#{consultaPerdidoBean.chamarTelaDeCadastroDePerdido}" rendered="#{consultaPerdidoBean.authenticationService.authenticated}"
 									value="ANUNCIAR PERDIDO?"  id="btnCadPerdido" />
 							</div>
 						</div>

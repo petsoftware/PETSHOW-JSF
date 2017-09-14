@@ -8,6 +8,7 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
+import br.com.petmooby.enums.EnumAchadoPerdido;
 import br.com.petmooby.enums.EnumErrosSistema;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
@@ -117,20 +118,16 @@ public class CallAnimalRest  extends RestUtilCall<Animal> {
 	}
 	
 	
-	public  List<Perdido> getListAnimalPerdidoAchado(long estado,long cidade,long bairro,String tpAnimal,String tpAchadoPerdido) throws ExceptionErroCallRest, ExceptionValidation{
+	public  List<Perdido> getListAnimalPerdidoAchado(long estado,long cidade,long bairro,String tpAnimal,EnumAchadoPerdido tpAchadoPerdido) throws ExceptionErroCallRest, ExceptionValidation{
 		 return getListAnimalPerdidoAchado( estado, cidade, bairro, tpAnimal, tpAchadoPerdido, 300); 
 	}
-	public  List<Perdido> getListAnimalPerdidoAchado(long estado,long cidade,long bairro,String tpAnimal,String tpAchadoPerdido, int limiteRegistros) throws ExceptionErroCallRest, ExceptionValidation{
+	public  List<Perdido> getListAnimalPerdidoAchado(long estado,long cidade,long bairro,String tpAnimal,EnumAchadoPerdido tpAchadoPerdido, int limiteRegistros) throws ExceptionErroCallRest, ExceptionValidation{
 
 		client = new ResteasyClientBuilder().build();
 		
 		if(tpAnimal==null || tpAnimal.trim().equals("")){
 			tpAnimal="null";
 		}
-		if(tpAchadoPerdido==null || tpAchadoPerdido.trim().equals("")){
-			tpAchadoPerdido="null";
-		}
-		
 		
 		target= client.target(URL_BASE+"animal/consulta/perdido/"+estado+"/"+cidade+"/"+bairro+"/"+tpAnimal+"/"+tpAchadoPerdido+"/"+limiteRegistros);
 		

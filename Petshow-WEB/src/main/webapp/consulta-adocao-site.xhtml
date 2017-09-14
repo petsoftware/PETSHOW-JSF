@@ -105,7 +105,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-pencil-square-o" 
-									action="#{consultaAdocaoBean.chamarTelaDeCadastroDeAdocao}"
+									action="#{consultaAdocaoBean.chamarTelaDeCadastroDeAdocao}" rendered="#{consultaAdocaoBean.authenticationService.authenticated}"
 									value="ANUNCIAR ADOÇÃO?"  id="btnCadAdocao" />
 							</div>
 						</div>

@@ -7,6 +7,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.petmooby.enums.EnumFlTpEstabelecimento;
+import br.com.petmooby.enums.EnumTipoUser;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
 import br.com.petmooby.model.Usuario;
@@ -21,7 +22,11 @@ public class NovoUsuarioBean {
 	private Usuario usuario;
 	private String senha;
 	private String confSenha;
-	
+	private String textUsuario = "";
+	private boolean renderizarNome = false;
+	private boolean renderizarEmail= false;
+	private boolean renderizarCNPJ = false;
+	private String tipoUsuario = "";
 	
 	@PostConstruct
 	private void init() {
@@ -40,6 +45,7 @@ public class NovoUsuarioBean {
 				usuario.setFlPreCadastro(true);
 				usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Usuário Cadastrado com sucesso!"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Em instante você receberá um e-mail para completar o seu cadastro!"));
 				return null;
 			}else{
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informações incorretas:", validate));
@@ -69,7 +75,9 @@ public class NovoUsuarioBean {
 			}else if(!getSenha().equals(getConfSenha())){
 				result = "As senhas não conferem. Coloque a senha depois confirme com a mesma senha.";
 			}else if(usuario.getCnpjCpf() != null && usuario.getCnpjCpf().trim().isEmpty()){
-				result = "CNPJ deve ser informado.";
+				if(!tipoUsuario.equalsIgnoreCase("U")){
+					result = "CNPJ deve ser informado.";
+				}
 			}
 		}else{
 			result = "Usuário não informado ou nulo";
@@ -99,5 +107,65 @@ public class NovoUsuarioBean {
 
 	public void setConfSenha(String confSenha) {
 		this.confSenha = confSenha;
+	}
+
+	public String getTextUsuario() {
+		return textUsuario;
+	}
+
+	public void setTextUsuario(String textUsuario) {
+		this.textUsuario = textUsuario;
+	}
+
+	public boolean isRenderizarNome() {
+		return renderizarNome;
+	}
+
+	public void setRenderizarNome(boolean renderizarNome) {
+		this.renderizarNome = renderizarNome;
+	}
+
+	public boolean isRenderizarEmail() {
+		return renderizarEmail;
+	}
+
+	public void setRenderizarEmail(boolean renderizarEmail) {
+		this.renderizarEmail = renderizarEmail;
+	}
+
+	public boolean isRenderizarCNPJ() {
+		return renderizarCNPJ;
+	}
+
+	public void setRenderizarCNPJ(boolean renderizarCNPJ) {
+		this.renderizarCNPJ = renderizarCNPJ;
+	}
+	
+	public void renderComponenets() {
+		if(tipoUsuario.equalsIgnoreCase("P") || tipoUsuario.equalsIgnoreCase("O")){
+			setRenderizarCNPJ(true);
+			setRenderizarEmail(true);
+			setRenderizarNome(true);
+			setTextUsuario("NOME DA SUA EMPRESA");
+			if(tipoUsuario.equalsIgnoreCase("P")){
+				usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.PETSHOP);
+			}else{
+				usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.ONG);
+			}
+		}else{
+			setRenderizarCNPJ(false);
+			setRenderizarEmail(true);
+			setRenderizarNome(true);
+			setTextUsuario("SEU NOME");
+			usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.USER);
+		}
+	}
+
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 }

@@ -1,5 +1,6 @@
 package br.com.petmooby.beans;
 
+import javax.faces.bean.ManagedProperty;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -22,6 +23,9 @@ public class SuperBean <T>{
 	protected static ResteasyClient client;
 	protected static ResteasyWebTarget target;
 	public static final String URL_BASE = FileApplicationUtil.getUrlBaseREST();
+	
+	@ManagedProperty(value = "#{authenticationService}")
+	private AuthenticationService authenticationService;
 	
 	static{
 		client = new ResteasyClientBuilder().build();
@@ -68,6 +72,14 @@ public class SuperBean <T>{
 	
 	protected void exibirAlertaMessage(String message) {
 		MessagesBeanUtil.alert(message);
+	}
+
+	public AuthenticationService getAuthenticationService() {
+		return authenticationService;
+	}
+
+	public void setAuthenticationService(AuthenticationService authenticationService) {
+		this.authenticationService = authenticationService;
 	}
 
 }

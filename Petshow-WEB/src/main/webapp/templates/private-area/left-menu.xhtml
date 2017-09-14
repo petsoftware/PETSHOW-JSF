@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+       
+    <ui:composition>
+        	
+    	<div id="sidebar-wrapper">
+    		<div class="sidebar-brand">
+    			<div style="width: 205px; height: 205px" align="center">
+             		<a href="#" style="width: 100%; height: 100%"><img class="img-circle" style="width: 100%; height: 100%"	src="#{request.contextPath}/resources/images/imgSemFoto.jpg" /></a>
+           		</div>
+           	</div>
+           	<div class="sidebar-content">
+           		<div id="sidebar-body">
+		    		<ul class="sidebar-nav">
+			      		<li>		      		
+			            	<p:link id="inicio" styleClass="#{activeAnuncio}" title="Sua página inical" outcome="private-inicio" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-home"></i>
+		                			</div>
+		                			<div class="media-body">INÍCIO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="anuncio" styleClass="#{activeAnuncio}" title="Anúcio" outcome="private-anunciar-perdido" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-bullhorn"></i>
+		                			</div>
+		                			<div class="media-body">ANUNCIAR PERDIDO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="servicos" styleClass="#{activeAnuncio}" title="Serviços do Petshop ou da ONG" outcome="private-anunciar-adocao" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-cogs"></i>
+		                			</div>
+		                			<div class="media-body">ANUNCIAR ADOÇÃO</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		<li>		      		
+			            	<p:link id="notificacao" styleClass="#{activeAnuncio}" title="Notificações" outcome="private-meus-animais" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-bell-o"></i>
+		                			</div>
+		                			<div class="media-body">MEUS ANIMAIS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		
+			      		<li>		      		
+			            	<p:link id="vacinas" styleClass="#{activeAnuncio}" title="Vacinas dos Animais" outcome="private-meus-dados" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-pencil-square-o"></i>
+		                			</div>
+		                			<div class="media-body">MEUS DADOS</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>
+			      		
+			      		<li>		      		
+			            	<p:link id="usuario" styleClass="#{activeAnuncio}" title="Editar Usuário" outcome="private-promocoes" onclick="paceStart();">				            			                			
+		                		<div class="media media-left-menu">
+		                			<div class="media-left">
+		                				<i class="fa fa-user-circle"></i>
+		                			</div>
+		                			<div class="media-body">PROMOÇÕES</div>
+		                		</div>
+	                		</p:link>
+	                		
+			      		</li>				      					      	
+			        </ul>
+			   	</div>
+		   	</div>	        
+        </div>        
+    </ui:composition>
+    
+</html>

@@ -83,6 +83,11 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>sucessoLoginComumUser</from-outcome>
+			<to-view-id>/private/inicio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>cad-perdido</from-outcome>
 			<to-view-id>/admin/perdido-cadastro.xhtml</to-view-id>
 			<redirect />
@@ -109,12 +114,48 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>anunciar-adocao-site</from-outcome>
-			<to-view-id>/adocao-cadastro-site.xhtml</to-view-id>
+			<to-view-id>/private/adocao-cadastro-site.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>anunciar-perdido-site</from-outcome>
-			<to-view-id>/perdido-cadastro-site.xhtml</to-view-id>
+			<to-view-id>/private/perdido-cadastro-site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+		<navigation-case>
+			<from-outcome>private-inicio</from-outcome>
+			<to-view-id>/private/inicio.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>private-anunciar-perdido</from-outcome>
+			<to-view-id>/private/perdido-cadastro-site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>private-anunciar-adocao</from-outcome>
+			<to-view-id>/private/private-anunciar-adocao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>anunciar-perdido-site</from-outcome>
+			<to-view-id>/private/private-anunciar-perdido.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>private-meus-animais</from-outcome>
+			<to-view-id>/private/private-meus-animais.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>private-meus-dados</from-outcome>
+			<to-view-id>/private/private-meus-dados.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>private-promocoes</from-outcome>
+			<to-view-id>/private/private-promocoes.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

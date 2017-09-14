@@ -6,6 +6,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.petmooby.enums.EnumFlTpEstabelecimento;
 import br.com.petmooby.model.Usuario;
 import br.com.petmooby.security.AuthenticationService;
 import br.com.petmooby.util.MD5EncriptUtil;
@@ -39,10 +40,6 @@ public class LoginBean {
 		}
 	}
 
-	//public void setLogado(boolean isLogado) {
-	//	LoginBean.isLogado = isLogado;
-	//}
-
 	public String login() {
 		System.out.println("entrou login");
 		String validate = validate();
@@ -52,6 +49,12 @@ public class LoginBean {
 			if (!success) {
 				MessagesBeanUtil.erroMessage("Falha no login!", "Usuário ou senha inválidos! Ou o usuário pode não ter sido validado pelo E-mail");
 				return "";
+			}
+			Usuario user = AuthenticationService.getUsuarioLogado();
+			if(user != null){
+				if(user.getFlTpEstabelecimento().equals(EnumFlTpEstabelecimento.USER)){
+					return "sucessoLoginComumUser";
+				}
 			}
 			return "sucessoLogin";
 		}else{

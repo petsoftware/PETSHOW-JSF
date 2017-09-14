@@ -69,10 +69,7 @@ public class UsuarioBean extends SuperBean<Usuario>{
 
 	public void solicitarCadastro(){
 		try {
-
-			//usuario.setFoto(ImagemUtil.transformBase64AsString(imagem));
 			usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
-
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Solicitação de cadastro foi efetivado com sucesso!Em até 1 dia util receberá um email com instruções!"));
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
@@ -87,20 +84,14 @@ public class UsuarioBean extends SuperBean<Usuario>{
 
 	public void salvarUsuarioEstabelecimento(){
 		try {
-			
-			
-			
 			usuario.setTipoUser(EnumTipoUser.USER);
 			usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.USER);
 			usuario = RestUtilCall.postEntity(usuario, "usuario/salvar",Usuario.class);
-			
 			UsuarioCliente userCli = new UsuarioCliente();
 			userCli.setCliente(usuario);
 			userCli.setEstabelecimento(getUsuarioLogado());
 			userCli.setDataCadastro(new Date());
-			
 			String result = RestUtilCall.postEntity(userCli, "usuario/salvar/usercli",String.class);
-			
 			MessagesBeanUtil.infor("Usuário salvo com sucesso", result);
 		} catch (ExceptionErroCallRest  e) {
 			MessagesBeanUtil.exception(e);
@@ -113,11 +104,7 @@ public class UsuarioBean extends SuperBean<Usuario>{
 
 	public void salvarUsuario(){
 		try {
-
-			//usuario.setFoto(ImagemUtil.transformBase64AsString(imagem));
-			//usuario.setFoto(ImagemUtil.transformBase64AsString(imagem));
 			usuario = RestUtilCall.postEntity(usuario, "usuario/salvar",Usuario.class);
-
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Alteração efetuada com sucesso!"));
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
@@ -132,7 +119,6 @@ public class UsuarioBean extends SuperBean<Usuario>{
 
 	public void consultaCEP(){
 		try {
-			
 				HashMap<String,String> retorno = RestUtilCall.getHashMap("endereco/consulta/Cep/"+usuario.getNrCep());
 				usuario.setCidade(retorno.get("cidade"));
 				usuario.setRua(retorno.get("rua"));
@@ -149,7 +135,6 @@ public class UsuarioBean extends SuperBean<Usuario>{
 			e.printStackTrace();
 		}
 	}
-
 
 	public String getLblNmLogin(){
 		if(usuario==null){
@@ -184,7 +169,6 @@ public class UsuarioBean extends SuperBean<Usuario>{
 		}
 	}
 
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -206,6 +190,6 @@ public class UsuarioBean extends SuperBean<Usuario>{
         if(this.usuario!=null){
         	this.usuario.setFoto(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
         }
-}
+	}
 
 }

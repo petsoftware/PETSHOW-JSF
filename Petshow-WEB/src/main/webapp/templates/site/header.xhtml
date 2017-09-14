@@ -86,65 +86,96 @@
 						<div class="ui-grid-row ui-grid-row-custom">
 							<div class="ui-grid-col-12">
 								<div class="inputTextGroupLeft">
-									<p:inputText id="usuario" style="width:100%;" label="Usuário"
-										placeholder="Seu nome" title="Usuário"
-										value="#{novoUsuarioBean.usuario.nome}" required="true">
-									</p:inputText>
-									<i class="fa fa-user"></i>
-								</div>
-							</div>
-						</div>
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:inputText id="email" style="width:100%;" label="E-mail"
-										placeholder="E-mail" title="E-mail"
-										value="#{novoUsuarioBean.usuario.email}" required="true">
-									</p:inputText>
-									<i class="fa fa-envelope"></i>
-								</div>
-							</div>
-						</div>
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:inputText id="txtCNPJ" style="width:100%;" label="CNPJ"
-										value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
-										title="CNPJ" required="true">
-										<f:validator
-											validatorId="br.com.petmooby.validator.CnpjValidator" />
-									</p:inputText>
-									<i class="fa fa-cube"></i>
-								</div>
-							</div>
-						</div>
-
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:password id="senha" style="width:50%;" label="Senha"
-										placeholder="Senha" title="Senha"
-										value="#{novoUsuarioBean.senha}" autocomplete="new-password"
-										required="true">
-									</p:password>
-									<i class="fa fa-lock"></i>
-								</div>
-							</div>
-						</div>
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<p:password id="txtConfSenha" style="width:50%;" label="Senha"
-										placeholder="Confirme a senha" title="Senha"
-										value="#{novoUsuarioBean.confSenha}"
-										autocomplete="new-password" required="true">
-									</p:password>
-									<i class="fa fa-lock"></i>
+								Quem sou eu?
 								</div>
 							</div>
 						</div>
 					</div>
-
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<p:selectOneRadio value="#{novoUsuarioBean.tipoUsuario}">
+										<f:selectItem itemLabel="PETSHOP" itemValue="P"/>
+										<f:selectItem itemLabel="ONG" 	  itemValue="O"/>
+										<f:selectItem itemLabel="USUÁRIO" itemValue="U"/>
+										<p:ajax update="pnlgFields" listener="#{novoUsuarioBean.renderComponenets}" />
+									</p:selectOneRadio>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h:panelGroup id="pnlgFields">
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<h:panelGroup rendered="#{novoUsuarioBean.renderizarNome}">
+										<p:inputText id="usuario" style="width:100%;" label="Usuário"
+											placeholder="#{novoUsuarioBean.textUsuario}" title="Usuário"
+											value="#{novoUsuarioBean.usuario.nome}" required="true">
+										</p:inputText>
+										<i class="fa fa-user"></i>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
+										<p:inputText id="email" style="width:100%;" label="E-mail"
+											placeholder="E-mail" title="E-mail" 
+											value="#{novoUsuarioBean.usuario.email}" required="true">
+										</p:inputText>
+										<i class="fa fa-envelope"></i>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<h:panelGroup  rendered="#{novoUsuarioBean.renderizarCNPJ}">
+									<div class="inputTextGroupLeft">
+										<p:inputText id="txtCNPJ" style="width:100%;" label="CNPJ"
+											value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
+											title="CNPJ" required="#{novoUsuarioBean.renderizarCNPJ}">
+											<f:validator
+												validatorId="br.com.petmooby.validator.CnpjValidator" />
+										</p:inputText>
+										<i class="fa fa-cube"></i>
+									</div>
+								</h:panelGroup>
+							</div>
+						</div>
+						<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="inputTextGroupLeft">
+										<p:password id="senha" style="width:50%;" label="Senha"
+											placeholder="Senha" title="Senha"
+											value="#{novoUsuarioBean.senha}" autocomplete="new-password"
+											required="true">
+										</p:password>
+										<i class="fa fa-lock"></i>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="inputTextGroupLeft">
+										<p:password id="txtConfSenha" style="width:50%;" label="Senha"
+											placeholder="Confirme a senha" title="Senha"
+											value="#{novoUsuarioBean.confSenha}"
+											autocomplete="new-password" required="true">
+										</p:password>
+										<i class="fa fa-lock"></i>
+									</div>
+								</div>
+							</div>
+						</h:panelGroup>
+					</div>
+					</h:panelGroup>
 					<f:facet name="footer">
 
 						<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
@@ -156,6 +187,7 @@
 							value="Confirmar" type="submit"
 							title="Confirme após informar todos os dados"
 							update="cadastrarMsgsDialog"
+							onclick="paceStart();" oncomplete="Pace.restart();"
 							action="#{novoUsuarioBean.solicitarCadastro}" />
 
 					</f:facet>
@@ -202,16 +234,16 @@
 					<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}"
 						style="margin-right: 15px;">
 						<div class="usuario-logado">
-							<i class="fa fa-user-circle-o"></i>
+							<i class="fa fa-user fa-2x" style="color: black;"></i>
 							<h:outputText value="#{loginBean.userName}" />
 						</div>
 					</li>
 
 					<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}"><p:commandLink
 							id="sair" styleClass="lnk-sair" title="Sair?" process="@this"
-							action="#{bean.logout}">
-							<i class="fa fa-sign-out"></i>
-						</p:commandLink></li>
+							action="#{loginBean.logout}" ajax="false">
+							<i class="fa fa-sign-out fa-3x"></i>
+						</p:commandLink><pe:tooltip for="sair" /></li>
 				</ul>
 			</h:form>
 				<ul class="navbar-nav ml-auto">

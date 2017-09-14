@@ -69,5 +69,22 @@ public class AuthenticationService {
     HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
     session.invalidate();
   }
+  
+  public boolean isAuthenticated() {
+	  if(SecurityContextHolder.getContext() != null && SecurityContextHolder.getContext().getAuthentication() != null){
+		  if(SecurityContextHolder.getContext().getAuthentication().isAuthenticated()){
+			  Object obj = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			  if(obj instanceof Usuario){
+				  return true;
+			  }else{
+				  return false;
+			  }
+		  }else{
+			  return false;
+		  }
+	  }else{
+		  return false;
+	  }
+  }
 
 }

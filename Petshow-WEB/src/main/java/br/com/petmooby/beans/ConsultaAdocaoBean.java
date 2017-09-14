@@ -27,7 +27,7 @@ import br.com.petmooby.web.util.CallAnimalRest;
 
 @ManagedBean
 @ViewScoped
-public class ConsultaAdocaoBean implements Serializable{
+public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializable{
 	
 	/**
 	 * 

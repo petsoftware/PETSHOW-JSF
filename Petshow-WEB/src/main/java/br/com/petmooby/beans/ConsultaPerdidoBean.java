@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.petmooby.enums.EnumAchadoPerdido;
 import br.com.petmooby.enums.EnumFaseVida;
 import br.com.petmooby.enums.EnumSexo;
 import br.com.petmooby.enums.EnumTipoAnimal;
@@ -23,7 +24,7 @@ import br.com.petmooby.web.util.CallAnimalRest;
 
 @ManagedBean
 @ViewScoped
-public class ConsultaPerdidoBean {
+public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 	
 	private List<Perdido> perdidos;
 	private CallAnimalRest restAnimal;
@@ -33,7 +34,7 @@ public class ConsultaPerdidoBean {
 	private Cidade cidade;
 	private Bairro bairro;
 	private String animal;
-	private String tpPerdidoAchado;
+	private EnumAchadoPerdido tpPerdidoAchado;
 	private EnumSexo sexo;
 	private int totalRows = 0;
 	
@@ -134,14 +135,6 @@ public class ConsultaPerdidoBean {
 	public void setBairro(Bairro bairro) {
 		this.bairro = bairro;
 	}
-
-	public String getTpPerdidoAchado() {
-		return tpPerdidoAchado;
-	}
-
-	public void setTpPerdidoAchado(String tpPerdidoAchado) {
-		this.tpPerdidoAchado = tpPerdidoAchado;
-	}
 	
 	public String getEstado(Estado estado) {
 		if(estado !=null){
@@ -187,6 +180,14 @@ public class ConsultaPerdidoBean {
 	}
 	public void setTotalRows(int totalRows) {
 		this.totalRows = totalRows;
+	}
+
+	public EnumAchadoPerdido getTpPerdidoAchado() {
+		return tpPerdidoAchado;
+	}
+
+	public void setTpPerdidoAchado(EnumAchadoPerdido tpPerdidoAchado) {
+		this.tpPerdidoAchado = tpPerdidoAchado;
 	}
 	
 }

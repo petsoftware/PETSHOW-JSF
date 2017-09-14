@@ -40,7 +40,7 @@
 		<intercept-url pattern="/" access="permitAll" />
 		<intercept-url pattern="/admin/*"
 			access="isAuthenticated() and hasAnyRole('ADMIN','PETSHOP')" />
-		<intercept-url pattern="/private/**" access="permitAll" />
+		<intercept-url pattern="/private/**" access="isAuthenticated() and hasAnyRole('ADMIN','PRIVATE')" />
 		<intercept-url pattern="/rest/**" access="isAuthenticated() and hasAnyRole('ADMIN','PETSHOP')"/>
 
 	</http>
