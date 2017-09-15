@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
-
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:p="http://primefaces.org/ui" template="#{pageHelperBean.mainTemplatePrivate}">
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="#{pageHelperBean.mainTemplatePrivate}">
 
 	<ui:param name="activeAnuncio" value="active" />
-	<ui:param name="pageIcon" value="bullhorn" />
-	<ui:param name="pageTitle" value="ANÚNCIO" />
+	<ui:param name="pageIcon" value="paw" />
+	<ui:param name="pageTitle" value="MEUS ANIMAIS" />
 
 	<ui:define name="header">
 
@@ -19,40 +20,145 @@
 
 	<ui:define name="body">
 
-			<div class="ui-grid ui-grid-responsive">	   		
-	   			<div class="ui-grid-row ui-grid-row-custom">
-					<div class="ui-grid-col-12">									
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-6" style="padding-right:5px;">				  				
-					           	<div class="ui-grid-row">
-					  				<div class="ui-grid-col-12">					  				
-										<div class="ui-grid-row ui-grid-row-custom">
-											<div class="ui-grid-col-12">
-											
-<!-- *********************************************************************************************************** -->											
-											<!-- O layout da Tela comeca aqui -->
-											<!-- Template para criar campo e lable 
-												<div class="ui-grid-row">
-											    
-											    </div>
-											   	<div class="ui-grid-row">
-										 	     
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<h:panelGroup id="panelAnimais" rendered="#{meusAnimaisBean.temAnimais}">
+								<ui:repeat var="animal"
+									value="#{meusAnimaisBean.meusAnimais}">
+									<p:link  styleClass="btn-detalhes">
+										<f:param name="id" value="#{animal.id}"></f:param>
+										<div class="div-click" onclick="#">
+											<p:panel 
+												header="#{animal.nome}"
+												styleClass="box">
+												<f:facet name="actions">
+													<div class="ui-panel-titlebar-icon">
+														 <img class="img-fluid"
+																src="#{request.contextPath}/resources/images/drawable-android/#{animal.imageAnimal}" />
+													</div>
+												</f:facet>
+												<div class="row">
+													<div class="col-md-4" style="width: 150px;height: 150px;">
+														<h:panelGroup rendered="#{animal.fotoPerfil.isEmpty()}">
+															<img class="img-fluid"
+																src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+														</h:panelGroup>
+														<h:graphicImage rendered="#{not animal.fotoPerfil.isEmpty()}"
+															style="width:100%;height:100%;" stream="false"
+															styleClass="img-circle"
+															cache="false"
+															url="data:image/jpg;base64,#{animal.fotoPerfil}"
+															id="visualizacao" alt="Foto do seu animal" />
+
+													</div>
+													<div class="col-md-6">
+														<h6 style="text-align: justify; text-justify: inter-word;">#{animal.sobre}</h6>
+													</div>
+
 												</div>
-											
-											-->
-											
-											
-											<!-- Fim das divs que definem os layouts  -->
-<!-- ************************************************************************************************************** -->								
+											</p:panel>
+										</div>
+									</p:link>
+								</ui:repeat>
+							</h:panelGroup>
+							<h:panelGroup  rendered="#{not meusAnimaisBean.temAnimais}">
+								<p:panel header="Ainda não cadastrou nenhum PET?">
+									<div class="row">
+										<div class="col-md-4">
+											<img class="img-fluid" src="#{request.contextPath}/resources/images/emo-icons/sad-64.png" />
+										</div>
+										<div class="col-md-4">
+											<p> É muito rápido e simples cadastrar. Faço isso agora mesmo preenchendo o formulário abaixo</p>
+										</div>
+									</div>
+								</p:panel>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<p:panel header="Insira os dados do animal" rendered="true">
+									<f:facet name="actions">
+										<div class="ui-panel-titlebar-icon">
+											 <img class="img-fluid" src="#{request.contextPath}/resources/images/drawable-android/animal-prints.png" />
+										</div>
+									</f:facet>
+									<div class="row">
+										<div class="col-md-4">
+											<div class="ui-upload-img" style="height: 215px;">
+												<h:graphicImage
+													style="width:100%;height:100%;display:#{meusAnimaisBean.animal.fotoPerfil.isEmpty() ?'none' : 'inline-block' }"
+													stream="false" cache="false"
+													url="data:image/jpg;base64,#{meusAnimaisBean.animal.fotoPerfil}"
+													id="visualizacao" alt="FOTO" />
+												<span
+													style="font-size: 58px; display: #{meusAnimaisBean.animal.fotoPerfil.isEmpty()?'inline-block': 'none' }"
+													class="fa-stack fa-lg"> <i
+													class="fa fa-camera fa-stack-1x"></i> <i
+													class="fa fa-ban fa-stack-2x text-danger"></i>
+												</span>
+											</div>
+											<p:fileUpload fileUploadListener="#{meusAnimaisBean.enviaImagem}"
+											auto="true" update="visualizacao" id="upldFoto"
+											label="Escolha uma foto" skinSimple="true" multiple="false"
+											allowTypes="/(\.|\/)(jpe?g|png)$/" />
+										</div>
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-6" style="padding-left:0px !important;">
+													<p:inputText style="padding-left:0px;" placeholder="NOME DO ANIMAL" maxlength="35" value="#{meusAnimaisBean.animal.nome}"/>
+												</div>
+												
+												<div class="col-md-6" style="padding-left:0px;">
+													<p:calendar id="dataInicio"
+																style="width:50px !important;"
+																locale="pt"
+																pattern="dd/MM/yyyy"
+																placeholder="Nascimento"
+																mask="true" 
+																value="#{meusAnimaisBean.animal.dataNascimento}"
+										 						required="true" 
+																
+																/>
+															
+												</div>
+											</div>
+											<div class="row" style="padding-top: 5px;">
+												<p:selectOneMenu id="cbAnimal" style="width: 100%;"
+													value="#{meusAnimaisBean.animal.tipo}">
+													<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
+														itemValue="" noSelectionOption="true" />
+													<f:selectItems value="#{meusAnimaisBean.tiposAnimais}" />
+												</p:selectOneMenu>
+											</div>
+											<div class="row" style="padding-top: 5px;">
+												<p:selectOneMenu id="cbSexo" value="#{meusAnimaisBean.animal.flSexo}"
+													style="width: 100%;">
+													<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
+														itemValue="" noSelectionOption="true" />
+													<f:selectItems value="#{meusAnimaisBean.sexos}" />
+												</p:selectOneMenu>
+											</div>
+											<div class="row" style="padding-top: 5px;" >
+												<p:inputTextarea style="width:100%" cols="8" rows="6" value="#{meusAnimaisBean.animal.sobre}" placeholder="FALE UM POUCO SOBRE O SEU PET."/>
+											</div>
+											<div class="row" style="padding-top 5px;">
+												<p:commandButton update="panelAnimais" value="Salvar" styleClass="btn btn-primary btn-lg btn3d" action="#{meusAnimaisBean.salvar}" ajax="false"/>
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>
+ 
+								</p:panel>
+							</h:panelGroup>
+							
 						</div>
+
 					</div>
 				</div>
+
 			</div>
+		</div>
 
 	</ui:define>
 

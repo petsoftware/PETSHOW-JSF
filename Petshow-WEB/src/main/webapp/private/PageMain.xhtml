@@ -3,118 +3,77 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html">
-<ui:composition >
+<ui:composition>
 	<!-- Page Content -->
 	<div class="container">
 
-		<!-- Introduction Row -->
 		<div class="row">
-			<div class="col-lg-6">
-
-				<p:separator />
-				<p>A PETSHOW é uma plataforma para ajudar animais, ONG's,
-					Tutores e PetShops a se encontrarem e manterem um relação de
-					parceria mandendo uma relação forte e insolúvel. Nós oferecemos o
-					melhor que temos para manter seus laços com os PETs cada vez mais
-					forte. Você não precisa pagar na por este serviço, por isso fique a
-					vontade. Juntos podemos fazer muito pelos animais do que você
-					imagina.</p>
-				<p:separator />
-			</div>
-
-		</div>
-
-		<ui:remove>
-		<div class="row">
-				<!-- Inicio div dos baloes  -->
-				<div class="col-lg-6">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-comments fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge">26</div>
-									<div>Novos Comentários!</div>
-								</div>
-							</div>
-						</div>
-						<a href="#">
-							<div class="panel-footer">
-								<span class="pull-left">Detalhes</span> <span class="pull-right"><i
-									class="fa fa-arrow-circle-right"></i></span>
-								<div class="clearfix"></div>
-							</div>
-						</a>
-					</div>
-				</div>
-			</div>
-			</ui:remove>
-			
-			<div class="row">
+			<div class="col-md-4">
 				<!-- perdidos -->
-				<div class="col-lg-6">
-					<div class="panel panel-green">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-bullhorn fa-5x"></i>
+
+				<div class="panel panel-green">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<i class="fa fa-paw fa-5x"></i>
+							</div>
+							<div class="col-xs-9 text-right">
+								<div class="huge">
+									<p:outputLabel
+										value="#{mainPageBean.estatistica.numeroDeAnuncios}" />
 								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge"> <p:outputLabel value="#{mainPageBean.estatistica.numeroDeAnuncios}"/> </div>
-									<div>Anúncios Ativos</div>
-								</div>
+								<div>MEUS PETS</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			
 			</div>
-		
-			
-			
-			<div class="row">
-				<!-- Anúncios -->
-				<div class="col-lg-6">
-					<div class="panel panel-yellow">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-qq fa-5x"></i>
+
+			<div class="col-md-4">
+				<div class="panel panel-yellow">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<img class="img-fluid" src="#{request.contextPath}/resources/images/comment-mono.png" />
+							</div>
+							<div class="col-xs-9 text-right">
+								<div class="huge">
+									<p:outputLabel
+										value="#{mainPageBean.estatistica.numeroDeVendas}" />
 								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge"> <p:outputLabel value="#{mainPageBean.estatistica.numeroDeVendas}"/> </div>
-									<div>Total de Classificados</div>
-								</div>
+								<div>O QUE O PESSOAL ESTÁ FALANDO</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				</div>
-				<div class="row">
-				<!-- Adocoes -->
-				<div class="col-lg-6">
-					<div class="panel panel-red">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-xs-3">
-									<i class="fa fa-cogs fa-5x"></i>
-								</div>
-								<div class="col-xs-9 text-right">
-									<div class="huge"><p:outputLabel value="#{mainPageBean.estatistica.numeroDeServicos}"/></div>
-									<div>Serviços Ativos!</div>
-								</div>
-							</div>
-						</div>
-						
 					</div>
 				</div>
 
-				<!-- Ultima div dos baloes  -->
 			</div>
-
+			<div class="col-md-4">
+				<div class="panel panel-red">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-3">
+								<i class="fa fa-tags fa-5x"></i>
+							</div>
+							<div class="col-xs-9 text-right">
+								<div class="huge">
+									<p:outputLabel
+										value="#{mainPageBean.estatistica.numeroDeServicos}" />
+								</div>
+								<div>PROMOÇÕES</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-	
+		<div class="row">
+			<div class="col-md-12">
+			   <ui:include src="feed-commets-content.xhtml"/>
+			</div>
+		</div>
+
+	</div>
+
 </ui:composition>
 </html>

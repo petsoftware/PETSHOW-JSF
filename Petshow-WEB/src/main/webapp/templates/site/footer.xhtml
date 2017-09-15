@@ -46,20 +46,51 @@
 	<!-- Footer -->
 	<footer>
 		<div class="container">
-			<ul class="list-inline">
-				<li class="list-inline-item"><a href="#">HOME</a></li>
-				<li class="footer-menu-divider list-inline-item">&#8901;</li>
-				<li class="list-inline-item"><a href="#about">SOBRE NÓS</a></li>
-				<li class="footer-menu-divider list-inline-item">&#8901;</li>
-				<li class="list-inline-item"><a href="#services">SOU UM
-						PETSHOP</a></li>
-				<li class="footer-menu-divider list-inline-item">&#8901;</li>
-				<li class="list-inline-item"><a href="#contact">CONTATO</a></li>
-			</ul>
-			<p class="copyright text-muted small">Copyright &#169; PetSHOW
-				platform 2016. All Rights Reserved</p>
+			
+			<div class="row">
+				<ul class="list-inline">
+					<li class="list-inline-item"><a href="#"><img src="#{request.contextPath}/resources/images/koala-64.png" /></a></li>
+					<li class="footer-menu-divider list-inline-item">&#8901;</li>
+					<li class="list-inline-item"><a href="#about"><img src="#{request.contextPath}/resources/images/fox-64.png" /></a></li>
+					<li class="footer-menu-divider list-inline-item">&#8901;</li>
+					<li class="list-inline-item"><a href="#services"><img src="#{request.contextPath}/resources/images/tiger-64.png" /></a></li>
+					<li class="footer-menu-divider list-inline-item">&#8901;</li>
+					<li class="list-inline-item"><a href="#contact"><img src="#{request.contextPath}/resources/images/lemur-64.png" /></a></li>
+					
+				</ul>
+			</div>
+			<div class="row" style="padding-bottom: 10px">
+					<img src="#{request.contextPath}/resources/images/warning-32.png" />
+					<h5 style="color: red; padding-left: 8px; padding-top: 10px;">ATENÇÃO</h5> <p style="color: orphans; padding-left: 8px;  padding-top: 10px;">Comprar, vender ou manter animal silvestre em cativeiro é crime. Estamos de olho.</p>	
+			</div>
+			<div class="row">
+				<p class="copyright text-muted small">Copyright &#169; PetmOOby	platform 2016. All Rights Reserved</p>
+			</div>
 		</div>
 	</footer>
+	<h:form id="frmFooter">
+	<p:dialog id="showAnimal" header="Entrar" widgetVar="dlgAnimal"
+			modal="true" showEffect="fade" hideEffect="fade" width="300"
+			resizable="false" responsive="true">
+
+			<p:messages id="entrarMsgsDialog" styleClass="ui-messages-dialog"
+				showSummary="true" showDetail="true" closable="true"
+				showIcon="false" />
+
+			
+
+			<f:facet name="footer">
+
+				<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
+					style="margin-right:4px" icon="fa fa-times" value="Sair"
+					process="@this" title="Fecha a janela sem efetuar o login"
+					oncomplete="PF('edlg').hide();" />
+				<pe:tooltip for="sair" />
+
+			</f:facet>
+		</p:dialog>
+	</h:form>
+	<ui:include src="footer-with_address.xhtml" />
 
 	<!-- Bootstrap core JavaScript -->
 

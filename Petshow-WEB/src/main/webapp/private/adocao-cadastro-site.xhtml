@@ -9,7 +9,6 @@
 <ui:composition template="#{pageHelperBean.mainTemplateSite}">
 
 	<ui:define name="body">
-
 		<section class="content-section-a">
 			<div class="container">
 				<div class="row">
@@ -17,143 +16,20 @@
 						styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
 						title="Limpar Anúncio?" value="Novo" action="#{adocaoBean.novo}"
 						type="submit" ajax="false" />
-
 					<p:commandButton id="btnSalvar" style="margin-right:4px"
 						styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
 						title="Salvar Anúncio?" value="Salvar"
 						action="#{adocaoBean.salvar}" type="submit" ajax="false"
 						onstart="paceStart();" onclick="paceStart();"
 						oncomplete="Pace.restart();" update="@form" />
-
-					<p:confirmDialog id="dlgConfirm" global="true" showEffect="fade"
-						severity="alert" widgetVar="deleteConfirmDlg" hideEffect="fade"
-						appendToBody="true" ajax="false">
-
-						<p:commandButton value="Sim" type="button"
-							styleClass="ui-confirmdialog-yes btn btn-info btn-lg"
-							icon="ui-icon-check" />
-						<p:commandButton value="Não" type="button"
-							styleClass="ui-confirmdialog-no btn btn-danger btn-lg"
-							icon="ui-icon-close" />
-
-					</p:confirmDialog>
-
 				</div>
 				<div class="row"></div>
 				<section class="content-section-a">
-					<div class="row">
-						<div class="col-md-6">
-							<div class="row">
-								<div class="form-group">
-									<p:inputText placeholder="Título do anúncio" maxlength="15" value="#{adocaoBean.adocao.titulo}"/>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group">
-									<p:inputTextarea id="txtMensagem"
-										placeholder="FALA SOBRE ESTE ANIMAL DA ADOÇÃO" rows="8"
-										cols="40" counter="display" maxlength="255"
-										counterTemplate="{0} characters faltando." autoResize="false" value="#{adocaoBean.adocao.descAdocao}"/>
-								</div>
-							</div>
-							<div class="row">
-								<p:outputLabel id="display" />
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-										<p:inputText placeholder="DDD" maxlength="2" size="5" value="#{adocaoBean.adocao.dddCelular}"/>
-										<p:inputText placeholder="Número para contato" maxlength="9" value="#{adocaoBean.adocao.telefoneCelular}"/>
-								</div>
-							</div>
-							<div class="row">
-							Tipo de Animal
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<p:selectOneMenu id="cbAnimal" style="width: 100%;"
-										value="#{adocaoBean.adocao.tipo}">
-										<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
-											itemValue="" noSelectionOption="true" />
-										<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
-									</p:selectOneMenu>
-								</div>
-							</div>
-							<div class="row">
-							Fase de Vida
-							</div>
-							<div class="row">
-								<div class="col-md-6">	
-									<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
-										style="width: 100% !important;">
-										<f:selectItem itemLabel="#{placeHolderBean.selFase}"
-											itemValue="" noSelectionOption="true" />
-										<f:selectItems value="#{consultaAdocaoBean.fases}" />
-									</p:selectOneMenu>
-								</div>
-							</div>
-							
-						</div>
-						<div class="col-md-6">
-
-							<h:outputLabel value="FOTO" for="txtInputFoto1" />
-							<p:fileUpload fileUploadListener="#{adocaoBean.enviaImagem}"
-								update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
-								fileLimit="100000" fileLimitMessage="Imagem muito grande"
-								label="Selecionar" invalidFileMessage="Tipo de imagem inválido"
-								invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
-								multiple="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
-
-							</p:fileUpload>
-
-							<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col -->-6" align="center">
-									<p:panel header="FOTOS" id="pnlFotos">
-										<div class="ui-grid-row">
-											<ui:repeat var="foto" value="#{adocaoBean.adocao.fotos}">
-												<div class="ui-grid-col-4">
-													<div class="ui-grid-row">
-														<div class="ui-upload-img" style="height: 215px;">
-															<h:graphicImage
-																style="width:100%;height:100%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
-																stream="false" cache="false"
-																url="data:image/jpg;base64,#{foto}" id="visualizacao"
-																alt="Visualização do anuncio" />
-															<span
-																style="font-size: 58px; display: #{foto.isEmpty()? 'inline-block': 'none'}"
-																class="fa-stack fa-lg"> <i
-																class="fa fa-camera fa-stack-1x"></i> <i
-																class="fa fa-ban fa-stack-2x text-danger"></i>
-															</span>
-														</div>
-													</div>
-													<div class="ui-grid-row">
-														<p:commandButton style="width:100%;height:100%;"
-															actionListener="#{adocaoBean.removePhoto(foto)}"
-															styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
-															title="Excluir foto à esquerda" ajax="true"
-															update="@form">
-															<p:confirm header="Confirme a exclusão"
-																message="Você tem certeza que deseja excluir este registro? Só terá efeito após você clicar no botão salvar"
-																icon="fa fa-exclamation-triangle" />
-														</p:commandButton>
-													</div>
-
-												</div>
-
-											</ui:repeat>
-										</div>
-									</p:panel>
-								</div>
-							</div>
-
-						</div>
-					</div>
+					<ui:include src="adocao-cadastro-content.xhtml" />
 				</section>
 			</div>
 		</section>
-
 	</ui:define>
-
 </ui:composition>
 
 </html>

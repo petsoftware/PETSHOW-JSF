@@ -11,10 +11,21 @@
 
 	<ui:param name="activeAnuncio" value="active" />
 	<ui:param name="pageIcon" value="bullhorn" />
-	<ui:param name="pageTitle" value="ANÚNCIO" />
+	<ui:param name="pageTitle" value="PERDIDO" />
 
 	<ui:define name="header">
+		<p:commandButton id="btnLimpar" style="margin-right:4px"
+			styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
+			title="Limpar tela?" value="Novo" action="#{perdidoBean.novo}"
+			type="submit" ajax="false" />
 
+		<p:commandButton id="btnSalvar" style="margin-right:4px"
+			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+			title="Salvar anúncio de perdido?" value="Salvar"
+			action="#{perdidoBean.salvar}" type="submit" ajax="false"
+			onstart="paceStart();" onclick="paceStart();"
+			oncomplete="Pace.restart();" update="@form" />
+			
 	</ui:define>
 
 	<ui:define name="body">
@@ -22,34 +33,7 @@
 			<div class="ui-grid ui-grid-responsive">	   		
 	   			<div class="ui-grid-row ui-grid-row-custom">
 					<div class="ui-grid-col-12">									
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-6" style="padding-right:5px;">				  				
-					           	<div class="ui-grid-row">
-					  				<div class="ui-grid-col-12">					  				
-										<div class="ui-grid-row ui-grid-row-custom">
-											<div class="ui-grid-col-12">
-											
-<!-- *********************************************************************************************************** -->											
-											<!-- O layout da Tela comeca aqui -->
-											<!-- Template para criar campo e lable 
-												<div class="ui-grid-row">
-											    
-											    </div>
-											   	<div class="ui-grid-row">
-										 	     
-												</div>
-											
-											-->
-											
-											
-											<!-- Fim das divs que definem os layouts  -->
-<!-- ************************************************************************************************************** -->								
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<ui:include src="perdido-cadastro-content.xhtml" />
 					</div>
 				</div>
 			</div>

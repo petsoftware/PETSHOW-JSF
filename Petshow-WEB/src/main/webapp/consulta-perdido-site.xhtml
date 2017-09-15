@@ -95,6 +95,7 @@
 								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-pencil-square-o" 
 									action="#{consultaPerdidoBean.chamarTelaDeCadastroDePerdido}" rendered="#{consultaPerdidoBean.authenticationService.authenticated}"
 									value="ANUNCIAR PERDIDO?"  id="btnCadPerdido" />
+								<p:outputLabel style="color:red;text-align: justify;text-justify: inter-word;" value="Deseja anunciar um perdido?Então procure o botão  Quero me cadastrar, não demora nem 1 minuto"  rendered="#{not consultaPerdidoBean.authenticationService.authenticated}"/>
 							</div>
 						</div>
 					</div>
@@ -133,7 +134,7 @@
 														
 												</div>
 												<div class="col-md-8">
-													<h6>#{perdido.descAcontecimento}</h6>
+													<h6 style="text-align: justify;text-justify: inter-word;">#{perdido.descAcontecimento}</h6>
 													
 												</div>
 		
