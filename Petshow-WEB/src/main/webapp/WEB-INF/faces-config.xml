@@ -158,6 +158,11 @@
 			<to-view-id>/private/private-promocoes.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>private-usuario</from-outcome>
+			<to-view-id>/private/private-meus-dados.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	
 	 <navigation-rule>

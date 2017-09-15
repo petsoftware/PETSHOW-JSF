@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+     		<li class="#{onlySmall}">		      		
+           	<p:link  styleClass="#{activeAnuncio}" title="Sua página inical" outcome="private-inicio" onclick="paceStart();">				            			                			
+              		<div class="media media-left-menu">
+              			<div class="media-left">
+              				<i class="fa fa-home"></i>
+              			</div>
+              			<div class="media-body">INÍCIO</div>
+              		</div>
+             		</p:link>
+             		
+     		</li>
+     		<li class="#{onlySmall}">		      		
+           	<p:link  styleClass="#{activeAnuncio}" title="Anunciar que seu PET foi perdido" outcome="private-anunciar-perdido" onclick="paceStart();">				            			                			
+              		<div class="media media-left-menu">
+              			<div class="media-left">
+              				<i class="fa fa-bullhorn"></i>
+              			</div>
+              			<div class="media-body">ANUNCIAR PERDIDO</div>
+              		</div>
+             		</p:link>
+             		
+     		</li>
+     		<li class="#{onlySmall}">		      		
+           	<p:link  styleClass="#{activeAnuncio}" title="Anunciar a adoção de algum animal." outcome="private-anunciar-adocao" onclick="paceStart();">				            			                			
+              		<div class="media media-left-menu">
+              			<div class="media-left">
+              				<i class="fa fa-bullhorn"></i>
+              			</div>
+              			<div class="media-body">ANUNCIAR ADOÇÃO</div>
+              		</div>
+             		</p:link>
+             		
+     		</li>
+     		<li class="#{onlySmall}">		      		
+           	<p:link  styleClass="#{activeAnuncio}" title="Notificações" outcome="private-meus-animais" onclick="paceStart();">				            			                			
+              		<div class="media media-left-menu">
+              			<div class="media-left">
+              				<i class="fa fa-paw"></i>
+              			</div>
+              			<div class="media-body">MEUS ANIMAIS</div>
+              		</div>
+             		</p:link>
+             		
+     		</li>
+     		
+     		<li class="#{onlySmall}">		      		
+           	<p:link  styleClass="#{activeAnuncio}" title="Vacinas dos Animais" outcome="private-meus-dados" onclick="paceStart();">				            			                			
+              		<div class="media media-left-menu">
+              			<div class="media-left">
+              				<i class="fa fa-pencil-square-o"></i>
+              			</div>
+              			<div class="media-body">MEUS DADOS</div>
+              		</div>
+             		</p:link>
+             		
+     		</li>
+     		
+     		<li class="#{onlySmall}">		      		
+           	<p:link  styleClass="#{activeAnuncio}" title="Editar Usuário" outcome="private-promocoes" onclick="paceStart();">				            			                			
+              		<div class="media media-left-menu">
+              			<div class="media-left">
+              				<i class="fa fa-tags"></i>
+              			</div>
+              			<div class="media-body">PROMOÇÕES</div>
+              		</div>
+             		</p:link>
+             		
+     		</li>				      					      	
+      
+	
+</ui:composition>
+
+</html>
+

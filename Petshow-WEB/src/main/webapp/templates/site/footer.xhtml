@@ -21,14 +21,14 @@
 					<ul class="list-inline banner-social-buttons">
 						<li class="list-inline-item"
 							title="Baixe agora mesmo a app para plataforma Android"><a
-							href="#" class="btn btn-secondary btn-lg"> <i
+							href="#{request.contextPath}/page-android-site.xhtml" class="btn btn-secondary btn-lg"> <i
 								class="fa fa-android fa-fw"></i> <span class="network-name">Android</span>
 						</a></li>
-						<li class="list-inline-item"><a href="#"
+						<li class="list-inline-item"><a href="#{request.contextPath}/page-apple-site.xhtml"
 							class="btn btn-secondary btn-lg"> <i
 								class="fa fa-apple fa-fw"></i> <span class="network-name">iPhone</span>
 						</a></li>
-						<li class="list-inline-item"><a href="#"
+						<li class="list-inline-item"><a href="#{request.contextPath}/page-face-site.xhtml"
 							class="btn btn-secondary btn-lg"> <i
 								class="fa fa-facebook-official fa-fw"></i> <span
 								class="network-name">facebook</span>
@@ -46,22 +46,28 @@
 	<!-- Footer -->
 	<footer>
 		<div class="container">
-			
-			<div class="row">
-				<ul class="list-inline">
-					<li class="list-inline-item"><a href="#"><img src="#{request.contextPath}/resources/images/koala-64.png" /></a></li>
-					<li class="footer-menu-divider list-inline-item">&#8901;</li>
-					<li class="list-inline-item"><a href="#about"><img src="#{request.contextPath}/resources/images/fox-64.png" /></a></li>
-					<li class="footer-menu-divider list-inline-item">&#8901;</li>
-					<li class="list-inline-item"><a href="#services"><img src="#{request.contextPath}/resources/images/tiger-64.png" /></a></li>
-					<li class="footer-menu-divider list-inline-item">&#8901;</li>
-					<li class="list-inline-item"><a href="#contact"><img src="#{request.contextPath}/resources/images/lemur-64.png" /></a></li>
-					
-				</ul>
-			</div>
-			<div class="row" style="padding-bottom: 10px">
-					<img src="#{request.contextPath}/resources/images/warning-32.png" />
-					<h5 style="color: red; padding-left: 8px; padding-top: 10px;">ATENÇÃO</h5> <p style="color: orphans; padding-left: 8px;  padding-top: 10px;">Comprar, vender ou manter animal silvestre em cativeiro é crime. Estamos de olho.</p>	
+			<div class="col-md-12">
+				<div class="row">
+				<div class="col-md-6">
+					<div class="row">
+						<ul class="list-inline">
+							<li class="list-inline-item"><a href="#"><img src="#{request.contextPath}/resources/images/koala-64.png" /></a></li>
+							<li class="footer-menu-divider list-inline-item">&#8901;</li>
+							<li class="list-inline-item"><a href="#about"><img src="#{request.contextPath}/resources/images/fox-64.png" /></a></li>
+							<li class="footer-menu-divider list-inline-item">&#8901;</li>
+							<li class="list-inline-item"><a href="#services"><img src="#{request.contextPath}/resources/images/tiger-64.png" /></a></li>
+							<li class="footer-menu-divider list-inline-item">&#8901;</li>
+							<li class="list-inline-item"><a href="#contact"><img src="#{request.contextPath}/resources/images/lemur-64.png" /></a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row" style="padding-bottom: 10px">
+							<img src="#{request.contextPath}/resources/images/warning-32.png" />
+							<h5 style="color: red; padding-left: 8px; padding-top: 10px;">ATENÇÃO</h5> <p style="color: orphans; padding-left: 8px;  padding-top: 10px;">Comprar, vender ou manter animal silvestre em cativeiro é crime. Estamos de olho.</p>	
+					</div>
+				</div>
+				</div>
 			</div>
 			<div class="row">
 				<p class="copyright text-muted small">Copyright &#169; PetmOOby	platform 2016. All Rights Reserved</p>

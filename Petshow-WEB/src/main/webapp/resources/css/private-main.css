@@ -240,6 +240,12 @@
     height: 200px;
 }
 
+.img-circle-comment {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
+
 .ui-fileupload-filename {
     display: none !important;
 }

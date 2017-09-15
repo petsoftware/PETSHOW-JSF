@@ -235,14 +235,16 @@
 						style="margin-right: 15px;">
 						<div class="usuario-logado">
 							<i class="fa fa-user fa-2x" style="color: black;"></i>
-							<h:outputText value="#{loginBean.userName}" />
+							<p:link outcome="sucessoLoginComumUser">
+								<h:outputText style="font-variant: small-caps;font-weight: bold;font-size: 1.875em;" value="#{loginBean.userName}" />
+							</p:link>
 						</div>
 					</li>
 
 					<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}"><p:commandLink
 							id="sair" styleClass="lnk-sair" title="Sair?" process="@this"
 							action="#{loginBean.logout}" ajax="false">
-							<i class="fa fa-sign-out fa-3x"></i>
+							<i class="fa fa-sign-out fa-3x" style="padding-top: 15px"></i>
 						</p:commandLink><pe:tooltip for="sair" /></li>
 				</ul>
 			</h:form>

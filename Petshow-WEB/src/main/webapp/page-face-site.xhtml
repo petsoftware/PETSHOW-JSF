@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageHelperBean.mainTemplateSite}">
+
+	<ui:define name="header">
+
+	</ui:define>
+	
+	<ui:define name="body">
+		
+
+		<section class="content-section-a" >
+			<div class="content">
+				
+					<div class="row">
+						<div class="col-md-4" style="padding-left: 8%;">
+							<img src="#{request.contextPath}/resources/images/banner/face-emotions.jpg"></img>
+						</div>
+						<div class="col-md-6" >
+							<p style="color:blue; text-align: justify;text-justify: inter-word;">Podemos deixar o mundo do seu PET ainda mais conectado. Nossas mobile apps estão integradas com o Facebook.
+							Você pode compartilhar suas fotos com seus amigos no face e ainda acompanhar se eles estão curtindo.</p>
+						</div>
+					</div>
+					
+				
+			</div>
+		</section>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
+

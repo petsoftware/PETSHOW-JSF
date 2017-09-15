@@ -5,108 +5,65 @@
       xmlns:h="http://java.sun.com/jsf/html">
        
     <ui:composition>
-        	
-    	<div id="sidebar-wrapper">
-    		<div class="sidebar-brand">
-    			<h:form id="frm-left" enctype="multipart/form-data">
-	    			<div style="width: 205px; height: 205px" align="center">
-							<h:graphicImage rendered="#{usuarioBean.temFoto}"
-								styleClass="img-circle"
-								stream="false" cache="false"
-								url="data:image/jpg;base64,#{usuarioBean.usuario.foto}"
-								id="visualizacao" alt="Visualização do anuncio" />
-							<h:panelGroup  rendered="#{not usuarioBean.temFoto}">
-								<img class="img-circle"
-									src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
-							</h:panelGroup>
-						
-	           		</div>
-	           		<ui:remove>
-	           		<div class="row" style="padding-top:10px;">
-	           			<i class="fa fa-camera" />
-	           			<p:fileUpload fileUploadListener="#{usuarioBean.enviaImagem}"
-						update="visualizacao" id="upldFoto"
-						label="Escolha uma foto" multiple="false"
-						allowTypes="/(\.|\/)(jpe?g|png)$/" />
-	           		</div>
-	           		</ui:remove>
-           		</h:form>
-           	</div>
-           	<div class="sidebar-content">
-           		<div id="sidebar-body">
-		    		<ul class="sidebar-nav">
-			      		<li>		      		
-			            	<p:link id="inicio" styleClass="#{activeAnuncio}" title="Sua página inical" outcome="private-inicio" onclick="paceStart();">				            			                			
-		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-home"></i>
-		                			</div>
-		                			<div class="media-body">INÍCIO</div>
-		                		</div>
-	                		</p:link>
-	                		
-			      		</li>
-			      		<li>		      		
-			            	<p:link id="anuncio" styleClass="#{activeAnuncio}" title="Anunciar que seu PET foi perdido" outcome="private-anunciar-perdido" onclick="paceStart();">				            			                			
-		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-bullhorn"></i>
-		                			</div>
-		                			<div class="media-body">ANUNCIAR PERDIDO</div>
-		                		</div>
-	                		</p:link>
-	                		
-			      		</li>
-			      		<li>		      		
-			            	<p:link id="servicos" styleClass="#{activeAnuncio}" title="Anunciar a adoção de algum animal." outcome="private-anunciar-adocao" onclick="paceStart();">				            			                			
-		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-bullhorn"></i>
-		                			</div>
-		                			<div class="media-body">ANUNCIAR ADOÇÃO</div>
-		                		</div>
-	                		</p:link>
-	                		
-			      		</li>
-			      		<li>		      		
-			            	<p:link id="notificacao" styleClass="#{activeAnuncio}" title="Notificações" outcome="private-meus-animais" onclick="paceStart();">				            			                			
-		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-paw"></i>
-		                			</div>
-		                			<div class="media-body">MEUS ANIMAIS</div>
-		                		</div>
-	                		</p:link>
-	                		
-			      		</li>
-			      		
-			      		<li>		      		
-			            	<p:link id="vacinas" styleClass="#{activeAnuncio}" title="Vacinas dos Animais" outcome="private-meus-dados" onclick="paceStart();">				            			                			
-		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-pencil-square-o"></i>
-		                			</div>
-		                			<div class="media-body">MEUS DADOS</div>
-		                		</div>
-	                		</p:link>
-	                		
-			      		</li>
-			      		
-			      		<li>		      		
-			            	<p:link id="usuario" styleClass="#{activeAnuncio}" title="Editar Usuário" outcome="private-promocoes" onclick="paceStart();">				            			                			
-		                		<div class="media media-left-menu">
-		                			<div class="media-left">
-		                				<i class="fa fa-tags"></i>
-		                			</div>
-		                			<div class="media-body">PROMOÇÕES</div>
-		                		</div>
-	                		</p:link>
-	                		
-			      		</li>				      					      	
-			        </ul>
-			   	</div>
-		   	</div>	        
-        </div>        
+
+	<nav class="navbar navbar-inverse visible-xs visible-sm">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<ui:include src="menu-content.xhtml" >
+						<ui:param name="onlySmall" value=" visible-xs visible-sm" />
+					</ui:include>
+				</ul>
+				
+			</div>
+		</div>
+	</nav>
+
+
+
+	<div id="sidebar-wrapper">
+	    		<div class="sidebar-brand">
+	    			<h:form id="frm-left" enctype="multipart/form-data">
+		    			<div style="width: 205px; height: 205px" align="center">
+								<h:graphicImage rendered="#{usuarioBean.temFoto}"
+									styleClass="img-circle"
+									stream="false" cache="false"
+									url="data:image/jpg;base64,#{usuarioBean.usuario.foto}"
+									id="visualizacao" alt="Visualização do anuncio" />
+								<h:panelGroup  rendered="#{not usuarioBean.temFoto}">
+									<img class="img-circle"
+										src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+								</h:panelGroup>
+							
+		           		</div>
+		           		<ui:remove>
+		           		<div class="row" style="padding-top:10px;">
+		           			<i class="fa fa-camera" />
+		           			<p:fileUpload fileUploadListener="#{usuarioBean.enviaImagem}"
+							update="visualizacao" id="upldFoto"
+							label="Escolha uma foto" multiple="false"
+							allowTypes="/(\.|\/)(jpe?g|png)$/" />
+		           		</div>
+		           		</ui:remove>
+	           		</h:form>
+	           	</div>
+	           	<div class="sidebar-content">
+	           		<div id="sidebar-body">
+	           			<ul class="sidebar-nav ml-auto">
+			    			<ui:include src="menu-content.xhtml" />
+			    			<ui:param name="onlySmall" value=" " />
+			    		</ul>
+				   	</div>
+			   	</div>	        
+	        </div>    
+		   
     </ui:composition>
     
 </html>

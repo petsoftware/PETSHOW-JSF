@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageHelperBean.mainTemplateSite}">
+
+	<ui:define name="header">
+
+	</ui:define>
+	
+	<ui:define name="body">
+		
+		<section class="content-section-a">
+			<div class="content">
+				<div class="row">
+					<div align="center">
+						<h3 style="padding-left: 10%;width: 100%;padding-bottom: 20px;">Destinação de parte dos lucros</h3>
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<img src="#{request.contextPath}/resources/images/get-money-256.png" />
+					</div>
+					<div class="col-md-6">
+						<p style=" text-align: justify;text-justify: inter-word;"> Todo o trimestre iremos doar parte dos lucros para ONGs que cuidam de animais domésticos abandonados ou 
+						que sofreram maus tratos. Será realizada uma votação entre os usuário da plataforma para escolher a entidade de destino esse percentual do lucro.
+						Isso é um compromisso com a sociedade como um todo, afim de devolver em forma de benefício os ganhos vindo da própria sociedade.</p>
+					</div>
+				
+				</div>
+				
+			
+			</div>
+		</section>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
+

@@ -38,9 +38,16 @@
 			<br />    
 	             
 	             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
-      		    
+      		    	 <ul class="nav navbar-nav navbar-left menu-top" style="margin: 0;">
+		                <li>
+		                	
+		                	<h4 style="padding-left: 15px; font-variant: small-caps">#{loginBean.userName}</h4>
+		                </li>
+		              </ul>
 		            <ul class="nav navbar-nav navbar-right menu-top" style="margin: 0;">
-		                      		                                
+		                <li>
+		                	<a style="font-variant: small-caps" href="#">Voltar ao Site</a>
+		                </li>      		                                
 		                <li>
 		                	<div class="dropdown" >		                	
 								<button id="dropdownMenu1"
@@ -57,10 +64,10 @@
 							  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							    	<li>
 							    		<p:link onclick="paceStart();" id="lnk-edit-user" title="Clique aqui para editar os dados do Usuário"
-							    		outcome="usuario"
+							    		outcome="private-usuario"
 							    		>
-				                			<i class="fa fa-user" aria-hidden="true"></i>
-							    			#{loginBean.userName}
+				                			<i class="fa fa-user" aria-hidden="true" />
+				                			#{loginBean.userName}
 				                		</p:link>
 				                		<pe:tooltip for="lnk-edit-user"/>
 							    	</li>							    							    	

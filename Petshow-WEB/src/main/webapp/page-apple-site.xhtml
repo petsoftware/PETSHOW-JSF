@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageHelperBean.mainTemplateSite}">
+
+	<ui:define name="header">
+
+	</ui:define>
+	
+	<ui:define name="body">
+		
+
+		<section class="content-section-a">
+			<div class="content" style="padding-left: 8%; padding-right: 8%;">
+				<div class="row">
+					<div align="center">
+						<h3 style="padding-left: 10%;width: 100%;padding-bottom: 20px;">iPhone</h3>
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-2">
+						<img src="#{request.contextPath}/resources/images/apple-128.png" />
+					</div>
+					<div class="col-md-6">
+						<p style=" text-align: justify;text-justify: inter-word;"> Em breve você poderá baixar a nossa app na Apple Store e nos levar 
+						com você pra onde for.</p>
+					</div>
+				</div>
+				<div align="center">
+					<div class="row">
+						<img style="width: 50%;height: 50%;padding-left: 12px" src="#{request.contextPath}/resources/images/banner/apple_products.png" />
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
+
