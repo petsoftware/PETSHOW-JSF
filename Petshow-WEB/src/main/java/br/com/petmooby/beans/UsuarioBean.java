@@ -33,12 +33,9 @@ public class UsuarioBean extends SuperBean<Usuario>{
 		
 	}
 	private Usuario usuario;
-
-
 	private Part imagem;
-
 	private String cb;	
-
+	private boolean temFoto = false;
 	public String getCb() {
 		return cb;
 	}
@@ -138,9 +135,9 @@ public class UsuarioBean extends SuperBean<Usuario>{
 
 	public String getLblNmLogin(){
 		if(usuario==null){
-			return "Nome Login:";
+			return "Login:";
 		}else{
-			return "Nome Login:"+usuario.getNmLogin();
+			return "Login:"+usuario.getNmLogin();
 		}
 	}
 	public String getLblCNPJ(){
@@ -190,6 +187,19 @@ public class UsuarioBean extends SuperBean<Usuario>{
         if(this.usuario!=null){
         	this.usuario.setFoto(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
         }
+	}
+
+	public boolean isTemFoto() {
+		if(usuario.getFoto() != null){
+			temFoto = !usuario.getFoto().isEmpty();
+		}else{
+			temFoto = false;
+		}
+		return temFoto;
+	}
+
+	public void setTemFoto(boolean temFoto) {
+		this.temFoto = temFoto;
 	}
 
 }

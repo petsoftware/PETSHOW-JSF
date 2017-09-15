@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
 import br.com.petmooby.enums.EnumFrequenciaVermifugacao;
+import br.com.petmooby.enums.EnumSexo;
 import br.com.petmooby.enums.EnumTipoAnimal;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
@@ -78,7 +79,7 @@ public class AnimalBean extends SuperBean<Animal> {
 			animal.setFotoPerfil("");
 			animal.setFrequenciaVermifugacao(EnumFrequenciaVermifugacao.ANUAL);
 			animal.setTemReforco(false);
-			animal.setFlSexo("M");
+			animal.setFlSexo(EnumSexo.MACHO);
 			if(cliente != null){
 				Tutor tutor = new Tutor();
 				tutor.setAnimal(null);

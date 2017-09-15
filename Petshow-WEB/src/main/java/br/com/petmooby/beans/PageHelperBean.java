@@ -8,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 public class PageHelperBean {
 
 	private String mainTemplate 		= "../templates/main.xhtml";
-	private String mainTemplatePrivate 	= "../private-area/main.xhtml";
+	private String mainTemplatePrivate 	= "../templates/private-area/main.xhtml";
 	private String mainTemplateSite 	= "/templates/site/main.xhtml";
 
 	public String getMainTemplate() {

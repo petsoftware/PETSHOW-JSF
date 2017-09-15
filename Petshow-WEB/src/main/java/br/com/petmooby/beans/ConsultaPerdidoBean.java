@@ -55,6 +55,7 @@ public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 			long idEstado=0;
 			long idCidade=0;
 			long idBairro=0;
+			setTpPerdidoAchado(EnumAchadoPerdido.PERDIDO);
 			if(estado!=null){
 				idEstado=estado.getId();
 			}
