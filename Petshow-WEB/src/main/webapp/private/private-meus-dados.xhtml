@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -105,87 +106,10 @@
 							<div class="ui-grid-row">
 								<div class="ui-grid-col-12">
 
-								<p:panel header="Endereço" id="pnlEndereco">
-									<div class="ui-grid-row ui-grid-row-custom">
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="CEP:" for="txtCep" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtCep" size="9"
-													value="#{usuarioBean.usuario.nrCep}" styleClass="txtCEP"
-													converter="cepConverter">
-													<f:validator validatorId="cepValidator" />
-													<p:ajax event="change"
-														update="txtEstado,txtCidade,txtBairro,txtRua"
-														listener="#{usuarioBean.consultaCEP}" />
-												</p:inputText>
-											</div>
-										</div>
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="Rua:" for="txtRua" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtRua" value="#{usuarioBean.usuario.rua}"
-													maxlength="50" />
-											</div>
-										</div>
+								
+									<clx:ender title="Meu Endereço" ender="#{usuarioBean.usuario.endereco}"/>
 
-									</div>
-
-									<div class="ui-grid-row ui-grid-row-custom">
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="Estado:" for="txtEstado" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtEstado"
-													value="#{usuarioBean.usuario.estado}" maxlength="15" />
-											</div>
-										</div>
-
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="Cidade:" for="txtCidade" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtCidade"
-													value="#{usuarioBean.usuario.cidade}" maxlength="50" />
-											</div>
-										</div>
-
-									</div>
-
-
-
-									<div class="ui-grid-row ui-grid-row-custom">
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="Bairro:" for="txtBairro" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtBairro"
-													value="#{usuarioBean.usuario.bairro}" maxlength="50" />
-											</div>
-										</div>
-									</div>
-									</p:panel>
-
-									<div class="ui-grid-row ui-grid-row-custom">
-										<div class="ui-grid-col-12">
-											<div class="ui-grid-row">
-												<h:outputLabel value="Número:" for="txtNumero" />
-											</div>
-											<div class="ui-grid-row">
-												<p:inputText id="txtNumero" size="5"
-													value="#{usuarioBean.usuario.nrEndereco}" maxlength="10" />
-											</div>
-										</div>
-										
-									</div>
-
-									<div class="ui-grid-row ui-grid-row-custom"></div>
+									
 								</div>
 							</div>
 						</div>

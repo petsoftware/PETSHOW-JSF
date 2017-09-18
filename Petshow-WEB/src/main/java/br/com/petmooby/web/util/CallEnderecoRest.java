@@ -1,14 +1,13 @@
 package br.com.petmooby.web.util;
 
-import java.util.Date;
 import java.util.List;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
 import br.com.petmooby.enums.EnumErrosSistema;
+import br.com.petmooby.enums.EnumUF;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Anuncio;
 import br.com.petmooby.model.Bairro;
 import br.com.petmooby.model.Cidade;
 import br.com.petmooby.model.Estado;
@@ -137,5 +136,25 @@ public class CallEnderecoRest extends RestUtilCall{
 		
 		return (List<Estado>)entidades;
 	
+	}
+	
+	public  List<Cidade> getListCidadeUF(EnumUF uf) throws ExceptionErroCallRest, ExceptionValidation{
+		client = new ResteasyClientBuilder().build();
+		target= client.target(URL_BASE+"endereco/consulta/cidade/uf/"+uf);
+		Object entidades = null;
+		try{
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Cidade>>() {});
+		}catch(Exception ex){
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+		}
+		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
+			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}else{
+				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
+			}
+		}	
+		return (List<Cidade>)entidades;
 	}
 }

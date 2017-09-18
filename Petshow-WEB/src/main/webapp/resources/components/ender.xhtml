@@ -1,0 +1,86 @@
+<!-- 
+DateCalendar
+Criado dia 30/05/2016 as 22:12
+Motivacao: Criar um componente de data que seja reutilizavel e responsivo
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+	<!-- 
+	Essa tag serve para declarar todos os atributos que poderão ser passados 
+	para uso no nosso composite component
+	 -->
+	<composite:interface>
+		<composite:attribute name="title"
+			shortDescription="Sera exibido ao passar o mouse" />
+		<composite:attribute name="ender"
+			shortDescription="Bean para ser passado" type="br.com.petmooby.model.Endereco"  displayName="Passar o componente bean" />
+	</composite:interface>
+
+	<composite:implementation>
+
+		<p:panel header="#{cc.attrs.title}" id="pnlEndereco">
+			
+
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row">
+						<h:outputLabel value="Estado:" for="txtEstado" />
+					</div>
+					<div class="ui-grid-row">
+						<p:selectOneMenu id="txtEstado" value="#{cc.attrs.ender.uf}">
+							<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+							<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+								<p:ajax event="change" update="cidade" listener="#{enderecoBean.findCidadesByUF(cc.attrs.ender.uf)}" />
+							
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row">
+						<h:outputLabel value="Cidade:" for="cidade" />
+					</div>
+					<div class="ui-grid-row">
+						<p:selectOneMenu id="cidade" value="#{cc.attrs.ender.cidade}" converter="#{cidadeConverter}"
+						required="true" requiredMessage="Por favor nos diga a sua cidade.">
+							<f:selectItem itemLabel="Selecione a cidade"/>
+							<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+						</p:selectOneMenu>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row">
+						<h:outputLabel value="Bairro:" for="txtBairro" />
+					</div>
+					<div class="ui-grid-row">
+						<p:inputText id="txtBairro" value="#{cc.attrs.ender.bairro}"
+							maxlength="50" />
+					</div>
+				</div>
+			</div>
+
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row">
+						<h:outputLabel value="Número:" for="txtNumero" />
+					</div>
+					<div class="ui-grid-row">
+						<p:inputText id="txtNumero" size="5"
+							value="#{cc.attrs.ender.numero}" maxlength="10" />
+					</div>
+				</div>
+
+			</div>
+		</p:panel>
+
+	</composite:implementation>
+</ui:composition>

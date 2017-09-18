@@ -2,17 +2,15 @@ package br.com.petmooby.web.servlets;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
-import br.com.petmooby.constants.WebServletStartsConstants;
 import br.com.petmooby.role.AcessoRole;
 import br.com.petmooby.util.WriteConsoleUtil;
-
-@WebServlet(value="/webIniConfigutations", loadOnStartup=WebServletStartsConstants.START_INI_CONFIGURATIONS)
+@Deprecated
+//@WebServlet(value="/webIniConfigutations", loadOnStartup=WebServletStartsConstants.START_INI_CONFIGURATIONS)
 public class WebIniConfigutations extends HttpServlet{
 
 	/**

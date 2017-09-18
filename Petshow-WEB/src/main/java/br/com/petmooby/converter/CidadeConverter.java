@@ -7,13 +7,9 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import org.springframework.web.jsf.FacesContextUtils;
-
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
 import br.com.petmooby.model.Cidade;
-import br.com.petmooby.model.Estado;
-import br.com.petmooby.role.CidadeRole;
 import br.com.petmooby.util.PlaceHolderUtil;
 import br.com.petmooby.web.util.RestUtilCall;
 
