@@ -11,6 +11,7 @@ import br.com.petmooby.enums.EnumUF;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
 import br.com.petmooby.model.Cidade;
+import br.com.petmooby.model.Endereco;
 import br.com.petmooby.web.util.CallEnderecoRest;
 
 @ManagedBean
@@ -20,10 +21,13 @@ public class EnderecoBean {
 	private CallEnderecoRest callEnderecoRest;
 	private EnumUF uf;
 	private List<Cidade> cidades;
+	private Endereco endereco;
+
 	
 	@PostConstruct
 	public void ini() {
 		callEnderecoRest = new CallEnderecoRest();
+		
 	}
 	public EnumUF[] getUfs(){
 		return EnumUF.values();
@@ -50,5 +54,12 @@ public class EnderecoBean {
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
 	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 
 }

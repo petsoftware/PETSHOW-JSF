@@ -16,6 +16,7 @@ import br.com.petmooby.enums.EnumFlTpEstabelecimento;
 import br.com.petmooby.enums.EnumTipoUser;
 import br.com.petmooby.exceptions.ExceptionErroCallRest;
 import br.com.petmooby.exceptions.ExceptionValidation;
+import br.com.petmooby.model.Endereco;
 import br.com.petmooby.model.Usuario;
 import br.com.petmooby.model.UsuarioCliente;
 import br.com.petmooby.role.UsuarioRole;
@@ -118,8 +119,6 @@ public class UsuarioBean extends SuperBean<Usuario>{
 		try {
 				HashMap<String,String> retorno = RestUtilCall.getHashMap("endereco/consulta/Cep/"+usuario.getNrCep());
 				usuario.setCidade(retorno.get("cidade"));
-				usuario.setRua(retorno.get("rua"));
-				usuario.setBairro(retorno.get("bairro"));
 				usuario.setEstado(retorno.get("estado"));
 		
 		} catch (ExceptionErroCallRest  e) {

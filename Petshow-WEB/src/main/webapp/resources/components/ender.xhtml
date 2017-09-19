@@ -8,7 +8,8 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
 	<!-- 
 	Essa tag serve para declarar todos os atributos que poderão ser passados 
@@ -16,23 +17,25 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 	 -->
 	<composite:interface>
 		<composite:attribute name="title"
-			shortDescription="Sera exibido ao passar o mouse" />
-		<composite:attribute name="ender"
+			shortDescription="Sera exibido ao passar o mouse" />	
+		<composite:attribute name="ender" 
 			shortDescription="Bean para ser passado" type="br.com.petmooby.model.Endereco"  displayName="Passar o componente bean" />
+		<composite:attribute name="uf" 
+			shortDescription="Bean para ser passado" type="br.com.petmooby.enums"  displayName="Passar o componente bean" />
 	</composite:interface>
 
 	<composite:implementation>
 
 		<p:panel header="#{cc.attrs.title}" id="pnlEndereco">
 			
-
+			
 			<div class="ui-grid-row ui-grid-row-custom">
 				<div class="ui-grid-col-12">
 					<div class="ui-grid-row">
 						<h:outputLabel value="Estado:" for="txtEstado" />
 					</div>
 					<div class="ui-grid-row">
-						<p:selectOneMenu id="txtEstado" value="#{cc.attrs.ender.uf}">
+						<p:selectOneMenu id="txtEstado" value="#{cc.attrs.ender.uf}" binding="#{enderecoBean.selectOneMenu}">
 							<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
 							<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 								<p:ajax event="change" update="cidade" listener="#{enderecoBean.findCidadesByUF(cc.attrs.ender.uf)}" />
@@ -46,7 +49,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 						<h:outputLabel value="Cidade:" for="cidade" />
 					</div>
 					<div class="ui-grid-row">
-						<p:selectOneMenu id="cidade" value="#{cc.attrs.ender.cidade}" converter="#{cidadeConverter}"
+						<p:selectOneMenu id="cidade" value="#{cc.attrs.ender.cidade}" converter="cidadeConverter"
 						required="true" requiredMessage="Por favor nos diga a sua cidade.">
 							<f:selectItem itemLabel="Selecione a cidade"/>
 							<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
