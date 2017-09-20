@@ -61,5 +61,11 @@ public class EnderecoBean {
 		this.endereco = endereco;
 	}
 	
+	public void preencherComboCidade(EnumUF uf) {
+		if(uf != null && this.cidades == null){
+			findCidadesByUF(uf);
+		}
+	}
+	
 
 }

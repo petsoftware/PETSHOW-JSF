@@ -20,12 +20,14 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 			shortDescription="Sera exibido ao passar o mouse" />	
 		<composite:attribute name="ender" 
 			shortDescription="Bean para ser passado" type="br.com.petmooby.model.Endereco"  displayName="Passar o componente bean" />
-		<composite:attribute name="uf" 
-			shortDescription="Bean para ser passado" type="br.com.petmooby.enums"  displayName="Passar o componente bean" />
+		
 	</composite:interface>
 
 	<composite:implementation>
 
+		<f:metadata>  
+    		<f:event type="preRenderView"  listener="#{enderecoBean.preencherComboCidade(cc.attrs.ender.uf)}" />
+		</f:metadata>
 		<p:panel header="#{cc.attrs.title}" id="pnlEndereco">
 			
 			
@@ -35,7 +37,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 						<h:outputLabel value="Estado:" for="txtEstado" />
 					</div>
 					<div class="ui-grid-row">
-						<p:selectOneMenu id="txtEstado" value="#{cc.attrs.ender.uf}" binding="#{enderecoBean.selectOneMenu}">
+						<p:selectOneMenu id="txtEstado" value="#{cc.attrs.ender.uf}">
 							<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
 							<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 								<p:ajax event="change" update="cidade" listener="#{enderecoBean.findCidadesByUF(cc.attrs.ender.uf)}" />
@@ -69,9 +71,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 							maxlength="50" />
 					</div>
 				</div>
-			</div>
 
-			<div class="ui-grid-row ui-grid-row-custom">
 				<div class="ui-grid-col-12">
 					<div class="ui-grid-row">
 						<h:outputLabel value="Número:" for="txtNumero" />
