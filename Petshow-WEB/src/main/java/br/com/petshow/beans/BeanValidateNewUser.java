@@ -1,13 +1,13 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.security.AuthenticationService;
-import br.com.petmooby.web.util.CallUsuarioRest;
-import br.com.petmooby.web.util.MessagesBeanUtil;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.security.AuthenticationService;
+import br.com.petshow.web.util.CallUsuarioRest;
+import br.com.petshow.web.util.MessagesBeanUtil;
 
 @ManagedBean
 @ViewScoped

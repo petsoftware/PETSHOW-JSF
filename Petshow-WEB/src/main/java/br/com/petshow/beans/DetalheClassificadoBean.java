@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,14 +11,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Anuncio;
-import br.com.petmooby.model.Venda;
-import br.com.petmooby.util.FormatacaoUtil;
-import br.com.petmooby.util.ValidationUtil;
-import br.com.petmooby.web.util.CallVendaRest;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Anuncio;
+import br.com.petshow.model.Venda;
+import br.com.petshow.util.FormatacaoUtil;
+import br.com.petshow.util.ValidationUtil;
+import br.com.petshow.web.util.CallVendaRest;
+import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped

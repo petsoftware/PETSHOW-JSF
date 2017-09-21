@@ -1,4 +1,4 @@
-package br.com.petmooby.security;
+package br.com.petshow.security;
 
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,10 +6,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.web.util.CallUsuarioRest;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.web.util.CallUsuarioRest;
 
 
 

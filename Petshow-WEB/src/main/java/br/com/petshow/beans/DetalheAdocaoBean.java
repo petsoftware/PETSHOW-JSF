@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,11 +9,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Adocao;
-import br.com.petmooby.util.FormatacaoUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Adocao;
+import br.com.petshow.util.FormatacaoUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
@@ -104,13 +104,7 @@ public class DetalheAdocaoBean {
 		}
 	}
 	public String getTelCelVendedor(){
-		//if(venda ==null || adocao.getUsuario().getDdd() ==0 || adocao.getUsuario().getTelefone()==0){
-			return "Não Informado";
-			/*}else{
-			return FormatacaoUtil.telefoneComDDD(adocao.getUsuario().getDdd(), adocao.getUsuario().getTelefone(), false);
-			
-		}*/
-		
+		return "Não Informado";
 	}
 	public String getDataAnunciada(){
 		if(adocao !=null ){
@@ -154,29 +148,27 @@ public class DetalheAdocaoBean {
 	}
 	
 	public String getEstado() {
-		if(adocao.getEstado() !=null){
-			return adocao.getEstado().getNome();
+		if(adocao.getEndereco() !=null){
+			return adocao.getEndereco().getUf().getLabel();
 		}else{
-			return "Não Informado";
+			return "";
 		}
 		
 	}
 	public String getCidade() {
-		if(adocao.getCidade() !=null){
-			return adocao.getCidade().getNome();
+		if(adocao.getEndereco() !=null){
+			return adocao.getEndereco().getCidade().getNome();
 		}else{
-			return "Não Informado";
+			return "";
 		}
 	}
 	public String getBairro() {
-		if(adocao.getBairro() !=null){
-			return adocao.getBairro().getNome();
+		if(adocao.getEndereco() !=null){
+			return "Bairro: " + adocao.getEndereco().getBairro();
 		}else{
-			return "Não Informado";
+			return "";
 		}
 	}
-
-
 
 	public Adocao getAdocao() {
 		return adocao;

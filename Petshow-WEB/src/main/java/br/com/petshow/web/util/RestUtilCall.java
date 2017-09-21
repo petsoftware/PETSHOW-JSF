@@ -1,4 +1,4 @@
-package br.com.petmooby.web.util;
+package br.com.petshow.web.util;
 
 
 
@@ -14,14 +14,14 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-import br.com.petmooby.enums.EnumErrosSistema;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Entidade;
-import br.com.petmooby.util.FileApplicationUtil;
-import br.com.petmooby.util.JsonUtil;
-import br.com.petmooby.util.MapErroRetornoRest;
-import br.com.petmooby.util.WriteConsoleUtil;
+import br.com.petshow.enums.EnumErrosSistema;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Entidade;
+import br.com.petshow.util.FileApplicationUtil;
+import br.com.petshow.util.JsonUtil;
+import br.com.petshow.util.MapErroRetornoRest;
+import br.com.petshow.util.WriteConsoleUtil;
 
 
 public class RestUtilCall <T extends Entidade>{

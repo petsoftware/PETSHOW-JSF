@@ -1,11 +1,11 @@
-package br.com.petmooby.web.util;
+package br.com.petshow.web.util;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Estatistica;
-import br.com.petmooby.model.Usuario;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Estatistica;
+import br.com.petshow.model.Usuario;
 
 public class CallEstatisticaRest extends RestUtilCall<Estatistica>{
 

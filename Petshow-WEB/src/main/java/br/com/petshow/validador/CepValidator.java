@@ -1,4 +1,4 @@
-package br.com.petmooby.validador;
+package br.com.petshow.validador;
 
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;

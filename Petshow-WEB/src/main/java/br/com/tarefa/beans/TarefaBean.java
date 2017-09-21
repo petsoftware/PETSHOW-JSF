@@ -10,11 +10,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
-import br.com.petmooby.enums.EnumPrioridade;
-import br.com.petmooby.enums.EnumTipoAnimal;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.enums.EnumPrioridade;
+import br.com.petshow.enums.EnumTipoAnimal;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.web.util.RestUtilCall;
 import br.com.tafera.enums.EnumDesenvolvedor;
 import br.com.tafera.enums.EnumStatus;
 import br.com.tafera.enums.EnumTipo;

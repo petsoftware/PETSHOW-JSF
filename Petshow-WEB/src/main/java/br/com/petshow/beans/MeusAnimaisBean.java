@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,14 +12,14 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.FileUploadEvent;
 
-import br.com.petmooby.enums.EnumSexo;
-import br.com.petmooby.enums.EnumTipoAnimal;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Animal;
-import br.com.petmooby.model.Tutor;
-import br.com.petmooby.web.util.CallAnimalRest;
-import br.com.petmooby.web.util.ImagemUtil;
+import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumTipoAnimal;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Animal;
+import br.com.petshow.model.Tutor;
+import br.com.petshow.web.util.CallAnimalRest;
+import br.com.petshow.web.util.ImagemUtil;
 
 @ManagedBean
 @ViewScoped

@@ -3,132 +3,188 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:p="http://primefaces.org/ui">
-
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:p="http://primefaces.org/ui"
-	template="#{pageHelperBean.mainTemplate}">
+	xmlns:f="http://java.sun.com/jsf/core">
 
-	<ui:param name="activeAnuncio" value="active" />
-	<ui:param name="pageIcon" value="bullhorn" />
-	<ui:param name="pageTitle" value="LOGIN" />
-
-	<ui:define name="header">
-
-	</ui:define>
+<ui:composition template="#{pageHelperBean.mainTemplateSite}">
 
 	<ui:define name="body">
+		<section class="content-section-a">
+			<div class="container">
+				<div class="row">
+					<div style="width: 50%; float: left;">
+						<div class="ui-g">
+							<div class="col-md-6">		
+									<div class="row">
+										Já sou usuário
+										
+									</div>
+									<p:separator />
+									<p:messages id="entrarMsgsDialog"
+										styleClass="ui-messages-dialog" showSummary="true"
+										showDetail="true" closable="true" showIcon="false" />
+									<div class="row">
+										<p:outputLabel value="Usuário" for="usuario" />
+									</div>
+									<div class="row">
+										<div class="inputTextGroupLeft">
+											<p:inputText id="usuario" style="width:70%;" label="Usuário"
+												placeholder="Usuário" title="Usuário"
+												value="#{loginBean.usuario}">
+											</p:inputText>
+											<i class="fa fa-user"></i>
+										</div>
+									</div>
 
-		<div style="width: 50%; float: left;">
-			<div class="ui-g">
-				<div class="ui-g-8 ui-g-nopad">
-					<div class="ui-g-4">
-						Login
-						<p:separator />
-						<div class="ui-g-4">
-							<p:outputLabel value="Usuário" for="usuario" />
-						</div>
-						<div class="ui-g-4">
-							<p:inputText id="usuario" style="width:50%;" label="Usuário"
-								placeholder="Usuário" title="Usuário"
-								value="#{loginBean.usuario}">
-							</p:inputText>
-							<i class="fa fa-user"></i>
-						</div>
+									<div class="row">
+										<p:outputLabel value="Senha:" for="senha" />
+									</div>
+									<div class="row">
+										<div class="inputTextGroupLeft">
+											<p:password id="senha" style="width:70%;" label="Senha"
+												placeholder="Senha" title="Senha" value="#{loginBean.senha}">
+											</p:password>
+											<i class="fa fa-lock"></i>
+										</div>
+									</div>
+									<div class="ui-g-4"></div>
+									<div class="ui-g-4">
+										<p:commandButton id="confirmar"
+											styleClass="btn btn-info btn-lg" icon="fa fa-check"
+											type="submit" action="#{loginBean.login}"
+											title="Informe o usuário e a senha e depois clique neste botão para efetuar o login"
+											value="Entrar" update="entrarMsgsDialog" />
+										<pe:tooltip for="confirmar" />
+									</div>
+								
 
-						<div class="ui-g-4">
-							<p:outputLabel value="Senha:" for="senha" />
-						</div>
-						<div class="ui-g-4">
-							<p:password id="senha" style="width:30%;" label="Senha"
-								placeholder="Senha" title="Senha" value="#{loginBean.senha}">
-							</p:password>
-							<i class="fa fa-lock"></i>
-						</div>
-						<div class="ui-g-4"> </div>
-						<div class="ui-g-4">
-							<p:commandButton id="confirmar" styleClass="btn btn-info btn-lg"
-								icon="fa fa-check" type="submit" action="#{loginBean.login}"
-								title="Informe o usuário e a senha e depois clique neste botão para efetuar o login"
-								value="Confirmar" update="msgs" />
-							<pe:tooltip for="confirmar" />
+							</div>
 						</div>
 					</div>
 
+					<div style="width: 50%; float: right;" align="left">
+						<div class="row">
+						<h4>Cadastre-se</h4>
+						
+						</div>
+
+						<p:separator />
+
+						<p:messages id="cadastrarMsgsDialog"
+						styleClass="ui-messages-dialog" showSummary="true"
+						showDetail="true" closable="true" showIcon="false" />
+
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+								Quem sou eu?
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<p:selectOneRadio value="#{novoUsuarioBean.tipoUsuario}">
+										<f:selectItem itemLabel="PETSHOP" itemValue="P"/>
+										<f:selectItem itemLabel="ONG" 	  itemValue="O"/>
+										<f:selectItem itemLabel="USUÁRIO" itemValue="U"/>
+										<p:ajax update="pnlgFields" listener="#{novoUsuarioBean.renderComponenets}" />
+									</p:selectOneRadio>
+								</div>
+							</div>
+						</div>
+					</div>
+					<h:panelGroup id="pnlgFields">
+					
+					<div class="ui-grid ui-grid-responsive">
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-6">
+								<div class="inputTextGroupLeft">
+									<h:panelGroup rendered="#{novoUsuarioBean.renderizarNome}">
+										<p:inputText id="txtNovoUsuario" style="width:100%;" label="Usuário"
+											placeholder="#{novoUsuarioBean.textUsuario}" title="Usuário"
+											value="#{novoUsuarioBean.usuario.nome}" required="true">
+										</p:inputText>
+										<i class="fa fa-user"></i>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-6">
+								<div class="inputTextGroupLeft">
+									<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
+										<p:inputText id="email" style="width:100%;" label="E-mail"
+											placeholder="E-mail" title="E-mail" 
+											value="#{novoUsuarioBean.usuario.email}" required="true">
+										</p:inputText>
+										<i class="fa fa-envelope"></i>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-6">
+								<h:panelGroup  rendered="#{novoUsuarioBean.renderizarCNPJ}">
+									<div class="inputTextGroupLeft">
+										<p:inputText id="txtCNPJ" style="width:100%;" label="CNPJ"
+											value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
+											title="CNPJ" required="#{novoUsuarioBean.renderizarCNPJ}">
+											<f:validator
+												validatorId="br.com.petshow.validator.CnpjValidator" />
+										</p:inputText>
+										<i class="fa fa-cube"></i>
+									</div>
+								</h:panelGroup>
+							</div>
+						</div>
+						<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-6">
+									<div class="inputTextGroupLeft">
+										<p:password id="txtNovoSenha" style="width:50%;" label="Senha"
+											placeholder="Senha" title="Senha"
+											value="#{novoUsuarioBean.senha}" autocomplete="new-password"
+											required="true">
+										</p:password>
+										<i class="fa fa-lock"></i>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-6">
+									<div class="inputTextGroupLeft">
+										<p:password id="txtNovoConfSenha" style="width:50%;" label="Senha"
+											placeholder="Confirme a senha" title="Senha"
+											value="#{novoUsuarioBean.confSenha}"
+											autocomplete="new-password" required="true">
+										</p:password>
+										<i class="fa fa-lock"></i>
+									</div>
+								</div>
+							</div>
+						</h:panelGroup>
+						<p:commandButton id="btnConfNovoUsu" rendered="#{novoUsuarioBean.renderizarNome}"
+							styleClass="btn btn-info btn-lg" icon="fa fa-check"
+							value="Confirmar" type="submit"
+							title="Confirme após informar todos os dados"
+							update="cadastrarMsgsDialog"
+							onclick="paceStart();" oncomplete="Pace.restart();"
+							action="#{novoUsuarioBean.solicitarCadastro}" />
+					</div>
+					
+					</h:panelGroup>
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+
+					</div>
 				</div>
-			</div>
-		</div>
 
-		<div style="width: 50%; float: right;" align="left">
-			<div class="ui-g-4">Cadastre-se</div>
-
-			<p:separator />
-
-			<div class="ui-g-4">
-				<p:outputLabel value="E-mail" for="email" />
 			</div>
-			<div class="ui-g-4">
-				<p:inputText id="email" style="width:50%;" placeholder="E-mail"
-					value="#{novoUsuarioBean.usuario.email}" title="Informe um e-mail válido. Ele será o seu Login">
-				</p:inputText>
-				<i class="fa fa-envelope"></i>
-			</div>
-			<div class="ui-g-4">
-				<p:outputLabel value="CNPJ:" for="txtCNPJ" />
-			</div>
-			<div class="ui-g-4">
-				<p:inputMask id="txtCNPJ" style="width:50%;" label="CNPJ"
-					required="false"
-					value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
-					title="Digite o CNPJ"  mask="99.999.999/9999-99">
-					<f:validator validatorId="br.com.petmooby.validator.CnpjValidator" />
-				</p:inputMask>
-				<i class="fa fa-cube"/>
-			</div>
-			<div class="ui-g-4">
-				<p:outputLabel value="Quem sou eu?" for="cboTpEstabelecimento" />
-			</div>
-			<div class="ui-g-4">
-				<p:selectOneMenu
-					value="#{novoUsuarioBean.usuario.flTpEstabelecimento}"
-					style="width:50%;" id="cboTpEstabelecimento" title="Que tipo de empresa ou pessoa você se encaixa?">
-					<f:selectItems value="#{novoUsuarioBean.tipos}" />
-				</p:selectOneMenu>
-			</div>
-			<div class="ui-g-4">
-				<p:outputLabel value="Senha:" for="senhaCad" />
-			</div>
-			<div class="ui-g-4">
-				<p:password id="senhaCad" style="width:30%;" label="Senha" title="Digite a senha."
-					placeholder="Senha" value="#{novoUsuarioBean.senha}">
-				</p:password>
-				<i class="fa fa-lock"></i>
-			</div>
-			<div class="ui-g-4">
-				<p:outputLabel value="Confirme senha:" for="confSenhaCad" />
-			</div>
-			<div class="ui-g-4">
-				<p:password id="confSenhaCad" style="width:30%;" placeholder="Senha"
-					value="#{novoUsuarioBean.confSenha}" title="Confirme a senha que você colocou logo acima">
-				</p:password>
-				<i class="fa fa-lock"></i>
-			</div>
-			<div class="ui-g-4"></div>
-
-			<p:commandButton id="cadastrar"
-				styleClass="btn btn-cadastrar btn-lg navbar-btn" value="Cadastrar"
-				type="submit" update="msgs" title="Solicitar cadastro de usuário"
-				action="#{novoUsuarioBean.solicitarCadastro}">
-
-			</p:commandButton>
-			<pe:tooltip for="cadastrar" />
-
-		</div>
-
+		</section>
 	</ui:define>
 
 </ui:composition>

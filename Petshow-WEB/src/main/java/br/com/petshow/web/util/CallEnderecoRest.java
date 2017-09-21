@@ -1,17 +1,17 @@
-package br.com.petmooby.web.util;
+package br.com.petshow.web.util;
 
 import java.util.List;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
-import br.com.petmooby.enums.EnumErrosSistema;
-import br.com.petmooby.enums.EnumUF;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Bairro;
-import br.com.petmooby.model.Cidade;
-import br.com.petmooby.model.Estado;
-import br.com.petmooby.util.MapErroRetornoRest;
+import br.com.petshow.enums.EnumErrosSistema;
+import br.com.petshow.enums.EnumUF;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Bairro;
+import br.com.petshow.model.Cidade;
+import br.com.petshow.model.Estado;
+import br.com.petshow.util.MapErroRetornoRest;
 
 public class CallEnderecoRest extends RestUtilCall{
 	

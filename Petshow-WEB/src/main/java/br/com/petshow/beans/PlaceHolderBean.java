@@ -1,11 +1,11 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 
-import br.com.petmooby.util.PlaceHolderUtil;
+import br.com.petshow.util.PlaceHolderUtil;
 
 @ManagedBean
 @RequestScoped

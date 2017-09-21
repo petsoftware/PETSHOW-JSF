@@ -1,18 +1,18 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.com.petmooby.enums.EnumFaseVida;
-import br.com.petmooby.enums.EnumPorteAnimal;
-import br.com.petmooby.enums.EnumSexo;
-import br.com.petmooby.enums.EnumTipoAnimal;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.PerfilAdocao;
-import br.com.petmooby.web.util.CallPerfilAdocaoRest;
-import br.com.petmooby.web.util.MessagesBeanUtil;
+import br.com.petshow.enums.EnumFaseVida;
+import br.com.petshow.enums.EnumPorteAnimal;
+import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumTipoAnimal;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.PerfilAdocao;
+import br.com.petshow.web.util.CallPerfilAdocaoRest;
+import br.com.petshow.web.util.MessagesBeanUtil;
 
 @ManagedBean
 @ViewScoped

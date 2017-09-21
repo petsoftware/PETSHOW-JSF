@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.faces.bean.ManagedProperty;
 import javax.ws.rs.client.Entity;
@@ -9,14 +9,14 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Entidade;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.security.AuthenticationService;
-import br.com.petmooby.util.FileApplicationUtil;
-import br.com.petmooby.web.util.MessagesBeanUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Entidade;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.security.AuthenticationService;
+import br.com.petshow.util.FileApplicationUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 public class SuperBean <T>{
 	

@@ -1,4 +1,4 @@
-package br.com.petmooby.web.util;
+package br.com.petshow.web.util;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;

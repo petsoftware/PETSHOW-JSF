@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.Date;
 
@@ -10,12 +10,12 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
-import br.com.petmooby.enums.EnumTipoAnimal;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Perdido;
-import br.com.petmooby.util.CollectionUtil;
-import br.com.petmooby.web.util.ImagemUtil;
+import br.com.petshow.enums.EnumTipoAnimal;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Perdido;
+import br.com.petshow.util.CollectionUtil;
+import br.com.petshow.web.util.ImagemUtil;
 
 @ManagedBean
 @ViewScoped
@@ -30,6 +30,7 @@ public class PerdidoBean extends SuperBean<Perdido> {
 
 	private void novoPerdido() {
 		perdido = new Perdido();
+		perdido.setUsuario(getUsuarioLogado());
 	}
 	
 	public void novo() {

@@ -1,10 +1,10 @@
-package br.com.petmooby.web.util;
+package br.com.petshow.web.util;
 
-import br.com.petmooby.constants.RestPathConstants;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.PerfilAdocao;
-import br.com.petmooby.model.Usuario;
+import br.com.petshow.constants.RestPathConstants;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.PerfilAdocao;
+import br.com.petshow.model.Usuario;
 
 public class CallPerfilAdocaoRest extends RestUtilCall<PerfilAdocao> {
 	

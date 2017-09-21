@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;

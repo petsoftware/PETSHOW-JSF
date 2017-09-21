@@ -1,4 +1,4 @@
-package br.com.petmooby.web.util;
+package br.com.petshow.web.util;
 
 import java.util.List;
 
@@ -8,15 +8,16 @@ import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
-import br.com.petmooby.enums.EnumAchadoPerdido;
-import br.com.petmooby.enums.EnumErrosSistema;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Adocao;
-import br.com.petmooby.model.Animal;
-import br.com.petmooby.model.Perdido;
-import br.com.petmooby.objects.query.AdocaoQuery;
-import br.com.petmooby.util.MapErroRetornoRest;
+import br.com.petshow.enums.EnumAchadoPerdido;
+import br.com.petshow.enums.EnumErrosSistema;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Adocao;
+import br.com.petshow.model.Animal;
+import br.com.petshow.model.Perdido;
+import br.com.petshow.objects.query.AdocaoQuery;
+import br.com.petshow.objects.query.PerdidoQuery;
+import br.com.petshow.util.MapErroRetornoRest;
 
 public class CallAnimalRest  extends RestUtilCall<Animal> {
 
@@ -105,6 +106,28 @@ public class CallAnimalRest  extends RestUtilCall<Animal> {
 			}
 		}
 		return (List<Adocao>)entidades;
+	}
+	
+	public  List<Perdido> getListAnimaisPerdidos(PerdidoQuery query) throws ExceptionErroCallRest, ExceptionValidation{
+
+		client = new ResteasyClientBuilder().build();
+		target= client.target(URL_BASE+"animal/consulta/perdidos/");
+		Object entidades = null;
+		try{
+			Response response = target.request().post(Entity.entity(query, MediaType.APPLICATION_JSON));
+			entidades = response.readEntity(new javax.ws.rs.core.GenericType<List<Perdido>>() {});
+		}catch(Exception ex){
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+		}
+		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
+			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}else{
+				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
+			}
+		}
+		return (List<Perdido>)entidades;
 	}
 	
 	

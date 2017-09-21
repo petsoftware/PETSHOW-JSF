@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -12,17 +12,17 @@ import javax.servlet.http.Part;
 
 import org.primefaces.event.FileUploadEvent;
 
-import br.com.petmooby.enums.EnumFlTpEstabelecimento;
-import br.com.petmooby.enums.EnumTipoUser;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Endereco;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.model.UsuarioCliente;
-import br.com.petmooby.role.UsuarioRole;
-import br.com.petmooby.web.util.ImagemUtil;
-import br.com.petmooby.web.util.MessagesBeanUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.enums.EnumFlTpEstabelecimento;
+import br.com.petshow.enums.EnumTipoUser;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Endereco;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.model.UsuarioCliente;
+import br.com.petshow.role.UsuarioRole;
+import br.com.petshow.web.util.ImagemUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 
 @ManagedBean

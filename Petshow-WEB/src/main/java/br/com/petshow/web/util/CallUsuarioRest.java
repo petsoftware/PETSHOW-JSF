@@ -1,4 +1,4 @@
-package br.com.petmooby.web.util;
+package br.com.petshow.web.util;
 
 import java.util.List;
 
@@ -7,12 +7,12 @@ import javax.faces.context.FacesContext;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 
-import br.com.petmooby.enums.EnumErrosSistema;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.SecurityLogin;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.util.MapErroRetornoRest;
+import br.com.petshow.enums.EnumErrosSistema;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.SecurityLogin;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.util.MapErroRetornoRest;
 
 public class CallUsuarioRest  extends RestUtilCall {
 

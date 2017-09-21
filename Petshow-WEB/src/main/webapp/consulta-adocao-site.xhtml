@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:clx="http://java.sun.com/jsf/composite/components">
 
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
@@ -26,34 +27,24 @@
 						<div class="row">
 
 							<div class="col-md-12">
-								<p:selectOneMenu id="cbEstado" style="width: 100%;"
-									value="#{consultaAdocaoBean.estado}"
-									converter="estadoConverter">
-
-									<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
-										itemValue=" " noSelectionOption="true" />
-									<f:selectItems
-										value="#{consultaAdocaoBean.autoCompleteBean.estados}"
-										var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
-									<p:ajax
-										listener="#{consultaAdocaoBean.autoCompleteBean.onEstadoChange(consultaAdocaoBean.estado)}"
-										update="cbCidade" />
-
-								</p:selectOneMenu>
+								
+								 <p:selectOneMenu id="cbEstado" value="#{consultaAdocaoBean.uf}"  style="width: 100%;" required="false">
+									<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(consultaAdocaoBean.uf)}" />
+								 </p:selectOneMenu>
+								 
 							</div>
 
 						</div>
 						<div class="row">
 
 							<div class="col-md-12">
-								<p:selectOneMenu id="cbCidade" style="width: 100%;"
-									value="#{consultaAdocaoBean.cidade}"
-									converter="cidadeConverter">
-									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
-										itemValue="" noSelectionOption="true" />
-									<f:selectItems
-										value="#{consultaAdocaoBean.autoCompleteBean.cidades}"
-										var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+								
+								 <p:selectOneMenu id="cbCidade" value="#{consultaAdocaoBean.cidade}" converter="cidadeConverter" style="width: 100%;"
+									required="false" >
+									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+									<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
 								</p:selectOneMenu>
 							</div>
 
@@ -97,18 +88,17 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-search" 
+								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;"  icon="fa fa-fw fa-search" 
 									actionListener="#{consultaAdocaoBean.obterAdocoesDisponiveis}" ajax="false"
 									value="BUSCAR" update="panelAdocoes" id="btConsulta" />
 							</div>
 						</div>
-						<div class="row">
+						<div class="row" style="padding-top:5px;">
 							<div class="col-md-12">
-								<p:commandButton styleClass="btn-consultar" style="width: 100%;"  icon="fa fa-fw fa-pencil-square-o" 
-									action="#{consultaAdocaoBean.chamarTelaDeCadastroDeAdocao}" rendered="#{consultaAdocaoBean.authenticationService.authenticated}"
+								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;"  icon="fa fa-fw fa-pencil-square-o" 
+									action="#{consultaAdocaoBean.chamarTelaDeCadastroDeAdocao}" rendered="true" ajax="false"
 									value="ANUNCIAR ADOÇÃO?"  id="btnCadAdocao" />
-								<p:outputLabel style="color:red; text-align: justify;text-justify: inter-word;" value="Quer por um animal pra adoção? Então procure o botão  Quero me cadastrar, não demora nem 1 minuto. 
-								E o melhor, você não paga nada."  rendered="#{not consultaPerdidoBean.authenticationService.authenticated}"/>
+								
 							</div>
 						</div>
 					</div>

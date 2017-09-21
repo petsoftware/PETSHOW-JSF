@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,16 +10,16 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Bairro;
-import br.com.petmooby.model.Cidade;
-import br.com.petmooby.model.Estado;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.util.EnderecoUtil;
-import br.com.petmooby.util.StringUtil;
-import br.com.petmooby.web.util.CallAutoComplete;
-import br.com.petmooby.web.util.CallEnderecoRest;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Bairro;
+import br.com.petshow.model.Cidade;
+import br.com.petshow.model.Estado;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.util.EnderecoUtil;
+import br.com.petshow.util.StringUtil;
+import br.com.petshow.web.util.CallAutoComplete;
+import br.com.petshow.web.util.CallEnderecoRest;
 
 @ManagedBean
 @ViewScoped

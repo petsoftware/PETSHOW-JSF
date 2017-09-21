@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.Date;
 import java.util.List;
@@ -11,10 +11,10 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
-import br.com.petmooby.model.Adocao;
-import br.com.petmooby.util.CollectionUtil;
-import br.com.petmooby.web.util.ImagemUtil;
-import br.com.petmooby.web.util.MessagesBeanUtil;
+import br.com.petshow.model.Adocao;
+import br.com.petshow.util.CollectionUtil;
+import br.com.petshow.web.util.ImagemUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 @ManagedBean
 @ViewScoped
 public class AdocaoBean extends SuperBean<Adocao>{
@@ -44,13 +44,16 @@ public class AdocaoBean extends SuperBean<Adocao>{
 
 	@PostConstruct
 	public void init() {
-		if(adocao == null){
-			adocao = new Adocao();
-		}
+		novaAdocao();
+	}
+
+	private void novaAdocao() {
+		adocao = new Adocao();
+		adocao.setUsuario(getUsuarioLogado());
 	}
 	
 	public String novo() {
-		adocao = new Adocao();
+		novaAdocao();
 		return null;
 	}
 

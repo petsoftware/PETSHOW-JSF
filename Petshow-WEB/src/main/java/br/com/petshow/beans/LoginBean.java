@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -6,11 +6,11 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petmooby.enums.EnumFlTpEstabelecimento;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.security.AuthenticationService;
-import br.com.petmooby.util.MD5EncriptUtil;
-import br.com.petmooby.web.util.MessagesBeanUtil;
+import br.com.petshow.enums.EnumFlTpEstabelecimento;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.security.AuthenticationService;
+import br.com.petshow.util.MD5EncriptUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 
 @ManagedBean
 @RequestScoped

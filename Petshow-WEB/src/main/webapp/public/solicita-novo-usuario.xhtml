@@ -43,7 +43,7 @@
 			
 						<p:outputLabel for="txtCNPJ" value="CNPJ:"	/>
 			        	<p:inputText  id="txtCNPJ" value="#{usuarioBean.usuario.cnpjCpf}" styleClass="txtCNPJ" converter="cnpjConverter" requiredMessage="informe seu CNPJ!" required="true">
-			        		<f:validator validatorId="br.com.petmooby.validator.CnpjValidator" />
+			        		<f:validator validatorId="br.com.petshow.validator.CnpjValidator" />
 			        	</p:inputText>
 			        	
 			        	<p:outputLabel for="txtnmLogin" value="Nome usuário:" />

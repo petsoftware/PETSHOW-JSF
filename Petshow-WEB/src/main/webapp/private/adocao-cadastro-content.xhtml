@@ -44,34 +44,46 @@
 				<p:outputLabel id="display" />
 			</div>
 			<div class="row">
-				<div class="col-md-6">
-					<p:inputText placeholder="DDD" maxlength="2" size="5"
-						value="#{adocaoBean.adocao.dddCelular}" />
-					<p:inputText placeholder="Número para contato" maxlength="9"
-						value="#{adocaoBean.adocao.telefoneCelular}" />
-				</div>
+				<p:inputText placeholder="DDD" maxlength="2" size="5"
+					value="#{adocaoBean.adocao.dddCelular}" />
+				<p:inputText placeholder="Número para contato" maxlength="9"
+					value="#{adocaoBean.adocao.telefoneCelular}" />
 			</div>
 			<div class="row">Tipo de Animal</div>
 			<div class="row">
-				<div class="col-md-6">
-					<p:selectOneMenu id="cbAnimal" style="width: 100%;"
-						value="#{adocaoBean.adocao.tipo}">
-						<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
-							itemValue="" noSelectionOption="true" />
-						<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
-					</p:selectOneMenu>
-				</div>
+				<p:selectOneMenu id="cbAnimal" style="width: 50%;"
+					value="#{adocaoBean.adocao.tipo}">
+					<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
+						itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
+				</p:selectOneMenu>
 			</div>
 			<div class="row">Fase de Vida</div>
 			<div class="row">
-				<div class="col-md-6">
+				
 					<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
-						style="width: 100% !important;">
+						style="width: 50% !important;">
 						<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
 							noSelectionOption="true" />
 						<f:selectItems value="#{consultaAdocaoBean.fases}" />
 					</p:selectOneMenu>
-				</div>
+				
+			</div>
+			<div class="row">Estado</div>
+			<div class="row">
+				 <p:selectOneMenu id="cbEstado" value="#{adocaoBean.adocao.endereco.uf}"  style="width: 50%;">
+					<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+					<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+						<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(adocaoBean.adocao.endereco.uf)}" />
+				 </p:selectOneMenu>
+			</div>
+			<div class="row">Cidade</div>
+			<div class="row">
+				 <p:selectOneMenu id="cbCidade" value="#{adocaoBean.adocao.endereco.cidade}" converter="cidadeConverter" style="width: 50%;"
+					required="false" >
+					<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+					<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+				</p:selectOneMenu>
 			</div>
 
 		</div>

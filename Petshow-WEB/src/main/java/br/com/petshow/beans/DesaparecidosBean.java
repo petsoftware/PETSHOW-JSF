@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -18,11 +18,11 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-import br.com.petmooby.dao.DesaparecidosDAO;
-import br.com.petmooby.model.Desaparecidos;
-import br.com.petmooby.model.Entidade;
-import br.com.petmooby.role.DesaparecidosRole;
-import br.com.petmooby.util.FileApplicationUtil;
+import br.com.petshow.dao.DesaparecidosDAO;
+import br.com.petshow.model.Desaparecidos;
+import br.com.petshow.model.Entidade;
+import br.com.petshow.role.DesaparecidosRole;
+import br.com.petshow.util.FileApplicationUtil;
 
 @ManagedBean
 public class DesaparecidosBean {//extends SuperBean{

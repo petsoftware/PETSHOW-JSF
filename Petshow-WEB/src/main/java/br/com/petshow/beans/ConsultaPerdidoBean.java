@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,17 +10,19 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petmooby.enums.EnumAchadoPerdido;
-import br.com.petmooby.enums.EnumFaseVida;
-import br.com.petmooby.enums.EnumSexo;
-import br.com.petmooby.enums.EnumTipoAnimal;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Bairro;
-import br.com.petmooby.model.Cidade;
-import br.com.petmooby.model.Estado;
-import br.com.petmooby.model.Perdido;
-import br.com.petmooby.web.util.CallAnimalRest;
+import br.com.petshow.enums.EnumAchadoPerdido;
+import br.com.petshow.enums.EnumFaseVida;
+import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumTipoAnimal;
+import br.com.petshow.enums.EnumUF;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Bairro;
+import br.com.petshow.model.Cidade;
+import br.com.petshow.model.Estado;
+import br.com.petshow.model.Perdido;
+import br.com.petshow.objects.query.PerdidoQuery;
+import br.com.petshow.web.util.CallAnimalRest;
 
 @ManagedBean
 @ViewScoped
@@ -31,9 +33,10 @@ public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 	@ManagedProperty(value="#{autoCompleteBean}")
     private AutoCompleteBean autoCompleteBean;
 	private Estado estado;
+	private EnumUF uf;
 	private Cidade cidade;
 	private Bairro bairro;
-	private String animal;
+	private EnumTipoAnimal animal = EnumTipoAnimal.CACHORRO;
 	private EnumAchadoPerdido tpPerdidoAchado;
 	private EnumSexo sexo;
 	private int totalRows = 0;
@@ -50,23 +53,16 @@ public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 	}
 
 	public String obterAnimaisPerdidos() {
+		
+		PerdidoQuery query = new PerdidoQuery();
 		try {
 			
-			long idEstado=0;
-			long idCidade=0;
-			long idBairro=0;
-			setTpPerdidoAchado(EnumAchadoPerdido.PERDIDO);
-			if(estado!=null){
-				idEstado=estado.getId();
-			}
-			if(cidade!=null){
-				idCidade=cidade.getId();
-			}
-			if(bairro!=null){
-				idBairro=bairro.getId();
-			}
-			perdidos=restAnimal.getListAnimalPerdidoAchado(idEstado, idCidade,idBairro ,animal,tpPerdidoAchado);
-
+			query.setCidade(getCidade());
+			query.setSexo(getSexo());
+			query.setUf(getUf());
+			query.setTpAnimal(getAnimal());
+			perdidos=restAnimal.getListAnimaisPerdidos(query);
+			
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 
@@ -114,13 +110,7 @@ public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-	public String getAnimal() {
-		return animal;
-	}
-	public void setAnimal(String animal) {
-		this.animal = animal;
-	}
-
+	
 	public List<Perdido> getPerdidos() {
 		return perdidos;
 	}
@@ -169,7 +159,11 @@ public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 	}
 	
 	public String chamarTelaDeCadastroDePerdido() {
-		return "anunciar-perdido-site";
+		if(getAuthenticationService().isAuthenticated()){
+			return "anunciar-perdido-site";
+		}else{
+			return "do-login";
+		}
 	}
 
 	public int getTotalRows() {
@@ -189,6 +183,22 @@ public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 
 	public void setTpPerdidoAchado(EnumAchadoPerdido tpPerdidoAchado) {
 		this.tpPerdidoAchado = tpPerdidoAchado;
+	}
+
+	public EnumUF getUf() {
+		return uf;
+	}
+
+	public void setUf(EnumUF uf) {
+		this.uf = uf;
+	}
+
+	public EnumTipoAnimal getAnimal() {
+		return animal;
+	}
+
+	public void setAnimal(EnumTipoAnimal animal) {
+		this.animal = animal;
 	}
 	
 }

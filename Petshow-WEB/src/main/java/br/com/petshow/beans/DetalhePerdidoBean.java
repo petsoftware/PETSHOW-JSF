@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.HashMap;
 
@@ -8,11 +8,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Perdido;
-import br.com.petmooby.util.FormatacaoUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Perdido;
+import br.com.petshow.util.FormatacaoUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
@@ -146,25 +146,25 @@ public class DetalhePerdidoBean {
 	}
 	
 	public String getEstado() {
-		if(perdido.getEstado() !=null){
-			return perdido.getEstado().getNome();
+		if(perdido.getEndereco() !=null){
+			return perdido.getEndereco().getUf().getLabel();
 		}else{
-			return "Não Informado";
+			return "";
 		}
 		
 	}
 	public String getCidade() {
-		if(perdido.getCidade() !=null){
-			return perdido.getCidade().getNome();
+		if(perdido.getEndereco()!=null){
+			return perdido.getEndereco().getCidade().getNome();
 		}else{
-			return "Não Informado";
+			return "";
 		}
 	}
 	public String getBairro() {
-		if(perdido.getBairro() !=null){
-			return perdido.getBairro().getNome();
+		if(perdido.getEndereco() !=null){
+			return perdido.getEndereco().getBairro();
 		}else{
-			return "Não Informado";
+			return "";
 		}
 	}
 

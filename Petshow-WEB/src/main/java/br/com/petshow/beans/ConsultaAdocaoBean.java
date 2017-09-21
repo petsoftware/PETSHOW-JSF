@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,16 +14,17 @@ import javax.faces.bean.ViewScoped;
 
 import org.primefaces.context.RequestContext;
 
-import br.com.petmooby.enums.EnumFaseVida;
-import br.com.petmooby.enums.EnumSexo;
-import br.com.petmooby.enums.EnumTipoAnimal;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Adocao;
-import br.com.petmooby.model.Cidade;
-import br.com.petmooby.model.Estado;
-import br.com.petmooby.objects.query.AdocaoQuery;
-import br.com.petmooby.web.util.CallAnimalRest;
+import br.com.petshow.enums.EnumFaseVida;
+import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumTipoAnimal;
+import br.com.petshow.enums.EnumUF;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Adocao;
+import br.com.petshow.model.Cidade;
+import br.com.petshow.model.Estado;
+import br.com.petshow.objects.query.AdocaoQuery;
+import br.com.petshow.web.util.CallAnimalRest;
 
 @ManagedBean
 @ViewScoped
@@ -42,6 +43,7 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
     private AutoCompleteBean autoCompleteBean;
 	private List<String> fotos;
 	private Estado estado;
+	private EnumUF uf;
 	private Cidade cidade;
 	private EnumTipoAnimal animal;
 	private EnumSexo sexo;
@@ -62,7 +64,11 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	}
 
 	public String chamarTelaDeCadastroDeAdocao() {
-		return "anunciar-adocao-site";
+		if(getAuthenticationService().isAuthenticated()){
+			return "anunciar-adocao-site";
+		}else{
+			return "do-login";
+		}
 	}
 	
 	public String obterAdocoesDisponiveis() {
@@ -70,6 +76,8 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 		query.setFase(getFase() 		== null ? EnumFaseVida.FILHOTE 	  :getFase());
 		query.setSexo(getSexo() 		== null ? EnumSexo.MACHO 		  : getSexo() );
 		query.setTpAnimal(getAnimal()	== null ? EnumTipoAnimal.CACHORRO : getAnimal());
+		query.setUf(getUf());
+		query.setCidade(getCidade());
 		try {
 			setAdocoesDisponiveis(restAnimal.getListAnimalDisponiveisAdocao(query));
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
@@ -187,6 +195,12 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	}
 	public void setFotos(List<String> fotos) {
 		this.fotos = fotos;
+	}
+	public EnumUF getUf() {
+		return uf;
+	}
+	public void setUf(EnumUF uf) {
+		this.uf = uf;
 	}
 	
 }

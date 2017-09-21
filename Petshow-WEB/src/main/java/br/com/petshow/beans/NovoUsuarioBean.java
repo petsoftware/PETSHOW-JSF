@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -6,13 +6,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
-import br.com.petmooby.enums.EnumFlTpEstabelecimento;
-import br.com.petmooby.enums.EnumTipoUser;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.util.MD5EncriptUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.enums.EnumFlTpEstabelecimento;
+import br.com.petshow.enums.EnumTipoUser;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.util.MD5EncriptUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 
 @ManagedBean
@@ -142,16 +142,18 @@ public class NovoUsuarioBean {
 	}
 	
 	public void renderComponenets() {
-		if(tipoUsuario.equalsIgnoreCase("P") || tipoUsuario.equalsIgnoreCase("O")){
+		if(tipoUsuario.equalsIgnoreCase("P")){
 			setRenderizarCNPJ(true);
 			setRenderizarEmail(true);
 			setRenderizarNome(true);
 			setTextUsuario("NOME DA SUA EMPRESA");
-			if(tipoUsuario.equalsIgnoreCase("P")){
-				usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.PETSHOP);
-			}else{
-				usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.ONG);
-			}
+			usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.PETSHOP);
+		}else if(tipoUsuario.equalsIgnoreCase("O")){
+			setRenderizarCNPJ(false);
+			setRenderizarEmail(true);
+			setRenderizarNome(true);
+			setTextUsuario("NOME DA ONG");
+			usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.ONG);
 		}else{
 			setRenderizarCNPJ(false);
 			setRenderizarEmail(true);

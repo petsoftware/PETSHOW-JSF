@@ -1,0 +1,35 @@
+<!-- 
+DateCalendar
+Criado dia 30/05/2016 as 22:12
+Motivacao: Criar um componente de data que seja reutilizavel e responsivo
+ -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      			xmlns:p="http://primefaces.org/ui"
+      			xmlns:ui="http://java.sun.com/jsf/facelets"
+      			xmlns:composite="http://java.sun.com/jsf/composite"
+      			xmlns:f="http://java.sun.com/jsf/core"
+  				xmlns:h="http://java.sun.com/jsf/html">
+  		
+  	<!-- 
+	Essa tag serve para declarar todos os atributos que poderão ser passados 
+	para uso no nosso composite component
+	 -->			
+	<composite:interface>
+	    <composite:attribute name="id" 		 shortDescription="Identificacao unica do elemento no formulario"   type="java.lang.String"/>
+	    <composite:attribute name="value" 	 shortDescription="Campo do Bean que o compnente sera vinculado" 	type="br.com.petshow.model.Cidade"/>
+	    <composite:attribute name="readonly" shortDescription="Indica se o componente sera do tipo so leitura" 	type="java.lang.Boolean" default="Boolean.FALSE" />
+	    <composite:attribute name="required" shortDescription="Indica se o campo sera obrigatorio" 				type="java.lang.Boolean" default="Boolean.FALSE" />
+		<composite:attribute name="requiredMessage"	 shortDescription="Mensagem a ser exibida quando o campo for obrigatorio" required="false"/>		
+		<composite:attribute name="update"	 shortDescription="O componenete que ele deve atualizar" required="false"/>
+		<composite:attribute name="style"	  required="false"/>
+		<composite:attribute name="styleClass"	  required="false"/>
+	</composite:interface>
+	
+	<composite:implementation> 		
+		   	<p:selectOneMenu id="#{cc.attrs.id}" value="#{cc.attrs.value}" converter="cidadeConverter" style="#{cc.attrs.style}" styleClass="#{cc.attrs.styleClass}"
+				required="#{cc.attrs.required}" requiredMessage="#{cc.attrs.requiredMessage}">
+				<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+				<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+			</p:selectOneMenu>
+	</composite:implementation>
+</ui:composition>

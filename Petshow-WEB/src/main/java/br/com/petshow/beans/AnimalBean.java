@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.Date;
 import java.util.List;
@@ -6,16 +6,16 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 
-import br.com.petmooby.enums.EnumFrequenciaVermifugacao;
-import br.com.petmooby.enums.EnumSexo;
-import br.com.petmooby.enums.EnumTipoAnimal;
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Animal;
-import br.com.petmooby.model.Tutor;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.web.util.MessagesBeanUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.enums.EnumFrequenciaVermifugacao;
+import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumTipoAnimal;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Animal;
+import br.com.petshow.model.Tutor;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.web.util.MessagesBeanUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 public class AnimalBean extends SuperBean<Animal> {

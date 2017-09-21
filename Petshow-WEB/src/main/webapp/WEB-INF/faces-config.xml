@@ -9,7 +9,7 @@
 	    <renderer>
 	        <component-family>org.primefaces.component</component-family>
 	        <renderer-type>org.primefaces.component.FileUploadRenderer</renderer-type>
-	        <renderer-class>br.com.petmooby.web.util.FileUploadRender</renderer-class>
+	        <renderer-class>br.com.petshow.web.util.FileUploadRender</renderer-class>
 	    </renderer>
 	</render-kit>
 	<application>
@@ -161,6 +161,11 @@
 		<navigation-case>
 			<from-outcome>private-usuario</from-outcome>
 			<to-view-id>/private/private-meus-dados.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>do-login</from-outcome>
+			<to-view-id>/public/login.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

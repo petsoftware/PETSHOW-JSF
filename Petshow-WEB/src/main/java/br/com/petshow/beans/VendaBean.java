@@ -1,4 +1,4 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,17 +13,17 @@ import javax.servlet.http.Part;
 
 import org.primefaces.event.FileUploadEvent;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Bairro;
-import br.com.petmooby.model.Cidade;
-import br.com.petmooby.model.Usuario;
-import br.com.petmooby.model.Venda;
-import br.com.petmooby.role.UsuarioRole;
-import br.com.petmooby.util.CollectionUtil;
-import br.com.petmooby.web.util.CallVendaRest;
-import br.com.petmooby.web.util.ImagemUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Bairro;
+import br.com.petshow.model.Cidade;
+import br.com.petshow.model.Usuario;
+import br.com.petshow.model.Venda;
+import br.com.petshow.role.UsuarioRole;
+import br.com.petshow.util.CollectionUtil;
+import br.com.petshow.web.util.CallVendaRest;
+import br.com.petshow.web.util.ImagemUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped

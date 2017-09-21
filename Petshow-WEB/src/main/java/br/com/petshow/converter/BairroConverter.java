@@ -1,4 +1,4 @@
-package br.com.petmooby.converter;
+package br.com.petshow.converter;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
@@ -9,13 +9,13 @@ import javax.faces.convert.FacesConverter;
 
 import org.springframework.web.jsf.FacesContextUtils;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Bairro;
-import br.com.petmooby.model.Cidade;
-import br.com.petmooby.role.BairroRole;
-import br.com.petmooby.util.PlaceHolderUtil;
-import br.com.petmooby.web.util.RestUtilCall;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Bairro;
+import br.com.petshow.model.Cidade;
+import br.com.petshow.role.BairroRole;
+import br.com.petshow.util.PlaceHolderUtil;
+import br.com.petshow.web.util.RestUtilCall;
 
 @FacesConverter("bairroConverter")
 public class BairroConverter  implements Converter{

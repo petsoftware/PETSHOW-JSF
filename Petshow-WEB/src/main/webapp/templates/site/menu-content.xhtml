@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+
+     		 <ul class="list-inline intro-social-buttons" style="width: 600px;">
+							<li class="list-inline-item" 
+								title="Veja aqui os animais perdidos anunciados no site">
+								<a	href="#{request.contextPath}/consulta-perdido-site.xhtml" class="btn btn-success btn-lg"> <i
+									class="fa fa-question-circle fa-fw"></i> <span
+									class="network-name">Perdidos</span>
+								</a>
+							</li>
+							<li class="list-inline-item" title="Adode um animal">
+								<a href="#{request.contextPath}/consulta-adocao-site.xhtml" class="btn btn-success btn-lg"> <i
+									class="fa fa-info fa-fw"></i> <span class="network-name">Adoção</span>
+								</a>
+							</li>
+							<li class="list-inline-item" title="Se você é um PETSHOP anuncie conosco.">
+								<a href="#" class="btn btn-success btn-lg"> <i
+									class="fa fa fa-tags fa-fw"></i> <span class="network-name">Promoções</span>
+								</a>
+							</li>
+							<li class="list-inline-item" title="Se você é um PETSHOP anuncie conosco.">
+								<a href="#{request.contextPath}/page-eventos-site.xhtml" class="btn btn-success btn-lg"> <i
+									class="fa fa-calendar-check-o fa-fw"></i> <span class="network-name">Eventos</span>
+								</a>
+							</li>
+						</ul>
+	
+</ui:composition>
+
+</html>
+

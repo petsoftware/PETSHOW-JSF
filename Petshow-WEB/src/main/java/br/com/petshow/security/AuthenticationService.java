@@ -1,4 +1,4 @@
-package br.com.petmooby.security;
+package br.com.petshow.security;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -12,7 +12,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import br.com.petmooby.model.Usuario;
+import br.com.petshow.model.Usuario;
 
 
 

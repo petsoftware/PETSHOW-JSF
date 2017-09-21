@@ -1,12 +1,12 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.ws.rs.core.Response;
 
-import br.com.petmooby.constants.RestConstants;
-import br.com.petmooby.constants.RestPathConstants;
-import br.com.petmooby.model.Evento;
+import br.com.petshow.constants.RestConstants;
+import br.com.petshow.constants.RestPathConstants;
+import br.com.petshow.model.Evento;
 
 @ManagedBean
 public class EventoBean extends SuperBean {

@@ -82,7 +82,7 @@
 
 .box {
 	border:none;
-	background-color: #f0fff1;
+	width:100%;
 	color: purple;
 	border-radius: 4px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -90,18 +90,10 @@
 	padding-left: 4px;
 }
 
-.box:hover {
-	color:red;
-	border: 2px red solid;
-	font-size: large;
-	box-shadow: 5px 5px 5px #8888EE;
-	font-weight: bold;
-}
-
 .box-titulo{
 	border:none;
-	background-color:#2E64FE;
-	color: white;
+	background-color:#cadec7;
+	color: black;
 	border-radius: 4px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	padding-top: 4px;
@@ -110,10 +102,11 @@
 } 
 
 .box-mensagem {
-	padding-left: 8px;
-	background-color: #E0E0F8;
+	
+	background-color: #cadec7;
 	border-radius: 4px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	width: 200px;
 }
 
 .h5-font{
@@ -141,4 +134,31 @@
 .div-click:hover {
 	box-shadow: 5px 5px 5px #8888EE;
 	text-decoration: none !important;
+}
+
+.link{
+	color: black;
+}
+
+.link:hover{
+	text-decoration: none;
+}
+
+
+
+.div-detalhe {
+    float: right;
+    width: 100%;
+    padding: 20px;
+    background: #eef2f5;
+    margin: 0 0 20px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    padding-right: 10px;
+}
+
+.btn-top-menu{
+	
+	width: 145px;
+	padding: 2.5px;
 }

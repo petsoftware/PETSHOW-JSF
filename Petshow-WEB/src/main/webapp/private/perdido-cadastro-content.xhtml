@@ -62,38 +62,38 @@
 				</div>
 			</div>
 			
+			<div class="row">Sexo do animal?</div>
+			<div class="row">
+				<div class="col-md-6">
+					<p:selectOneMenu id="cbSexo" value="#{perdidoBean.perdido.flSexo}"
+						style="width: 100%;">
+						<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
+							itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{consultaPerdidoBean.sexos}" />
+					</p:selectOneMenu>
+				</div>
+			</div>
+			
 			
 			<div class="row">Qual é seu Estado?</div>
 			<div class="row">
 				<div class="col-md-6">
-					<p:selectOneMenu id="cbEstado" style="width: 100%;"
-						value="#{perdidoBean.perdido.estado}" required="false"
-						converter="estadoConverter">
-
-						<f:selectItem itemLabel="#{placeHolderBean.selEstado}"
-							itemValue=" " noSelectionOption="true" />
-						<f:selectItems
-							value="#{consultaPerdidoBean.autoCompleteBean.estados}"
-							var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}" />
-						<p:ajax
-							listener="#{consultaPerdidoBean.autoCompleteBean.onEstadoChange(consultaPerdidoBean.estado)}"
-							update="cbCidade" />
-
-					</p:selectOneMenu>
+					<p:selectOneMenu id="cbEstado" value="#{perdidoBean.perdido.endereco.uf}"  style="width: 100%;">
+						<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+						<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+						<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perdidoBean.perdido.endereco.uf)}" />
+				 	</p:selectOneMenu>
 				</div>
 
 			</div>
+			
 			<div class="row">E sua cidade?</div>
 			<div class="row">
 				<div class="col-md-6">
-					<p:selectOneMenu id="cbCidade" style="width: 100%;"
-						value="#{perdidoBean.perdido.cidade}" required="false"
-						converter="cidadeConverter">
-						<f:selectItem itemLabel="#{placeHolderBean.selCidade}"
-							itemValue="" noSelectionOption="true" />
-						<f:selectItems
-							value="#{consultaPerdidoBean.autoCompleteBean.cidades}"
-							var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}" />
+					<p:selectOneMenu id="cbCidade" value="#{perdidoBean.perdido.endereco.cidade}" converter="cidadeConverter" style="width: 100%;"
+						required="false" >
+						<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+						<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
 					</p:selectOneMenu>
 				</div>
 

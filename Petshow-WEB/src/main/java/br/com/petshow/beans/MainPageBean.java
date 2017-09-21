@@ -1,14 +1,14 @@
-package br.com.petmooby.beans;
+package br.com.petshow.beans;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.com.petmooby.exceptions.ExceptionErroCallRest;
-import br.com.petmooby.exceptions.ExceptionValidation;
-import br.com.petmooby.model.Estatistica;
-import br.com.petmooby.role.UsuarioRole;
-import br.com.petmooby.web.util.CallEstatisticaRest;
+import br.com.petshow.exceptions.ExceptionErroCallRest;
+import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Estatistica;
+import br.com.petshow.role.UsuarioRole;
+import br.com.petshow.web.util.CallEstatisticaRest;
 
 @ManagedBean
 @ViewScoped

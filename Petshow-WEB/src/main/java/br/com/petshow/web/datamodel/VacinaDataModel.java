@@ -1,4 +1,4 @@
-package br.com.petmooby.web.datamodel;
+package br.com.petshow.web.datamodel;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.faces.model.ListDataModel;
 
 import org.primefaces.model.SelectableDataModel;
 
-import br.com.petmooby.model.Vacina;
+import br.com.petshow.model.Vacina;
 
 public class VacinaDataModel extends ListDataModel<Vacina> implements SelectableDataModel<Vacina> {
 
