@@ -1,103 +1,143 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:pe="http://primefaces.org/ui/extensions"
-      xmlns:p="http://primefaces.org/ui">
- 
-    <ui:composition>
-	    <script type="text/javascript">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<script type="text/javascript">
 	    	jQuery(function($){
 	    	   $("input.txtCEP").mask("99999-999", {reverse: true});
 	    	  
 	    	});
 	    </script>
-    	 
-    		    		
-	        <div class="navbar" role="navigation">
-	                    
-		        <div class="navbar-header">
-		            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">	            
-		                <span class="sr-only">Toggle navigation</span>
-		                <span class="icon-bar"></span>
-		                <span class="icon-bar"></span>
-		                <span class="icon-bar"></span>
-		            </button>
-		        </div>
-		        
-		        <div class="navbar-collapse collapse" style="padding: 0;">
-		        	
-		        	<pe:tooltip global="true" />
-		        													
-					<div class="nav navbar-nav navbar-left">					
-						<p:commandLink id="menu-toggle" styleClass="btn btn-default navbar-toggle">
-	                		<i class="fa fa-angle-double-left"></i>
-	                	</p:commandLink>						
-			        </div>
-			   
-			<br />    
-	             
-	             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
-      		    	 <ul class="nav navbar-nav navbar-left menu-top" style="margin: 0;">
-		                <li>
-		                	
-		                	<h4 style="padding-left: 15px; font-variant: small-caps">#{loginBean.userName}</h4>
-		                </li>
-		              </ul>
-		            <ul class="nav navbar-nav navbar-right menu-top" style="margin: 0;">
-		                <li>
-		                	<a style="font-variant: small-caps" href="#">Voltar ao Site</a>
-		                </li>      		                                
-		                <li>
-		                	<div class="dropdown" >		                	
-								<button id="dropdownMenu1"
-									class="btn btn-default dropdown-toggle"
-									type="button"
-									data-toggle="dropdown"
-									aria-haspopup="true"
-									aria-expanded="true">
-							    	<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-							    	<h:outputText value="#{loginBean.usuario}" />
-							    	<span class="caret"></span>
-							  	</button>
-							  	
-							  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							    	<li>
-							    		<p:link onclick="paceStart();" id="lnk-edit-user" title="Clique aqui para editar os dados do Usuário"
-							    		outcome="private-usuario"
-							    		>
-				                			<i class="fa fa-user" aria-hidden="true" />
+
+
+	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target=".navbar-collapse">
+
+				<span class="icon-bar"> 
+				</span>
+				<i style="color:#333" class="fa fa-angle-double-down" aria-hidden="true"></i>
+				<span class="icon-bar"> </span>
+
+			</button>
+		</div>
+
+		<div class="navbar-collapse collapse" style="padding: 0;">
+
+			<pe:tooltip global="true" />
+
+			<div class="nav navbar-nav navbar-left">
+				<p:commandLink id="menu-toggle"
+					styleClass="btn btn-default navbar-toggle">
+					<i class="fa fa-angle-double-left"></i>
+				</p:commandLink>
+			</div>
+
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+			<ul class="nav navbar-nav navbar-left menu-top" style="margin: 0;">
+				<li>
+
+					<h4 style="padding-left: 15px; font-variant: small-caps">#{loginBean.userName}</h4>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right menu-top" style="margin: 0;">
+				<li><a style="font-variant: small-caps" href="#{request.contextPath}/index.xhtml">Voltar ao
+						Site</a></li>
+				<li class="dropdown">
+					<a class="nav-link dropdown-toggle mr-lg-2"	data-toggle="dropdown" href="#"> 
+						<i class="fa fa-bell fa-fw"></i>
+						<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas > 0}">
+							<span class="indicator text-primary d-none d-lg-block">
+	              				<i class="fa fa-fw fa-circle"></i>
+	            			</span>
+            			</h:panelGroup>
+						<i class="fa fa-caret-down"></i>	
+					</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<!-- 
+						<li><a href="#">
+								<div>
+									<i class="fa fa-comment fa-fw"></i> New Comment <span
+										class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-twitter fa-fw"></i> 3 New Followers <span
+										class="pull-right text-muted small">12 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						 -->
+						<li><a href="#{request.contextPath}/private/private-notificacoes.xhtml">
+								<div>
+									<i class="fa fa-envelope fa-fw"></i> Mensagens 
+									<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
+										
+								</div>
+								
+								  
+						</a></li>
+						<!-- 
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-tasks fa-fw"></i> New Task <span
+										class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a href="#">
+								<div>
+									<i class="fa fa-upload fa-fw"></i> Server Rebooted <span
+										class="pull-right text-muted small">4 minutes ago</span>
+								</div>
+						</a></li>
+						<li class="divider"></li>
+						<li><a class="text-center" href="#"> <strong>See
+									All Alerts</strong> <i class="fa fa-angle-right"></i>
+						</a></li>
+						 -->
+					</ul> <!-- /.dropdown-alerts --></li>
+				<li>
+					<div class="dropdown">
+						<button id="dropdownMenu1" class="btn btn-default dropdown-toggle"
+							type="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="true">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							<h:outputText value="#{loginBean.usuario}" />
+							<span class="caret"></span>
+						</button>
+
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li><p:link onclick="paceStart();" id="lnk-edit-user"
+									title="Clique aqui para editar os dados do Usuário"
+									outcome="private-usuario">
+									<i class="fa fa-user" aria-hidden="true" />
 				                			#{loginBean.userName}
-				                		</p:link>
-				                		<pe:tooltip for="lnk-edit-user"/>
-							    	</li>							    							    	
-							    	<li role="separator" class="divider"></li>							    	
-							    	<li>
-							    		<p:commandLink 
-							    			id="btn-sair-adm"
-							    			onstart="paceStart();"
-							    			process="@this"
-							    			title="Sair do sistema - efetuar logout"
-							    			action="#{loginBean.logout}">
-				                			<i class="fa fa-sign-out"></i>
+				                		</p:link> <pe:tooltip for="lnk-edit-user" /></li>
+							<li role="separator" class="divider"></li>
+							<li><p:commandLink id="btn-sair-adm" onstart="paceStart();"
+									process="@this" title="Sair do sistema - efetuar logout"
+									action="#{loginBean.logout}">
+									<i class="fa fa-sign-out"></i>
 				                			SAIR
-				                		</p:commandLink>
-				                		<pe:tooltip for="btn-sair-adm"/>
-				                	</li>
-							  	</ul>							  							  	
-							</div>	                	
-		                </li>
-		                
-		               
-		                		                
-		            </ul>
-		            		            
-		      	 </div>	
-		      	 	      	 
-	        </div>
-	        
-		
-        
-    </ui:composition>
-    
+				                		</p:commandLink> <pe:tooltip for="btn-sair-adm" /></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</ui:composition>
+
 </html>

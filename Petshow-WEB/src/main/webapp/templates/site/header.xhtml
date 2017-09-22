@@ -249,12 +249,11 @@
 						</li>
 	
 						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}">
-							
-								<i class="fa fa-user" style="color: black;"></i>
-								<p:link outcome="sucessoLoginComumUser" >
-									<h:outputText style="font-variant: small-caps;font-weight: bold;font-size: 1.5em;" value="#{loginBean.userName}" />
-								</p:link>
-							
+							<i class="fa fa-user" style="color: black;"></i>
+							<p:link outcome="sucessoLoginComumUser" id="lnkAdmArea" title="Voltar para sua área pessoal">
+								<h:outputText style="font-variant: small-caps;font-weight: bold;font-size: 1.5em;" value="#{loginBean.userName}" />
+							</p:link>
+							<pe:tooltip for="lnkAdmArea" />
 						</li>
 	
 						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'} nav-item"><p:commandLink styleClass="nav-link"

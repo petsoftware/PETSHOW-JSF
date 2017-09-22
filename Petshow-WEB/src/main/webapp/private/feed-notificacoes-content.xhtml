@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>PetmOOby</title>
+	<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8" />
+
+
+</h:head>
+<ui:composition>
+	
+	<!-- /.panel -->
+	<div class="chat-panel panel panel-default">
+		<div class="panel-heading">
+			<i class="fa fa-envelope fa-fw"></i> Suas Mensagens
+			<div class="btn-group pull-right">
+				<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+					<i class="fa fa-chevron-down"></i>
+				</button>
+				<ul class="dropdown-menu slidedown">
+					<li>
+						<a href="#"> <i class="fa fa-refresh fa-fw"></i>Atualizar</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<p:growl id="msg" />
+		
+		<!-- /.panel-heading -->
+		<div class="panel-body">
+			<ul class="chat">
+				<!-- Repetir para todas as notificacoes -->
+				<ui:repeat var="notificacao" value="#{notificacoesBean.notificacoes}">
+					<li class="left clearfix">
+						<span class="chat-img pull-left">
+							<img src="#{request.contextPath}/resources/images/users-64.png" alt="User Avatar"	class="img-circle-small" />
+						</span>
+						<div class="chat-body clearfix">
+							<div class="header">
+								<strong class="primary-font"><p:outputLabel value="#{notificacao.nome}"/> </strong>
+								<h:panelGroup id="jaLigp" rendered="#{not notificacao.flLida}">
+									<h:outputText value="Já li, retire." />
+							        <p:selectBooleanCheckbox value="#{notificacao.flLida}">
+							            <p:ajax update="msg,jaLigp" listener="#{notificacoesBean.}" />
+							        </p:selectBooleanCheckbox>
+						        </h:panelGroup>
+								<small class="pull-right text-muted"> 
+									<i class="fa fa-clock-o fa-fw"></i> #{notificacao.getTempoDePublicacao}
+								</small>
+								
+							</div>
+							<p>
+								#{notificacao.msgNotificacao}
+							</p>
+						</div>
+					</li>
+				</ui:repeat>
+				
+			</ul>
+		</div>
+		<!-- /.panel-body -->
+		<div class="panel-footer">
+		
+		</div>
+		<!-- /.panel-footer -->
+	</div>
+</ui:composition>
+<h:body>
+
+</h:body>
+</html>
+

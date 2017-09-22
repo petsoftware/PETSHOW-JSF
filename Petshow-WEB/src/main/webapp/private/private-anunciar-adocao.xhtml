@@ -14,7 +14,18 @@
 	<ui:param name="pageTitle" value="ADOÇÃO" />
 
 	<ui:define name="header">
-
+		<div class="row">
+			<p:commandButton id="btnLimpar" style="margin-right:4px"
+				styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
+				title="Limpar Anúncio?" value="Novo" action="#{adocaoBean.novo}"
+				type="submit" ajax="false" />
+			<p:commandButton id="btnSalvar" style="margin-right:4px"
+				styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+				title="Salvar Anúncio?" value="Salvar"
+				action="#{adocaoBean.salvar}" type="submit" ajax="false"
+				onstart="paceStart();" onclick="paceStart();"
+				oncomplete="Pace.restart();" update="@form" />
+		</div>
 	</ui:define>
 
 	<ui:define name="body">

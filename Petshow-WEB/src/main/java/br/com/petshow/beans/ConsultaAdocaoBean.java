@@ -73,9 +73,14 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	
 	public String obterAdocoesDisponiveis() {
 		AdocaoQuery query = new AdocaoQuery();
-		query.setFase(getFase() 		== null ? EnumFaseVida.FILHOTE 	  :getFase());
-		query.setSexo(getSexo() 		== null ? EnumSexo.MACHO 		  : getSexo() );
-		query.setTpAnimal(getAnimal()	== null ? EnumTipoAnimal.CACHORRO : getAnimal());
+//		query.setFase(getFase() 		== null ? EnumFaseVida.FILHOTE 	  :getFase());
+//		query.setSexo(getSexo() 		== null ? EnumSexo.MACHO 		  : getSexo() );
+//		query.setTpAnimal(getAnimal()	== null ? EnumTipoAnimal.CACHORRO : getAnimal());
+//		query.setUf(getUf());
+//		query.setCidade(getCidade());
+		query.setFase(getFase());
+		query.setSexo(getSexo() );
+		query.setTpAnimal(getAnimal());
 		query.setUf(getUf());
 		query.setCidade(getCidade());
 		try {

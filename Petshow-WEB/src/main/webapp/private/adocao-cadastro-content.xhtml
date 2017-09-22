@@ -69,6 +69,17 @@
 					</p:selectOneMenu>
 				
 			</div>
+			<div class="row">Sexo</div>
+			<div class="row">
+				
+				<p:selectOneMenu id="cbSexo" value="#{adocaoBean.adocao.flSexo}"
+					style="width: 50%;">
+					<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
+						itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{consultaAdocaoBean.sexos}" />
+				</p:selectOneMenu>
+				
+			</div>
 			<div class="row">Estado</div>
 			<div class="row">
 				 <p:selectOneMenu id="cbEstado" value="#{adocaoBean.adocao.endereco.uf}"  style="width: 50%;">

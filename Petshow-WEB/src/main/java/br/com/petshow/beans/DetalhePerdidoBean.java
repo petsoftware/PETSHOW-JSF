@@ -12,6 +12,7 @@ import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Perdido;
 import br.com.petshow.util.FormatacaoUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
@@ -21,7 +22,7 @@ public class DetalhePerdidoBean {
 	private Perdido perdido;
 	private String nome;
 	private String email;
-	private long telefone;
+	private String telefone;
 	private String mensagem;
 	private String id;
 	
@@ -55,7 +56,9 @@ public class DetalhePerdidoBean {
 			map.put("mensagem", mensagem);
 			map.put("telefone", telefone+"");
 			map.put("email", email+"");
+			map.put("nome", getNome());
 			RestUtilCall.post( map, "notificacao/perdido/msganuncio");
+			MessagesBeanUtil.infor("Mensagem enviada com sucesso!");
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
@@ -129,14 +132,6 @@ public class DetalhePerdidoBean {
 		this.email = email;
 	}
 
-	public long getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(long telefone) {
-		this.telefone = telefone;
-	}
-
 	public String getMensagem() {
 		return mensagem;
 	}
@@ -182,6 +177,14 @@ public class DetalhePerdidoBean {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 }

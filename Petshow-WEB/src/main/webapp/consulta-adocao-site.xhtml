@@ -25,33 +25,24 @@
 							</div>
 						</div>
 						<div class="row">
-
 							<div class="col-md-12">
-								
-								 <p:selectOneMenu id="cbEstado" value="#{consultaAdocaoBean.uf}"  style="width: 100%;" required="false">
+								 <p:selectOneMenu id="cboEstado" value="#{consultaAdocaoBean.uf}"  style="width: 100%;" required="false">
 									<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
 									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(consultaAdocaoBean.uf)}" />
 								 </p:selectOneMenu>
-								 
 							</div>
-
 						</div>
 						<div class="row">
-
 							<div class="col-md-12">
-								
 								 <p:selectOneMenu id="cbCidade" value="#{consultaAdocaoBean.cidade}" converter="cidadeConverter" style="width: 100%;"
 									required="false" >
 									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
 									<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
 								</p:selectOneMenu>
 							</div>
-
 						</div>
-
 						<div class="row">
-
 							<div class="col-md-12">
 								<p:selectOneMenu id="cbAnimal" style="width: 100%;"
 									value="#{consultaAdocaoBean.animal}">
@@ -60,10 +51,8 @@
 									<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
 								</p:selectOneMenu>
 							</div>
-
 						</div>
 						<div class="row">
-
 							<div class="col-md-12">
 								<p:selectOneMenu id="cbSexo" value="#{consultaAdocaoBean.sexo}"
 									style="width: 100%;">
@@ -72,10 +61,8 @@
 									<f:selectItems value="#{consultaAdocaoBean.sexos}" />
 								</p:selectOneMenu>
 							</div>
-
 						</div>
 						<div class="row">
-
 							<div class="col-md-12">
 								<p:selectOneMenu id="cbFase" value="#{consultaAdocaoBean.fase}"
 									style="width: 100%;">
@@ -84,7 +71,6 @@
 									<f:selectItems value="#{consultaAdocaoBean.fases}" />
 								</p:selectOneMenu>
 							</div>
-
 						</div>
 						<div class="row">
 							<div class="col-md-12">
@@ -139,6 +125,14 @@
 												<div class="col-md-8">
 													<h6 style="text-align: justify;text-justify: inter-word;">#{adocao.descAdocao}</h6>
 													
+												</div>
+												<div class="row">
+													<div style="padding-top: 10px;">
+														<h6 style="text-align: justify;text-justify: inter-word; padding-left: 15px;" >#{adocao.endereco.cidade.nome} - #{adocao.endereco.uf.label}</h6>
+													</div>
+													<div style="padding-left: 5px ;padding-top: 5px;">
+														<img class="img-fluid" src="#{request.contextPath}/resources/images/drawable-android/#{adocao.flSexo.id == 0 ? 'ic_macho.png' : 'ic_femea.png'}" />
+													</div>
 												</div>
 		
 											</div>

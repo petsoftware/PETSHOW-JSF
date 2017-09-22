@@ -36,7 +36,7 @@ public class ConsultaPerdidoBean extends SuperBean<Perdido>{
 	private EnumUF uf;
 	private Cidade cidade;
 	private Bairro bairro;
-	private EnumTipoAnimal animal = EnumTipoAnimal.CACHORRO;
+	private EnumTipoAnimal animal;
 	private EnumAchadoPerdido tpPerdidoAchado;
 	private EnumSexo sexo;
 	private int totalRows = 0;
