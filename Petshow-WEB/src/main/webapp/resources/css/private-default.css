@@ -746,29 +746,7 @@ legend {
 .ui-dialog-custom {
 	top: 7% !important;
 }
-/*
-.ui-dialog-custom {	
-	height: 90% !important;
-	top: 5% !important;
-}
-.ui-dialog-custom .ui-dialog-titlebar {
-	height: 13% !important;
-}
-.ui-dialog-custom.ui-widget-content .ui-dialog-content {
-	position: absolute !important;
-	height: 77% !important;
-    width: 100% !important;
-}
-.ui-dialog-custom .ui-dialog-footer {
-	position: absolute !important;
-    bottom: 0 !important;
-    height: 10% !important;
-    width: 100% !important;
-}
-.ui-dialog-custom .ui-layout-center {
-	padding-bottom: 47px !important;
-}
-*/
+
 .ui-datalist-custom {
 	padding: 0 !important;
 }
@@ -999,10 +977,3 @@ div.jqplot-table-legend-swatch {
 	word-break: break-all !important;
 }
 
-.btn-detalhes{
-	color: #FFFFFF !important;
-		
-}
-.btn-detalhes:focus,
-.btn-detalhes:hover{
-	text-decoration: none;

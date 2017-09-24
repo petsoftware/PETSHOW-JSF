@@ -1,5 +1,6 @@
 package br.com.petshow.beans.privates;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -9,11 +10,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.petshow.beans.SuperBean;
+import br.com.petshow.enums.EnumAssuntoNotificacao;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Notificacao;
-import br.com.petshow.web.util.RestUtilCall;
+import br.com.petshow.web.util.CallNotificacaoRest;
 /**
  * Notificacoes do usuario
  * @author Rafael Rocha
@@ -25,17 +26,18 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 
 	private int qtMsgNaoLidas = 0;
 	private List<Notificacao> notificacoes;
-	private RestUtilCall<Notificacao> restUtilCall;
+	private String mensagemResposta;
+	private Notificacao selectedNotificacao;
 	
 	@PostConstruct
 	public void init() {
-		restUtilCall = new RestUtilCall<>();
+		
 		getMessages();
 	}
 	
 	public void getMessages() {
 		try {
-			List<Notificacao> list = restUtilCall.getEntityList("notificacao/usuario/"+getUsuarioLogado().getId(), Notificacao.class);
+			List<Notificacao> list = CallNotificacaoRest.getListNotificacoesUsuario(getUsuarioLogado().getId());
 			setNotificacoes(list);
 			setQtMsgNaoLidas(list.size());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
@@ -61,10 +63,99 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 	
 	public void jaLiMensagem(Notificacao notificacao) {
 		try {
-			RestUtilCall.postEntity(notificacao, "url modificar que ja leu", Notificacao.class);
+			notificacao.setFlLida(true);
+			notificacao.setFlExcluida(true);
+			CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar/", Notificacao.class);
 			FacesContext.getCurrentInstance().addMessage("msg", new FacesMessage("OK , Você não verá mais esta mensagem"));
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public void enviarResposta(Notificacao notificacao) {
+		Notificacao notificacaoResp = new Notificacao();
+		if(notificacao.getUsuarioRemetente() != null){
+			try {
+				notificacaoResp.setAssuntoNotificacao(EnumAssuntoNotificacao.PERDIDO);
+				notificacaoResp.setContato(notificacao.getUsuarioDestinatario().getTelefone()+"");
+				notificacaoResp.setDtNotificacao(new Date());
+				notificacaoResp.setEmail(notificacao.getUsuarioDestinatario().getEmail());
+				notificacaoResp.setFlEnviada(false);
+				notificacaoResp.setFlExcluida(false);
+				notificacaoResp.setFlLida(false);
+				notificacaoResp.setMsgNotificacao(getMensagemResposta());
+				notificacaoResp.setNome(notificacao.getUsuarioDestinatario().getNome());
+				notificacaoResp.setUsuarioDestinatario(notificacao.getUsuarioRemetente());
+				notificacaoResp.setUsuarioRemetente(notificacao.getUsuarioDestinatario());
+				notificacaoResp.setMensagemRespondida(notificacao.getMsgNotificacao());
+				CallNotificacaoRest.postEntity(notificacaoResp, "notificacao/salvar", Notificacao.class);
+				notificacao.setFlRespondeu(true);
+				notificacao.setResposta(getMensagemResposta());
+				CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar", Notificacao.class);
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Enviado com sucesso!",  null);
+		        FacesContext.getCurrentInstance().addMessage("growl", message);
+			} catch (ExceptionErroCallRest | ExceptionValidation e) {
+				e.printStackTrace();
+			}
+		}else{
+			enviarEmail(notificacao);
+		}
+	}
+	
+	public void enviarResposta(Long id) {
+		Notificacao notificacaoResp = new Notificacao();
+		Notificacao notificacao		= null;
+		try {
+			notificacao = CallNotificacaoRest.getEntity("notificacao/get/"+id, Notificacao.class);
+		} catch (ExceptionErroCallRest | ExceptionValidation e1) {
+			e1.printStackTrace();
+			notificacao = null;
+		}
+		if(notificacao.getUsuarioRemetente() != null){
+			try {
+				notificacaoResp.setAssuntoNotificacao(EnumAssuntoNotificacao.PERDIDO);
+				notificacaoResp.setContato(notificacao.getUsuarioDestinatario().getTelefone()+"");
+				notificacaoResp.setDtNotificacao(new Date());
+				notificacaoResp.setEmail(notificacao.getUsuarioDestinatario().getEmail());
+				notificacaoResp.setFlEnviada(false);
+				notificacaoResp.setFlExcluida(false);
+				notificacaoResp.setFlLida(false);
+				notificacaoResp.setMsgNotificacao(getMensagemResposta());
+				notificacaoResp.setNome(notificacao.getUsuarioDestinatario().getNome());
+				notificacaoResp.setUsuarioDestinatario(notificacao.getUsuarioRemetente());
+				notificacaoResp.setUsuarioRemetente(notificacao.getUsuarioDestinatario());
+				notificacaoResp.setMensagemRespondida(notificacao.getMsgNotificacao());
+				CallNotificacaoRest.postEntity(notificacaoResp, "notificacao/salvar", Notificacao.class);
+				notificacao.setFlRespondeu(true);
+				CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar", Notificacao.class);
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Enviado com sucesso!",  null);
+		        FacesContext.getCurrentInstance().addMessage("growl", message);
+			} catch (ExceptionErroCallRest | ExceptionValidation e) {
+				e.printStackTrace();
+			}
+		}else{
+			enviarEmail(notificacao);
+		}
+	}
+
+	private void enviarEmail(Notificacao notificacao) {
+		// TODO Auto-generated method stub
+	}
+
+	public String getMensagemResposta() {
+		return mensagemResposta;
+	}
+
+	public void setMensagemResposta(String mensagemResposta) {
+		this.mensagemResposta = mensagemResposta;
+	}
+
+	public Notificacao getSelectedNotificacao() {
+		return selectedNotificacao;
+	}
+
+	public void setSelectedNotificacao(Notificacao selectedNotificacao) {
+		this.selectedNotificacao = selectedNotificacao;
+	}
+	
 }

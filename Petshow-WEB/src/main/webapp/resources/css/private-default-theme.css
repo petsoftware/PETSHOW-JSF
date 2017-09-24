@@ -85,18 +85,8 @@ legend {
 .ui-menu.ui-widget li > .ui-menuitem-link.ui-state-hover {
     background-color: #26C281 !important;
 }
-.btn {
-	color: #fff !important;
-    border-color: transparent !important;
-}
-.btn:hover,
-.btn:focus,
-.btn:active,
-.btn.active {
- 	color: #fff !important;
-  	background-color: #ccd1d9 !important;
-  	border-color: #ccd1d9 !important;
-}
+
+
 .btn,
 .btn.disabled,
 .btn[disabled],
@@ -104,10 +94,7 @@ legend {
     background-color: #aab2bd !important;
     border-color: #aab2bd !important;
 }
-.btn-default {
-  	color: #656D78 !important;
-  	border-color: #656D78 !important;
-}
+
 .btn-default:hover,
 .btn-default:focus,
 .btn-default.focus,

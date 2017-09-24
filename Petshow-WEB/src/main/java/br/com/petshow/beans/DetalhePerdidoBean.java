@@ -17,7 +17,7 @@ import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
-public class DetalhePerdidoBean {
+public class DetalhePerdidoBean extends SuperBean<Perdido>{
 
 	private Perdido perdido;
 	private String nome;
@@ -25,15 +25,26 @@ public class DetalhePerdidoBean {
 	private String telefone;
 	private String mensagem;
 	private String id;
+	private boolean temUsuarioLogado;
 	
 	@PostConstruct
 	public void init() {
 		this.perdido= new Perdido();
-		 id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
+		id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
 		getAdocaoBanco();
-	
+		verificarSeUsuarioLogado();
 	}
-	
+
+	private void verificarSeUsuarioLogado() {
+		if(getUsuarioLogado() != null){
+			if(getUsuarioLogado().getId() > 0){
+				setTemUsuarioLogado(true);
+			}else{
+				setTemUsuarioLogado(false);
+			}
+		}
+	}
+
 	public void getAdocaoBanco(){
 		try {
 			perdido = RestUtilCall.getEntity("animal/perdido/"+id,Perdido.class);
@@ -57,23 +68,29 @@ public class DetalhePerdidoBean {
 			map.put("telefone", telefone+"");
 			map.put("email", email+"");
 			map.put("nome", getNome());
+			if(isTemUsuarioLogado()){
+				map.put("idUserRemet", getUsuarioLogado().getId()+"");
+			}else{
+				map.put("idUserRemet", "0");
+			}
 			RestUtilCall.post( map, "notificacao/perdido/msganuncio");
-			MessagesBeanUtil.infor("Mensagem enviada com sucesso!");
+			MessagesBeanUtil.inforClient("Enviado com sucesso!","msgEnviar");
+			setMensagem("");
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+			FacesContext.getCurrentInstance().addMessage("msgEnviar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 
 		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			FacesContext.getCurrentInstance().addMessage("msgEnviar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+			FacesContext.getCurrentInstance().addMessage("msgEnviar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
 	}
 
 	public String getTelResFormatado(){
 		if(perdido ==null || perdido.getDddResidencial() ==null || perdido.getTelefoneResidencial()==null){
-			return "Não Informado";
+			return "Tel. Fixo";
 			
 		}else{
 			return FormatacaoUtil.telefoneComDDD(perdido.getDddResidencial(), perdido.getTelefoneResidencial(), true);
@@ -185,6 +202,14 @@ public class DetalhePerdidoBean {
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+
+	public boolean isTemUsuarioLogado() {
+		return temUsuarioLogado;
+	}
+
+	public void setTemUsuarioLogado(boolean temUsuarioLogado) {
+		this.temUsuarioLogado = temUsuarioLogado;
 	}
 
 }

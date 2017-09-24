@@ -12,7 +12,7 @@
 
 </h:head>
 <ui:composition>
-	
+	<p:growl id="msg" />
 	<!-- /.panel -->
 	<div class="chat-panel panel panel-default">
 		<div class="panel-heading">
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		
-		<p:growl id="msg" />
+
 		
 		<!-- /.panel-heading -->
 		<div class="panel-body">
@@ -38,25 +38,109 @@
 				<ui:repeat var="notificacao" value="#{notificacoesBean.notificacoes}">
 					<li class="left clearfix">
 						<span class="chat-img pull-left">
-							<img src="#{request.contextPath}/resources/images/users-64.png" alt="User Avatar"	class="img-circle-small" />
+							<h:panelGroup  rendered="#{notificacao.usuarioRemetente == null}">
+								<img  src="#{request.contextPath}/resources/images/users-64.png" alt="User Avatar"	class="img-circle-small" />
+							</h:panelGroup>
+							<h:graphicImage rendered="#{notificacao.usuarioRemetente != null}"
+									styleClass="img-circle-small"
+									stream="false" cache="false"
+									url="data:image/jpg;base64,#{notificacao.usuarioRemetente.foto}" id="visualizacao"
+									alt="Visualização da foto do usuário" />
 						</span>
 						<div class="chat-body clearfix">
 							<div class="header">
-								<strong class="primary-font"><p:outputLabel value="#{notificacao.nome}"/> </strong>
+								<h:panelGroup rendered="#{notificacao.usuarioRemetente == null}" >
+									<strong class="primary-font"><p:outputLabel value="#{notificacao.nome}"/> </strong>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificacao.usuarioRemetente != null}" >
+									<strong class="primary-font"><p:outputLabel value="#{notificacao.usuarioRemetente.nome}"/> </strong>
+								</h:panelGroup>
 								<h:panelGroup id="jaLigp" rendered="#{not notificacao.flLida}">
-									<h:outputText value="Já li, retire." />
-							        <p:selectBooleanCheckbox value="#{notificacao.flLida}">
-							            <p:ajax update="msg,jaLigp" listener="#{notificacoesBean.}" />
-							        </p:selectBooleanCheckbox>
+									<span class="span-attention">
+										<strong>
+											<h:outputText value="Já li, retire." />
+								        </strong>
+								        <p:selectBooleanCheckbox value="#{notificacao.flLida}">
+								            <p:ajax update="jaLigp" listener="#{notificacoesBean.jaLiMensagem(notificacao)}" />
+								        </p:selectBooleanCheckbox>
+							        </span>
 						        </h:panelGroup>
 								<small class="pull-right text-muted"> 
 									<i class="fa fa-clock-o fa-fw"></i> #{notificacao.getTempoDePublicacao}
 								</small>
 								
 							</div>
-							<p>
-								#{notificacao.msgNotificacao}
-							</p>
+							<div class="row" style="max-width: 350px;">
+								<h:panelGroup rendered="#{not empty notificacao.mensagemRespondida}">
+									<div class="alert alert-info fade in alert-dismissable" style="width: #{notificacao.mensagemRespondida.length() + 8};">
+									    <h:graphicImage rendered="#{notificacao.usuarioDestinatario != null}"
+											styleClass="img-circle-x-small"
+											style="padding: 8px;"
+											stream="false" cache="false"
+											url="data:image/jpg;base64,#{notificacao.usuarioDestinatario.foto}" id="imgRespondida"
+											alt="Visualização da foto do usuário" />
+									    <strong>EU: </strong> #{notificacao.mensagemRespondida}
+									</div>
+								</h:panelGroup>
+							</div>
+							<div class="row">
+								<div class="alert alert-success pull-right" style="max-width: 350px;">
+										<div class="row">
+											<h:graphicImage rendered="#{notificacao.usuarioRemetente != null}"
+											styleClass="img-circle-x-small"
+											style="padding: 8px;"
+											stream="false" cache="false"
+											url="data:image/jpg;base64,#{notificacao.usuarioRemetente.foto}" id="imgResp"
+											alt="Visualização da foto do usuário" />
+											<strong>#{notificacao.usuarioRemetente.nome}</strong>
+											<div class="pull-right" style="padding-left: 5px;">
+												<p:outputLabel value="#{notificacao.dtNotificacao}">
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+												</p:outputLabel>
+											</div>
+										</div>
+										<div class="row" style="padding: 8px;">
+											<p>	#{notificacao.msgNotificacao}</p>
+										</div>
+									
+								</div>
+							</div>
+							<div class="row">
+							    <h:panelGroup id="rodape">
+									<h:panelGroup rendered="#{not notificacao.flRespondeu}">
+										<span class="pull-right text-muted"> 
+											<p:commandButton action="#" style="background-color: #d9edf7 !important; color: #31708f !important;" styleClass="btn btn-success btn-lg" icon="fa fa-fw fa-send"
+												onclick="PF('dlg1-#{notificacao.id}').show();" type="submit" value="Responder" title="responder a mensagem" id="btnResponder" />
+										</span>
+									</h:panelGroup>
+									 <h:panelGroup rendered="#{notificacao.flRespondeu}">
+								    	<div class="alert alert-info pull-left" >
+								    		<div class="row">
+												<h:graphicImage rendered="#{notificacao.usuarioDestinatario != null}"
+												styleClass="img-circle-x-small"
+												style="padding: 8px;"
+												stream="false" cache="false"
+												url="data:image/jpg;base64,#{notificacao.usuarioDestinatario.foto}" id="imgDest"
+												alt="Visualização da foto do usuário" />
+												<strong>EU</strong>
+												
+											</div>
+								    		<strong>#{notificacao.resposta}</strong>
+								    	</div>
+								    </h:panelGroup>
+								 </h:panelGroup>
+							</div>
+							<!-- Dialog de mensagem -->
+							<p:dialog id="dialogResp" header="Sua reposta" modal="true" widgetVar="dlg1-#{notificacao.id}" minHeight="40">
+								<p:messages id="growl" life="2000" />
+								<div class="row" style="padding:8px;">
+							    	<p:inputTextarea style="width:100%;" cols="8" rows="8" value="#{notificacoesBean.mensagemResposta}" immediate="true"/>
+							    </div>
+							    <div class="row">
+								    <p:commandButton update="growl,rodape" ajax="true" value="Enviar" style="padding-left:15px !important; backgorund-color:#dff0d8 !important;" styleClass="btn btn-success btn-lg" 
+								    	icon="fa fa-fw fa-send" actionListener="#{notificacoesBean.enviarResposta(notificacao)}"/>
+							    </div>							    
+							</p:dialog>
 						</div>
 					</li>
 				</ui:repeat>

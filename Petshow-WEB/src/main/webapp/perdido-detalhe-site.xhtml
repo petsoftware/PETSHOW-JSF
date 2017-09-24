@@ -56,27 +56,28 @@
 							<div class="div-detalhe">
 								<div class="row">
 									<i class="fa fa-user"></i>
-									<h:outputLabel id="lblUserAnuncio"
+									<h:outputLabel id="lblUserAnuncio" style="padding-left: 8px; font-variant: small-caps;"
 										value="#{detalhePerdidoBean.perdido.usuario.nome}">
 									</h:outputLabel>
 								</div>
 								<div class="row">
-									<h:outputLabel id="lblTelFixo"
+									<i class="fa fa-phone-square"></i> 
+									<h:outputLabel id="lblTelFixo" style="padding-left: 8px; font-variant: small-caps;"
 										value="#{detalhePerdidoBean.telResFormatado}">
 									</h:outputLabel>
 								</div>
 								<div class="row">
 									<i class="fa fa-phone-square"></i> 
-									<h:outputLabel id="lblTelCelular"
+									<h:outputLabel id="lblTelCelular" style="padding-left: 8px; font-variant: small-caps;"
 										value="#{detalhePerdidoBean.telCelFormatado}">
 									</h:outputLabel>
 								</div>
 	
 								<div class="row">
 									<i class="fa fa-map-marker"></i> 
-									<h:outputLabel id="lblCidade"
+									<h:outputLabel id="lblCidade" style="padding-left: 8px; font-variant: small-caps;"
 										value="#{detalhePerdidoBean.cidade}" /> - 
-									<h:outputLabel id="lblEstado"
+									<h:outputLabel id="lblEstado" style="font-variant: small-caps;"
 										value="#{detalhePerdidoBean.estado}" />	
 								</div>
 								<div class="row">
@@ -85,21 +86,22 @@
 								</div>
 							</div>
 						</div>
+							<p:messages id="msgEnviar" />
 							<div style="padding-left: 15px">
 								<div class="row">
-									<h:outputLabel value="Nome:" for="txtNome" />
+									<h:outputLabel rendered="#{not detalhePerdidoBean.temUsuarioLogado}" value="Nome:" for="txtNome" />
 								</div>
 								<div class="row">
-									<p:inputText id="txtNome" required="true" maxlength="40"
+									<p:inputText id="txtNome" rendered="#{not detalhePerdidoBean.temUsuarioLogado}" required="true" maxlength="40"
 										value="#{detalhePerdidoBean.nome}" style="width:90%;"/>
 								</div>
 							</div>
 							<div style="padding-left: 15px">
 								<div class="row">
-									<p:outputLabel value="E-mail:" for="txtEmail" />
+									<p:outputLabel rendered="#{not detalhePerdidoBean.temUsuarioLogado}" value="E-mail:" for="txtEmail" />
 								</div>
 								<div class="row">
-									<p:inputText id="txtEmail" required="true" maxlength="70"
+									<p:inputText rendered="#{not detalhePerdidoBean.temUsuarioLogado}" id="txtEmail" required="true" maxlength="70"
 										value="#{detalhePerdidoBean.email}"
 										requiredMessage="informe seu e-mail!" style="width:90%;"
 										validatorMessage="E-mail não está em formato válido!">
@@ -110,10 +112,10 @@
 							</div>
 							<div style="padding-left: 15px">
 								<div class="row">
-									<p:outputLabel value="Telefone:" for="txtTel" />
+									<p:outputLabel rendered="#{not detalhePerdidoBean.temUsuarioLogado}" value="Telefone:" for="txtTel" />
 								</div>
 								<div class="row">
-									<p:inputMask mask="(99)999999999" id="txtTel" maxlength="20" style="width:50%;"
+									<p:inputMask rendered="#{not detalhePerdidoBean.temUsuarioLogado}" mask="(99)999999999" id="txtTel" maxlength="20" style="width:50%;"
 										value="#{detalhePerdidoBean.telefone}" />
 								</div>
 							</div>
@@ -130,7 +132,7 @@
 							<div style="padding-left: 15px;padding-right: 15px;padding-bottom: 20px;">	
 								<div class="row">
 									<p:commandButton action="#{detalhePerdidoBean.enviar}" styleClass="btn btn-success btn-lg" icon="fa fa-fw fa-send"
-										type="submit" value="Enviar Menssagem" update="msgs" id="btNovo" style="padding-left: 4px !important;"/>
+										type="submit" value="Enviar Menssagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"/>
 								</div>
 							</div>
 

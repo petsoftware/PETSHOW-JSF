@@ -17,26 +17,31 @@ import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
-public class DetalheAdocaoBean {
+public class DetalheAdocaoBean extends SuperBean<Adocao>{
 
 	private Adocao adocao;
-	
-	
 	private String nome;
-	
 	private String email;
-	
 	private long telefone;
-	
 	private String mensagem;
-	
 	private String id;
+	private boolean temUsuarioLogado;
 	
 	@PostConstruct
 	public void init() {
 		this.adocao= new Adocao();
 		getAdocaoBanco();
+		verificarSeUsuarioLogado();
+	}
 	
+	private void verificarSeUsuarioLogado() {
+		if(getUsuarioLogado() != null){
+			if(getUsuarioLogado().getId() > 0){
+				setTemUsuarioLogado(true);
+			}else{
+				setTemUsuarioLogado(false);
+			}
+		}
 	}
 	
 	public void getAdocaoBanco(){
@@ -59,9 +64,7 @@ public class DetalheAdocaoBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
-		
-		
-		
+	
 	}
 	
 	public void enviar(){
@@ -113,7 +116,6 @@ public class DetalheAdocaoBean {
 			return "Não Informado";
 		}
 	}
-	
 
 	public String getNome() {
 		return nome;
@@ -174,8 +176,6 @@ public class DetalheAdocaoBean {
 		return adocao;
 	}
 
-
-
 	public void setAdocao(Adocao adocao) {
 		this.adocao = adocao;
 	}
@@ -186,6 +186,14 @@ public class DetalheAdocaoBean {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public boolean isTemUsuarioLogado() {
+		return temUsuarioLogado;
+	}
+
+	public void setTemUsuarioLogado(boolean temUsuarioLogado) {
+		this.temUsuarioLogado = temUsuarioLogado;
 	}
 	
 }

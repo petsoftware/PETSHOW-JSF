@@ -9,6 +9,10 @@ public class MessagesBeanUtil {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, details));
 	}
 	
+	public static void erroMessage(String erro, String details, String clienteId) {
+		FacesContext.getCurrentInstance().addMessage(clienteId, new FacesMessage(FacesMessage.SEVERITY_ERROR, erro, details));
+	}
+	
 	public static void erroMessage(String erro) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro do Sistema", erro));
 	}
@@ -27,5 +31,14 @@ public class MessagesBeanUtil {
 	public static void exception(Exception e) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Falha grave: ",e.getMessage()));
 	}
+	
+	public static void infor(String infor, String detail, String clientID) {
+		FacesContext.getCurrentInstance().addMessage(clientID, new FacesMessage(FacesMessage.SEVERITY_INFO, infor,detail));
+	}
+	
+	public static void inforClient(String infor,String clientID) {
+		FacesContext.getCurrentInstance().addMessage(clientID, new FacesMessage(FacesMessage.SEVERITY_INFO, infor,infor));
+	}
+	
 
 }

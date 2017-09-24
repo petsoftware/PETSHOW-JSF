@@ -53,11 +53,11 @@
 						Site</a></li>
 				<li class="dropdown">
 					<a class="nav-link dropdown-toggle mr-lg-2"	data-toggle="dropdown" href="#"> 
-						<i class="fa fa-bell fa-fw"></i>
+						<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas == 0}">
+							<i class="fa fa-bell fa-fw"></i>
+						</h:panelGroup>
 						<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas > 0}">
-							<span class="indicator text-primary d-none d-lg-block">
-	              				<i class="fa fa-fw fa-circle"></i>
-	            			</span>
+							<i class="fa fa-bell faa-ring animated" style="color: red;"></i>
             			</h:panelGroup>
 						<i class="fa fa-caret-down"></i>	
 					</a>
@@ -80,9 +80,16 @@
 						 -->
 						<li><a href="#{request.contextPath}/private/private-notificacoes.xhtml">
 								<div>
-									<i class="fa fa-envelope fa-fw"></i> Mensagens 
-									<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
-										
+									<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas == 0}">
+										<i class="fa fa-envelope fa-fw"></i> 
+									</h:panelGroup>
+									<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas > 0}">
+										<i class="fa fa-envelope faa-horizontal animated"></i>
+									</h:panelGroup>
+									Mensagens 
+									<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas > 0}">
+										<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
+									</h:panelGroup>	
 								</div>
 								
 								  
