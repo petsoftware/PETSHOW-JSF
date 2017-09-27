@@ -25,7 +25,7 @@ legend {
    	border-color: #37bc9b;
    	box-shadow: none;
 }
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+ .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
 	color: #383838;
     border-color: #cccccc;
     background-color: #fff;
@@ -87,7 +87,6 @@ legend {
 }
 
 
-.btn,
 .btn.disabled,
 .btn[disabled],
 .btn.ui-state-disabled {

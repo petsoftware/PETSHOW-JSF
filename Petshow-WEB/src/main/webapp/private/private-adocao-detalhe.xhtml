@@ -17,15 +17,15 @@
 	<ui:define name="header">
 
 	</ui:define>
-	<f:metadata>
-		<f:viewParam name="id" value="#{detalheAdocaoBean.id}" />
-	</f:metadata>
+	
 	<ui:define name="body">
-
+			<f:metadata>
+				<f:viewParam name="id" value="#{detalheAdocaoBean.id}" />
+			</f:metadata>
 			<div class="container">
 			
 				<ui:include src="../content-adocao-detalhe.xhtml" >
-				
+					
 				</ui:include>
 			</div>
 

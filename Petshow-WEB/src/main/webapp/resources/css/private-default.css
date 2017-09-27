@@ -985,8 +985,8 @@ div.jqplot-table-legend-swatch {
 
 .box-titulo{
 	border:none;
-	background-color:#cadec7;
-	color: black;
+	background-color:#d9edf7;
+	color: #31708f;
 	border-radius: 4px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	padding-top: 4px;
@@ -997,8 +997,27 @@ div.jqplot-table-legend-swatch {
 .ui-widget-header {
     border: 1px solid #eeeeee;
     font-weight: bold;
-    color: #31708f;
-    background-color: #d9edf7;
+    color: #333;
+    background-color: #9fe0da;
     border-color: #bce8f1;
+}
+
+.div-detalhe {
+    float: right;
+    width: 100%;
+    padding: 20px;
+    background: #eef2f5;
+    margin: 0 0 20px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    padding-right: 10px;
+}
+
+.box-mensagem {
+	
+	background-color: #cadec7;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	
 }
 

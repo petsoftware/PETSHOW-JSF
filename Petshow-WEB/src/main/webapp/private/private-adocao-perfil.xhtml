@@ -17,7 +17,7 @@
 	<ui:define name="header">
 
 	</ui:define>
-
+	
 	<ui:define name="body">
 		<div class="container">
 			<div class="row">
@@ -25,7 +25,7 @@
 					<h6>TOTAL DE RESULTADOS ENCONTRADOS </h6> 
 				</div>
 				<div class="col-md-4">
-					<h5 style="color: #F47D30">#{consultaAdocaoBean.totalRows}</h5>
+					<h5 style="color: #F47D30">#{consultaAdocaoBean.totalRowsAdocaoPerfil}</h5>
 				</div>
 			</div>	
 			<div class="row">						
@@ -44,7 +44,7 @@
 						</p:panel>
 						<ui:repeat var="adocao"
 							value="#{consultaAdocaoBean.adocoesDisponiveisPorPerfil}">
-							<p:link href="private-adocao-detalhe.xhtml"  styleClass="btn-detalhes">
+							<p:link outcome="private-adocao-detalhe"  styleClass="btn-detalhes">
 								<f:param name="id" value="#{adocao.id}"></f:param>
 								<div class="div-click" onclick="#">
 									<p:panel

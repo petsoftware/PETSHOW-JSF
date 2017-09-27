@@ -35,9 +35,11 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	 */
 	private static final long serialVersionUID = -6287940244391936527L;
 	private int totalRows = 0;
+	private int totalRowsAdocaoPerfil = 0;
 	private List<Adocao> adocoes;
 	private Adocao selectedAdocao;
 	private List<Adocao> adocoesDisponiveis;
+	private List<Adocao> adocoesDisponiveisPorPerfil;
 	private CallAnimalRest restAnimal;
 	@ManagedProperty(value="#{autoCompleteBean}")
     private AutoCompleteBean autoCompleteBean;
@@ -205,17 +207,30 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	}
 	
 	public List<Adocao> getAdocoesDisponiveisPorPerfil() {
-		return adocoesDisponiveis;
+		return adocoesDisponiveisPorPerfil;
 	}
 	private void obterAdocoesPorPerfil() {
 		try {
-
-			adocoesDisponiveis = restAnimal.getListAnimalDisponiveisAdocaoPorPerfil(getUsuarioLogado());
-
+			if(getUsuarioLogado() != null){	
+				adocoesDisponiveisPorPerfil = restAnimal.getListAnimalDisponiveisAdocaoPorPerfil(getUsuarioLogado());
+			}
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 
 			e.printStackTrace();
 		}
+	}
+	public void setAdocoesDisponiveisPorPerfil(List<Adocao> adocoesDisponiveisPorPerfil) {
+		this.adocoesDisponiveisPorPerfil = adocoesDisponiveisPorPerfil;
+	}
+	public int getTotalRowsAdocaoPerfil() {
+		totalRowsAdocaoPerfil = 0;
+		if(getAdocoesDisponiveisPorPerfil() != null){
+			totalRowsAdocaoPerfil = getAdocoesDisponiveisPorPerfil().size();
+		}
+		return totalRowsAdocaoPerfil;
+	}
+	public void setTotalRowsAdocaoPerfil(int totalRowsAdocaoPerfil) {
+		this.totalRowsAdocaoPerfil = totalRowsAdocaoPerfil;
 	}
 	
 }

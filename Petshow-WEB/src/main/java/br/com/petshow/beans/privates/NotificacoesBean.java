@@ -13,8 +13,11 @@ import br.com.petshow.beans.SuperBean;
 import br.com.petshow.enums.EnumAssuntoNotificacao;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Notificacao;
+import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.CallNotificacaoRest;
+import br.com.petshow.web.util.CallPerfilAdocaoRest;
 /**
  * Notificacoes do usuario
  * @author Rafael Rocha
@@ -29,6 +32,7 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 	private List<Notificacao> notificacoes;
 	private String mensagemResposta;
 	private Notificacao selectedNotificacao;
+	private boolean renderNotificacao = false;
 	
 	@PostConstruct
 	public void init() {
@@ -39,8 +43,10 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 	public void getMessages() {
 		try {
 			List<Notificacao> list = CallNotificacaoRest.getListNotificacoesUsuario(getUsuarioLogado().getId());
+			List<Adocao> listAdocao= new CallAnimalRest().getListAnimalDisponiveisAdocaoPorPerfil(getUsuarioLogado());
 			setNotificacoes(list);
 			setQtMsgNaoLidas(list.size());
+			setQtAdocoesPerfil(listAdocao.size());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			e.printStackTrace();
 		}
@@ -172,6 +178,19 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 
 	public void setQtAdocoesPerfil(int qtAdocoesPerfil) {
 		this.qtAdocoesPerfil = qtAdocoesPerfil;
+	}
+
+	public boolean isRenderNotificacao() {
+		if(qtMsgNaoLidas > 0 || qtAdocoesPerfil > 0){
+			renderNotificacao = true;
+		}else{
+			renderNotificacao = false;
+		}
+		return renderNotificacao;
+	}
+
+	public void setRenderNotificacao(boolean renderNotificacao) {
+		this.renderNotificacao = renderNotificacao;
 	}
 	
 }

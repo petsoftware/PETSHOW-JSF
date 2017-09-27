@@ -53,10 +53,10 @@
 						Site</a></li>
 				<li class="dropdown">
 					<a class="nav-link dropdown-toggle mr-lg-2"	data-toggle="dropdown" href="#"> 
-						<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas == 0}">
+						<h:panelGroup rendered="#{not notificacoesBean.renderNotificacao}">
 							<i class="fa fa-bell fa-fw"></i>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas > 0}">
+						<h:panelGroup rendered="#{notificacoesBean.renderNotificacao}">
 							<i class="fa fa-bell faa-ring animated" style="color: red;"></i>
             			</h:panelGroup>
 						<i class="fa fa-caret-down"></i>	
