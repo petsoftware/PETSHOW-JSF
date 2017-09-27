@@ -974,3 +974,31 @@ div.jqplot-table-legend-swatch {
 	word-break: break-all !important;
 }
 
+.box {
+	border:none;
+	width:100%;
+	border-radius: 5px !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding-top: 6px !important;
+	padding-left: 4px;
+}
+
+.box-titulo{
+	border:none;
+	background-color:#cadec7;
+	color: black;
+	border-radius: 4px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding-top: 4px;
+	padding-left: 4px;
+	
+}
+
+.ui-widget-header {
+    border: 1px solid #eeeeee;
+    font-weight: bold;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+

@@ -24,7 +24,8 @@ import br.com.petshow.web.util.CallNotificacaoRest;
 @ViewScoped
 public class NotificacoesBean extends SuperBean<Notificacao> {
 
-	private int qtMsgNaoLidas = 0;
+	private int qtMsgNaoLidas 	= 0;
+	private int qtAdocoesPerfil = 0;
 	private List<Notificacao> notificacoes;
 	private String mensagemResposta;
 	private Notificacao selectedNotificacao;
@@ -163,6 +164,14 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 
 	public void setSelectedNotificacao(Notificacao selectedNotificacao) {
 		this.selectedNotificacao = selectedNotificacao;
+	}
+
+	public int getQtAdocoesPerfil() {
+		return qtAdocoesPerfil;
+	}
+
+	public void setQtAdocoesPerfil(int qtAdocoesPerfil) {
+		this.qtAdocoesPerfil = qtAdocoesPerfil;
 	}
 	
 }

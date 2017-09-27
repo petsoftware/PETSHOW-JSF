@@ -35,66 +35,86 @@
 
 	<ui:define name="body">
 
-			<div class="ui-grid ui-grid-responsive">	   		
-	   			<div class="ui-grid-row ui-grid-row-custom">
-					<div class="ui-grid-col-12">									
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-6" style="padding-right:5px;">				  				
-					           	<div class="ui-grid-row">
-					  				<div class="ui-grid-col-12">					  				
-										<div class="ui-grid-row ui-grid-row-custom">
-											<div class="ui-grid-col-12">
-											
-											
-											<!-- O layout da Tela comeca aqui -->
-											<!-- Template para criar campo e lable -->
-												<div class="ui-grid-row">
-											    	<p:outputLabel value="Sexo do animal" />
-											    </div>
-											   	<div class="ui-grid-row">
-										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.sexo}" id="cboSexoAnimal" styleClass="selectonemenu">
-										 	     		<f:selectItems value="#{perfilAdocaoBean.sexoAnimal}"/>
-										 	     	</p:selectOneMenu>
-												</div>
-												<div class="ui-grid-row">
-											    	<p:outputLabel value="Tipo de animal" />
-											    </div>
-											   	<div class="ui-grid-row">
-										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.tipoAnimal}" id="cboTipoAnimal" styleClass="selectonemenu">
-										 	     		<f:selectItems value="#{perfilAdocaoBean.tiposDeAnimal}"/>
-										 	     	</p:selectOneMenu>
-												</div>
-												
-												<div class="ui-grid-row">
-											    	<p:outputLabel value="Fase da vida:" />
-											    </div>
-											   	<div class="ui-grid-row">
-										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.faseVida}" id="cboFaseVida" styleClass="selectonemenu">
-										 	     		<f:selectItems value="#{perfilAdocaoBean.fasesVida}"/>
-										 	     	</p:selectOneMenu>
-												</div>
-												
-												<div class="ui-grid-row">
-											    	<p:outputLabel value="Porte do animal" />
-											    </div>
-											   	<div class="ui-grid-row" >
-										 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.porteAnimal}" id="cboPorteAnimal" styleClass="selectonemenu">
-										 	     		<f:selectItems value="#{perfilAdocaoBean.portesDosAnimais}"/>
-										 	     	</p:selectOneMenu>
-												</div>
-											<!-- Fim das divs que definem os layouts  -->								
-											</div>
-										</div>
-									</div>
-								</div>
+			<div class="container-fluid">	
+				<div class="row">						
+					<div class="col-md-4">
+							<!-- O layout da Tela comeca aqui -->
+							<!-- Template para criar campo e lable -->
+						<div class="ui-grid-row">
+					    	<p:outputLabel value="Sexo do animal" />
+					    </div>
+					   	<div class="ui-grid-row">
+				 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.sexo}" id="cboSexoAnimal" styleClass="selectonemenu">
+				 	     		<f:selectItems value="#{perfilAdocaoBean.sexoAnimal}"/>
+				 	     	</p:selectOneMenu>
+						</div>
+						<div class="ui-grid-row">
+					    	<p:outputLabel value="Tipo de animal" />
+					    </div>
+					   	<div class="ui-grid-row">
+				 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.tipoAnimal}" id="cboTipoAnimal" styleClass="selectonemenu">
+				 	     		<f:selectItems value="#{perfilAdocaoBean.tiposDeAnimal}"/>
+				 	     	</p:selectOneMenu>
+						</div>
+						
+						<div class="ui-grid-row">
+					    	<p:outputLabel value="Fase da vida:" />
+					    </div>
+					   	<div class="ui-grid-row">
+				 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.faseVida}" id="cboFaseVida" styleClass="selectonemenu">
+				 	     		<f:selectItems value="#{perfilAdocaoBean.fasesVida}"/>
+				 	     	</p:selectOneMenu>
+						</div>
+						
+						<div class="ui-grid-row">
+					    	<p:outputLabel value="Porte do animal" />
+					    </div>
+					   	<div class="ui-grid-row" >
+				 	     	<p:selectOneMenu value="#{perfilAdocaoBean.perfilAdocao.porteAnimal}" id="cboPorteAnimal" styleClass="selectonemenu">
+				 	     		<f:selectItems value="#{perfilAdocaoBean.portesDosAnimais}"/>
+				 	     	</p:selectOneMenu>
+						</div>
+						<div class="ui-grid-row">
+				    		<p:outputLabel value="Estado" />
+				    	</div>
+						<div class="row">
+							<div class="col-md-12">
+								 <p:selectOneMenu id="cboEstado" value="#{perfilAdocaoBean.perfilAdocao.uf}"  style="width: 50%;" required="false">
+									<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perfilAdocaoBean.perfilAdocao.uf)}" />
+								 </p:selectOneMenu>
 							</div>
 						</div>
+						<div class="ui-grid-row">
+					    	<p:outputLabel value="Cidade" />
+					    </div>
+						<div class="row">
+							<div class="col-md-12">
+								 <p:selectOneMenu id="cbCidade" value="#{perfilAdocaoBean.perfilAdocao.cidade}" converter="cidadeConverter" style="width: 50%;"
+									required="false" >
+									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+									<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+								</p:selectOneMenu>
+							</div>
+						</div>
+						<!-- Fim das divs que definem os layouts  -->	
 					</div>
-				</div>
-			</div>
-
+					<div class="col-md-8">
+						<p:panel header="O QUE É PERFIL DE ADOÇÃO?">
+							<div class="row">
+								<div class="col-md-4">
+									<img class="img-fluid" src="#{request.contextPath}/resources/images/home-256.png" />
+								</div>
+								<div class="col-md-6">
+									<p>São as características pricipais de um animal que você deseja adotar. Quando o sistema identificar um animal
+									cadastrado com o perfil que foi cadastrado, ele automaticamente lhe enviará um e-mail e uma notificação. </p>
+								</div>
+							</div>
+						</p:panel>
+					</div>
+			</div>								
+		</div>																
 	</ui:define>
-
 </ui:composition>
-
 </html>

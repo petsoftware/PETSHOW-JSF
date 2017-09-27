@@ -6,7 +6,13 @@
 	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:p="http://primefaces.org/ui">
 
-<ui:composition template="#{pageHelperBean.mainTemplateSite}">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	 template="#{pageHelperBean.mainTemplatePrivate}">
+
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="bullhorn" />
+	<ui:param name="pageTitle" value="ANÚNCIO" />
 
 	<ui:define name="header">
 
@@ -15,26 +21,16 @@
 		<f:viewParam name="id" value="#{detalheAdocaoBean.id}" />
 	</f:metadata>
 	<ui:define name="body">
-		<script type="text/javascript">
-			jQuery(function($) {
 
-				$("input.txtTel").mask("99999999999");
-
-			});
-		</script>
-
-		<section class="content-section-a">
 			<div class="container">
-				<ui:include src="content-adocao-detalhe.xhtml" >
+			
+				<ui:include src="../content-adocao-detalhe.xhtml" >
 				
 				</ui:include>
-				
 			</div>
-		</section>
 
 	</ui:define>
 
 </ui:composition>
 
 </html>
-

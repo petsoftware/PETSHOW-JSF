@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	 template="#{pageHelperBean.mainTemplatePrivate}">
+
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="bullhorn" />
+	<ui:param name="pageTitle" value="ANÚNCIO" />
+
+	<ui:define name="header">
+
+	</ui:define>
+
+	<ui:define name="body">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<h6>TOTAL DE RESULTADOS ENCONTRADOS </h6> 
+				</div>
+				<div class="col-md-4">
+					<h5 style="color: #F47D30">#{consultaAdocaoBean.totalRows}</h5>
+				</div>
+			</div>	
+			<div class="row">						
+				<div class="consulta-result col-sm-8">
+						
+					<h:panelGroup id="panelAdocoes">
+						<p:panel header="SEM RESULTADO" rendered="#{empty consultaAdocaoBean.adocoesDisponiveisPorPerfil}">
+							<div class="row">
+								<div class="col-md-4">
+									<img class="img-fluid" src="#{request.contextPath}/resources/images/emo-icons/sad-64.png" />
+								</div>
+								<div class="col-md-6">
+									<p> Ops!!! Nenhum animal com o seu perfil desejado foi encontrado. Você pode mudar o seu perfil de adoção para tona-lo mais abrangente.</p>
+								</div>
+							</div>
+						</p:panel>
+						<ui:repeat var="adocao"
+							value="#{consultaAdocaoBean.adocoesDisponiveisPorPerfil}">
+							<p:link href="private-adocao-detalhe.xhtml"  styleClass="btn-detalhes">
+								<f:param name="id" value="#{adocao.id}"></f:param>
+								<div class="div-click" onclick="#">
+									<p:panel
+										header="#{adocao.titulo}   -   (#{adocao.dddCelular})  #{adocao.telefoneCelular}"
+										styleClass="box">
+										 <f:facet name="actions">
+										 	<div class="ui-panel-titlebar-icon">
+								            	#{adocao.getTempoDePublicacao} 
+								            	<i class="fa fa-clock-o" aria-hidden="true"></i>
+								            </div>
+	        							</f:facet>
+										<div class="row">
+											<div class="col-md-4">
+												<h:panelGroup  rendered="#{adocao.fotos.size() == 0}">
+													<img class="img-fluid"
+														src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+												</h:panelGroup>
+												<h:graphicImage rendered="#{adocao.fotos.size() > 0}"
+																	style="width:100%;height:100%;"
+																	stream="false" cache="false"
+																	url="data:image/jpg;base64,#{adocao.fotos.get(0)}" id="visualizacao"
+																	alt="Visualização do anuncio" />
+													
+											</div>
+											<div class="col-md-8">
+												<h6 style="text-align: justify;text-justify: inter-word;">#{adocao.descAdocao}</h6>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-4">
+												<div style="padding-top: 2px;">
+													<h6 style="text-align: justify;text-justify: inter-word; padding-left: 15px;" >#{adocao.endereco.cidade.nome} - #{adocao.endereco.uf.label}</h6>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<div style="padding-left: 5px ;padding-top: 5px;">
+													<img class="img-fluid" src="#{request.contextPath}/resources/images/drawable-android/#{adocao.flSexo.id == 0 ? 'ic_macho.png' : 'ic_femea.png'}" />
+												</div>
+											</div>
+										</div>
+									</p:panel>
+								</div>
+							</p:link>
+						</ui:repeat>
+					</h:panelGroup>
+				</div>
+			</div>	
+		</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>

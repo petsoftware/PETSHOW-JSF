@@ -57,6 +57,7 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 		this.adocoes = new ArrayList<Adocao>();
 		restAnimal = new CallAnimalRest();
 		obterAdocoesDisponiveis();
+		obterAdocoesPorPerfil();
 		setTotalRows(getAdocoesDisponiveis().size());
 	}
 	public ConsultaAdocaoBean (){
@@ -73,11 +74,6 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	
 	public String obterAdocoesDisponiveis() {
 		AdocaoQuery query = new AdocaoQuery();
-//		query.setFase(getFase() 		== null ? EnumFaseVida.FILHOTE 	  :getFase());
-//		query.setSexo(getSexo() 		== null ? EnumSexo.MACHO 		  : getSexo() );
-//		query.setTpAnimal(getAnimal()	== null ? EnumTipoAnimal.CACHORRO : getAnimal());
-//		query.setUf(getUf());
-//		query.setCidade(getCidade());
 		query.setFase(getFase());
 		query.setSexo(getSexo() );
 		query.setTpAnimal(getAnimal());
@@ -206,6 +202,20 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	}
 	public void setUf(EnumUF uf) {
 		this.uf = uf;
+	}
+	
+	public List<Adocao> getAdocoesDisponiveisPorPerfil() {
+		return adocoesDisponiveis;
+	}
+	private void obterAdocoesPorPerfil() {
+		try {
+
+			adocoesDisponiveis = restAnimal.getListAnimalDisponiveisAdocaoPorPerfil(getUsuarioLogado());
+
+		} catch (ExceptionErroCallRest | ExceptionValidation e) {
+
+			e.printStackTrace();
+		}
 	}
 	
 }
