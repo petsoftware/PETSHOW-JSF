@@ -91,6 +91,7 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 				CallNotificacaoRest.postEntity(notificacaoResp, "notificacao/salvar", Notificacao.class);
 				notificacao.setFlRespondeu(true);
 				notificacao.setResposta(getMensagemResposta());
+				notificacao.setDtResposta(new Date());
 				CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar", Notificacao.class);
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Enviado com sucesso!",  null);
 		        FacesContext.getCurrentInstance().addMessage("growl", message);
@@ -134,6 +135,12 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 				e.printStackTrace();
 			}
 		}else{
+			notificacao.setFlRespondeu(true);
+			try {
+				CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar", Notificacao.class);
+			} catch (ExceptionErroCallRest | ExceptionValidation e) {
+				e.printStackTrace();
+			}
 			enviarEmail(notificacao);
 		}
 	}

@@ -1,9 +1,7 @@
 package br.com.petshow.beans;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -57,7 +55,7 @@ public class VacinaBean extends SuperBean<Vacina> {
 		System.out.println("PostConstruct " + this.getClass().getName());
 		vacina 				= new Vacina();
 		callRestAnimal		= new CallAnimalRest();
-		animais				= new ArrayList<>();
+		getAnimaisBanco(getUsuarioLogado().getId());
 		animaisSelecionados = new ArrayList<>();
 	}
 

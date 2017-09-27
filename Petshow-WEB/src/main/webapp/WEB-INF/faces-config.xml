@@ -99,7 +99,7 @@
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>vacinas</from-outcome>
-			<to-view-id>/admin/vacinacao.xhtml</to-view-id>
+			<to-view-id>/private/vacinacao.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<navigation-case>

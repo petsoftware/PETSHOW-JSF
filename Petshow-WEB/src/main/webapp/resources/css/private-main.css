@@ -273,6 +273,12 @@
 }
 
 
+.alert-warning-div {
+    background-color: #ffdd87;
+    border: #ffce54;
+}
+
+
 .btn3d {
     position:relative;
     top: -6px;

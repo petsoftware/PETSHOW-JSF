@@ -47,14 +47,83 @@
 									url="data:image/jpg;base64,#{notificacao.usuarioRemetente.foto}" id="visualizacao"
 									alt="Visualização da foto do usuário" />
 						</span>
-						<div class="chat-body clearfix">
-							<div class="header">
-								<h:panelGroup rendered="#{notificacao.usuarioRemetente == null}" >
-									<strong class="primary-font"><p:outputLabel value="#{notificacao.nome}"/> </strong>
+						<span class="chat-img pull-left">
+							<h:panelGroup rendered="#{notificacao.usuarioRemetente == null}" >
+									<strong class="primary-font"><p:outputLabel style="font-variant: small-caps" value="#{notificacao.nome}"/> </strong>
 								</h:panelGroup>
 								<h:panelGroup rendered="#{notificacao.usuarioRemetente != null}" >
-									<strong class="primary-font"><p:outputLabel value="#{notificacao.usuarioRemetente.nome}"/> </strong>
+									<strong class="primary-font"><p:outputLabel style="font-variant: small-caps" value="#{notificacao.usuarioRemetente.nome}"/> </strong>
 								</h:panelGroup>
+						</span>
+						
+						<div class="chat-body clearfix">
+							<div class="row alert-warning-div">
+								<div class="alert-warning-div"> 
+									<div class="pull-right">
+										<h:panelGroup rendered="#{notificacao.perdido != null}">
+											<div class="col-md-4">
+													<h:panelGroup  rendered="#{notificacao.perdido.fotos.size() == 0}">
+														<img class="img-fluid"
+															src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+													</h:panelGroup>
+													<h:graphicImage rendered="#{notificacao.perdido.fotos.size() > 0}"
+																		style="width:100%;height:100%;padding-top : 4px;border-radius:8px;"
+																		stream="false" cache="false"
+																		url="data:image/jpg;base64,#{notificacao.perdido.fotos.get(0)}" id="imgAnuncioPerdido"
+																		alt="Visualização do anúncio de animal perdido" />
+														
+												</div>
+												<div class="col-md-4">
+													<div class="row">
+														<kbd> #{notificacao.perdido.nome} </kbd>
+													</div>
+													<div class="row">
+														<div>Perdido desde:</div>
+														<div> 
+															
+															<p:outputLabel value="#{notificacao.perdido.dtPerdidoAchado}"> 
+																<f:convertDateTime pattern="dd/MM/yyyy"/>
+															</p:outputLabel>
+															
+														</div>
+													</div>
+												</div>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{notificacao.adocao != null}">
+											<div class="col-md-4">
+												<h:panelGroup  rendered="#{notificacao.adocao.fotos.size() == 0}">
+													<img class="img-fluid"
+														src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+												</h:panelGroup>
+												<h:graphicImage rendered="#{notificacao.adocao.fotos.size() > 0}"
+																	style="width:100%;height:100%;padding-top : 4px;border-radius:8px;"
+																	stream="false" cache="false"
+																	url="data:image/jpg;base64,#{notificacao.adocao.fotos.get(0)}" id="imgAnuncioAdocao"
+																	alt="Visualização do anúncio de animal perdido" />
+														
+											</div>
+											<div class="col-md-4">
+												<div class="row">
+													<kbd> #{notificacao.adocao.titulo} </kbd>
+												</div>
+												<div class="row">
+													<div>Anúnciado em:</div>
+													<div> 
+														
+														<p:outputLabel value="#{notificacao.adocao.dataCadastro}"> 
+															<f:convertDateTime pattern="dd/MM/yyyy"/>
+														</p:outputLabel>
+														
+													</div>
+												</div>
+											</div>
+										</h:panelGroup>
+										
+									</div>
+								</div>							
+							</div>
+							<div class="header">
+								
 								<h:panelGroup id="jaLigp" rendered="#{not notificacao.flLida}">
 									<span class="span-attention">
 										<strong>
@@ -70,7 +139,7 @@
 								</small>
 								
 							</div>
-							<div class="row" style="max-width: 350px;">
+							<div class="row" style="width:100%;">
 								<h:panelGroup rendered="#{not empty notificacao.mensagemRespondida}">
 									<div class="alert alert-info fade in alert-dismissable" style="width: #{notificacao.mensagemRespondida.length() + 8};">
 									    <h:graphicImage rendered="#{notificacao.usuarioDestinatario != null}"
@@ -84,7 +153,7 @@
 								</h:panelGroup>
 							</div>
 							<div class="row">
-								<div class="alert alert-success pull-right" style="max-width: 350px;">
+								<div class="alert alert-success pull-right" style="width:100%;">
 										<div class="row">
 											<h:graphicImage rendered="#{notificacao.usuarioRemetente != null}"
 											styleClass="img-circle-x-small"
@@ -107,14 +176,14 @@
 							</div>
 							<div class="row">
 							    <h:panelGroup id="rodape">
-									<h:panelGroup rendered="#{not notificacao.flRespondeu}">
+									<h:panelGroup rendered="false">
 										<span class="pull-right text-muted"> 
 											<p:commandButton action="#" style="background-color: #d9edf7 !important; color: #31708f !important;" styleClass="btn btn-success btn-lg" icon="fa fa-fw fa-send"
 												onclick="PF('dlg1-#{notificacao.id}').show();" type="submit" value="Responder" title="responder a mensagem" id="btnResponder" />
 										</span>
 									</h:panelGroup>
 									 <h:panelGroup rendered="#{notificacao.flRespondeu}">
-								    	<div class="alert alert-info pull-left" >
+								    	<div class="alert alert-info pull-left" style="width:100%;">
 								    		<div class="row">
 												<h:graphicImage rendered="#{notificacao.usuarioDestinatario != null}"
 												styleClass="img-circle-x-small"
@@ -123,7 +192,11 @@
 												url="data:image/jpg;base64,#{notificacao.usuarioDestinatario.foto}" id="imgDest"
 												alt="Visualização da foto do usuário" />
 												<strong>EU</strong>
-												
+											</div>
+											<div class="pull-right" style="padding-left: 5px;">
+												<p:outputLabel value="#{notificacao.dtResposta}">
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+												</p:outputLabel>
 											</div>
 								    		<strong>#{notificacao.resposta}</strong>
 								    	</div>
@@ -134,11 +207,11 @@
 							<p:dialog id="dialogResp" header="Sua reposta" modal="true" widgetVar="dlg1-#{notificacao.id}" minHeight="40">
 								<p:messages id="growl" life="2000" />
 								<div class="row" style="padding:8px;">
-							    	<p:inputTextarea style="width:100%;" cols="8" rows="8" value="#{notificacoesBean.mensagemResposta}" immediate="true"/>
+							    	<p:inputTextarea style="width:100%;" cols="8" rows="8" value="#{notificacoesBean.mensagemResposta}" />
 							    </div>
 							    <div class="row">
 								    <p:commandButton update="growl,rodape" ajax="true" value="Enviar" style="padding-left:15px !important; backgorund-color:#dff0d8 !important;" styleClass="btn btn-success btn-lg" 
-								    	icon="fa fa-fw fa-send" actionListener="#{notificacoesBean.enviarResposta(notificacao)}"/>
+								    	icon="fa fa-fw fa-send" actionListener="#{notificacoesBean.enviarResposta(notificacao)}" />
 							    </div>							    
 							</p:dialog>
 						</div>

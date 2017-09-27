@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="#{pageHelperBean.mainTemplatePrivate}">
+
+	<ui:param name="activeAnuncio" value="active" />
+	<ui:param name="pageIcon" value="eyedropper" />
+	<ui:param name="pageTitle" value="VACINAS" />
+
+	<ui:define name="header">
+		<p:commandButton id="btnSalvar" style="margin-right:4px"
+			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+			title="Salvar vacina?" value="Salvar" action="#{vacinaBean.salvar}"
+			type="submit" ajax="false" onstart="paceStart();"
+			onclick="paceStart();" oncomplete="Pace.restart();"
+			update="@form,grid" />
+
+	</ui:define>
+
+	<ui:define name="body">
+		<div class="row">
+			<div class="col-md-6">
+				<h:panelGroup id="panelGrid">
+					<p:dataTable id="checkboxDT" rendered="true" var="animal"
+						value="#{vacinaBean.animais}" selectionMode="single"
+						selection="#{vacinaBean.selectedAnimal}" rowKey="#{animal.id}"
+						style="margin-bottom:0">
+						<f:facet name="header">    Animais  </f:facet>
+						<p:ajax event="rowSelect"
+							listener="#{vacinaBean.onRowSelectAnimal}" update="@form" />
+						<p:ajax event="rowUnselect"
+							listener="#{vacinaBean.onRowUnselectAnimal}" update="@form" />
+						<p:column style="width:15%;">
+							<img class="img-fluid"
+								src="#{request.contextPath}/resources/images/drawable-android/#{animal.imageAnimal}" />
+						</p:column>
+						<p:column headerText="Nome" style="width:55%;">
+							<h:outputText value="#{animal.nome}" />
+						</p:column>
+						<p:column headerText="Tipo" style="width:30%;">
+							<h:outputText value="#{animal.tipo}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGroup>
+			</div>
+
+			<!-- Form -->
+			<div class="col-md-6">
+
+
+				<p:panel header="DADOS">
+					<div class="row">
+						<div class="row">
+							<h:outputLabel value="Vacina" for="vacina" style="padding-left:10px;"/>
+						</div>
+						<div class="row">
+							<p:selectOneMenu id="vacio" value="#{vacinaBean.vacina.tpVacina}" style="padding-left:10px;">
+								<f:selectItems value="#{vacinaBean.vacinas}" />
+							</p:selectOneMenu>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="row">
+							<p:outputLabel for="dataInicio" value="Data" style="padding-left:10px;"/>
+						</div>
+						<div class="row">
+							<p:calendar id="dataInicio" style="width:50%; padding-left:10px;" label="Data:"
+								locale="pt" pattern="dd/MM/yyyy" mask="true"
+								value="#{vacinaBean.vacina.data}" required="true" />
+							<i class="fa fa-calendar"></i>
+						</div>
+					</div>
+					<div class="row">
+						<div class="row">
+							<h:outputLabel value="Foi aplicada?" for="chkAplicada" style="padding-left:10px;"/>
+						</div>
+						<div class="row">
+							<p:selectBooleanCheckbox label="Aplicada" style="padding-left:10px;"
+								value="#{vacinaBean.vacina.flAplicada}" id="chkAplicada" />
+						</div>
+					</div>
+					<div class="row">
+						<h:outputLabel value="Data da Próxima" for="chkAplicada" style="padding-left:10px;"/>
+						<p:outputLabel value="#{vacinaBean.dtProxVacina}" style="padding-left:10px;" />
+					</div>
+					<!-- Fim form -->
+
+				</p:panel>
+			</div>
+		</div>
+		<div class="row">
+			
+		</div>
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<div class="ui-grid-row ui-grid-row-custom">
+						<p:dataTable id="grid" var="vacina" style="padding-top:10px;"
+							emptyMessage="Nenhuma Vacina Cadastrada." scrollHeight="200"
+							scrollable="true" resizableColumns="true"
+							value="#{vacinaBean.vacinasDoAnimal}"
+							paginator="#{vacinaBean.vacinasDoAnimal.size() > 12}" rows="13"
+							paginatorPosition="bottom" tabindex="-1">
+
+							<f:facet name="header">
+								<p:outputLabel
+									value="Vacinas do #{vacinaBean.animalSelecionado.nome}" />
+							</f:facet>
+
+							<p:column headerText="Vacina" width="160">
+								<h:outputText
+									value="#{vacinaBean.getTpVacinaDescription(vacina.tpVacina)}" />
+							</p:column>
+
+							<p:column headerText="Data Aplicaço" width="100">
+								<h:outputText value="#{vacina.data}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+
+							<p:column headerText="Foi Aplicada"
+								style="width:10%;text-align: center;">
+								<p:graphicImage rendered="#{vacina.flAplicada}">
+									<i class="fa fa-check-circle fa-2x fa-color-green" />
+								</p:graphicImage>
+								<p:graphicImage rendered="#{not vacina.flAplicada}">
+									<i class="fa fa-times fa-2x fa-color-red" />
+								</p:graphicImage>
+							</p:column>
+							<p:column headerText="Opções" style="text-align:center;width:20%">
+								<p:commandButton
+									actionListener="#{vacinaBean.selecionar(vacina)}" type="submit"
+									styleClass="btn btn-info btn-lg" icon="fa fa-pencil-square-o"
+									title="Clique aqui para alterar alguma informação" ajax="true"
+									process="@this" update="@form">
+									<f:ajax render="@form" />
+								</p:commandButton>
+							</p:column>
+
+						</p:dataTable>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+
+</ui:composition>
+
+</html>

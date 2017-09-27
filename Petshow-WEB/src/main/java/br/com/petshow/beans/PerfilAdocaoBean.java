@@ -34,6 +34,8 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 		}
 		if(perfilAdocao == null){
 			perfilAdocao 	 = new PerfilAdocao(getUsuarioLogado());
+		}else if(perfilAdocao.getId() == 0){
+			perfilAdocao 	 = new PerfilAdocao(getUsuarioLogado());
 		}
 		
 	}

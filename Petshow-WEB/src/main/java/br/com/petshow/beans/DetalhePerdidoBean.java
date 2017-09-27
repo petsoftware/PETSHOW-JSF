@@ -1,5 +1,6 @@
 package br.com.petshow.beans;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
@@ -8,10 +9,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.petshow.enums.EnumAssuntoNotificacao;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.model.Notificacao;
 import br.com.petshow.model.Perdido;
 import br.com.petshow.util.FormatacaoUtil;
+import br.com.petshow.web.util.CallNotificacaoRest;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
@@ -62,18 +66,24 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 	
 	public void enviar(){
 		try {			
-			HashMap<String,String> map = new HashMap<String,String>();
-			map.put("idPerdido", id );
-			map.put("mensagem", mensagem);
-			map.put("telefone", telefone+"");
-			map.put("email", email+"");
-			map.put("nome", getNome());
+			Notificacao notificacao = new Notificacao();
+			notificacao.setPerdido(getPerdido());
+			notificacao.setAdocao(null);
+			notificacao.setContato(getTelefone());
+			notificacao.setDtNotificacao(new Date());
+			notificacao.setEmail(getEmail());
+			notificacao.setFlExcluida(false);
+			notificacao.setMsgNotificacao(getMensagem());
+			notificacao.setNome(getNome());
+			notificacao.setTpNotificacao("P");
+			notificacao.setAssuntoNotificacao(EnumAssuntoNotificacao.PERDIDO);
+			notificacao.setUsuarioDestinatario(getPerdido().getUsuario());
 			if(isTemUsuarioLogado()){
-				map.put("idUserRemet", getUsuarioLogado().getId()+"");
+				notificacao.setUsuarioRemetente(getUsuarioLogado());
 			}else{
-				map.put("idUserRemet", "0");
+				notificacao.setUsuarioRemetente(null);
 			}
-			RestUtilCall.post( map, "notificacao/perdido/msganuncio");
+			CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar/", Notificacao.class);
 			MessagesBeanUtil.inforClient("Enviado com sucesso!","msgEnviar");
 			setMensagem("");
 		} catch (ExceptionErroCallRest  e) {

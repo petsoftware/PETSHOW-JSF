@@ -88,6 +88,16 @@
 							</div>
 						</div>	
 						<h:panelGroup id="panelPerdidos">
+							<p:panel header="SEM RESULTADO" rendered="#{empty consultaPerdidoBean.perdidosBanco}">
+								<div class="row">
+									<div class="col-md-4">
+										<img class="img-fluid" src="#{request.contextPath}/resources/images/emo-icons/sad-64.png" />
+									</div>
+									<div class="col-md-6">
+										<p> Ops!!! Nenhum resultado encontrado, tente mudar a filtragem.</p>
+									</div>
+								</div>
+							</p:panel>
 							<ui:repeat var="perdido"
 								value="#{consultaPerdidoBean.perdidosBanco}">
 								<p:link outcome="perdido-detalhe" styleClass="btn-detalhes">

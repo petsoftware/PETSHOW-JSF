@@ -7,7 +7,12 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-
+	<div id="lightbox" class="ui-widget-overlay">
+		<div class="ui-spinner">
+   			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+			<span class="sr-only" style="color: red;">Loading...</span>
+		</div>
+   	</div>
 	<!-- Navigation -->
 	<nav class="nav-color navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	
@@ -228,7 +233,7 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}"
 							style="margin-right: 15px;"><p:commandButton id="entrar"
-								styleClass="btn btn-entrar btn-lg navbar-btn" value="Fazer Login"
+								styleClass="btn btn-warning btn-lg navbar-btn" value="Fazer Login"
 								process="@this" 
 								oncomplete="PF('edlg').show();"
 								title="Entrar no sistema de gestão"
@@ -239,7 +244,7 @@
 	
 						<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}">
 							<p:commandButton
-								styleClass="btn btn-cadastrar btn-lg navbar-btn" id="cadastrar"
+								styleClass="btn btn-success btn-lg navbar-btn" id="cadastrar"
 								value="Quero me Cadastrar" process="@this"
 								icon="fa fa-fw fa-user-plus"
 								title="Solicitar cadastro de usuário"
