@@ -134,7 +134,7 @@ public class CallAnimalRest  extends RestUtilCall<Animal> {
 	public  List<Perdido> getListAnimaisPerdidos(PerdidoQuery query) throws ExceptionErroCallRest, ExceptionValidation{
 
 		client = new ResteasyClientBuilder().build();
-		target= client.target(URL_BASE+"animal/consulta/perdidos/");
+		target= client.target(URL_BASE+"perdido/consulta/perdidos/");
 		Object entidades = null;
 		try{
 			Response response = target.request().post(Entity.entity(query, MediaType.APPLICATION_JSON));
@@ -185,10 +185,7 @@ public class CallAnimalRest  extends RestUtilCall<Animal> {
 				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
 			}
 		}
-		
-		
-		
 		return (List<Perdido>)entidades;
-	
 	}
+	
 }

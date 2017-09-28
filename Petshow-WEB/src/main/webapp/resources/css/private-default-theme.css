@@ -144,6 +144,7 @@ fieldset[disabled] .btn-default.active {
 .btn-info .open .dropdown-toggle.btn {
     background-color: #37bc9b !important;
     border-color: #37bc9b !important;
+    color: white !important;
 }
 .btn-info:focus,
 .btn-info:hover {
@@ -222,6 +223,7 @@ fieldset[disabled] .btn-info-inverse.active {
 .btn-danger .open .dropdown-toggle.btn {
     background-color: #da4453 !important;
     border-color: #da4453 !important;
+    color: white !important;
 }
 .btn-danger:focus, 
 .btn-danger:hover {
@@ -306,6 +308,7 @@ fieldset[disabled] .btn-warning.active {
 .btn-primary .open .dropdown-toggle.btn {
   background-color: #3bafda !important;
   border-color: #3bafda !important;
+  color: white !important;
 }
 .btn-primary:hover,
 .btn-primary:focus {

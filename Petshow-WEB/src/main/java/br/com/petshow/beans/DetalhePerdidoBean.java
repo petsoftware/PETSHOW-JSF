@@ -1,7 +1,6 @@
 package br.com.petshow.beans;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -51,7 +50,7 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 
 	public void getAdocaoBanco(){
 		try {
-			perdido = RestUtilCall.getEntity("animal/perdido/"+id,Perdido.class);
+			perdido = RestUtilCall.getEntity("perdido/perdido/"+id,Perdido.class);
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));

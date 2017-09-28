@@ -28,4 +28,5 @@ public class CallPerfilAdocaoRest extends RestUtilCall<PerfilAdocao> {
 			throw e;
 		}
 	}
+	
 }

@@ -22,14 +22,22 @@
 			styleClass="ui-confirmdialog-no btn btn-danger btn-lg"
 			icon="ui-icon-close" />
 	</p:confirmDialog>
-	
+	<f:metadata>  
+   		<f:event type="preRenderView"  listener="#{enderecoBean.preencherComboCidade(adocaoBean.adocao.endereco.uf)}" />
+	</f:metadata>
 	<div class="row">
-		<div class="col-md-6">
+		<div class="col-md-4">
+			<div class="row">
+				<p:outputLabel value="Breve Título do Anúncio."/>
+			</div>
 			<div class="row">
 				<div class="form-group">
 					<p:inputText placeholder="Título do anúncio" maxlength="15"
 						value="#{adocaoBean.adocao.titulo}" />
 				</div>
+			</div>
+			<div class="row">
+				<p:outputLabel value="Fala um pouco deste animal."/>
 			</div>
 			<div class="row">
 				<div class="form-group">
@@ -49,7 +57,7 @@
 				<p:inputText placeholder="Número para contato" maxlength="9"
 					value="#{adocaoBean.adocao.telefoneCelular}" />
 			</div>
-			<div class="row">Tipo de Animal</div>
+			<div class="row"><p:outputLabel value="Tipo de Animal"/></div>
 			<div class="row">
 				<p:selectOneMenu id="cbAnimal" style="width: 50%;"
 					value="#{adocaoBean.adocao.tipo}">
@@ -58,7 +66,7 @@
 					<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
 				</p:selectOneMenu>
 			</div>
-			<div class="row">Fase de Vida</div>
+			<div class="row"><p:outputLabel value="Fase da Vida"/></div>
 			<div class="row">
 				
 					<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
@@ -69,7 +77,7 @@
 					</p:selectOneMenu>
 				
 			</div>
-			<div class="row">Sexo</div>
+			<div class="row"><p:outputLabel value="Sexo"/> </div>
 			<div class="row">
 				
 				<p:selectOneMenu id="cbSexo" value="#{adocaoBean.adocao.flSexo}"
@@ -80,7 +88,7 @@
 				</p:selectOneMenu>
 				
 			</div>
-			<div class="row">Estado</div>
+			<div class="row"><p:outputLabel value="Estado"/></div>
 			<div class="row">
 				 <p:selectOneMenu id="cbEstado" value="#{adocaoBean.adocao.endereco.uf}"  style="width: 50%;">
 					<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
@@ -88,7 +96,7 @@
 						<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(adocaoBean.adocao.endereco.uf)}" />
 				 </p:selectOneMenu>
 			</div>
-			<div class="row">Cidade</div>
+			<div class="row"><p:outputLabel value="Cidade"/></div>
 			<div class="row">
 				 <p:selectOneMenu id="cbCidade" value="#{adocaoBean.adocao.endereco.cidade}" converter="cidadeConverter" style="width: 50%;"
 					required="false" >
@@ -98,7 +106,7 @@
 			</div>
 
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-8">
 
 			<h:outputLabel value="FOTO" for="txtInputFoto1" />
 			<p:fileUpload fileUploadListener="#{adocaoBean.enviaImagem}"
@@ -111,44 +119,132 @@
 			</p:fileUpload>
 
 			<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
-				<div class="ui-grid-col -->-6" align="center">
-					<p:panel header="FOTOS" id="pnlFotos">
-						<div class="ui-grid-row">
-							<ui:repeat var="foto" value="#{adocaoBean.adocao.fotos}">
-								<div class="ui-grid-col-4">
-									<div class="ui-grid-row">
-										<div class="ui-upload-img" style="height: 215px;">
-											<h:graphicImage
-												style="width:100%;height:100%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
-												stream="false" cache="false"
-												url="data:image/jpg;base64,#{foto}" id="visualizacao"
-												alt="Visualização do anuncio" />
-											<span
-												style="font-size: 58px; display: #{foto.isEmpty()? 'inline-block': 'none'}"
-												class="fa-stack fa-lg"> <i
-												class="fa fa-camera fa-stack-1x"></i> <i
-												class="fa fa-ban fa-stack-2x text-danger"></i>
-											</span>
-										</div>
+				<p:panel header="FOTOS" id="pnlFotos">
+					<div class="ui-grid-row">
+						<ui:repeat var="foto" value="#{adocaoBean.adocao.fotos}">
+							<div class="ui-grid-col-4">
+								<div class="ui-grid-row">
+									<div class="ui-upload-img" style="height: 215px;">
+										<h:graphicImage
+											style="width:100%;height:100%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
+											stream="false" cache="false"
+											url="data:image/jpg;base64,#{foto}" id="visualizacao"
+											alt="Visualização do anuncio" />
+										<span
+											style="font-size: 58px; display: #{foto.isEmpty()? 'inline-block': 'none'}"
+											class="fa-stack fa-lg"> <i
+											class="fa fa-camera fa-stack-1x"></i> <i
+											class="fa fa-ban fa-stack-2x text-danger"></i>
+										</span>
 									</div>
-									<div class="ui-grid-row">
-										<p:commandButton style="width:100%;height:100%;"
-											actionListener="#{adocaoBean.removePhoto(foto)}"
-											styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
-											title="Excluir foto à esquerda" ajax="true" update="@form">
-											<p:confirm header="Confirme a exclusão"
-												message="Você tem certeza que deseja excluir este registro? Só terá efeito após você clicar no botão salvar"
-												icon="fa fa-exclamation-triangle" />
-										</p:commandButton>
-									</div>
-
 								</div>
-
-							</ui:repeat>
-						</div>
-					</p:panel>
-				</div>
+								<div class="ui-grid-row">
+									<p:commandButton style="width:100%;height:100%;"
+										actionListener="#{adocaoBean.removePhoto(foto)}"
+										styleClass="btn btn-danger btn-lg" icon="fa fa-trash-o"
+										title="Excluir foto à esquerda" ajax="true" update="@form">
+										<p:confirm header="Confirme a exclusão"
+											message="Você tem certeza que deseja excluir este registro? Só terá efeito após você clicar no botão salvar"
+											icon="fa fa-exclamation-triangle" />
+									</p:commandButton>
+								</div>
+							</div>
+						</ui:repeat>
+					</div>
+				</p:panel>	
 			</div>
+			
+			<!-- Div da grid -->
+			<div class="ui-grid-row ui-grid-row-custom">
+				<div class="ui-grid-col-12">
+					<p:dataTable id="grid"
+			   			var="adocao"
+			   			emptyMessage="Nenhum animal para adoção"
+			   			scrollHeight="157"
+						scrollable="true"
+		                resizableColumns="true"
+		                value="#{adocaoBean.adocoes}"
+		                paginator="#{adocaoBean.adocoes.size() > 12}" 
+		                rows="13"
+		                paginatorPosition="bottom" 
+				        tabindex="-1">
+				        
+		                <f:facet name="header">
+		                	<p:outputLabel value="Meus animais para Adoção" />
+		                </f:facet>
+		                
+				        <p:column headerText="Descrição"
+				        	width="200"
+				        	>
+				        	<h:outputText value="#{adocao.titulo}" />
+				        </p:column>
+				        
+				        <p:column headerText="Data Cadastro" width="120">
+							<h:outputText value="#{adocao.dataCadastro}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+									timeZone="America/Recife" />
+							</h:outputText>
+						</p:column>
+				        
+				        <p:column headerText="Data Adoção" width="100">
+							<h:outputText value="#{adocao.dataAdocao}">
+								<f:convertDateTime pattern="dd/MM/yyyy"
+									timeZone="America/Recife" />
+							</h:outputText>
+
+						</p:column>
+				        
+				        <p:column headerText="Opções" style="text-align:center;" width="100">
+							<p:commandButton 
+								actionListener="#{adocaoBean.selecionar(adocao)}"
+								type="submit" 
+								styleClass="btn btn-info btn-lg"
+								icon="fa fa-pencil-square-o" 
+								title="Clique aqui para alterar alguma informação"
+								ajax="true"
+								process="@this"
+								update="@form"
+								>
+									<f:ajax render="@form"/>
+								</p:commandButton>
+							<p:commandButton
+								action="#{adocaoBean.excluirAdocao(adocao.id)}"
+								type="submit" 
+								styleClass="btn btn-danger btn-lg"
+								icon="fa fa-trash-o"
+								title="Excluir este anúncio de adoção?"
+								ajax="true"
+								process="@this"
+								update="grid"
+								 >
+								 	<f:ajax execute="@all" render="@form"/>
+								 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+								</p:commandButton>
+						</p:column>
+						
+				        <p:column style="width:15%;text-align: center;">
+							<p:commandButton actionListener="#{adocaoBean.marcarComoAdotado(adocao)}"
+								type="submit" value="Foi adotado" id="btnAdotar" styleClass="btn btn-primary"
+								rendered="#{not adocao.flAdotado}" title="Marcar como animal adotado" 
+								ajax="true"
+								process="@this"
+								update="grid"
+							/>
+							<p:commandButton
+								actionListener="#{adocaoBean.marcarComoNAOAdotado(adocao)}" type="submit"
+								value="Não Adotado" id="btnNaoAdotado" styleClass="btn btn-danger" title="Marcar como NÃO adotado?"
+								rendered="#{adocao.flAdotado}" 
+								ajax="true"
+								process="@this"
+								update="grid"
+								>
+							</p:commandButton>
+						</p:column>
+				  									        							        																        					                		                		               	
+				    </p:dataTable>
+		        </div>
+		  	</div>
+			<!-- fim div da grid -->
 
 		</div>
 	</div>
