@@ -129,9 +129,9 @@ public class PerdidoBean extends SuperBean<Perdido> {
 		setPerdido(perdido);
 	}
 	
-	public void excluir(long idAdocao){
+	public void excluir(long idPerdido){
 		try{
-			RestUtilCall.delete("perdido/"+idAdocao);
+			RestUtilCall.delete("perdido/"+idPerdido);
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Anuncio de Adoção excluido com sucesso!"));
 			obterAnimaisPerdidosDoUsuario(); 
 		} catch (ExceptionErroCallRest  e) {
@@ -141,6 +141,14 @@ public class PerdidoBean extends SuperBean<Perdido> {
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
+		}
+	}
+	
+	public void excluisaoLogica(Perdido perdido) {
+		if(perdido != null){
+			perdido.setFlAtivo(false);
+			perdido.setDtDesativacao(new Date());
+			perdido = salvar(perdido);
 		}
 	}
 }

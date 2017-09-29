@@ -153,7 +153,6 @@ public class CallAnimalRest  extends RestUtilCall<Animal> {
 		return (List<Perdido>)entidades;
 	}
 	
-	
 	public  List<Perdido> getListAnimalPerdidoAchado(long estado,long cidade,long bairro,String tpAnimal,EnumAchadoPerdido tpAchadoPerdido) throws ExceptionErroCallRest, ExceptionValidation{
 		 return getListAnimalPerdidoAchado( estado, cidade, bairro, tpAnimal, tpAchadoPerdido, 20); 
 	}
