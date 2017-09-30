@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageHelperBean.mainTemplateSite}">
+
+	<ui:define name="body">
+
+		<section class="content-section-a">
+			<div class="container">
+				<div class="row">
+					<p:commandButton id="btnLimpar" style="margin-right:4px"
+						styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
+						title="Limpar tela?" value="Novo" action="#{encontradoBean.novo}"
+						type="submit" ajax="false" />
+
+					<p:commandButton id="btnSalvar" style="margin-right:4px"
+						styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
+						title="Salvar anúncio de perdido?" value="Salvar"
+						action="#{encontradoBean.salvar}" type="submit" ajax="false"
+						onstart="paceStart();" onclick="paceStart();"
+						oncomplete="Pace.restart();" update="@form" />
+				</div>
+							
+				<div class="row"></div>
+				<section class="content-section-a">
+					<ui:include src="encontrados-cadastro-content.xhtml" />
+				</section>
+			</div>
+		</section>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>

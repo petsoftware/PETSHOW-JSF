@@ -58,4 +58,25 @@ public class CallPerdidoRest extends RestUtilCall<Perdido> {
 		}
 		return (List<Perdido>)entidades;
 	}
+	
+	public  List<Perdido> getMeusAnimaisEncontrados(long usuarioId) throws ExceptionErroCallRest, ExceptionValidation{
+
+		client = new ResteasyClientBuilder().build();
+		target = client.target(URL_BASE+"perdido/consulta/encontrados/usuario/"+usuarioId);
+		Object entidades = null;
+		try{
+			entidades =  target.request().get(new javax.ws.rs.core.GenericType<List<Perdido>>() {});
+		}catch(Exception ex){
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+		}
+		if(entidades instanceof MapErroRetornoRest){// caso seja um objeto do tipo MapErroRetornoRest ocorreu um erro/validacao previsto no REST
+			MapErroRetornoRest erro=(MapErroRetornoRest) entidades;
+			if(erro.getType()==EnumErrosSistema.ERRO_VALIDACAO){
+				throw new ExceptionValidation(erro.getMessage());
+			}else{
+				throw new ExceptionErroCallRest("Failed: HTTP error code:"+erro.getMessage());
+			}
+		}
+		return (List<Perdido>)entidades;
+	}
 }

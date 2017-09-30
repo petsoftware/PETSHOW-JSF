@@ -154,7 +154,7 @@ public class ConsultaEncontradoBean extends SuperBean<Perdido>{
 	
 	public String chamarTelaDeCadastroDePerdido() {
 		if(getAuthenticationService().isAuthenticated()){
-			return "anunciar-perdido-site";
+			return "anunciar-encontrado-site";
 		}else{
 			return "do-login";
 		}

@@ -28,13 +28,21 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 	private String telefone;
 	private String mensagem;
 	private String id;
+	private String tipo;
 	private boolean temUsuarioLogado;
+	private boolean encontrado;
 	
 	@PostConstruct
 	public void init() {
 		this.perdido= new Perdido();
-		id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
+		id   = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("id");
+		tipo = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap() .get("tipo");
 		getAdocaoBanco();
+		if(tipo != null){
+			setEncontrado(true);
+		}else{
+			setEncontrado(false);
+		}
 		verificarSeUsuarioLogado();
 	}
 
@@ -219,6 +227,22 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 
 	public void setTemUsuarioLogado(boolean temUsuarioLogado) {
 		this.temUsuarioLogado = temUsuarioLogado;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public boolean isEncontrado() {
+		return encontrado;
+	}
+
+	public void setEncontrado(boolean encontrado) {
+		this.encontrado = encontrado;
 	}
 
 }

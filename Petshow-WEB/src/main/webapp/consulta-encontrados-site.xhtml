@@ -110,7 +110,8 @@
 							<ui:repeat var="perdido"
 								value="#{consultaEncontradoBean.perdidosBanco}">
 								<p:link outcome="perdido-detalhe" styleClass="btn-detalhes">
-									<f:param name="id" value="#{perdido.id}"></f:param>
+									<f:param name="id"   value="#{perdido.id}"></f:param>
+									<f:param name="tipo" value="#{perdido.flAcontecimento}"></f:param>
 									<div class="div-click" onclick="#">
 										<p:panel
 											header="#{perdido.nome}   -   (#{perdido.dddCelular})  #{perdido.telefoneCelular}"

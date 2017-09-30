@@ -11,9 +11,9 @@
                 
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         	<meta name="viewport" content="width=device-width, initial-scale=1" />
-        	<link rel="icon" type="image/png" href="#{resource['img/icon.png']}" />
         	<title>PETMOOBY - #{pageTitle}</title>
         	<link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/images/paw-16.png"/>
+        	<meta content="text/html" charset="UTF-8" http-equiv="Content-Type" />
         </f:facet>
  
         <f:facet name="middle">
@@ -38,7 +38,7 @@
 			<h:outputScript name="js/bootstrap.min.js" target="body"/>	
 					
         </f:facet>
-        <f:view contentType="text/html" charset="UTF-8" /> 
+        
         <f:facet name="last">
         
 			<h:outputScript name="js/pace.min.js" />
@@ -67,8 +67,8 @@
 	            <div class="container-fluid">
 	                <div class="row">
 	                    <div class="col-lg-12">
-	                    	<div class="row">
-	                    		<h:form id="form" enctype="multipart/form-data">
+	                    	<div class="row"> 
+	                    		<h:form id="form" enctype="multipart/form-data" >
 			        				<ui:include src="header.xhtml" />
 			        				<ui:include src="content.xhtml" />
 		        				</h:form>

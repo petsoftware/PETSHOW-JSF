@@ -132,6 +132,11 @@
 			<to-view-id>/private/perdido-cadastro-site.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-outcome>anunciar-encontrado-site</from-outcome>
+			<to-view-id>/private/encontrados-cadastro-site.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 		
 		<navigation-case>
 			<from-outcome>private-inicio</from-outcome>
