@@ -1008,6 +1008,10 @@ div.jqplot-table-legend-swatch {
 	background-image: url("#{resource['images/dog-in-front-16.png']}") !important;
 }
 
+.evento {
+	background-image: url("#{resource['images/evento-24.png']}") !important;
+}
+
 .btn-detalhes:focus,
 .btn-detalhes:hover{
 	text-decoration: none;

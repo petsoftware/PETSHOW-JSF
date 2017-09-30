@@ -17,6 +17,9 @@
 		<section class="content-section-a">
 			<div class="container">
 				<div class="row">
+					<img class="img-fluid" src="#{request.contextPath}/resources/images/dog-adopt-blue-64.png" />	<h4 style="padding-top: 15px;color: #004ddc;">ANIMAIS PARA ADOÇÃO</h4>
+				</div>
+				<div class="row">
 					
 					<div class="consulta-col col-md-4">
 						<div class="row">
@@ -27,7 +30,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								 <p:selectOneMenu id="cboEstado" value="#{consultaAdocaoBean.uf}"  style="width: 100%;" required="false">
-									<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+									<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(consultaAdocaoBean.uf)}" />
 								 </p:selectOneMenu>
@@ -81,7 +84,7 @@
 						</div>
 						<div class="row" style="padding-top:5px;">
 							<div class="col-md-12">
-								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;"  icon="fa fa-fw fa-pencil-square-o" 
+								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;"  icon="fa fa-fw fa-bullhorn" 
 									action="#{consultaAdocaoBean.chamarTelaDeCadastroDeAdocao}" rendered="true" ajax="false"
 									value="ANUNCIAR ADOÇÃO?"  id="btnCadAdocao" />
 								
