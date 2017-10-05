@@ -55,7 +55,9 @@ public class PerdidoBean extends SuperBean<Perdido> {
 	
 	public String salvar() {
 		try {
-			perdido.setDataCadastro(new Date());
+			if(perdido.getId() == 0){
+				perdido.setDataCadastro(new Date());
+			}
 			perdido = postEntity(perdido, "animal/perdido/salvar/", Perdido.class);
 			exibirInforMessage("Seu PET foi anunciado com sucesso!");
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {

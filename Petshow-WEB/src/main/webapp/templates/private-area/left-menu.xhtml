@@ -29,40 +29,46 @@
 
 
 	<div id="sidebar-wrapper">
-	    		<div class="sidebar-brand">
-	    			<h:form id="frm-left" enctype="multipart/form-data">
-		    			<div style="width: 205px; height: 205px" align="center">
-								<h:graphicImage rendered="#{usuarioBean.temFoto}"
-									styleClass="img-circle"
-									stream="false" cache="false"
-									url="data:image/jpg;base64,#{usuarioBean.usuario.foto}"
-									id="visualizacao" alt="Visualização do anuncio" />
-								<h:panelGroup  rendered="#{not usuarioBean.temFoto}">
-									<img class="img-circle"
-										src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
-								</h:panelGroup>
-							
-		           		</div>
-		           		<ui:remove>
-		           		<div class="row" style="padding-top:10px;">
-		           			<i class="fa fa-camera" />
-		           			<p:fileUpload fileUploadListener="#{usuarioBean.enviaImagem}"
-							update="visualizacao" id="upldFoto"
-							label="Escolha uma foto" multiple="false"
-							allowTypes="/(\.|\/)(jpe?g|png)$/" />
-		           		</div>
-		           		</ui:remove>
-	           		</h:form>
-	           	</div>
-	           	<div class="sidebar-content">
-	           		<div id="sidebar-body">
-	           			<ul class="sidebar-nav ml-auto">
-			    			<ui:include src="menu-content.xhtml" />
-			    			<ui:param name="onlySmall" value=" " />
-			    		</ul>
-				   	</div>
-			   	</div>	        
-	        </div>    
+   		<div class="sidebar-brand">
+   			<h:form id="frm-left" enctype="multipart/form-data">
+    			<div style="width: 205px; height: 205px" align="center">
+						<h:graphicImage rendered="#{usuarioBean.temFoto}"
+							styleClass="img-circle"
+							stream="false" cache="false"
+							url="data:image/jpg;base64,#{usuarioBean.usuario.foto}"
+							id="visualizacao" alt="Visualização do anuncio" />
+						<h:panelGroup  rendered="#{not usuarioBean.temFoto}">
+							<img class="img-circle"
+								src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+						</h:panelGroup>
+					
+           		</div>
+           		<ui:remove>
+           		<div class="row" style="padding-top:10px;">
+           			<i class="fa fa-camera" />
+           			<p:fileUpload fileUploadListener="#{usuarioBean.enviaImagem}"
+					update="visualizacao" id="upldFoto"
+					label="Escolha uma foto" multiple="false"
+					allowTypes="/(\.|\/)(jpe?g|png)$/" />
+           		</div>
+           		</ui:remove>
+          		</h:form>
+          	</div>
+          	<div class="sidebar-content">
+          		<div id="sidebar-body">
+          			<ul class="sidebar-nav ml-auto">
+		    			<ui:include src="menu-content.xhtml" />
+		    			<ui:param name="onlySmall" value=" " />
+	    			</ul>
+		   		</div>
+	   		</div>	
+	   	
+	   	  <div>
+	   	  	 <div class="col-lg-5 mr-auto">
+				<img class="img-fluid"	src="#{request.contextPath}/resources/images/logos/logo-petmooby.jpeg" />
+			</div>
+	   	  </div>      
+       </div>    
 		   
     </ui:composition>
     
