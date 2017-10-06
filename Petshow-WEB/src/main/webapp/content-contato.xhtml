@@ -13,6 +13,9 @@
 			<div class="container">
 
 			<div class="row">
+				  
+				 
+				 <p:growl id="growl" showDetail="true" sticky="true" life="2000"/>
 				<div class="col-lg-5 mr-auto order-lg-2">
 					<hr class="section-heading-spacer" />
 					<div class="clearfix"></div>
@@ -23,20 +26,26 @@
 						Preencha o formulário e nos envie.
 					</p>
 					<div class="row">
-						<p:inputText value="" placeholder="NOME"/>
+						<p:inputText value="#{indexBeans.enviarMensagem.nome}" placeholder="NOME"/>
 					</div>
 					<div class="row">
-						<p:inputText value="" placeholder="E-MAIL"/>
+						<p:inputText value="#{indexBeans.enviarMensagem.email}" placeholder="E-MAIL"/>
 					</div>
 					<div class="row">
-						<p:inputText value="" placeholder="CONTATO"/>
+						<p:inputText value="#{indexBeans.enviarMensagem.contato}" placeholder="CONTATO"/>
 					</div>
 					<div class="row">
-						<p:inputTextarea id="txtMensagem" placeholder="ESCREVA SUA MENSAGEM AQUI" rows="8" cols="40" counter="display" maxlength="120" counterTemplate="{0} characters faltando." autoResize="false" />
-	    				<p:outputLabel id="display" />
+						<p:inputTextarea value="#{indexBeans.enviarMensagem.mensagem}" id="txtMensagem" placeholder="ESCREVA SUA MENSAGEM AQUI" rows="8" cols="40" counter="display" maxlength="120" counterTemplate="{0} characters faltando." autoResize="false" />
+	    				
     				</div>
-					
+    				<div class="row">
+    					<p:outputLabel id="display" />
+    				</div>
+					<div class="row">
+						<p:commandButton value="Enviar" actionListener="#{indexBeans.enviar}" styleClass="btn btn-primary" update="growl" ajax="false" />
+					</div>
 				</div>
+				
 				<div class="col-lg-5 ml-auto order-lg-1">
 					<img class="img-fluid"
 						src="#{request.contextPath}/resources/images/site-contato-preto.jpg" />

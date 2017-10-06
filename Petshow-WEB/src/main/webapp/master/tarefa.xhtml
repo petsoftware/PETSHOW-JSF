@@ -15,7 +15,7 @@
 	<ui:param name="pageTitle" value="TAREFAS" />
 
 	<ui:define name="header">
-		<h:panelGrid columns="10">
+		<h:panelGrid columns="7">
 			<h:commandButton action="#{tarefaBean.novo}" type="submit" value="Novo" update="messages" id="btNovo" styleClass="btn btn-primary"/>
 			<h:commandButton action="#{tarefaBean.salvarTarefa}" type="submit" value="Salvar" update="messages" id="btSalvar" styleClass="btn btn-primary"/>
 			<h:commandButton action="#{tarefaBean.consultarTarefa}"	type="submit" value="Consultar" update="messages" id="btConsultar" styleClass="btn btn-primary"/>
@@ -23,7 +23,6 @@
 			<h:commandButton action="#{tarefaBean.reabrir}" type="submit" value="Reabrir" update="messages" id="btReabrir" styleClass="btn btn-primary"/>
 			<h:commandButton action="#{tarefaBean.postergar}" 	type="submit" value="Postergar" update="messages" id="btPostergar" styleClass="btn btn-primary"/>
 			<h:commandButton action="#{tarefaBean.finalizar}" type="submit" value="Finalizar" update="messages" id="brFinalizar" styleClass="btn btn-primary"/>	
-			<h:commandButton action="#{tarefaBean.testar}" type="submit" value="Teste de Carga" update="messages" id="btnTesteCarga" styleClass="btn btn-primary"/>
 		</h:panelGrid>	
 	</ui:define>
 	<ui:define name="body">

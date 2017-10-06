@@ -66,14 +66,12 @@
 			</div>
 			<div class="row"><p:outputLabel value="Fase da Vida"/></div>
 			<div class="row">
-				
-					<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
-						style="width: 50% !important;">
-						<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{consultaAdocaoBean.fases}" />
-					</p:selectOneMenu>
-				
+				<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
+					style="width: 50% !important;">
+					<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
+						noSelectionOption="true" />
+					<f:selectItems value="#{consultaAdocaoBean.fases}" />
+				</p:selectOneMenu>
 			</div>
 			<div class="row"><p:outputLabel value="Sexo"/> </div>
 			<div class="row">
@@ -112,7 +110,7 @@
 				fileLimit="100000" fileLimitMessage="Imagem muito grande"
 				label="Selecionar" invalidFileMessage="Tipo de imagem inválido"
 				invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
-				multiple="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
+				multiple="true" auto="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
 
 			</p:fileUpload>
 

@@ -103,9 +103,9 @@
 				<p:fileUpload fileUploadListener="#{perdidoBean.enviaImagem}"
 					update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
 					fileLimit="100000" fileLimitMessage="Imagem muito grande"
-					label="Selecionar" invalidFileMessage="Tipo de imagem inválido"
+					label="Escolher fotos" invalidFileMessage="Tipo de imagem inválido"
 					invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
-					multiple="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
+					multiple="true" auto="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
 				</p:fileUpload>
 			</div>
 			<div class="row">

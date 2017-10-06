@@ -1,7 +1,6 @@
 package br.com.tarefa.beans;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -10,10 +9,13 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
+import org.primefaces.event.FileUploadEvent;
+
 import br.com.petshow.enums.EnumPrioridade;
-import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
+import br.com.petshow.util.CollectionUtil;
+import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
 import br.com.tafera.enums.EnumDesenvolvedor;
 import br.com.tafera.enums.EnumStatus;
@@ -59,6 +61,23 @@ public class TarefaBean {
 
 	}
 	
+	public void testar(){
+		try{
+			RestUtilCall.getEntity("tarefa/carga/",Tarefa.class);
+		} catch (ExceptionErroCallRest  e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+
+		} catch (ExceptionValidation e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+			e.printStackTrace();
+		}
+
+
+	}
+	
+	
 	
 	public void salvarTarefa(){
 		try {
@@ -68,7 +87,7 @@ public class TarefaBean {
 			if(tarefa.getId()==0){
 				tarefa.setDataCriacao(new Date());
 			}
-			tarefa = (Tarefa) RestUtilCall.postEntity(tarefa, "tarefa/salvar",Tarefa.class);
+			tarefa =  RestUtilCall.postEntity(tarefa, "tarefa/salvar",Tarefa.class);
 			 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Tarefa foi salva com sucesso!"));
 		} catch (ExceptionErroCallRest  e) {
@@ -122,12 +141,8 @@ public class TarefaBean {
 	
 	public void alterarStatus(EnumStatus item){
 		try {
-			
-			//tarefa.setFoto(ImagemUtil.transformBase64AsString(imagem));
-			
 			tarefa.setStatus(item);
 			tarefa = (Tarefa) RestUtilCall.postEntity(tarefa, "tarefa/status",Tarefa.class);
-			 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Tarefa foi salva com sucesso!"));
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
@@ -177,5 +192,18 @@ public class TarefaBean {
 		this.observacao = observacao;
 	}
 	
+	public void enviaImagem(FileUploadEvent event) {
+		if(this.tarefa!=null){
+			tarefa.getFotos().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+		}
+	}
+	
+	public void removePhoto(String photoInBase64) {
+		if(this.tarefa != null){
+			if(this.tarefa.getFotos().isEmpty() == false){
+				this.tarefa.setFotos(CollectionUtil.removeItem(this.tarefa.getFotos(), photoInBase64));
+			}
+		}
+	}
 	
 }

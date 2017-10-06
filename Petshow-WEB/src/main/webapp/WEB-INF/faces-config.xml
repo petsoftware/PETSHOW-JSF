@@ -68,6 +68,11 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>evento</from-outcome>
+			<to-view-id>/admin/anunciar-evento.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>notificacoes</from-outcome>
 			<to-view-id>/admin/notificacao.xhtml</to-view-id>
 			<redirect />

@@ -4,6 +4,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.view.ViewScoped;
 
+import br.com.petshow.enums.EnumFlTpEstabelecimento;
+import br.com.petshow.enums.EnumTipoUser;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.security.AuthenticationService;
 import br.com.petshow.web.util.CallUsuarioRest;
@@ -59,7 +61,11 @@ public class BeanValidateNewUser {
 						MessagesBeanUtil.erroMessage("Erro ao validar usuario:", "Usuário ou senha incorretos!");
 						return "";
 					}
-					return "sucessoLogin";
+					if(user.getFlTpEstabelecimento().equals(EnumFlTpEstabelecimento.USER)){
+						return "private-inicio";
+					}else{
+						return "sucessoLogin";
+					}
 			}else{
 				MessagesBeanUtil.erroMessage("Erro ao validar usuário", "Credenciais não existem");
 			}

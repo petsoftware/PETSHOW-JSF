@@ -36,8 +36,7 @@
 			ao recurso. Os valores pos´oveis são: any, http e https. O valor padrão é 
 			any <intercept-url pattern="/categorias" access="hasAnyRole('ADMIN', 'GERENTE', 
 			'COORDENADOR') and isAuthenticated()" /> -->
-		<intercept-url pattern="/pages/**" access="permitAll" />
-		<intercept-url pattern="/" access="permitAll" />
+		
 		<intercept-url pattern="/admin/*"
 			access="isAuthenticated() and hasAnyRole('ADMIN','PETSHOP')" />
 		<intercept-url pattern="/private/**" access="isAuthenticated() and hasAnyRole('ADMIN','PRIVATE')" />

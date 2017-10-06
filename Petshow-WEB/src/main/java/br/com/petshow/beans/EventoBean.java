@@ -1,12 +1,17 @@
 package br.com.petshow.beans;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.ws.rs.core.Response;
+
+import org.primefaces.event.FileUploadEvent;
 
 import br.com.petshow.constants.RestConstants;
 import br.com.petshow.constants.RestPathConstants;
 import br.com.petshow.model.Evento;
+import br.com.petshow.web.util.ImagemUtil;
 
 @ManagedBean
 public class EventoBean extends SuperBean {
@@ -44,6 +49,12 @@ public class EventoBean extends SuperBean {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
+	}
+	
+	public void enviaImagem(FileUploadEvent event) {
+		if(this.evento!=null){
+			evento.setBunner(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+		}
 	}
 
 }
