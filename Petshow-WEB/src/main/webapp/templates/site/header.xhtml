@@ -117,8 +117,9 @@
 								<div class="inputTextGroupLeft">
 									<h:panelGroup rendered="#{novoUsuarioBean.renderizarNome}">
 										<p:inputText id="usuario" style="width:100%;" label="Usuário"
-											placeholder="#{novoUsuarioBean.textUsuario}" title="Usuário"
-											value="#{novoUsuarioBean.usuario.nome}" required="true">
+											placeholder="#{novoUsuarioBean.textUsuario}" title="Usuário" 
+											value="#{novoUsuarioBean.usuario.nome}" required="true" maxlength="60">
+											<f:validateLength minimum="3" />
 										</p:inputText>
 										<i class="fa fa-user"></i>
 									</h:panelGroup>
@@ -130,7 +131,7 @@
 								<div class="inputTextGroupLeft">
 									<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
 										<p:inputText id="email" style="width:100%;" label="E-mail"
-											placeholder="E-mail" title="E-mail" 
+											placeholder="E-mail" title="E-mail" maxlength="50"
 											value="#{novoUsuarioBean.usuario.email}" required="true">
 										</p:inputText>
 										<i class="fa fa-envelope"></i>
@@ -143,8 +144,10 @@
 								<h:panelGroup  rendered="#{novoUsuarioBean.renderizarCNPJ}">
 									<div class="inputTextGroupLeft">
 										<p:inputText id="txtCNPJ" style="width:100%;" label="CNPJ"
-											value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ"
-											title="CNPJ" required="#{novoUsuarioBean.renderizarCNPJ}">
+											value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ - SOMENTE NÚMEROS"
+											title="CNPJ" required="#{novoUsuarioBean.renderizarCNPJ}" 
+											requiredMessage="O CNPJ neste caso é necessário" maxlength="14"
+											>
 											<f:validator
 												validatorId="br.com.petshow.validator.CnpjValidator" />
 										</p:inputText>
@@ -160,7 +163,7 @@
 										<p:password id="senha" style="width:50%;" label="Senha"
 											placeholder="Senha" title="Senha"
 											value="#{novoUsuarioBean.senha}" autocomplete="new-password"
-											required="true">
+											required="true" maxlength="14">
 										</p:password>
 										<i class="fa fa-lock"></i>
 									</div>
@@ -172,7 +175,7 @@
 										<p:password id="txtConfSenha" style="width:50%;" label="Senha"
 											placeholder="Confirme a senha" title="Senha"
 											value="#{novoUsuarioBean.confSenha}"
-											autocomplete="new-password" required="true">
+											autocomplete="new-password" required="true" maxlength="14">
 										</p:password>
 										<i class="fa fa-lock"></i>
 									</div>
@@ -223,10 +226,14 @@
 							<i class="fa fa-home fa-2x" aria-hidden="true"></i>
 						</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#quem-somos">Quem
-							somos?</a></li>
-					<li class="nav-item"><a class="nav-link" href="#ongs">ONG's</a></li>
-					<li class="nav-item"><a class="nav-link" href="#contato">Contate-nos</a>
+					<li class="nav-item">
+						<a class="nav-link" href="#{request.contextPath}/index.xhtml#quem-somos">Quem somos?</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#{request.contextPath}/index.xhtml#ongs">ONG's</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#{request.contextPath}/index.xhtml#contato">Contate-nos</a>
 					</li>
 				</ul>
 				<h:form id="form" prependId="false">

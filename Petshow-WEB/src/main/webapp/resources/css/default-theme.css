@@ -25,11 +25,7 @@ legend {
    	border-color: #37bc9b;
    	box-shadow: none;
 }
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-	color: #383838;
-    border-color: #cccccc;
-    background-color: #fff;
-}
+
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
     border-color: #eed3d7;
 }
@@ -89,33 +85,13 @@ legend {
 	color: #fff !important;
     border-color: transparent !important;
 }
-.btn:hover,
-.btn:focus,
-.btn:active,
-.btn.active {
- 	color: #fff !important;
-  	background-color: #ccd1d9 !important;
-  	border-color: #ccd1d9 !important;
-}
-.btn,
-.btn.disabled,
-.btn[disabled],
-.btn.ui-state-disabled {
-    background-color: #aab2bd !important;
-    border-color: #aab2bd !important;
-}
+
+
 .btn-default {
   	color: #656D78 !important;
   	border-color: #656D78 !important;
 }
-.btn-default:hover,
-.btn-default:focus,
-.btn-default.focus,
-.btn-default:active,
-.btn-default.active {
-  	background-color: #656D78 !important;
-  	border-color: #656D78 !important;
-}
+
 .btn-default,
 .btn-default.disabled,
 .btn-default[disabled],

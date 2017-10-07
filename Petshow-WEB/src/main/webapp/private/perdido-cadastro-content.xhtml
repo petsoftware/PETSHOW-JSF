@@ -29,7 +29,7 @@
 			<div class="row">
 				<div class="form-group">
 					<p:inputText placeholder="NOME DO SEU PET" maxlength="15"
-						value="#{perdidoBean.perdido.nome}" />
+						value="#{perdidoBean.perdido.nome}" required="true" requiredMessage="Favor informar o nome do PET"/>
 				</div>
 			</div>
 			<div class="row"> <p:outputLabel value="Relate o que aconteceu"/></div>
@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<p:inputTextarea id="txtMensagem"
 						placeholder="FALE COMO ACONTECEU E CARACTERÍSTICAS PARA AJUDAR A ACHA-LO"
-						rows="8" cols="40" counter="display" maxlength="255"
+						rows="8" cols="40" counter="display" maxlength="255" required="true" requiredMessage="Favor informar o que aconteceu"
 						counterTemplate="{0} characters faltando." autoResize="false"
 						value="#{perdidoBean.perdido.descAcontecimento}" />
 				</div>
@@ -75,7 +75,7 @@
 			<div class="row"><p:outputLabel value="Qual é seu Estado?"/></div>
 			<div class="row">
 				<p:selectOneMenu id="cbEstado" value="#{perdidoBean.perdido.endereco.uf}"  style="width: 80%;">
-					<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+					<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 					<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 					<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perdidoBean.perdido.endereco.uf)}" />
 			 	</p:selectOneMenu>

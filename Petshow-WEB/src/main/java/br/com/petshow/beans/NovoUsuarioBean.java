@@ -45,7 +45,8 @@ public class NovoUsuarioBean {
 				usuario.setFlPreCadastro(true);
 				usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Usuário Cadastrado com sucesso!"));
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Em instante você receberá um e-mail para completar o seu cadastro!"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, ":)","Em instante você receberá um e-mail para completar o seu cadastro!"));
+				this.usuario = new Usuario();
 				return null;
 			}else{
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informações incorretas:", validate));

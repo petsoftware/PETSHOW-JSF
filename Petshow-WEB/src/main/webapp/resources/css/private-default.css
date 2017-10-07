@@ -997,9 +997,9 @@ div.jqplot-table-legend-swatch {
 .ui-widget-header {
     border: 1px solid #eeeeee;
     font-weight: bold;
-    color: #333;
-    background-color: #9fe0da;
-    border-color: #bce8f1;
+    color: #f5f5f5;
+    background-color: #4a934a;
+    border-color: #4a934a;
 }
 
 .div-detalhe {

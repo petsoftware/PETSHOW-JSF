@@ -26,9 +26,9 @@ legend {
    	box-shadow: none;
 }
  .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
-	color: #383838;
-    border-color: #cccccc;
-    background-color: #fff;
+	color: #4a934a;
+    
+    background-color: #fff3ea;
 }
 .ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
     border-color: #eed3d7;
