@@ -36,8 +36,8 @@ public class MessagesBeanUtil {
 		FacesContext.getCurrentInstance().addMessage(clientID, new FacesMessage(FacesMessage.SEVERITY_INFO, infor,detail));
 	}
 	
-	public static void inforClient(String infor,String clientID) {
-		FacesContext.getCurrentInstance().addMessage(clientID, new FacesMessage(FacesMessage.SEVERITY_INFO, infor,infor));
+	public static void inforClient(String resumo, String infor,String clientID) {
+		FacesContext.getCurrentInstance().addMessage(clientID, new FacesMessage(FacesMessage.SEVERITY_INFO, resumo,infor));
 	}
 	
 

@@ -91,7 +91,7 @@ public class DetalheAdocaoBean extends SuperBean<Adocao>{
 				notificacao.setUsuarioRemetente(null);
 			}
 			CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar/", Notificacao.class);
-			MessagesBeanUtil.inforClient("Enviado com sucesso!","msgEnviar");
+			MessagesBeanUtil.inforClient("","Enviado com sucesso!","msgEnviar");
 			setMensagem("");
 
 		} catch (ExceptionErroCallRest  e) {

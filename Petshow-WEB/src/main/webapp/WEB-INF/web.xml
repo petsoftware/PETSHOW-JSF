@@ -62,7 +62,9 @@
   </filter>
   <filter-mapping>
     <filter-name>springSecurityFilterChain</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/admin/*</url-pattern>
+    <url-pattern>/master/*</url-pattern>
+    <url-pattern>/private/*</url-pattern>
   </filter-mapping>
   <listener>
     <listener-class>
@@ -70,7 +72,7 @@
         </listener-class>
   </listener>
   <session-config>
-    <session-timeout>15</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
   <listener>
     <listener-class>

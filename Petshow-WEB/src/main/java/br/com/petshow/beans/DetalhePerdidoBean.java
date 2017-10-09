@@ -91,7 +91,7 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 				notificacao.setUsuarioRemetente(null);
 			}
 			CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar/", Notificacao.class);
-			MessagesBeanUtil.inforClient("Enviado com sucesso!","msgEnviar");
+			MessagesBeanUtil.inforClient("","Enviado com sucesso!","msgEnviar");
 			setMensagem("");
 		} catch (ExceptionErroCallRest  e) {
 			// erro: nao está mostrando a mensavem
