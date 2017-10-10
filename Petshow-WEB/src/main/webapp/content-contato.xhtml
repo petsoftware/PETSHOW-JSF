@@ -26,13 +26,14 @@
 						Preencha o formulário e nos envie.
 					</p>
 					<div class="row">
-						<p:inputText value="#{indexBeans.enviarMensagem.nome}" placeholder="NOME"/>
+						<p:inputText value="#{indexBeans.enviarMensagem.nome}" placeholder="NOME" style = "width: 55%"/>
+					</div>
+					
+					<div class="row">
+						<p:inputText value="#{indexBeans.enviarMensagem.contato}" placeholder="TELEFONE" style = "width: 55%" />
 					</div>
 					<div class="row">
-						<p:inputText value="#{indexBeans.enviarMensagem.email}" placeholder="E-MAIL"/>
-					</div>
-					<div class="row">
-						<p:inputText value="#{indexBeans.enviarMensagem.contato}" placeholder="TELEFONE"/>
+						<p:inputText value="#{indexBeans.enviarMensagem.email}" placeholder="E-MAIL" style = "width: 70%"/>
 					</div>
 					<div class="row">
 						<p:inputTextarea value="#{indexBeans.enviarMensagem.mensagem}" id="txtMensagem" placeholder="ESCREVA SUA MENSAGEM AQUI" rows="8" cols="40" counter="display" maxlength="300" counterTemplate="{0} characters faltando." autoResize="false" />
