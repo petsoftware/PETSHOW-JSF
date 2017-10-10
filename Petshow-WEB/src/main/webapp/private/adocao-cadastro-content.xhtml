@@ -30,7 +30,7 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<p:inputText placeholder="Título do anúncio" maxlength="15"
+					<p:inputText placeholder="Título do anúncio" maxlength="15" required="false" requiredMessage="Por favor informe um titulo."
 						value="#{adocaoBean.adocao.titulo}" />
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 			<div class="row"><p:outputLabel value="Tipo de Animal"/></div>
 			<div class="row">
 				<p:selectOneMenu id="cbAnimal" style="width: 50%;"
-					value="#{adocaoBean.adocao.tipo}">
+					value="#{adocaoBean.adocao.tipo}" required="true" requiredMessage="Por favor informe qual o tipo de animal.">
 					<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
 						itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
@@ -86,8 +86,8 @@
 			</div>
 			<div class="row"><p:outputLabel value="Estado"/></div>
 			<div class="row">
-				 <p:selectOneMenu id="cbEstado" value="#{adocaoBean.adocao.endereco.uf}"  style="width: 50%;">
-					<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+				 <p:selectOneMenu id="cbEstado" value="#{adocaoBean.adocao.endereco.uf}" required="false" requiredMessage="Por favor, informe o seu estado." style="width: 50%;">
+					<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 					<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 						<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(adocaoBean.adocao.endereco.uf)}" />
 				 </p:selectOneMenu>
@@ -95,8 +95,8 @@
 			<div class="row"><p:outputLabel value="Cidade"/></div>
 			<div class="row">
 				 <p:selectOneMenu id="cbCidade" value="#{adocaoBean.adocao.endereco.cidade}" converter="cidadeConverter" style="width: 50%;"
-					required="false" >
-					<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+					required="false" requiredMessage="Por favor informe a cidade." >
+					<f:selectItem itemLabel="#{placeHolderBean.selCidade}" itemValue="#{null}"/>
 					<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
 				</p:selectOneMenu>
 			</div>
@@ -170,7 +170,7 @@
 		                </f:facet>
 		                
 				        <p:column headerText="Descrição"
-				        	width="200"
+				        	width="150"
 				        	>
 				        	<h:outputText value="#{adocao.titulo}" />
 				        </p:column>
@@ -190,7 +190,7 @@
 
 						</p:column>
 				        
-				        <p:column headerText="Opções" style="text-align:center;" width="100">
+				        <p:column headerText="Opções" style="text-align:center;" width="80">
 							<p:commandButton 
 								actionListener="#{adocaoBean.selecionar(adocao)}"
 								type="submit" 
@@ -218,9 +218,9 @@
 								</p:commandButton>
 						</p:column>
 						
-				        <p:column style="width:15%;text-align: center;">
+				        <p:column style="text-align: center;" width="150">
 							<p:commandButton actionListener="#{adocaoBean.marcarComoAdotado(adocao)}"
-								type="submit" value="Foi adotado" id="btnAdotar" styleClass="btn btn-primary"
+								type="submit" value="Já Foi adotado?" id="btnAdotar" styleClass="btn btn-primary"
 								rendered="#{not adocao.flAdotado}" title="Marcar como animal adotado" 
 								ajax="true"
 								process="@this"
@@ -228,7 +228,7 @@
 							/>
 							<p:commandButton
 								actionListener="#{adocaoBean.marcarComoNAOAdotado(adocao)}" type="submit"
-								value="Não Adotado" id="btnNaoAdotado" styleClass="btn btn-danger" title="Marcar como NÃO adotado?"
+								value="Não Adotado?" id="btnNaoAdotado" styleClass="btn btn-danger" title="Marcar como NÃO adotado?Ou seja, o animal ainda não foi adotado."
 								rendered="#{adocao.flAdotado}" 
 								ajax="true"
 								process="@this"

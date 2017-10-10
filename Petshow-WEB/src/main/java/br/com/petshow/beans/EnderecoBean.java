@@ -35,9 +35,14 @@ public class EnderecoBean {
 
 	public List<Cidade> findCidadesByUF(EnumUF uf) {
 		try {
-			List<Cidade> cidades = callEnderecoRest.getListCidadeUF(uf);
-			setCidades(cidades);
-			return cidades;
+			if(uf != null){
+				List<Cidade> cidades = callEnderecoRest.getListCidadeUF(uf);
+				setCidades(cidades);
+				return cidades;
+			}else{
+				setCidades(new ArrayList<>());
+				return getCidades();
+			}
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			return new ArrayList<>();
 		}

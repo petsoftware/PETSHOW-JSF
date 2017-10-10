@@ -77,7 +77,7 @@
 			<div class="row"><p:outputLabel value="Qual é seu Estado?"/></div>
 			<div class="row">
 				<p:selectOneMenu id="cbEstado" value="#{encontradoBean.perdido.endereco.uf}"  style="width: 80%;">
-					<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+					<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 					<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 					<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(encontradoBean.perdido.endereco.uf)}" />
 			 	</p:selectOneMenu>

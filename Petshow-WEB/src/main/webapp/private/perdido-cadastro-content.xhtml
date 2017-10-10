@@ -25,11 +25,11 @@
 	</f:metadata>
 	<div class="row">
 		<div class="col-md-4">
-			<div class="row"> <p:outputLabel value="Que tipo de animal ele é?"/></div>
+			<div class="row"> <p:outputLabel value="Qual é o nome do seu PET?"/></div>
 			<div class="row">
 				<div class="form-group">
 					<p:inputText placeholder="NOME DO SEU PET" maxlength="15"
-						value="#{perdidoBean.perdido.nome}" required="true" requiredMessage="Favor informar o nome do PET"/>
+						value="#{perdidoBean.perdido.nome}" required="false" requiredMessage="Favor informar o nome do PET"/>
 				</div>
 			</div>
 			<div class="row"> <p:outputLabel value="Relate o que aconteceu"/></div>
@@ -37,7 +37,7 @@
 				<div class="form-group">
 					<p:inputTextarea id="txtMensagem"
 						placeholder="FALE COMO ACONTECEU E CARACTERÍSTICAS PARA AJUDAR A ACHA-LO"
-						rows="8" cols="40" counter="display" maxlength="255" required="true" requiredMessage="Favor informar o que aconteceu"
+						rows="8" cols="40" counter="display" maxlength="255" required="false" requiredMessage="Favor informar o que aconteceu"
 						counterTemplate="{0} characters faltando." autoResize="false"
 						value="#{perdidoBean.perdido.descAcontecimento}" />
 				</div>
@@ -94,8 +94,8 @@
 			<div class="row"><p:outputLabel value="Data que se Perdeu"/></div>
 			<div class="row">
 				<p:calendar id="dtPerdido" style="width:30%;" locale="pt"
-					pattern="dd/MM/yyyy" mask="true"
-					value="#{perdidoBean.perdido.dtPerdidoAchado}" required="true" />
+					pattern="dd/MM/yyyy" mask="true" requiredMessage="Por favor informe a data em que ele se perdeu."
+					value="#{perdidoBean.perdido.dtPerdidoAchado}" required="false" />
 
 			</div>
 			<div class="row">

@@ -82,7 +82,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								 <p:selectOneMenu id="cboEstado" value="#{perfilAdocaoBean.perfilAdocao.uf}"  style="width: 50%;" required="false">
-									<f:selectItem itemLabel="Selecione um estado" itemValue="0"/>
+									<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perfilAdocaoBean.perfilAdocao.uf)}" />
 								 </p:selectOneMenu>

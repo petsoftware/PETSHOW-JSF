@@ -54,8 +54,8 @@ public class AdocaoBean extends SuperBean<Adocao>{
 		obterAdocoesAnunciadasDoUsuario();
 		novaAdocao();
 	}
-
-	public void obterAdocoesAnunciadasDoUsuario() {
+	
+	public List<Adocao> obterAdocoesAnunciadasDoUsuario() {
 		List<Adocao> adocoes = null;
 		try {
 			adocoes = callAdocaoRest.getMeusAnimaisAnunciadosAdocao(getUsuarioLogado().getId());
@@ -63,6 +63,7 @@ public class AdocaoBean extends SuperBean<Adocao>{
 			adocoes = new ArrayList<>();
 		}
 		setAdocoes(adocoes);
+		return getAdocoes();
 	}
 	private void novaAdocao() {
 		adocao = new Adocao();
@@ -80,10 +81,14 @@ public class AdocaoBean extends SuperBean<Adocao>{
 	}
 	
 	public String send() {
-		adocao.setDataAdocao(new Date());
+		//adocao.setDataAdocao(new Date());
 		try{
-			adocao = postEntity(adocao, "adocao/salvar", Adocao.class);
-			MessagesBeanUtil.infor("Seu anúncio foi registrado com sucesso!");;
+			if(validar(adocao)){
+				adocao = postEntity(adocao, "adocao/salvar", Adocao.class);
+				MessagesBeanUtil.infor("Seu anúncio foi registrado com sucesso!");
+				obterAdocoesAnunciadasDoUsuario();
+				novaAdocao();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			MessagesBeanUtil.erroMessage(e.getMessage());
@@ -92,10 +97,12 @@ public class AdocaoBean extends SuperBean<Adocao>{
 	}
 	
 	public String salvar(Adocao adocao) {
-		adocao.setDataAdocao(new Date());
+		//adocao.setDataAdocao(new Date());
 		try{
-			adocao = postEntity(adocao, "adocao/salvar", Adocao.class);
-			MessagesBeanUtil.infor("Seu anúncio foi alterado com sucesso!");;
+			if(validar(adocao)){
+				adocao = postEntity(adocao, "adocao/salvar", Adocao.class);
+				MessagesBeanUtil.infor("Seu anúncio foi alterado com sucesso!");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			MessagesBeanUtil.erroMessage(e.getMessage());
@@ -150,6 +157,27 @@ public class AdocaoBean extends SuperBean<Adocao>{
 		adocao.setFlAdotado(false);
 		adocao.setDataAdocao(null);
 		salvar(adocao);
+	}
+	
+	public boolean validar(Adocao adocao) {
+		String msg = "";
+		if(adocao != null){
+			if(adocao.getEndereco().getUf() == null){
+				msg = "Informe o Estado";
+			}else if(adocao.getEndereco().getCidade() == null){
+				msg = "Favor informar a cidade";
+			}else if(adocao.getTitulo().trim().isEmpty()){
+				msg = "Por favor informe o título";
+			}
+		}else{
+			msg = "";
+		}
+		if(msg.trim().isEmpty()){
+			return true;
+		}else{
+			exibirErroMessage(msg);
+			return false;
+		}
 	}
 
 }

@@ -17,7 +17,8 @@
 		<p:commandButton id="btnLimpar" style="margin-right:4px"
 			styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
 			title="Limpar tela?" value="Novo" action="#{perdidoBean.novo}"
-			type="submit" ajax="false" />
+			type="submit" ajax="false" onstart="paceStart();" onclick="paceStart();"
+				oncomplete="Pace.restart();"/>
 
 		<p:commandButton id="btnSalvar" style="margin-right:4px"
 			styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"

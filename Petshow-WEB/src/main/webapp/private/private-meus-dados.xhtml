@@ -83,12 +83,7 @@
 								stream="false" cache="false"
 								url="data:image/jpg;base64,#{usuarioBean.usuario.foto}"
 								id="visualizacao" alt="Visualização do anuncio" />
-							<span
-								style="font-size: 58px; display: #{usuarioBean.usuario.foto.isEmpty()?'inline-block': 'none' }"
-								class="fa-stack fa-lg"> <i
-								class="fa fa-camera fa-stack-1x"></i> <i
-								class="fa fa-ban fa-stack-2x text-danger"></i>
-							</span>
+							
 						</div>
 					</div>
 					<p:fileUpload fileUploadListener="#{usuarioBean.enviaImagem}"

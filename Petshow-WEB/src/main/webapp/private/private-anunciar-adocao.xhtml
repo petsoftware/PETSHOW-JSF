@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
-
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:pe="http://primefaces.org/ui/extensions"
-	xmlns:p="http://primefaces.org/ui" template="#{pageHelperBean.mainTemplatePrivate}">
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	 template="#{pageHelperBean.mainTemplatePrivate}">
 
 	<ui:param name="activeAnuncio" value="active" />
 	<ui:param name="pageIcon" value="bullhorn" />
@@ -15,16 +16,20 @@
 
 	<ui:define name="header">
 		<div class="row">
+			
 			<p:commandButton id="btnLimpar" style="margin-right:4px"
 				styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
-				title="Limpar Anúncio?" value="Novo" action="#{adocaoBean.novo}"
-				type="submit" ajax="false" />
+				title="Limpar Anúncio?" value="Novo"   action="#{adocaoBean.novo}"
+				type="submit" ajax="false"
+				onstart="paceStart();" onclick="paceStart();"
+				oncomplete="Pace.restart();" 
+				/>
 			<p:commandButton id="btnSalvar" style="margin-right:4px"
 				styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
 				title="Salvar Anúncio?" value="Salvar"
 				action="#{adocaoBean.salvar}" type="submit" ajax="false"
 				onstart="paceStart();" onclick="paceStart();"
-				oncomplete="Pace.restart();" update="@form" />
+				oncomplete="Pace.restart();" update="@form,grid" />
 		</div>
 	</ui:define>
 

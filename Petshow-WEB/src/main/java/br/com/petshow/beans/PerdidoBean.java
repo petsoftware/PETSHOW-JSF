@@ -55,17 +55,44 @@ public class PerdidoBean extends SuperBean<Perdido> {
 	
 	public String salvar() {
 		try {
-			if(perdido.getId() == 0){
-				perdido.setDataCadastro(new Date());
+			if(validar(perdido)){
+				if(perdido.getId() == 0){
+					perdido.setDataCadastro(new Date());
+				}
+				perdido = postEntity(perdido, "animal/perdido/salvar/", Perdido.class);
+				exibirInforMessage("Seu PET foi anunciado com sucesso!");
+				novoPerdido();
+				obterAnimaisPerdidosDoUsuario();
 			}
-			perdido = postEntity(perdido, "animal/perdido/salvar/", Perdido.class);
-			exibirInforMessage("Seu PET foi anunciado com sucesso!");
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			exibirErroMessage("Erro ao tentar salvar: " + e.getMessage());
 		}
 		return null;
 	}
 	
+	private boolean validar(Perdido perdido) {
+		String msg = "";
+		if(perdido != null){
+			if(perdido.getEndereco().getUf() == null){
+				msg = "Por favor selecione o estado";
+			}else if(perdido.getEndereco().getCidade() == null){
+				msg = "Por favor informe a cidade.";
+			}else if(perdido.getNome().trim().isEmpty() ){
+				msg = "Por favor informe o nome.";
+			}else if(perdido.getDtPerdidoAchado() == null ){
+				msg = "Por favor informe a data em que ele se perdeu.";
+			}
+		}else{
+			msg = "Objeto perdido veio nulo";
+		}
+		if(msg.trim().isEmpty()){
+			return true;
+		}else{
+			exibirErroMessage(msg);
+			return false;
+		}
+	}
+
 	public Perdido salvar(Perdido perdido) {
 		try {
 			perdido.setDataCadastro(new Date());
