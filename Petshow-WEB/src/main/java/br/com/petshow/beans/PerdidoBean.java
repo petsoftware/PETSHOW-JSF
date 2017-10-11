@@ -120,7 +120,7 @@ public class PerdidoBean extends SuperBean<Perdido> {
 
 		if(this.perdido!=null){
 			if(perdido.getFotos().size() >= 3){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de imagens excedido", "Só é permitido por até 5 imagens!"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de imagens ultrapassado!", "Só é permitido por até 3 imagens!"));
 			}else{
 				perdido.getFotos().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
 			}
