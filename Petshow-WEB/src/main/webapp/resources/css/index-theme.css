@@ -66,3 +66,7 @@
 	padding-top: 	20px;
 	padding-bottom: 25px;
 }
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+	color: black !important;
+}

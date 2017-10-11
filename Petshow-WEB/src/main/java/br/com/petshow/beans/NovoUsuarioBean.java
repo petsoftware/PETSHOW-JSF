@@ -7,11 +7,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.petshow.enums.EnumFlTpEstabelecimento;
-import br.com.petshow.enums.EnumTipoUser;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.util.MD5EncriptUtil;
+import br.com.petshow.web.util.CallUsuarioRest;
 import br.com.petshow.web.util.RestUtilCall;
 
 
@@ -170,5 +170,28 @@ public class NovoUsuarioBean {
 
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
+	}
+	
+	public void verificarEmail() {
+		boolean temUser = false;
+		String email = "";
+		try {
+			email = getUsuario().getEmail();
+			Usuario user = new CallUsuarioRest().getUserByLoginName(getUsuario().getEmail());
+			if(user != null){
+				if(user.getId() > 0){
+					temUser = true;
+				}
+			}
+			if(temUser){
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "","E-mail " + email +" já existe."));
+			}else{
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "","E-mail disponível."));
+			}
+		} catch (ExceptionErroCallRest | ExceptionValidation e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
