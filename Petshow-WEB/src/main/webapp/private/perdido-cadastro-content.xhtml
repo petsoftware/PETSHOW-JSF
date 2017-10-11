@@ -5,6 +5,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
+
+
+
 <h:head>
 	<title>PetmOOby</title>
 
@@ -24,89 +27,108 @@
    		<f:event type="preRenderView"  listener="#{enderecoBean.preencherComboCidade(perdidoBean.perdido.endereco.uf)}" />
 	</f:metadata>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-12">
 			<div class="row"> <p:outputLabel value="Qual é o nome do seu PET?"/></div>
 			<div class="row">
-				<div class="form-group">
+			
 					<p:inputText placeholder="NOME DO SEU PET" maxlength="15"
 						value="#{perdidoBean.perdido.nome}" required="false" requiredMessage="Favor informar o nome do PET"/>
-				</div>
+				
 			</div>
-			<div class="row"> <p:outputLabel value="Relate o que aconteceu"/></div>
-			<div class="row">
-				<div class="form-group">
-					<p:inputTextarea id="txtMensagem"
-						placeholder="FALE COMO ACONTECEU E CARACTERÍSTICAS PARA AJUDAR A ACHA-LO"
-						rows="8" cols="40" counter="display" maxlength="255" required="false" requiredMessage="Favor informar o que aconteceu"
-						counterTemplate="{0} characters faltando." autoResize="false"
-						value="#{perdidoBean.perdido.descAcontecimento}" />
-				</div>
-			</div>
-			<div class="row">
-				<p:outputLabel id="display" />
-			</div>
-			<div class="row">
-				<p:inputText placeholder="DDD" maxlength="2" size="5"
-					value="#{perdidoBean.perdido.dddCelular}" />
-				<p:inputText placeholder="Número para contato" maxlength="9"
-					value="#{perdidoBean.perdido.telefoneCelular}" />
-			</div>
+					
 			<div class="row"><p:outputLabel value="Que tipo de animal ele é?"/></div>
+			
 			<div class="row">
+				<div class="row col-md-6">
 				<p:selectOneMenu id="cbAnimal" style="width: 80%;"
 					value="#{perdidoBean.perdido.tpAnimal}">
 					<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
 						itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{perdidoBean.tiposAnimais}" />
 				</p:selectOneMenu>
+				</div>
+				
 			</div>
+			
 			
 			<div class="row"><p:outputLabel value="Sexo do animal?"/></div>
 			<div class="row">
+			<div class="row col-md-6">
 				<p:selectOneMenu id="cbSexo" value="#{perdidoBean.perdido.flSexo}"
 					style="width: 80%;">
 					<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
 						itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{consultaPerdidoBean.sexos}" />
 				</p:selectOneMenu>
+				</div>
+				
+			</div>
+			<div class="row"><p:outputLabel value="Data do Acontecimento"/></div>
+			<div class="row">
+				<p:calendar id="dtPerdido" style="width:30%;" locale="pt"
+					pattern="dd/MM/yyyy" mask="true" requiredMessage="Por favor informe a data do acontecimento."
+					value="#{perdidoBean.perdido.dtPerdidoAchado}" required="false"  placeholder="__/__/____"/>
+
+			</div>
+			
+			<div class="row"><p:outputLabel value="Contato"/></div>
+			<div class="row">
+				<p:inputText placeholder="DDD" maxlength="2" size="5"
+					value="#{perdidoBean.perdido.dddCelular}" />
+				<p:inputText placeholder="Número" maxlength="9"
+					value="#{perdidoBean.perdido.telefoneCelular}" />
 			</div>
 			
 			
 			<div class="row"><p:outputLabel value="Qual é seu Estado?"/></div>
 			<div class="row">
+			<div class="row col-md-6">
 				<p:selectOneMenu id="cbEstado" value="#{perdidoBean.perdido.endereco.uf}"  style="width: 80%;">
 					<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 					<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 					<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perdidoBean.perdido.endereco.uf)}" />
 			 	</p:selectOneMenu>
+			 	</div>
+				
 			</div>
 			
 			<div class="row"><p:outputLabel value="E sua cidade?"/></div>
 			<div class="row">
+			<div class="row col-md-6">
 				<p:selectOneMenu id="cbCidade" value="#{perdidoBean.perdido.endereco.cidade}" converter="cidadeConverter" style="width: 80%;"
 					required="false" >
 					<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
 					<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
 				</p:selectOneMenu>
+				</div>
+			
 			</div>
-		</div>
-		<div class="col-md-8">
-			<div class="row"><p:outputLabel value="Data que se Perdeu"/></div>
+			
+			
+			<div class="row"> <p:outputLabel value="Relate o acontecimento"/></div>
 			<div class="row">
-				<p:calendar id="dtPerdido" style="width:30%;" locale="pt"
-					pattern="dd/MM/yyyy" mask="true" requiredMessage="Por favor informe a data em que ele se perdeu."
-					value="#{perdidoBean.perdido.dtPerdidoAchado}" required="false" />
-
+				<div class="form-group">
+					<p:inputTextarea id="txtMensagem"
+						placeholder="FALE COMO ACONTECEU E CARACTERÍSTICAS DO ANIMAL"
+						rows="7" style="width:100%" counter="display" maxlength="700" required="false" requiredMessage="Favor informar o que aconteceu"
+						counterTemplate="{0} characters faltando." 
+						value="#{perdidoBean.perdido.descAcontecimento}" />
+						<p:outputLabel id="display"  />
+				</div>
 			</div>
+			
 			<div class="row">
-				<h:outputLabel value="FOTO" for="txtInputFoto1" />
+			<div class="col-md-10"><h:outputLabel value="FOTO" for="txtInputFoto1" /></div>
+				
+				<div class="col-md-2">
 				<p:fileUpload fileUploadListener="#{perdidoBean.enviaImagem}"
 					update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
 					fileLimit="100000" fileLimitMessage="Imagem muito grande"
 					label="Escolher fotos" invalidFileMessage="Tipo de imagem inválido"
 					invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
-					multiple="true" auto="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
+					auto="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
 				</p:fileUpload>
+				</div>
 			</div>
 			<div class="row">
 				<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
@@ -163,17 +185,17 @@
 		                paginatorPosition="bottom" 
 				        tabindex="-1">
 				        
-		                <f:facet name="header">
+		                <f:facet name="header" style="background-color: red important!">
 		                	<p:outputLabel value="Meus animais perdidos" />
 		                </f:facet>
 		                
-				        <p:column headerText="Nome:"
+				        <p:column headerText="Nome"
 				        	width="200"
 				        	>
 				        	<h:outputText value="#{perdido.nome}" />
 				        </p:column>
 				        
-				        <p:column headerText="Se perdeu" width="120">
+				        <p:column headerText="Data do Acontecimento" width="120">
 							<h:outputText value="#{perdido.dtPerdidoAchado}">
 								<f:convertDateTime pattern="dd/MM/yyyy"
 									timeZone="America/Recife" />
@@ -206,7 +228,7 @@
 								type="submit" 
 								styleClass="btn btn-danger btn-lg"
 								icon="fa fa-trash-o"
-								title="Excluir este anúncio de adoção?"
+								title="Excluir este anúncio de Perdido?"
 								ajax="true"
 								process="@this"
 								update="grid"
@@ -242,6 +264,7 @@
 		</div>
 	</div>
 </ui:composition>
+
 <h:body>
 
 </h:body>

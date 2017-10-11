@@ -232,6 +232,21 @@
 }
 
 
+.ui-datatable-header.ui-widget-header.ui-corner-top {
+    background-color: #4a934a !important;
+}
 
 
+
+.ui-fileupload-buttonbar.ui-widget-header.ui-corner-top {
+    background-color: #fff3ea !important;
+    border: none !important;
+}
+.ui-fileupload-content  {
+        display: none !important;
+    }
+    .ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-fileupload-choose {
+    color: white !important;
+    background-color: #4a934a !important;
+}
 
