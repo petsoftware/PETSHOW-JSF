@@ -27,7 +27,7 @@
 					resizable="false" responsive="true">
 
 					<p:messages id="entrarMsgsDialog" styleClass="ui-messages-dialog"
-						showSummary="true" showDetail="true" closable="true"
+						showSummary="false" showDetail="true" closable="true"
 						showIcon="false" />
 
 					<div class="ui-grid ui-grid-responsive">
@@ -36,7 +36,7 @@
 								<div class="inputTextGroupLeft">
 									<p:inputText id="usuario" style="width:100%;" label="Usuário"
 										placeholder="Usuário" title="Usuário"
-										value="#{loginBean.usuario}" required="true">
+										value="#{loginBean.usuario}" required="true" requiredMessage="Por favor informe o usuário" >
 									</p:inputText>
 									<i class="fa fa-user"></i>
 								</div>
@@ -47,7 +47,7 @@
 								<div class="inputTextGroupLeft">
 									<p:password id="senha" style="width:100%;" label="Senha"
 										placeholder="Senha" title="Senha" value="#{loginBean.senha}"
-										required="true">
+										required="true" requiredMessage="A senha é obrigatória">
 									</p:password>
 									<i class="fa fa-lock"></i>
 								</div>
@@ -133,6 +133,7 @@
 										<p:inputText id="email" style="width:100%;" label="E-mail"
 											placeholder="E-mail" title="E-mail" maxlength="50"
 											value="#{novoUsuarioBean.usuario.email}" required="true">
+											<p:ajax event="blur" listener="#{novoUsuarioBean.verificarEmail}"  process="email" update="cadastrarMsgsDialog"/>
 										</p:inputText>
 										<i class="fa fa-envelope"></i>
 									</h:panelGroup>
