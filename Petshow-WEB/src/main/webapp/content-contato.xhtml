@@ -9,20 +9,13 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html" >
 
-	<style type="text/css">
-           div[id="formContent:frmContato:growl_container"] {
-			    position:absolute;
-			    top:20px;
-			    left:40%;
-			}
-    </style>
-	<h:form id="frmContato" prependId="false">
+	<h:form>
 			<div class="container">
 
 			<div class="row">
 				  
 				 
-				 <p:growl id="growl" showDetail="false" sticky="true" life="4000" />
+				 <p:growl id="growl" showDetail="true" sticky="false" life="4000"/>
 				<div class="col-lg-5 mr-auto order-lg-2">
 					<hr class="section-heading-spacer" />
 					<div class="clearfix"></div>
@@ -33,28 +26,28 @@
 						Preencha o formulário e nos envie.
 					</p>
 					<div class="row">
-						<p:inputText value="#{indexBeans.enviarMensagem.nome}" placeholder="NOME" required="true" requiredMessage="Pro favor nos diga o seu nome."/>
+						<p:inputText value="#{indexBeans.enviarMensagem.nome}" placeholder="NOME" style = "width: 55%; padding-top:5px;" required="true" requiredMessage="Pro favor nos diga o seu nome."/>
 					</div>
-					<div class="row">
-						<p:inputText value="#{indexBeans.enviarMensagem.email}" placeholder="E-MAIL" required="true" requiredMessage="Informe um e-mail de contato." immediate="false"/>
+				
+					<div class="row" style="padding-top:5px !important;">
+						<p:inputText value="#{indexBeans.enviarMensagem.contato}" placeholder="TELEFONE" style = "width: 55%; padding-top:5px !important;" />
 					</div>
-					<div class="row">
-						<p:inputText value="#{indexBeans.enviarMensagem.contato}" placeholder="CONTATO"/>
+					
+					<div class="row" style="padding-top:5px !important;">
+						<p:inputText value="#{indexBeans.enviarMensagem.email}" placeholder="E-MAIL" style = "width: 70%;padding-top:5px;" required="true" requiredMessage="Informe um e-mail de contato."/>
 					</div>
-					<div class="row">
-						<p:inputTextarea value="#{indexBeans.enviarMensagem.mensagem}" id="txtMensagem" placeholder="ESCREVA SUA MENSAGEM AQUI" 
-						rows="8" cols="40" counter="display" maxlength="120" counterTemplate="{0} characters faltando." autoResize="false" 
-						required="true" requiredMessage="Informe a mensagem que você deseja nos enviar."
-						/>
+					
+					<div class="row" style="padding-top:5px !important;">
+						<p:inputTextarea value="#{indexBeans.enviarMensagem.mensagem}" id="txtMensagem" placeholder="ESCREVA SUA MENSAGEM AQUI" rows="8" cols="40" 
+						counter="display" maxlength="300" counterTemplate="{0} characters faltando." autoResize="false" required="true" 
+						requiredMessage="Informe a mensagem que você deseja nos enviar." style="padding-top:5px;"/>
 	    				
     				</div>
     				<div class="row">
     					<p:outputLabel id="display" />
     				</div>
 					<div class="row">
-						<p:commandButton value="Enviar" actionListener="#{indexBeans.enviar}"  styleClass="btn btn-primary" update="growl" ajax="false" >
-							
-						</p:commandButton>
+						<p:commandButton value="Enviar" actionListener="#{indexBeans.enviar}" styleClass="btn btn-primary" update="growl" ajax="false" />
 					</div>
 				</div>
 				
