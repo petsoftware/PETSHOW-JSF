@@ -179,5 +179,11 @@ public class AdocaoBean extends SuperBean<Adocao>{
 			return false;
 		}
 	}
-
+	
+	public boolean isTemFotos() {
+		if(adocao != null && adocao.getFotos() != null && adocao.getFotos().size() > 0){
+			return true;
+		}
+		return false;
+	}
 }

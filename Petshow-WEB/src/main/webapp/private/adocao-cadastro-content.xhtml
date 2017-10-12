@@ -24,91 +24,89 @@
    		<f:event type="preRenderView"  listener="#{enderecoBean.preencherComboCidade(adocaoBean.adocao.endereco.uf)}" />
 	</f:metadata>
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="row">
-				<p:outputLabel value="Breve Título do Anúncio."/>
+				<p:outputLabel value="Nome do animal"/>
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<p:inputText placeholder="Título do anúncio" maxlength="15" required="false" requiredMessage="Por favor informe um titulo."
+					<p:inputText placeholder="Nome" maxlength="20" required="false" requiredMessage="Por favor informe o nome do animal"
 						value="#{adocaoBean.adocao.titulo}" />
 				</div>
 			</div>
+			
+			<div class="row"><p:outputLabel value="Telefone"/></div>
 			<div class="row">
-				<p:outputLabel value="Fala um pouco deste animal."/>
-			</div>
-			<div class="row">
-				<div class="form-group">
-					<p:inputTextarea id="txtMensagem"
-						placeholder="FALA SOBRE ESTE ANIMAL DA ADOÇÃO" rows="8" cols="40"
-						counter="display" maxlength="255"
-						counterTemplate="{0} characters faltando." autoResize="false"
-						value="#{adocaoBean.adocao.descAdocao}" />
-				</div>
-			</div>
-			<div class="row">
-				<p:outputLabel id="display" />
-			</div>
-			<div class="row">
+			<div class="form-group">
 				<p:inputText placeholder="DDD" maxlength="2" size="5"
 					value="#{adocaoBean.adocao.dddCelular}" />
-				<p:inputText placeholder="Número para contato" maxlength="9"
+				<p:inputText placeholder="Número" maxlength="9"
 					value="#{adocaoBean.adocao.telefoneCelular}" />
+					</div>
 			</div>
 			<div class="row"><p:outputLabel value="Tipo de Animal"/></div>
 			<div class="row">
-				<p:selectOneMenu id="cbAnimal" style="width: 50%;"
+			<div class="form-group">
+				<p:selectOneMenu id="cbAnimal" style="width: 100%;"
 					value="#{adocaoBean.adocao.tipo}" required="true" requiredMessage="Por favor informe qual o tipo de animal.">
 					<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
 						itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
 				</p:selectOneMenu>
+				</div>
 			</div>
 			<div class="row"><p:outputLabel value="Fase da Vida"/></div>
 			<div class="row">
+			<div class="form-group">
 				<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
-					style="width: 50% !important;">
+					style="width: 100% !important;">
 					<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
 						noSelectionOption="true" />
 					<f:selectItems value="#{consultaAdocaoBean.fases}" />
 				</p:selectOneMenu>
+			</div>	
 			</div>
 			<div class="row"><p:outputLabel value="Sexo"/> </div>
 			<div class="row">
 				
+				<div class="form-group">
 				<p:selectOneMenu id="cbSexo" value="#{adocaoBean.adocao.flSexo}"
-					style="width: 50%;">
+					style="width: 100%;">
 					<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
 						itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{consultaAdocaoBean.sexos}" />
 				</p:selectOneMenu>
-				
+				</div>
 			</div>
 			<div class="row"><p:outputLabel value="Estado"/></div>
 			<div class="row">
-				 <p:selectOneMenu id="cbEstado" value="#{adocaoBean.adocao.endereco.uf}" required="false" requiredMessage="Por favor, informe o seu estado." style="width: 50%;">
+			<div class="form-group">
+				 <p:selectOneMenu id="cbEstado" value="#{adocaoBean.adocao.endereco.uf}" required="false" requiredMessage="Por favor, informe o seu estado." style="width: 100%;">
 					<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 					<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 						<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(adocaoBean.adocao.endereco.uf)}" />
 				 </p:selectOneMenu>
+				 </div>
 			</div>
 			<div class="row"><p:outputLabel value="Cidade"/></div>
 			<div class="row">
-				 <p:selectOneMenu id="cbCidade" value="#{adocaoBean.adocao.endereco.cidade}" converter="cidadeConverter" style="width: 50%;"
+			<div class="form-group">
+				 <p:selectOneMenu id="cbCidade" value="#{adocaoBean.adocao.endereco.cidade}" converter="cidadeConverter" style="width: 100%;"
 					required="false" requiredMessage="Por favor informe a cidade." >
 					<f:selectItem itemLabel="#{placeHolderBean.selCidade}" itemValue="#{null}"/>
 					<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
 				</p:selectOneMenu>
+				</div>
 			</div>
-
+			
 		</div>
-		<div class="col-md-8">
-
-			<h:outputLabel value="FOTO" for="txtInputFoto1" />
+		<div class="col-md-9">
+			
+			
 			<p:fileUpload fileUploadListener="#{adocaoBean.enviaImagem}"
 				update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
 				fileLimit="3" fileLimitMessage="Imagem muito grande"		
-				label="Selecionar" invalidFileMessage="Tipo de imagem inválido"
+				label="Adicionar Foto" invalidFileMessage="Tipo de imagem inválido"
 				invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
 				multiple="true" auto="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
 
@@ -117,10 +115,13 @@
 			<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
 				<p:panel header="FOTOS" id="pnlFotos">
 					<div class="ui-grid-row">
+					<p:outputLabel value="Nenhuma foto foi selecionada!" rendered = "#{not adocaoBean.isTemFotos()}"/>
 						<ui:repeat var="foto" value="#{adocaoBean.adocao.fotos}">
-							<div class="ui-grid-col-4">
+						<div class= "col-xs-12 col-md-4">
+							<div class="ui-grid-col-12" style = "padding-left: 5px;">
 								<div class="ui-grid-row">
 									<div class="ui-upload-img" style="height: 215px;">
+										
 										<h:graphicImage
 											style="width:100%;height:100%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
 											stream="false" cache="false"
@@ -145,20 +146,67 @@
 									</p:commandButton>
 								</div>
 							</div>
+							</div>
 						</ui:repeat>
 					</div>
 				</p:panel>	
 			</div>
 			
-			<!-- Div da grid -->
+			
+
+		</div>
+	</div>
+	
+	<!-- Div da grid -->
+	<div class="row col-md-12">
+	<div class="row">
+				<div class="form-group">
+					
+					<div class="row">
+						<div class="col-md-12">
+						<p:outputLabel value="Saúde"/>
+						</div>
+					</div>
+					<div class="row">
+					<div class="col-md-2">
+						<p:outputLabel value="Vacinado:" style="padding-right:10px;"/> <h:selectBooleanCheckbox style="heigpadding-right: 30px;" /> 
+						</div>
+						<div class="col-md-2">
+						 <p:outputLabel value="Vermifugado:" style="padding-right: 10px;"/> <h:selectBooleanCheckbox  class="squaredFour" style="padding-right: 30px;" />
+						 </div>
+						 <div class="col-md-2">
+						<p:outputLabel value="Castrado:" style="padding-right: 10px;"/><h:selectBooleanCheckbox  style="padding-right: 30px;" /> 
+					</div>
+					</div>
+				</div>
+			</div>
+	<div class="row">
+				<p:outputLabel value="Fale um pouco deste animal"/>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<p:inputTextarea id="txtMensagem"
+						placeholder="FALA SOBRE ESTE ANIMAL DA ADOÇÃO" rows="7" 
+						counter="display" maxlength="1000"
+						counterTemplate="{0} caracteres faltando." autoResize="false"
+						value="#{adocaoBean.adocao.descAdocao}" 
+						style="width:100%"/>
+						<p:outputLabel id="display" />
+				</div>
+				
+			</div>
+			<div class="row">
+				
+			</div>
+	
 			<div class="ui-grid-row ui-grid-row-custom">
 				<div class="ui-grid-col-12">
 					<p:dataTable id="grid"
 			   			var="adocao"
 			   			emptyMessage="Nenhum animal para adoção"
-			   			scrollHeight="157"
-						scrollable="true"
-		                resizableColumns="true"
+			   			
+						scrollable="false"
+		                resizableColumns="false"
 		                value="#{adocaoBean.adocoes}"
 		                paginator="#{adocaoBean.adocoes.size() > 12}" 
 		                rows="13"
@@ -169,28 +217,7 @@
 		                	<p:outputLabel value="Meus animais para Adoção" />
 		                </f:facet>
 		                
-				        <p:column headerText="Descrição"
-				        	width="150"
-				        	>
-				        	<h:outputText value="#{adocao.titulo}" />
-				        </p:column>
-				        
-				        <p:column headerText="Data Cadastro" width="120">
-							<h:outputText value="#{adocao.dataCadastro}">
-								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-									timeZone="America/Recife" />
-							</h:outputText>
-						</p:column>
-				        
-				        <p:column headerText="Data Adoção" width="100">
-							<h:outputText value="#{adocao.dataAdocao}">
-								<f:convertDateTime pattern="dd/MM/yyyy"
-									timeZone="America/Recife" />
-							</h:outputText>
-
-						</p:column>
-				        
-				        <p:column headerText="Opções" style="text-align:center;" width="80">
+		                <p:column headerText="Opções" style="text-align:center; width: 95px;" >
 							<p:commandButton 
 								actionListener="#{adocaoBean.selecionar(adocao)}"
 								type="submit" 
@@ -218,6 +245,29 @@
 								</p:commandButton>
 						</p:column>
 						
+		                
+				        <p:column headerText="Nome"
+				        	width="70"
+				        	>
+				        	<h:outputText value="#{adocao.titulo}" />
+				        </p:column>
+				        
+				        <p:column headerText="Data Cadastro" width="120">
+							<h:outputText value="#{adocao.dataCadastro}">
+								<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+									timeZone="America/Recife" />
+							</h:outputText>
+						</p:column>
+				        
+				        <p:column headerText="Data Adoção" width="100">
+							<h:outputText value="#{adocao.dataAdocao}">
+								<f:convertDateTime pattern="dd/MM/yyyy"
+									timeZone="America/Recife" />
+							</h:outputText>
+
+						</p:column>
+				        
+				        
 				        <p:column style="text-align: center;" width="150">
 							<p:commandButton actionListener="#{adocaoBean.marcarComoAdotado(adocao)}"
 								type="submit" value="Já Foi adotado?" id="btnAdotar" styleClass="btn btn-primary"
@@ -241,9 +291,8 @@
 		        </div>
 		  	</div>
 			<!-- fim div da grid -->
-
-		</div>
-	</div>
+			
+	</div>		
 </ui:composition>
 <h:body>
 
