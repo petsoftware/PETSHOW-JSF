@@ -19,13 +19,13 @@
 			</div>
 			<div class="col-md-4">
 				<h:panelGroup id="imgVacina" rendered="#{detalheAdocaoBean.adocao.flVacinado}">
-					<img class="img-fluid"   src="#{request.contextPath}/resources/images/vacina-24.png" />
+					<img class="img-fluid"   src="#{request.contextPath}/resources/images/vacina-24.png" title="Este animal já foi VACINADO"/>
 				</h:panelGroup>
 				<h:panelGroup id="imgVerme" rendered="#{detalheAdocaoBean.adocao.flVermifugado}">
-					<img class="img-fluid"  src="#{request.contextPath}/resources/images/verme-24.png" />
+					<img class="img-fluid"  src="#{request.contextPath}/resources/images/verme-24.png" title="Este animal já foi VERMIFUGADO e agora está protegido contra os vermes."/>
 				</h:panelGroup>
 				<h:panelGroup id="imgCastrado" rendered="#{detalheAdocaoBean.adocao.castrado}">
-					<img class="img-fluid"  src="#{request.contextPath}/resources/images/stork-24.png" />
+					<img class="img-fluid"  src="#{request.contextPath}/resources/images/stork-24.png" title="Este animal já foi CADASTRADO"/>
 				</h:panelGroup>
 			</div>
 		</div>
@@ -47,21 +47,21 @@
 							<div class="row">
 								
 								<div class="col-md-4">
-									<h:outputLabel value="Sexo:"  />
+									<h:outputLabel value="Sexo: "  />
 									<h:outputLabel id="lblSexo"
 										value="#{detalheAdocaoBean.adocao.flSexo}">
 									</h:outputLabel>
 								</div>
 								
 								<div class="col-md-4">
-									<h:outputLabel value="Tipo:"  />
+									<h:outputLabel value="Tipo: "  />
 									<h:outputLabel id="lblTipo"
 										value="#{detalheAdocaoBean.adocao.tipo}">
 									</h:outputLabel>
 								</div>
 								
 								<div class="col-md-4">
-									<h:outputLabel value="Porte:"  />
+									<h:outputLabel value="Porte: "  />
 									<h:outputLabel id="lblPorte"
 										value="#{detalheAdocaoBean.adocao.porteAnimal}">
 									</h:outputLabel>
