@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import org.primefaces.context.RequestContext;
 
 import br.com.petshow.enums.EnumFaseVida;
+import br.com.petshow.enums.EnumPorteAnimal;
 import br.com.petshow.enums.EnumSexo;
 import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.enums.EnumUF;
@@ -231,6 +232,10 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	}
 	public void setTotalRowsAdocaoPerfil(int totalRowsAdocaoPerfil) {
 		this.totalRowsAdocaoPerfil = totalRowsAdocaoPerfil;
+	}
+	
+	public EnumPorteAnimal[] getPortes() {
+		return EnumPorteAnimal.values();
 	}
 	
 }

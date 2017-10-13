@@ -27,6 +27,7 @@ public class NovoUsuarioBean {
 	private boolean renderizarEmail= false;
 	private boolean renderizarCNPJ = false;
 	private String tipoUsuario = "";
+	private String confirmEmail = "";
 	
 	@PostConstruct
 	private void init() {
@@ -79,6 +80,8 @@ public class NovoUsuarioBean {
 				if(!tipoUsuario.equalsIgnoreCase("U")){
 					result = "CNPJ deve ser informado.";
 				}
+			}else if(!usuario.getEmail().equals(getConfirmEmail())){
+				result = "E-mail não confere. Verifique se ele está correto.";
 			}
 		}else{
 			result = "Usuário não informado ou nulo";
@@ -193,5 +196,13 @@ public class NovoUsuarioBean {
 			e.printStackTrace();
 		}
 		
+	}
+
+	public String getConfirmEmail() {
+		return confirmEmail;
+	}
+
+	public void setConfirmEmail(String confirmEmail) {
+		this.confirmEmail = confirmEmail;
 	}
 }

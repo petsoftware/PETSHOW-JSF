@@ -78,6 +78,17 @@
 				</p:selectOneMenu>
 				</div>
 			</div>
+			<div class="row"><p:outputLabel value="Porte"/> </div>
+			<div class="row">
+				<div class="form-group">
+				<p:selectOneMenu id="cbPorte" value="#{adocaoBean.adocao.porteAnimal}"
+					style="width: 100%;">
+					<f:selectItem itemLabel="Porte do Animal"
+						itemValue="" noSelectionOption="true" />
+					<f:selectItems value="#{consultaAdocaoBean.portes}" />
+				</p:selectOneMenu>
+				</div>
+			</div>
 			<div class="row"><p:outputLabel value="Estado"/></div>
 			<div class="row">
 			<div class="form-group">
@@ -115,7 +126,7 @@
 			<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
 				<p:panel header="FOTOS" id="pnlFotos">
 					<div class="ui-grid-row">
-					<p:outputLabel value="Nenhuma foto foi selecionada!" rendered = "#{not adocaoBean.isTemFotos()}"/>
+					<p:outputLabel value="Nenhuma foto foi selecionada!" rendered = "#{not adocaoBean.temFotos}"/>
 						<ui:repeat var="foto" value="#{adocaoBean.adocao.fotos}">
 						<div class= "col-xs-12 col-md-4">
 							<div class="ui-grid-col-12" style = "padding-left: 5px;">
@@ -168,15 +179,41 @@
 						</div>
 					</div>
 					<div class="row">
-					<div class="col-md-2">
-						<p:outputLabel value="Vacinado:" style="padding-right:10px;"/> <h:selectBooleanCheckbox style="heigpadding-right: 30px;" /> 
+						<div class="col-md-2">
+							<p:outputLabel value="Vacinado:" style="padding-right:10px;"/> 
+							<p:selectBooleanCheckbox value="#{adocaoBean.adocao.flVacinado}" style="heigpadding-right: 30px;" >
+								<p:ajax update="imgVacina" />
+							</p:selectBooleanCheckbox> 
 						</div>
 						<div class="col-md-2">
-						 <p:outputLabel value="Vermifugado:" style="padding-right: 10px;"/> <h:selectBooleanCheckbox  class="squaredFour" style="padding-right: 30px;" />
+						 	<p:outputLabel value="Vermifugado:" style="padding-right: 10px;"/> 
+						 	<p:selectBooleanCheckbox value="#{adocaoBean.adocao.flVermifugado}"  class="squaredFour" style="padding-right: 30px;" >
+						 		<p:ajax update="imgVerme"  />
+						 	</p:selectBooleanCheckbox>
 						 </div>
 						 <div class="col-md-2">
-						<p:outputLabel value="Castrado:" style="padding-right: 10px;"/><h:selectBooleanCheckbox  style="padding-right: 30px;" /> 
+							<p:outputLabel value="Castrado:" style="padding-right: 10px;"/>
+							<p:selectBooleanCheckbox  style="padding-right: 30px;" value="#{adocaoBean.adocao.castrado}">
+								<p:ajax update="imgCastrado"  />
+							</p:selectBooleanCheckbox> 
+						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<h:panelGroup id="imgVacina" rendered="#{adocaoBean.adocao.flVacinado}">
+								<img class="img-fluid"   src="#{request.contextPath}/resources/images/vacina-24.png" />
+							</h:panelGroup>
+						</div>
+						<div class="col-md-2">
+							<h:panelGroup id="imgVerme" rendered="#{adocaoBean.adocao.flVermifugado}">
+								<img class="img-fluid"  src="#{request.contextPath}/resources/images/verme-24.png" />
+							</h:panelGroup>
+						</div>
+						<div class="col-md-2">
+							<h:panelGroup id="imgCastrado" rendered="#{adocaoBean.adocao.castrado}">
+								<img class="img-fluid"  src="#{request.contextPath}/resources/images/segonha-24.png" />
+							</h:panelGroup>
+						</div>
 					</div>
 				</div>
 			</div>

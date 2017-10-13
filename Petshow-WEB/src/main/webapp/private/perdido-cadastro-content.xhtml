@@ -28,19 +28,27 @@
 	</f:metadata>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="row"> <p:outputLabel value="Qual é o nome do seu PET?"/></div>
+			<div class="row"><p:outputLabel value="Achado ou Perdido?"/></div>
 			<div class="row">
+				<p:selectOneMenu id="cboAcontecimento" value="#{perdidoBean.perdido.flAcontecimento}" style="width: 20%;"
+					required="false" >
+					<f:selectItem itemLabel="Achado ou perdido" itemValue="#{null}"/>
+					<f:selectItems  value="#{perdidoBean.achadoPerdido}" />
+					<p:ajax event="change" update="@form" listener="#{perdidoBean.adequarForm}" />
+				</p:selectOneMenu>
+			</div>
 			
-					<p:inputText placeholder="NOME DO SEU PET" maxlength="15"
-						value="#{perdidoBean.perdido.nome}" required="false" requiredMessage="Favor informar o nome do PET"/>
-				
+			<div class="row"> <p:outputLabel value="#{perdidoBean.descricao}"/></div>
+			<div class="row">
+				<p:inputText placeholder="NOME DO SEU PET" maxlength="15"
+					value="#{perdidoBean.perdido.nome}" required="false" requiredMessage="Favor informar o nome do PET"/>
 			</div>
 					
 			<div class="row"><p:outputLabel value="Que tipo de animal ele é?"/></div>
 			
 			<div class="row">
 				<div class="row col-md-6">
-				<p:selectOneMenu id="cbAnimal" style="width: 80%;"
+				<p:selectOneMenu id="cbAnimal" style="width: 220px;"
 					value="#{perdidoBean.perdido.tpAnimal}">
 					<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
 						itemValue="" noSelectionOption="true" />
@@ -55,7 +63,7 @@
 			<div class="row">
 			<div class="row col-md-6">
 				<p:selectOneMenu id="cbSexo" value="#{perdidoBean.perdido.flSexo}"
-					style="width: 80%;">
+					style="width: 220px;">
 					<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
 						itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{consultaPerdidoBean.sexos}" />
@@ -83,7 +91,7 @@
 			<div class="row"><p:outputLabel value="Qual é seu Estado?"/></div>
 			<div class="row">
 			<div class="row col-md-6">
-				<p:selectOneMenu id="cbEstado" value="#{perdidoBean.perdido.endereco.uf}"  style="width: 80%;">
+				<p:selectOneMenu id="cbEstado" value="#{perdidoBean.perdido.endereco.uf}"  style="width: 220px;">
 					<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 					<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 					<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perdidoBean.perdido.endereco.uf)}" />
@@ -95,15 +103,22 @@
 			<div class="row"><p:outputLabel value="E sua cidade?"/></div>
 			<div class="row">
 			<div class="row col-md-6">
-				<p:selectOneMenu id="cbCidade" value="#{perdidoBean.perdido.endereco.cidade}" converter="cidadeConverter" style="width: 80%;"
+				<p:selectOneMenu id="cbCidade" value="#{perdidoBean.perdido.endereco.cidade}" converter="cidadeConverter" style="width: 220px;"
 					required="false" >
 					<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
 					<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
 				</p:selectOneMenu>
 				</div>
-			
 			</div>
 			
+			<div class="row"><p:outputLabel value="Cor predominante"/></div>
+			<div class="row">
+				<p:selectOneMenu id="cboCor" value="#{perdidoBean.perdido.tpCorPrincipal}" style="width: 220px;"
+					required="false" >
+					<f:selectItem itemLabel="Selecione uma cor" itemValue="#{null}"/>
+					<f:selectItems value="#{perdidoBean.cores}" />
+				</p:selectOneMenu>
+			</div>
 			
 			<div class="row"> <p:outputLabel value="Relate o acontecimento"/></div>
 			<div class="row">
@@ -123,9 +138,9 @@
 				<div class="col-md-2">
 				<p:fileUpload fileUploadListener="#{perdidoBean.enviaImagem}"
 					update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
-					fileLimit="100000" fileLimitMessage="Imagem muito grande"
+					fileLimit="3" fileLimitMessage="Numero de imagens para selecionar ultrapassado"
 					label="Escolher fotos" invalidFileMessage="Tipo de imagem inválido"
-					invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
+					invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar" multiple="true"
 					auto="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
 				</p:fileUpload>
 				</div>

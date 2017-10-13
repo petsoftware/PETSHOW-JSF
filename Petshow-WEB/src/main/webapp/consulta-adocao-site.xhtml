@@ -90,6 +90,35 @@
 								
 							</div>
 						</div>
+						<!-- Legenda dos icones -->
+						<div class="div-detalhe">
+							
+							<div class="row">
+								<div class="col-md-2">
+									<img class="img-fluid"  src="#{request.contextPath}/resources/images/vacina-24.png" title="Este animal já foi VACINADO"/>
+								</div>
+								<div class="col-md-8">
+									<p:outputLabel value="O animal já foi vacinado"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<img class="img-fluid" src="#{request.contextPath}/resources/images/verme-24.png" title="Este animal já foi VERMIFUGADO e agora está protegido contra os vermes."/>
+								</div>
+								<div class="col-md-8">
+									<p:outputLabel value="Está protegido contra vermes"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<img class="img-fluid"  src="#{request.contextPath}/resources/images/stork-24.png" title="Este animal já foi CADASTRADO"/>
+								</div>
+								<div class="col-md-8">
+									<p:outputLabel value="O animal está castrado"/>
+								</div>
+							</div>
+						</div>
+						<!-- fim legenda dos icones -->
 					</div>
 					<div class="consulta-result col-sm-8">
 						<div class="col-sm-12">
@@ -117,6 +146,17 @@
 											header="#{adocao.titulo}   -   (#{adocao.dddCelular})  #{adocao.telefoneCelular}"
 											styleClass="box">
 											 <f:facet name="actions">
+											 	<div class="ui-panel-titlebar-icon">
+											 		<h:panelGroup id="imgVacina" rendered="#{adocao.flVacinado}">
+														<img class="img-fluid"   src="#{request.contextPath}/resources/images/vacina-24.png" title="Este animal já foi VACINADO"/>
+													</h:panelGroup>
+													<h:panelGroup id="imgVerme" rendered="#{adocao.flVermifugado}">
+														<img class="img-fluid"  src="#{request.contextPath}/resources/images/verme-24.png" title="Este animal já foi VERMIFUGADO e agora está protegido contra os vermes."/>
+													</h:panelGroup>
+													<h:panelGroup id="imgCastrado" rendered="#{adocao.castrado}">
+														<img class="img-fluid"  src="#{request.contextPath}/resources/images/stork-24.png" title="Este animal já foi CADASTRADO"/>
+													</h:panelGroup>
+											 	</div>
 											 	<div class="ui-panel-titlebar-icon">
 									            	#{adocao.getTempoDePublicacao} 
 									            	<i class="fa fa-clock-o" aria-hidden="true"></i>

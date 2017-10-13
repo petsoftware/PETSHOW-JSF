@@ -51,6 +51,10 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 			e.printStackTrace();
 		}
 	}
+	
+	public void atualizarMensagens() {
+		getMessages();
+	}
 
 	public int getQtMsgNaoLidas() {
 		return qtMsgNaoLidas;

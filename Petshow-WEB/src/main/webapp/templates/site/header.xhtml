@@ -19,7 +19,7 @@
 		<!--  Botoes de cima -->
 		<div class="row">
 			
-
+			<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
 			<h:form id="formEntrar">
 
 				<p:dialog id="entrarDialog" header="Entrar" widgetVar="edlg"
@@ -54,13 +54,13 @@
 							</div>
 						</div>
 					</div>
-
+					<p:hotkey action="#{loginBean.login}" bind="return" />
 					<f:facet name="footer">
 
 						<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
 							style="margin-right:4px" icon="fa fa-times" value="Sair"
 							process="@this" title="Fecha a janela sem efetuar o login"
-							oncomplete="PF('edlg').hide();" />
+							oncomplete="PF('edlg').hide();" actionListener="#{loginBean.limparCampos}" />
 						<pe:tooltip for="sair" />
 
 						<p:commandButton id="confirmar"
@@ -134,6 +134,19 @@
 											placeholder="E-mail" title="E-mail" maxlength="50"
 											value="#{novoUsuarioBean.usuario.email}" required="true">
 											<p:ajax event="blur" listener="#{novoUsuarioBean.verificarEmail}"  process="email" update="cadastrarMsgsDialog"/>
+										</p:inputText>
+										<i class="fa fa-envelope"></i>
+									</h:panelGroup>
+								</div>
+							</div>
+						</div>
+						<div class="ui-grid-row ui-grid-row-custom">
+							<div class="ui-grid-col-12">
+								<div class="inputTextGroupLeft">
+									<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
+										<p:inputText id="txtEmailConf" style="width:100%;" label="E-mail"
+											placeholder="Digite novamente o e-mail" title="Confirme o e-mail" maxlength="50"
+											value="#{novoUsuarioBean.confirmEmail}" required="true" >
 										</p:inputText>
 										<i class="fa fa-envelope"></i>
 									</h:panelGroup>
@@ -264,7 +277,7 @@
 						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}">
 							<i class="fa fa-user" style="color: black;"></i>
 							<p:link outcome="sucessoLoginComumUser" id="lnkAdmArea" title="Voltar para sua área pessoal">
-								<h:outputText style="font-variant: small-caps;font-weight: bold;font-size: 1.5em;" value="#{loginBean.userName}" />
+								<h:outputText style="font-variant: small-caps;font-weight: bold;font-size: 1.5em;" value="#{loginBean.userName} - ENTRAR" />
 							</p:link>
 							<pe:tooltip for="lnkAdmArea" />
 						</li>
@@ -275,6 +288,7 @@
 								<i class="fa fa-sign-out"></i>SAIR
 							</p:commandLink> <pe:tooltip for="sair" /></li>
 					</ul>
+					<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
 				</h:form>
 				
 			</div>
