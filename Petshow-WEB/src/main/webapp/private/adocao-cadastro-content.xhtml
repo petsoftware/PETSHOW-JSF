@@ -113,16 +113,6 @@
 		</div>
 		<div class="col-md-9">
 			
-			
-			<p:fileUpload fileUploadListener="#{adocaoBean.enviaImagem}"
-				update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
-				fileLimit="3" fileLimitMessage="Imagem muito grande"		
-				label="Adicionar Foto" invalidFileMessage="Tipo de imagem inválido"
-				invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
-				multiple="true" auto="true" allowTypes="/(\.|\/)(jpe?g|png)$/">
-
-			</p:fileUpload>
-
 			<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
 				<p:panel header="FOTOS" id="pnlFotos">
 					<div class="ui-grid-row">
@@ -163,7 +153,14 @@
 				</p:panel>	
 			</div>
 			
-			
+				<p:fileUpload fileUploadListener="#{adocaoBean.enviaImagem}"
+				update="pnlFotos,msgs" ajax="true" cancelLabel="Cancelar"
+				fileLimit="3" fileLimitMessage="Número de imagens para selecionar ultrapassado"		
+				label="Escolher fotos" invalidFileMessage="Tipo de imagem inválido"
+				invalidSizeMessage="Imagem muito grande" uploadLabel="Enviar"
+				multiple="true" auto="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/">
+
+			</p:fileUpload>
 
 		</div>
 	</div>

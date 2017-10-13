@@ -378,8 +378,9 @@
     background-color: #fff3ea !important;
     border: none !important;
 }
-.ui-fileupload-content  {
-        display: none !important;
+	.ui-fileupload-content  {
+        background-color: #fff3ea !important;
+        border: none !important;
     }
     .ui-button.ui-widget.ui-state-default.ui-corner-all.ui-button-text-icon-left.ui-fileupload-choose {
     color: white !important;
