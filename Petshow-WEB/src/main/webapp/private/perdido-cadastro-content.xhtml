@@ -203,9 +203,8 @@
 						</p:column>
 				        
 				        <p:column headerText="Encontrado" width="100">
-							<h:outputText value="#{perdido.dtEncontrado}">
-								<f:convertDateTime pattern="dd/MM/yyyy"
-									timeZone="America/Recife" />
+							<h:outputText value="#{perdido.isFoiEncontrado()}">
+								
 							</h:outputText>
 
 						</p:column>

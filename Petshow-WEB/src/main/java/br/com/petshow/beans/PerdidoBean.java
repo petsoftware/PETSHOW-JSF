@@ -180,4 +180,6 @@ public class PerdidoBean extends SuperBean<Perdido> {
 			perdido = salvar(perdido);
 		}
 	}
+	
+	
 }
