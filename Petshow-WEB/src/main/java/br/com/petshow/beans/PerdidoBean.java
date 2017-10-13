@@ -12,6 +12,8 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
+import br.com.petshow.enums.EnumAchadoPerdido;
+import br.com.petshow.enums.EnumCor;
 import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -28,6 +30,8 @@ public class PerdidoBean extends SuperBean<Perdido> {
 	private Perdido perdido;
 	private List<Perdido> perdidos;
 	private CallPerdidoRest callPerdidoRest;
+	private boolean redenrizarCampos = false;
+	private String descricao = "";
 	@PostConstruct
 	public void init() {
 		callPerdidoRest = new CallPerdidoRest();
@@ -81,6 +85,8 @@ public class PerdidoBean extends SuperBean<Perdido> {
 				msg = "Por favor informe o nome.";
 			}else if(perdido.getDtPerdidoAchado() == null ){
 				msg = "Por favor informe a data em que ele se perdeu.";
+			}else if(perdido.getFlAcontecimento() == null ){
+				msg = "For favor diga se ele foi achado ou perdido.";
 			}
 		}else{
 			msg = "Objeto perdido veio nulo";
@@ -180,4 +186,45 @@ public class PerdidoBean extends SuperBean<Perdido> {
 			perdido = salvar(perdido);
 		}
 	}
+	
+	public EnumCor[] getCores() {
+		return EnumCor.values();
+	}
+	
+	public EnumAchadoPerdido[] getAchadoPerdido() {
+		return EnumAchadoPerdido.values();
+	}
+
+	public boolean isRedenrizarCampos() {
+		return redenrizarCampos;
+	}
+
+	public void setRedenrizarCampos(boolean redenrizarCampos) {
+		this.redenrizarCampos = redenrizarCampos;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
+	public void adequarForm() {
+		if(perdido != null){
+			if(perdido.getFlAcontecimento() != null){
+				if(perdido.getFlAcontecimento().equals(EnumAchadoPerdido.PERDIDO)){
+					setDescricao("Qual é o nome do seu PET?");
+				}else{
+					setDescricao("Sugira um nome ou deixe como estar.");
+					perdido.setNome("PET encontrado");
+				}
+				setRedenrizarCampos(true);
+			}else{
+				setRedenrizarCampos(false);
+			}
+		}
+	}
+	
 }

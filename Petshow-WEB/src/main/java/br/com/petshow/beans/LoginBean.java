@@ -121,6 +121,10 @@ public class LoginBean {
 		this.focusProperty = focusProperty;
 	}
 
+	public void limparCampos() {
+		setUsuario("");
+		setSenha("");
+	}
 
 
 }
