@@ -226,5 +226,11 @@ public class PerdidoBean extends SuperBean<Perdido> {
 			}
 		}
 	}
+	public boolean isTemFotos() {
+		if(perdido != null && perdido.getFotos() != null && perdido.getFotos().size() > 0){
+			return true;
+		}
+		return false;
+	}
 	
 }
