@@ -16,18 +16,20 @@
 	<!-- /.panel -->
 	<div class="chat-panel panel panel-default">
 		<div class="panel-heading">
-			<i class="fa fa-envelope fa-fw"></i> Suas Mensagens
-			<div class="btn-group pull-right">
-				<p:commandButton ajax="true" styleClass="btn btn-default btn-xs dropdown-toggle" icon="fa fa-refresh fa-fw">
+			<i class="fa fa-envelope fa-fw"></i> 
+			
+				Suas Mensagens
+		
+				<p:commandButton ajax="true"  style = "border:none; right: 18px;  position: absolute;" styleClass="btn btn-default btn-xs" icon="fa fa-refresh fa-fw">
 					<p:ajax listener="#{notificacoesBean.atualizarMensagens}" update="@form"/>
 				</p:commandButton>
-			</div>
+			
 		</div>
 
 		<!-- /.panel-heading -->
 		<div class="panel-body">
 			<ul id="ulForm" class="chat">
-				
+				<p:outputLabel value="Não existe mensagens não lidas!" rendered = "#{not notificacoesBean.isTemMensagensNaoLidas()}"/>
 				<!-- Repetir para todas as notificacoes -->
 				<ui:repeat var="notificacao" value="#{notificacoesBean.notificacoes}">
 					<li class="left clearfix">

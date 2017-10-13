@@ -197,4 +197,12 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 		this.renderNotificacao = renderNotificacao;
 	}
 	
+	public boolean isTemMensagensNaoLidas() {
+		 
+		if(notificacoes != null &&  notificacoes.size() > 0){
+			return true;
+		}
+		return false;
+	}
+	
 }
