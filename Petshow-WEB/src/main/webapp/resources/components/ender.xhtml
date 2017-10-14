@@ -37,7 +37,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 						<h:outputLabel value="Estado:" for="txtEstado" />
 					</div>
 					<div class="ui-grid-row">
-						<p:selectOneMenu id="txtEstado" value="#{cc.attrs.ender.uf}">
+						<p:selectOneMenu style="width:100%" id="txtEstado" value="#{cc.attrs.ender.uf}">
 							<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 							<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 							<p:ajax event="change" update="cidade" listener="#{enderecoBean.findCidadesByUF(cc.attrs.ender.uf)}" />
@@ -51,7 +51,7 @@ Motivacao: Criar um componente de data que seja reutilizavel e responsivo
 						<h:outputLabel value="Cidade:" for="cidade" />
 					</div>
 					<div class="ui-grid-row">
-						<p:selectOneMenu id="cidade" value="#{cc.attrs.ender.cidade}" converter="cidadeConverter"
+						<p:selectOneMenu id="cidade" style="width:100%" value="#{cc.attrs.ender.cidade}" converter="cidadeConverter"
 						required="true" requiredMessage="Por favor nos diga a sua cidade.">
 							<f:selectItem itemLabel="Selecione a cidade" itemValue="#{null}"/>
 							<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
