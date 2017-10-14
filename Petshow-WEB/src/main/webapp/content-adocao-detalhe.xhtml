@@ -28,96 +28,99 @@
 					<img class="img-fluid"  src="#{request.contextPath}/resources/images/stork-24.png" title="Este animal já foi CADASTRADO"/>
 				</h:panelGroup>
 			</div>
-		</div>
-		<div class="row">
-				<div class="col-md-8">
+	</div>
+	<div class="row">
+		<div class="col-md-8">
 					<div class="row">
-						<p:galleria value="#{detalheAdocaoBean.adocao.fotos}" var="foto"
-							panelWidth="500" panelHeight="313">
+						<div class="col-md-11">
+							<p:galleria value="#{detalheAdocaoBean.adocao.fotos}" var="foto"
+							max-width="700px" max-height="500px" style= "width:100%;height:100%">
 							<h:graphicImage url="data:image/jpg;base64,#{foto}"
 								style="width:100%;height:100%" id="visualizacao" title="" />
-						</p:galleria>
+							</p:galleria>
+						</div>
 					</div>
 					<div class="row">
-						<h:outputLabel id="txtDesc"
-							value="#{detalheAdocaoBean.adocao.descAdocao}" />
-					</div>
-					<div class="row">
-						<div class="col-md-8 box-mensagem">
-							<div class="row">
-								
-								<div class="col-md-4">
-									<h:outputLabel value="Sexo: "  />
-									<h:outputLabel id="lblSexo"
-										value="#{detalheAdocaoBean.adocao.flSexo}">
-									</h:outputLabel>
-								</div>
-								
-								<div class="col-md-4">
-									<h:outputLabel value="Tipo: "  />
+						<div class="col-md-7">
+							<h:outputLabel id="txtDesc" value="#{detalheAdocaoBean.adocao.descAdocao}" />
+						</div>
+						<div class="col-md-4  box-mensagem"  style = "background-color:#DDFFDC;font-size: 13px;padding-top: 10px;padding-bottom: 10px;">
+								<div class="row" style = "padding-left: 5px">
+									<h:outputLabel value="Tipo:&#160;"  style = "font-weight: 800 !important;"/>
 									<h:outputLabel id="lblTipo"
 										value="#{detalheAdocaoBean.adocao.tipo}">
 									</h:outputLabel>
 								</div>
 								
-								<div class="col-md-4">
-									<h:outputLabel value="Porte: "  />
-									<h:outputLabel id="lblPorte"
-										value="#{detalheAdocaoBean.adocao.porteAnimal}">
+								<div class="row" style = "padding-left: 5px;">
+									<h:outputLabel value="Sexo:&#160;"   style = "font-weight: 800 !important;"/>
+									<h:outputLabel id="lblSexo"
+										value="#{detalheAdocaoBean.sexoInformado()}">
 									</h:outputLabel>
 								</div>
 								
-								<div class="col-md-4">
-									<h:outputLabel value="Vermifugado: "  />
-									<h:panelGroup rendered="#{detalheAdocaoBean.adocao.flVermifugado}">
+								<div class="row" style = "padding-left: 5px">
+									<h:outputLabel value="Porte:&#160;" style = "font-weight: 800 !important;" />
+									<h:outputLabel id="lblPorte"
+										value="#{detalheAdocaoBean.porteInformado()}">
+									</h:outputLabel>
+								</div>
+								
+								<div class="row" style = "padding-left: 5px">
+									<h:outputLabel value="Vermifugado:&#160;"  style = "font-weight: 800 !important;"/>
+									<h:outputLabel value="#{detalheAdocaoBean.vermifugadoInformado()}" />
+									<!-- <h:panelGroup rendered="#{detalheAdocaoBean.adocao.flVermifugado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/checked-24.png" />
 									</h:panelGroup>
 									<h:panelGroup rendered="#{not detalheAdocaoBean.adocao.flVermifugado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/uncheck-24.png" />
-									</h:panelGroup>
+									</h:panelGroup> -->
 								</div>
 								
-								<div class="col-md-4">
-									<h:outputLabel value="Vacinado"  />
-									<h:panelGroup rendered="#{detalheAdocaoBean.adocao.flVacinado}">
+								<div class="row" style = "padding-left: 5px">
+									<h:outputLabel value="Vacinado:&#160;"  style = "font-weight: 800 !important;"/>
+									<h:outputLabel value="#{detalheAdocaoBean.vacinadoInformado()}" />
+									<!-- <h:panelGroup rendered="#{detalheAdocaoBean.adocao.flVacinado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/checked-24.png" />
 									</h:panelGroup>
 									<h:panelGroup rendered="#{not detalheAdocaoBean.adocao.flVacinado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/uncheck-24.png" />
-									</h:panelGroup>
+									</h:panelGroup> -->
 								</div>
 								
-								<div class="col-md-4">
-									<h:outputLabel value="Castrado"  />
-									<h:panelGroup rendered="#{detalheAdocaoBean.adocao.castrado}">
+								<div class="row" style = "padding-left: 5px">
+									<h:outputLabel value="Castrado:&#160;" style = "font-weight: 800 !important;" />
+									<h:outputLabel value="#{detalheAdocaoBean.castradoInformado()}"  />
+									<!-- <h:panelGroup rendered="#{detalheAdocaoBean.adocao.castrado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/checked-24.png" />
 									</h:panelGroup>
 									<h:panelGroup rendered="#{not detalheAdocaoBean.adocao.castrado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/uncheck-24.png" />
-									</h:panelGroup>
+									</h:panelGroup> -->
 								</div>
 								
-							</div>
+							
 						</div>
 					</div>
-				</div>
+				
+		</div>
 				
 				
-			<div class="col-md-4 box-mensagem">
+		<div class="col-md-4 box-mensagem">
 				<div class="row" style="padding-right: 4px !important;">
-					<div class="div-detalhe">
+					<div class="div-detalhe" style="background-color:#E8F1E7">
 						<div class="row">
 							<i class="fa fa-user"></i>
 							<h:outputLabel id="lblUserAnuncio" style="padding-left: 8px; font-variant: small-caps;"
 								value="#{detalheAdocaoBean.adocao.usuario.nome}">
 							</h:outputLabel>
 						</div>
-						<div class="row">
+						<!-- <div class="row">
 							<i class="fa fa-phone-square"></i>
 							<h:outputLabel id="lblTelFixo" style="padding-left: 8px; font-variant: small-caps;"
 								value="#{detalheAdocaoBean.telResFormatado}">
 							</h:outputLabel>
-						</div>
+						</div> -->
 						<div class="row">
 							<i class="fa fa-phone-square"></i> 
 							<h:outputLabel id="lblTelCelular" style="padding-left: 8px; font-variant: small-caps;"
@@ -132,10 +135,10 @@
 							<h:outputLabel id="lblEstado" style="font-variant: small-caps;"
 								value="#{detalheAdocaoBean.estado}" />	
 						</div>
-						<div class="row">
+						<!-- <div class="row">
 							<h:outputLabel id="lblBairro"
 								value="#{detalheAdocaoBean.bairro}" />
-						</div>
+						</div> -->
 					</div>
 				</div>
 					<p:messages id="msgEnviar" />
@@ -176,29 +179,29 @@
 							<h:outputLabel value="Mensagem:" for="txtMensagem" />
 						</div>
 						<div class="row">
-							<p:inputTextarea id="txtMensagem" required="true" style="width:100%;" counterTemplate="{0} characters faltando." counter="display"
-								maxlength="250" rows="6" value="#{detalheAdocaoBean.mensagem}" />
+							<p:inputTextarea id="txtMensagem" required="true" style="width:100%;" counterTemplate="{0} caracteres faltando." counter="display"
+								maxlength="600" rows="8" value="#{detalheAdocaoBean.mensagem}" />
 								<p:outputLabel id="display" />
 						</div>
 					</div>
 					<div style="padding-left: 15px;padding-right: 15px;padding-bottom: 20px;">	
 						<div class="row">
 							<p:commandButton action="#{detalheAdocaoBean.enviar}" styleClass="btn btn-success btn-lg" icon="fa fa-fw fa-send"
-								type="submit" value="Enviar Menssagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"/>
+								type="submit" value="Enviar Mensagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"/>
 						</div>
 					</div>
 
 			</div>
 
 
-		</div>
-		<div class="row">
-			<div class="row ">
-				<h:outputLabel value="Anunciado em:" for="lblDataAnuncio" />
+	</div>
+	<div class="row">
+			
+				<h:outputLabel value="Anunciado em:&#160;" style = "font-weight: bold;" for="lblDataAnuncio" />
 				<h:outputLabel id="lblDataAnuncio"
 					value="#{detalheAdocaoBean.dataAnunciada}">
 				</h:outputLabel>
-			</div>
+
 		</div>
 
 </ui:composition>

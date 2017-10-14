@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.petshow.enums.EnumAssuntoNotificacao;
+import br.com.petshow.enums.EnumSexo;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Adocao;
@@ -115,8 +116,8 @@ public class DetalheAdocaoBean extends SuperBean<Adocao>{
 		}
 	}
 	public String getTelCelFormatado(){
-		if(adocao ==null || adocao.getDddCelular() ==null || adocao.getTelefoneCelular()==null){
-			return "Não Informado";
+		if(adocao ==null || adocao.getDddCelular() ==null || adocao.getTelefoneCelular()==null ||  adocao.getTelefoneCelular() == 0  ){
+			return "Não informado";
 		}else{
 			return FormatacaoUtil.telefoneComDDD(adocao.getDddCelular(), adocao.getTelefoneCelular(), false);
 			
@@ -210,6 +211,63 @@ public class DetalheAdocaoBean extends SuperBean<Adocao>{
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	
+	public String sexoInformado(){
+		
+		if(adocao.getFlSexo() == null){
+			return "Não informado";
+		}
+		if(adocao.getFlSexo() == EnumSexo.MACHO){
+			return "MACHO";
+		}
+		if(adocao.getFlSexo() == EnumSexo.FEMEA){
+			return "FÊMEA";
+		}
+		return "Não informado";
+	}
+	
+	public String porteInformado(){
+		
+		if(adocao.getPorteAnimal() == null){
+			return "Não informado";
+		}
+		
+		return adocao.getPorteAnimal().toString();
+		
+	}
+	public String vacinadoInformado(){
+		
+		
+		if(adocao.isFlVacinado() ){
+			return "Sim";
+		}else {
+			return "Não informado";
+		}
+		
+		
+	}
+	public String vermifugadoInformado(){
+		
+		
+		if(adocao.isFlVermifugado() ){
+			return "Sim";
+		}else {
+			return "Não informado";
+		}
+		
+		
+	}
+	public String castradoInformado(){
+		
+		
+		if(adocao.isCastrado() ){
+			return "Sim";
+		}else {
+			return "Não informado";
+		}
+		
+		
 	}
 	
 }
