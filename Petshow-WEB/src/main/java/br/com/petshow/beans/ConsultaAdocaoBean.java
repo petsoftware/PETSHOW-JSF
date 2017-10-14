@@ -24,8 +24,10 @@ import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Cidade;
 import br.com.petshow.model.Estado;
+import br.com.petshow.model.Racas;
 import br.com.petshow.objects.query.AdocaoQuery;
 import br.com.petshow.web.util.CallAnimalRest;
+import br.com.petshow.web.util.CallRacasRest;
 
 @ManagedBean
 @ViewScoped
@@ -42,6 +44,7 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	private List<Adocao> adocoesDisponiveis;
 	private List<Adocao> adocoesDisponiveisPorPerfil;
 	private CallAnimalRest restAnimal;
+	private CallRacasRest callRacasRest;
 	@ManagedProperty(value="#{autoCompleteBean}")
     private AutoCompleteBean autoCompleteBean;
 	private List<String> fotos;
@@ -51,14 +54,15 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 	private EnumTipoAnimal animal;
 	private EnumSexo sexo;
 	private EnumFaseVida fase;
-	
+	private List<Racas> racas;
 	
 	
 	
 	@PostConstruct
 	public void init() {
-		this.adocoes = new ArrayList<Adocao>();
-		restAnimal = new CallAnimalRest();
+		this.adocoes 	= new ArrayList<Adocao>();
+		restAnimal 		= new CallAnimalRest();
+		callRacasRest	= new CallRacasRest();
 		obterAdocoesDisponiveis();
 		obterAdocoesPorPerfil();
 		setTotalRows(getAdocoesDisponiveis().size());
@@ -238,4 +242,18 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 		return EnumPorteAnimal.values();
 	}
 	
+	public void findRacasPorTipoAnimal(EnumTipoAnimal tipoAnimal) {
+		try {
+			List<Racas> racas = callRacasRest.getListRacasPorTipoDeAnimal(tipoAnimal);
+			setRacas(racas);
+		} catch (ExceptionErroCallRest | ExceptionValidation e) {
+			setRacas(new ArrayList<>());
+		}
+	}
+	public List<Racas> getRacas() {
+		return racas;
+	}
+	public void setRacas(List<Racas> racas) {
+		this.racas = racas;
+	}
 }

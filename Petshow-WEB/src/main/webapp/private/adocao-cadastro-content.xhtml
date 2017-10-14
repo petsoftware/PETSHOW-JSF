@@ -46,25 +46,36 @@
 			</div>
 			<div class="row"><p:outputLabel value="Tipo de Animal"/></div>
 			<div class="row">
-			<div class="form-group">
-				<p:selectOneMenu id="cbAnimal" style="width: 100%;"
-					value="#{adocaoBean.adocao.tipo}" required="true" requiredMessage="Por favor informe qual o tipo de animal.">
-					<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
-						itemValue="" noSelectionOption="true" />
-					<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
-				</p:selectOneMenu>
+				<div class="form-group">
+					<p:selectOneMenu id="cbAnimal" style="width: 100%;"
+						value="#{adocaoBean.adocao.tipo}" required="true" requiredMessage="Por favor informe qual o tipo de animal.">
+						<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
+							itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
+						<p:ajax event="change" update="cboRacas" listener="#{consultaAdocaoBean.findRacasPorTipoAnimal(adocaoBean.adocao.tipo)}" />
+					</p:selectOneMenu>
+				</div>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<p:selectOneMenu id="cboRacas" style="width: 100%;" converter="racasConverter"
+						value="#{adocaoBean.adocao.raca}" required="false" requiredMessage="Por favor informe qual o tipo de animal.">
+						<f:selectItem itemLabel="Selecione uma raça"
+							itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{consultaAdocaoBean.racas}" var="raca" itemLabel="#{raca.descricao}" itemValue="#{raca}" />
+					</p:selectOneMenu>
 				</div>
 			</div>
 			<div class="row"><p:outputLabel value="Fase da Vida"/></div>
 			<div class="row">
-			<div class="form-group">
-				<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
-					style="width: 100% !important;">
-					<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
-						noSelectionOption="true" />
-					<f:selectItems value="#{consultaAdocaoBean.fases}" />
-				</p:selectOneMenu>
-			</div>	
+				<div class="form-group">
+					<p:selectOneMenu id="cbFase" value="#{adocaoBean.adocao.fase}"
+						style="width: 100% !important;">
+						<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{consultaAdocaoBean.fases}" />
+					</p:selectOneMenu>
+				</div>	
 			</div>
 			<div class="row"><p:outputLabel value="Sexo"/> </div>
 			<div class="row">
