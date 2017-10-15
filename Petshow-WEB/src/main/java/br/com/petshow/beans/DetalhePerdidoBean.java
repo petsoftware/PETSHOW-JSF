@@ -244,5 +244,24 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 	public void setEncontrado(boolean encontrado) {
 		this.encontrado = encontrado;
 	}
-
+	public String racaInformado(){
+		
+		if(perdido.getRaca() == null){
+			return "Não informada";
+		}
+	
+		return perdido.getRaca().getDescricao();
+		
+		
+	}
+	public String corInformado(){
+		
+		if(perdido.getTpCorPrincipal() == null){
+			return "Não informada";
+		}
+	
+		return perdido.getTpCorPrincipal().getDesc();
+		
+		
+	}
 }

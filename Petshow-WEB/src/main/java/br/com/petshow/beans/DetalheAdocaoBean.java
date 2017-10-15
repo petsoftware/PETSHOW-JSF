@@ -271,4 +271,15 @@ public class DetalheAdocaoBean extends SuperBean<Adocao>{
 		
 	}
 	
+	public String racaInformado(){
+		
+		if(adocao.getRaca() == null){
+			return "Não informada";
+		}
+	
+		return adocao.getRaca().getDescricao();
+		
+		
+	}
+	
 }

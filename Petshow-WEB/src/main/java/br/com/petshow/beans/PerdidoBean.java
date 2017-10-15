@@ -261,4 +261,10 @@ public class PerdidoBean extends SuperBean<Perdido> {
 	public EnumSexo[] getSexos(){
 		return EnumSexo.values();
 	}
+	
+	
+	
+	
+	
+
 }

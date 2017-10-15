@@ -41,7 +41,7 @@
 							
 							
 								<p:galleria value="#{detalheAdocaoBean.adocao.fotos}" var="foto"
-							panelWidth="342"  panelHeight="216"  style="align-items: center;" class ="d-sm-block d-md-none d-lg-none d-xl-none">
+							panelWidth="342"  panelHeight="216" class ="d-sm-block d-md-none d-lg-none d-xl-none">
 							<h:graphicImage url="data:image/jpg;base64,#{foto}"
 								style="width:100%;height:100%"  id="visualizacao2" title="" />
 							</p:galleria>
@@ -54,33 +54,39 @@
 						
 						
 						<div class="col-md-4  box-mensagem"  style = "background-color:#DDFFDC;font-size: 13px;padding-top: 10px;padding-bottom: 10px; margin: 0px 10px 15px 15px;">
-								<div class="row d-sm-block d-md-none d-lg-none d-xl-none" style = "padding-left: 20px">
-									<h:outputLabel value="Caracteristicas do animal"  style = "font-weight: 800 !important;"/>
+								<div class="row" style = "padding-left: 20px">
+									<h:outputLabel value="Caracteristicas do animal"  style = "font-weight: bold !important;"/>
 								</div>
 								
 								<div class="row" style = "padding-left: 20px">
-									<h:outputLabel value="Tipo:&#160;"  style = "font-weight: 800 !important;"/>
+									<h:outputLabel value="Tipo:&#160;"  style = "font-weight: 800 !important;color:#28a745;"/>
 									<h:outputLabel id="lblTipo"
 										value="#{detalheAdocaoBean.adocao.tipo}">
 									</h:outputLabel>
 								</div>
+								<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Raça:&#160;" style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblRaca"
+											value="#{detalheAdocaoBean.racaInformado()}">
+										</h:outputLabel>
+									</div>
 								
 								<div class="row" style = "padding-left: 20px;">
-									<h:outputLabel value="Sexo:&#160;"   style = "font-weight: 800 !important;"/>
+									<h:outputLabel value="Sexo:&#160;"   style = "font-weight: 800 !important;color:#28a745;"/>
 									<h:outputLabel id="lblSexo"
 										value="#{detalheAdocaoBean.sexoInformado()}">
 									</h:outputLabel>
 								</div>
 								
 								<div class="row" style = "padding-left: 20px">
-									<h:outputLabel value="Porte:&#160;" style = "font-weight: 800 !important;" />
+									<h:outputLabel value="Porte:&#160;" style = "font-weight: 800 !important;color:#28a745;" />
 									<h:outputLabel id="lblPorte"
 										value="#{detalheAdocaoBean.porteInformado()}">
 									</h:outputLabel>
 								</div>
 								
 								<div class="row" style = "padding-left: 20px">
-									<h:outputLabel value="Vermifugado:&#160;"  style = "font-weight: 800 !important;"/>
+									<h:outputLabel value="Vermifugado:&#160;"  style = "font-weight: 800 !important;color:#28a745;"/>
 									<h:outputLabel value="#{detalheAdocaoBean.vermifugadoInformado()}" />
 									<!-- <h:panelGroup rendered="#{detalheAdocaoBean.adocao.flVermifugado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/checked-24.png" />
@@ -91,7 +97,7 @@
 								</div>
 								
 								<div class="row" style = "padding-left: 20px">
-									<h:outputLabel value="Vacinado:&#160;"  style = "font-weight: 800 !important;"/>
+									<h:outputLabel value="Vacinado:&#160;"  style = "font-weight: 800 !important;color:#28a745;"/>
 									<h:outputLabel value="#{detalheAdocaoBean.vacinadoInformado()}" />
 									<!-- <h:panelGroup rendered="#{detalheAdocaoBean.adocao.flVacinado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/checked-24.png" />
@@ -102,7 +108,7 @@
 								</div>
 								
 								<div class="row" style = "padding-left: 20px">
-									<h:outputLabel value="Castrado:&#160;" style = "font-weight: 800 !important;" />
+									<h:outputLabel value="Castrado:&#160;" style = "font-weight: 800 !important;color:#28a745;" />
 									<h:outputLabel value="#{detalheAdocaoBean.castradoInformado()}"  />
 									<!-- <h:panelGroup rendered="#{detalheAdocaoBean.adocao.castrado}">
 										<img class="img-fluid"  src="#{request.contextPath}/resources/images/checked-24.png" />

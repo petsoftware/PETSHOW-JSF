@@ -34,66 +34,96 @@
 					</div>
 				</div>
 				<div class="row">
-						<div class="col-md-8">
+					<div class="col-md-8">
 							<div class="row">
-								<div align="center">
-									<p:galleria value="#{detalhePerdidoBean.perdido.fotos}" var="foto"
-										panelWidth="500" panelHeight="313">
-										<h:graphicImage url="data:image/jpg;base64,#{foto}"
-											style="width:100%;height:100%" id="visualizacao" title="" />
+								<div class="col-md-11" style=" margin-top: 20px;">
+									
+									<p:galleria value="#{detalhePerdidoBean.perdido.fotos}" var="foto"   class ="d-none d-md-block" panelWidth="600"  panelHeight="400" >
+										<h:graphicImage url="data:image/jpg;base64,#{foto}" style="width:100%;height:100% "  id="visualizacao1" title="" />
+									</p:galleria>
+							
+									<p:galleria value="#{detalhePerdidoBean.perdido.fotos}" var="foto" 	panelWidth="342"  panelHeight="216"  class ="d-sm-block d-md-none d-lg-none d-xl-none">
+										<h:graphicImage url="data:image/jpg;base64,#{foto}"	style="width:100%;height:100%"  id="visualizacao2" title="" />
 									</p:galleria>
 								</div>
+												
 							</div>
 							<div class="row">
-								<h:outputLabel id="txtDesc"
-									value="#{detalhePerdidoBean.perdido.descAcontecimento}" />
-							</div>
-							<div class="row">
-								<div class="col-md-8 box-mensagem">
-									<div class="row">
-										
-										<div class="col-md-6">
-											<h:outputLabel value="Sexo: " style="color:#28a745;" />
-											<h:outputLabel id="lblSexo"
-												value="#{detalhePerdidoBean.perdido.flSexo}">
-											</h:outputLabel>
-										</div>
-										
-										<div class="col-md-6">
-											<h:outputLabel value="Tipo: "  style="color:#28a745;"/>
-											<h:outputLabel id="lblTipo"
-												value="#{detalhePerdidoBean.perdido.tpAnimal}">
-											</h:outputLabel>
-										</div>
-										
-										<div class="col-md-6">
-											<h:outputLabel value="Cor predominante: "  style="color:#28a745;"/>
-											<h:outputLabel id="lblCorPred"
-												value="#{detalhePerdidoBean.perdido.tpCorPrincipal}">
-											</h:outputLabel>
-										</div>
-										
-									</div>
+								
+								<div class="col-md-7">
+									<h:outputLabel id="txtDesc" value="#{detalhePerdidoBean.perdido.descAcontecimento}" />
 								</div>
+						
+						
+								<div class="col-md-4  box-mensagem"  style = "background-color:#DDFFDC;font-size: 13px;padding-top: 10px;padding-bottom: 10px; margin: 0px 10px 15px 15px;">
+									<div class="row"	style="padding-left: 20px">
+										<h:outputLabel value="Caracteristicas do animal"
+											style=" font-weight: bold !important;" />
+									</div>
+									
+									
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Data:&#160;" style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblDataAcontecimento"  value="#{detalhePerdidoBean.perdido.dtPerdidoAchado}">
+											<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
+										</h:outputLabel>
+									</div>
+	
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Tipo:&#160;" style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblTipo"
+											value="#{detalhePerdidoBean.perdido.tpAnimal}">
+										</h:outputLabel>
+									</div>
+									
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Raça:&#160;" style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblRaca"
+											value="#{detalhePerdidoBean.racaInformado()}">
+										</h:outputLabel>
+									</div>
+	
+	
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Sexo:&#160;" style="font-weight: 800 !important; color:#28a745; " />
+										<h:outputLabel id="lblSexo"
+											value="#{detalhePerdidoBean.perdido.flSexo}">
+										</h:outputLabel>
+									</div>
+									
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Cor:&#160;"
+											style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblCorPred"
+											value="#{detalhePerdidoBean.corInformado()}">
+										</h:outputLabel>
+									</div>
+											
+								</div>			
+									
 							</div>
-						</div>
+							
+					</div>
 						
 						
-					<div class="col-md-4 box-mensagem">
+					<div class="col-md-4" style="padding-top: 5px; margin-top: 20px;">
 						<div class="row" style="padding-right: 4px !important;">
-							<div class="div-detalhe">
+							<div class="div-detalhe"  style="background-color:#E8F1E7">
+								<div class="row d-sm-block d-md-none d-lg-none d-xl-none">
+									<h:outputLabel value="Contato"   style="padding-left: 8px; font-variant: small-caps;"/>
+								</div>
 								<div class="row">
 									<i class="fa fa-user"></i>
 									<h:outputLabel id="lblUserAnuncio" style="padding-left: 8px; font-variant: small-caps;"
 										value="#{detalhePerdidoBean.perdido.usuario.nome}">
 									</h:outputLabel>
 								</div>
-								<div class="row">
+								<!-- <div class="row">
 									<i class="fa fa-phone-square"></i> 
 									<h:outputLabel id="lblTelFixo" style="padding-left: 8px; font-variant: small-caps;"
 										value="#{detalhePerdidoBean.telResFormatado}">
 									</h:outputLabel>
-								</div>
+								</div> -->
 								<div class="row">
 									<i class="fa fa-phone-square"></i> 
 									<h:outputLabel id="lblTelCelular" style="padding-left: 8px; font-variant: small-caps;"
@@ -114,6 +144,7 @@
 								</div>
 							</div>
 						</div>
+							<div class="box-mensagem" style="padding: 15px">
 							<p:messages id="msgEnviar" />
 							<div style="padding-left: 15px">
 								<div class="row">
@@ -121,7 +152,7 @@
 								</div>
 								<div class="row">
 									<p:inputText id="txtNome" rendered="#{not detalhePerdidoBean.temUsuarioLogado}" required="true" maxlength="40"
-										value="#{detalhePerdidoBean.nome}" style="width:90%;"/>
+										value="#{detalhePerdidoBean.nome}" style="width:95%;"/>
 								</div>
 							</div>
 							<div style="padding-left: 15px">
@@ -131,7 +162,7 @@
 								<div class="row">
 									<p:inputText rendered="#{not detalhePerdidoBean.temUsuarioLogado}" id="txtEmail" required="true" maxlength="70"
 										value="#{detalhePerdidoBean.email}"
-										requiredMessage="informe seu e-mail!" style="width:90%;"
+										requiredMessage="informe seu e-mail!" style="width:95%;"
 										validatorMessage="E-mail não está em formato válido!">
 										<f:validateRegex
 											pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -152,30 +183,30 @@
 									<h:outputLabel value="Mensagem:" for="txtMensagem" />
 								</div>
 								<div class="row">
-									<p:inputTextarea id="txtMensagem" required="true" style="width:100%;" counterTemplate="{0} characters faltando." counter="display"
-										maxlength="250" rows="6" value="#{detalhePerdidoBean.mensagem}" />
+									<p:inputTextarea id="txtMensagem" required="true" style="width:95%;" counterTemplate="{0} caracteres faltando." counter="display"
+										maxlength="600" rows="9" value="#{detalhePerdidoBean.mensagem}" />
 										<p:outputLabel id="display" />
 								</div>
 							</div>
 							<div style="padding-left: 15px;padding-right: 15px;padding-bottom: 20px;">	
 								<div class="row">
 									<p:commandButton action="#{detalhePerdidoBean.enviar}" styleClass="btn btn-success btn-lg button" icon="fa fa-fw fa-send"
-										type="submit" value="Enviar Menssagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"/>
+										type="submit" value="Enviar Mensagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"/>
 								</div>
 							</div>
-
+						</div>
 					</div>
 
 
 				</div>
-				<div class="row">
-					<div class="row ">
-						<h:outputLabel value="Anunciado em:" for="lblDataAnuncio" />
+				
+					<div class="row " style="padding-top: 10px; padding-left: 15px;">
+						<h:outputLabel value="Anunciado em:&#160;" for="lblDataAnuncio" />
 						<h:outputLabel id="lblDataAnuncio"
 							value="#{detalhePerdidoBean.dataAnunciada}">
 						</h:outputLabel>
 					</div>
-				</div>
+			
 			</div>
 		</section>
 
