@@ -19,11 +19,13 @@
 			
 			<p:commandButton id="btnLimpar" style="margin-right:4px"
 				styleClass="btn btn-primary btn-lg" icon="fa fa-refresh"
-				title="Limpar Anúncio?" value="Novo"   action="#{adocaoBean.novo}"
-				type="submit" ajax="false"
+				title="Limpar Anúncio?" value="Novo"   actionListener="#{adocaoBean.novo}"
+				ajax="true" immediate="true" update="@form"
 				onstart="paceStart();" onclick="paceStart();"
 				oncomplete="Pace.restart();" 
-				/>
+				>
+				<p:ajax listener="#{adocaoBean.novo}" update="@form"/>
+				</p:commandButton>
 			<p:commandButton id="btnSalvar" style="margin-right:4px"
 				styleClass="btn btn-info btn-lg" icon="fa fa-floppy-o"
 				title="Salvar Anúncio?" value="Salvar"
