@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 
 
@@ -31,7 +32,7 @@
 		<div class="col-md-3">
 			<div class="row"><p:outputLabel value="Achado ou Perdido?"/></div>
 			<div class="row">
-				<p:selectOneMenu id="cboAcontecimento" value="#{perdidoBean.perdido.flAcontecimento}" required="false" style="width: 100%;" >
+				<p:selectOneMenu id="cboAcontecimento" value="#{perdidoBean.perdido.flAcontecimento}" required="false" style="width: 100%;" a:autofocus="true">
 					<f:selectItem itemLabel="Achado ou perdido" itemValue="#{null}"/>
 					<f:selectItems  value="#{perdidoBean.achadoPerdido}" />
 					<p:ajax event="change" update="@form" listener="#{perdidoBean.adequarForm}" />
@@ -40,7 +41,7 @@
 			
 			<div class="row"> <p:outputLabel value="#{perdidoBean.descricao}"/></div>
 			<div class="row">
-				<p:inputText placeholder="NOME DO SEU PET" maxlength="15"
+				<p:inputText placeholder="NOME DO SEU PET" maxlength="15" id="txtNome" a:autofocus="true"
 					value="#{perdidoBean.perdido.nome}" required="false" requiredMessage="Favor informar o nome do PET"/>
 			</div>
 					
@@ -229,6 +230,7 @@
 								ajax="true"
 								process="@this"
 								update="@form"
+								oncomplete="setFocus('txtNome')"
 								>
 									<f:ajax render="@form"/>
 								</p:commandButton>

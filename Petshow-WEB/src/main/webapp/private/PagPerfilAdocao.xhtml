@@ -43,6 +43,30 @@
 							<!-- O layout da Tela comeca aqui -->
 							<!-- Template para criar campo e lable -->
 						<div class="ui-grid-row">
+				    		<p:outputLabel value="Estado" />
+				    	</div>
+						<div class="row">
+							<div class="col-md-12">
+								 <p:selectOneMenu id="cboEstado" value="#{perfilAdocaoBean.perfilAdocao.uf}"  style="width: 50%;" required="true" requiredMessage="Por favor nos informe o seu Estado">
+									<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
+									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perfilAdocaoBean.perfilAdocao.uf)}" />
+								 </p:selectOneMenu>
+							</div>
+						</div>
+						<div class="ui-grid-row">
+					    	<p:outputLabel value="Cidade" />
+					    </div>
+						<div class="row">
+							<div class="col-md-12">
+								 <p:selectOneMenu id="cbCidade" value="#{perfilAdocaoBean.perfilAdocao.cidade}" converter="cidadeConverter" style="width: 50%;"
+									required="true"  requiredMessage="Pro favor informe a Cidade">
+									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+									<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+								</p:selectOneMenu>
+							</div>
+						</div>
+						<div class="ui-grid-row">
 					    	<p:outputLabel value="Sexo do animal" />
 					    </div>
 					   	<div class="ui-grid-row">
@@ -77,28 +101,14 @@
 				 	     	</p:selectOneMenu>
 						</div>
 						<div class="ui-grid-row">
-				    		<p:outputLabel value="Estado" />
-				    	</div>
-						<div class="row">
-							<div class="col-md-12">
-								 <p:selectOneMenu id="cboEstado" value="#{perfilAdocaoBean.perfilAdocao.uf}"  style="width: 50%;" required="false">
-									<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
-									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
-										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(perfilAdocaoBean.perfilAdocao.uf)}" />
-								 </p:selectOneMenu>
-							</div>
-						</div>
-						<div class="ui-grid-row">
-					    	<p:outputLabel value="Cidade" />
-					    </div>
-						<div class="row">
-							<div class="col-md-12">
-								 <p:selectOneMenu id="cbCidade" value="#{perfilAdocaoBean.perfilAdocao.cidade}" converter="cidadeConverter" style="width: 50%;"
-									required="false" >
-									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
-									<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
-								</p:selectOneMenu>
-							</div>
+							<span class="span-attention">
+								<strong>
+									<h:outputText value="Não quero mais receber notificações" />
+						        </strong>
+						        <p:selectBooleanCheckbox value="#{perfilAdocaoBean.flNaoReceberNotificacao}">
+						            <p:ajax  listener="#{perfilAdocaoBean.salvar}" />
+						        </p:selectBooleanCheckbox>
+					        </span>
 						</div>
 						<!-- Fim das divs que definem os layouts  -->	
 					</div>

@@ -34,24 +34,10 @@ $(document).ready(function() {
 	menuToggle.addClass("active");
 	menuToggle.prop("title", "Recolher Menu?");
 	menuToggle.find("i").removeClass("fa-angle-double-right").addClass("fa-angle-double-left");
-		
-	/*var collapsed = getCookie("collapsed");
-	var menuToggle = $("#menu-toggle");
-		
-    if (collapsed === "false") {    	
-    	
-    	menuToggle.addClass("active");
-    	menuToggle.prop("title", "Recolher Menu?");
-    	menuToggle.find("i").removeClass("fa-angle-double-right").addClass("fa-angle-double-left");
-    	    	        
-    } else {
-    	
-    	$("#wrapper").addClass("toggled");
-    	
-    	menuToggle.removeClass("active");
-    	menuToggle.prop("title", "Expandir Menu?");
-    	menuToggle.find("i").removeClass("fa-angle-double-left").addClass("fa-angle-double-right");
-    	
-    }*/
     		
 });
+
+
+function setFocus(idFormElement) {
+    document.getElementById(idFormElement).focus();
+}

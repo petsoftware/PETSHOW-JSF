@@ -37,7 +37,7 @@ public class CallPerfilAdocaoRest extends RestUtilCall<PerfilAdocao> {
 	}
 	public static long getCountAnimalDisponiveisAdocaoPorPerfil(Usuario usuario) throws ExceptionErroCallRest, ExceptionValidation{
 		client = new ResteasyClientBuilder().build();
-		target= client.target(URL_BASE+RestPathConstants.PATH_PERFIL_ADOCAO+RestPathConstants.GET+"/count/"+usuario.getId());
+		target= client.target(URL_BASE+RestPathConstants.PATH_PERFIL_ADOCAO+"/"+RestPathConstants.GET+"/count/"+usuario.getId());
 		long count = 0;
 		try{
 			count =  target.request().get(Long.class);

@@ -3,7 +3,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>PetmOOby</title>
@@ -20,6 +21,7 @@
 			styleClass="ui-confirmdialog-no btn btn-danger btn-lg"
 			icon="ui-icon-close" />
 	</p:confirmDialog>
+	
 	<f:metadata>  
    		<f:event type="preRenderView"  listener="#{enderecoBean.preencherComboCidade(adocaoBean.adocao.endereco.uf)}" />
 	</f:metadata>
@@ -30,8 +32,8 @@
 			</div>
 			<div class="row">
 				<div class="form-group">
-					<p:inputText placeholder="Nome" maxlength="20" required="false" requiredMessage="Por favor informe o nome do animal"
-						value="#{adocaoBean.adocao.titulo}" />
+					<p:inputText id="txtNome" placeholder="Nome" maxlength="20" required="false" requiredMessage="Por favor informe o nome do animal"
+						value="#{adocaoBean.adocao.titulo}" a:autofocus="true" />
 				</div>
 			</div>
 			
@@ -272,6 +274,7 @@
 								ajax="true"
 								process="@this"
 								update="@form"
+								oncomplete="setFocus('txtNome')"
 								>
 									<f:ajax render="@form"/>
 								</p:commandButton>
@@ -317,7 +320,7 @@
 							<p:commandButton actionListener="#{adocaoBean.marcarComoAdotado(adocao)}"
 								type="submit" value="Já Foi adotado?" id="btnAdotar" styleClass="btn btn-primary"
 								rendered="#{not adocao.flAdotado}" title="Marcar como animal adotado" 
-								ajax="true"
+								ajax="true" 
 								process="@this"
 								update="grid"
 							/>
