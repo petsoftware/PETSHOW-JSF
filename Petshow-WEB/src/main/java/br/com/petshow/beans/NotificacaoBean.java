@@ -95,6 +95,7 @@ public class NotificacaoBean  extends SuperBean<Notificacao>{
 		restServico 	= new CallServicoRest();
 		animais 		= new ArrayList<Animal>();
 		getServicosBanco();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 
 	public void eventoConsultaAnimais(SelectEvent event) {

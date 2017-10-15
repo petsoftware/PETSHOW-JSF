@@ -12,11 +12,17 @@ import javax.faces.context.FacesContext;
 
 import org.primefaces.event.FileUploadEvent;
 
+import br.com.petshow.enums.EnumFaseVida;
+import br.com.petshow.enums.EnumPorteAnimal;
+import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Adocao;
+import br.com.petshow.model.Racas;
 import br.com.petshow.util.CollectionUtil;
 import br.com.petshow.web.util.CallAdocaoRest;
+import br.com.petshow.web.util.CallRacasRest;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
@@ -27,6 +33,8 @@ public class AdocaoBean extends SuperBean<Adocao>{
 	private Adocao adocao;
 	private List<Adocao> adocoes;
 	private CallAdocaoRest callAdocaoRest;
+	private List<Racas> racas;
+	private CallRacasRest callRacasRest;
 
 	public List<Adocao> getAdocoes() {
 		return adocoes;
@@ -50,9 +58,15 @@ public class AdocaoBean extends SuperBean<Adocao>{
 
 	@PostConstruct
 	public void init() {
-		callAdocaoRest = new CallAdocaoRest();
+		callAdocaoRest  = new CallAdocaoRest();
+		callRacasRest	= new CallRacasRest();
 		obterAdocoesAnunciadasDoUsuario();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 		novaAdocao();
+	}
+	
+	public EnumTipoAnimal[] getTiposAnimais(){
+		return EnumTipoAnimal.values();
 	}
 	
 	public List<Adocao> obterAdocoesAnunciadasDoUsuario() {
@@ -185,5 +199,34 @@ public class AdocaoBean extends SuperBean<Adocao>{
 			return true;
 		}
 		return false;
+	}
+	
+	public void findRacasPorTipoAnimal(EnumTipoAnimal tipoAnimal) {
+		try {
+			List<Racas> racas = callRacasRest.getListRacasPorTipoDeAnimal(tipoAnimal);
+			setRacas(racas);
+		} catch (ExceptionErroCallRest | ExceptionValidation e) {
+			setRacas(new ArrayList<>());
+		}
+	}
+
+	public List<Racas> getRacas() {
+		return racas;
+	}
+
+	public void setRacas(List<Racas> racas) {
+		this.racas = racas;
+	}
+	
+	public EnumFaseVida[] getFases(){
+		return EnumFaseVida.values();
+	}
+	
+	public EnumSexo[] getSexos(){
+		return EnumSexo.values();
+	}
+	
+	public EnumPorteAnimal[] getPortes() {
+		return EnumPorteAnimal.values();
 	}
 }

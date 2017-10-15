@@ -29,7 +29,7 @@
 		<!-- /.panel-heading -->
 		<div class="panel-body">
 			<ul id="ulForm" class="chat">
-				<p:outputLabel value="Não existe mensagens não lidas!" rendered = "#{not notificacoesBean.isTemMensagensNaoLidas()}"/>
+				<p:outputLabel value="Não existe mensagens não lidas!" rendered = "#{not notificacoesBean.temMensagensNaoLidas}"/>
 				<!-- Repetir para todas as notificacoes -->
 				<ui:repeat var="notificacao" value="#{notificacoesBean.notificacoes}">
 					<li class="left clearfix">

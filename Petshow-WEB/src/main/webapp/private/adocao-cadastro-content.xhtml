@@ -51,8 +51,8 @@
 						value="#{adocaoBean.adocao.tipo}" required="true" requiredMessage="Por favor informe qual o tipo de animal.">
 						<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
 							itemValue="#{null}" noSelectionOption="true" />
-						<f:selectItems value="#{consultaAdocaoBean.tiposAnimais}" />
-						<p:ajax event="change" update="cboRacas" listener="#{consultaAdocaoBean.findRacasPorTipoAnimal(adocaoBean.adocao.tipo)}" />
+						<f:selectItems value="#{adocaoBean.tiposAnimais}" />
+						<p:ajax event="change" update="cboRacas" listener="#{adocaoBean.findRacasPorTipoAnimal(adocaoBean.adocao.tipo)}" />
 					</p:selectOneMenu>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 						value="#{adocaoBean.adocao.raca}" required="false" requiredMessage="Por favor informe qual o tipo de animal.">
 						<f:selectItem itemLabel="Selecione uma raça"
 							itemValue="#{null}" noSelectionOption="true" />
-						<f:selectItems value="#{consultaAdocaoBean.racas}" var="raca" itemLabel="#{raca.descricao}" itemValue="#{raca}" />
+						<f:selectItems value="#{adocaoBean.racas}" var="raca" itemLabel="#{raca.descricao}" itemValue="#{raca}" />
 					</p:selectOneMenu>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 						style="width: 100% !important;">
 						<f:selectItem itemLabel="#{placeHolderBean.selFase}" itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems value="#{consultaAdocaoBean.fases}" />
+						<f:selectItems value="#{adocaoBean.fases}" />
 					</p:selectOneMenu>
 				</div>	
 			</div>
@@ -85,7 +85,7 @@
 					style="width: 100%;">
 					<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
 						itemValue="" noSelectionOption="true" />
-					<f:selectItems value="#{consultaAdocaoBean.sexos}" />
+					<f:selectItems value="#{adocaoBean.sexos}" />
 				</p:selectOneMenu>
 				</div>
 			</div>
@@ -96,7 +96,7 @@
 					style="width: 100%;">
 					<f:selectItem itemLabel="Porte do Animal"
 						itemValue="" noSelectionOption="true" />
-					<f:selectItems value="#{consultaAdocaoBean.portes}" />
+					<f:selectItems value="#{adocaoBean.portes}" />
 				</p:selectOneMenu>
 				</div>
 			</div>

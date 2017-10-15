@@ -33,5 +33,20 @@ public class CallNotificacaoRest extends RestUtilCall<Notificacao>{
 		return (List<Notificacao>)entidades;
 	
 	}
+	
+	public static long getCountNotificacoesUsuario(long userId) throws ExceptionErroCallRest, ExceptionValidation{
+		String url       = "notificacao/usuario/count/"+userId;
+		client           = new ResteasyClientBuilder().build();
+		target           = client.target(URL_BASE+url);
+		long count		 = 0;
+		try{
+			count =  target.request().get(Long.class);
+		}catch(Exception ex){
+			throw new ExceptionErroCallRest("Failed: HTTP error code:"+ex.getMessage());
+		}
+		
+		return count;
+	
+	}
 
 }

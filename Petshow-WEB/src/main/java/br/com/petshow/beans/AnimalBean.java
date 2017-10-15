@@ -54,6 +54,7 @@ public class AnimalBean extends SuperBean<Animal> {
 	public void init() {
 		animal = new Animal();
 		rest = new RestUtilCall<>();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 
 	public Animal getAnimal() {

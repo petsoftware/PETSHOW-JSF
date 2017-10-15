@@ -15,6 +15,7 @@ public class PerfilDeAdocaoBean extends SuperBean<Adocao> {
 	public void init() {
 		
 		getAdocoesNoPerfil();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 
 	private void getAdocoesNoPerfil() {

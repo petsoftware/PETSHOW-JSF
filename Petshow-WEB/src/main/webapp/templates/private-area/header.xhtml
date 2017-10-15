@@ -53,10 +53,10 @@
 						Site</a></li>
 				<li class="dropdown">
 					<a class="nav-link dropdown-toggle mr-lg-2"	data-toggle="dropdown" href="#"> 
-						<h:panelGroup rendered="#{not notificacoesBean.renderNotificacao}">
+						<h:panelGroup rendered="#{not notificacoesCountBean.renderNotificacao}">
 							<i class="fa fa-bell fa-fw"></i>
 						</h:panelGroup>
-						<h:panelGroup rendered="#{notificacoesBean.renderNotificacao}">
+						<h:panelGroup rendered="#{notificacoesCountBean.renderNotificacao}">
 							<i class="fa fa-bell faa-ring animated" style="color: red;"></i>
             			</h:panelGroup>
 						<i class="fa fa-caret-down"></i>	
@@ -65,14 +65,14 @@
 						
 						<li><a href="#{request.contextPath}/private/private-notificacoes.xhtml">
 								<div>
-									<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas == 0}">
+									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas == 0}">
 										<i class="fa fa-envelope fa-fw"></i> 
 									</h:panelGroup>
-									<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas > 0}">
+									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
 										<i style="color: red;" class="fa fa-envelope faa-horizontal animated"></i>
 									</h:panelGroup>
 									Mensagens 
-									<h:panelGroup rendered="#{notificacoesBean.qtMsgNaoLidas > 0}">
+									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
 										<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
 									</h:panelGroup>	
 								</div>
@@ -81,15 +81,15 @@
 						</a></li>
 						<li><a href="#{request.contextPath}/private/private-adocao-perfil.xhtml">
 								<div>
-									<h:panelGroup rendered="#{notificacoesBean.qtAdocoesPerfil == 0}">
+									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil == 0}">
 										<i class="fa fa-heart fa-fw"></i> 
 									</h:panelGroup>
-									<h:panelGroup rendered="#{notificacoesBean.qtAdocoesPerfil > 0}">
+									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
 										<i style="color: red;" class="fa fa-heart faa-pulse animated"></i>
 									</h:panelGroup>
 									Adoções no Perfil
-									<h:panelGroup rendered="#{notificacoesBean.qtAdocoesPerfil > 0}">
-										<span style="background-color: red !important;" class="badge badge-notify">#{notificacoesBean.qtAdocoesPerfil}</span>
+									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+										<span style="background-color: red !important;" class="badge badge-notify">#{notificacoesCountBean.qtAdocoesPerfil}</span>
 									</h:panelGroup>	
 								</div>
 								

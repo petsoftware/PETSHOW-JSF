@@ -46,6 +46,7 @@ public class ConsultaEncontradoBean extends SuperBean<Perdido>{
 		this.perdidos 	= new ArrayList<Perdido>();
 		callPerdidoRest = new CallPerdidoRest();
 		obterAnimaisEncontrados();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 
 	public List<Perdido> getPerdidosBanco() {

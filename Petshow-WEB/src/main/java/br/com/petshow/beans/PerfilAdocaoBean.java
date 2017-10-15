@@ -28,6 +28,7 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 		perfilAdocaoRest = new CallPerfilAdocaoRest();
 		try {
 			perfilAdocao	 = perfilAdocaoRest.getSingleResult(getUsuarioLogado());
+			System.out.println("@PostConstruct"+this.getClass().getName());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			MessagesBeanUtil.erroMessage("erro ao tentar carregar o perfil de adoção da base da dados.", e.getMessage());
 			perfilAdocao = null;

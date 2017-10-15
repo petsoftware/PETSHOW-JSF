@@ -14,12 +14,15 @@ import org.primefaces.event.FileUploadEvent;
 
 import br.com.petshow.enums.EnumAchadoPerdido;
 import br.com.petshow.enums.EnumCor;
+import br.com.petshow.enums.EnumSexo;
 import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Perdido;
+import br.com.petshow.model.Racas;
 import br.com.petshow.util.CollectionUtil;
 import br.com.petshow.web.util.CallPerdidoRest;
+import br.com.petshow.web.util.CallRacasRest;
 import br.com.petshow.web.util.ImagemUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
@@ -30,13 +33,17 @@ public class PerdidoBean extends SuperBean<Perdido> {
 	private Perdido perdido;
 	private List<Perdido> perdidos;
 	private CallPerdidoRest callPerdidoRest;
+	private CallRacasRest callRacasRest;
 	private boolean redenrizarCampos = false;
-	private String descricao = "";
+	private String descricao 		 = "";
+	private List<Racas> racas;
 	@PostConstruct
 	public void init() {
 		callPerdidoRest = new CallPerdidoRest();
+		callRacasRest   = new CallRacasRest();
 		obterAnimaisPerdidosDoUsuario();
 		novoPerdido();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 
 	private void novoPerdido() {
@@ -232,5 +239,25 @@ public class PerdidoBean extends SuperBean<Perdido> {
 		}
 		return false;
 	}
+
+	public void findRacasPorTipoAnimal(EnumTipoAnimal tipoAnimal) {
+		try {
+			List<Racas> racas = callRacasRest.getListRacasPorTipoDeAnimal(tipoAnimal);
+			setRacas(racas);
+		} catch (ExceptionErroCallRest | ExceptionValidation e) {
+			setRacas(new ArrayList<>());
+		}
+	}
+
+	public List<Racas> getRacas() {
+		return racas;
+	}
+
+	public void setRacas(List<Racas> racas) {
+		this.racas = racas;
+	}
 	
+	public EnumSexo[] getSexos(){
+		return EnumSexo.values();
+	}
 }

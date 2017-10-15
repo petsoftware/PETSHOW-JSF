@@ -52,8 +52,19 @@
 					<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
 						itemValue="" noSelectionOption="true" />
 					<f:selectItems value="#{perdidoBean.tiposAnimais}" />
+					<p:ajax event="change" update="cboRacas" listener="#{perdidoBean.findRacasPorTipoAnimal(perdidoBean.perdido.tpAnimal)}" />
 				</p:selectOneMenu>
 				
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<p:selectOneMenu id="cboRacas" style="width: 100%;" converter="racasConverter"
+						value="#{perdidoBean.perdido.raca}" required="false" requiredMessage="Por favor informe qual o tipo de animal.">
+						<f:selectItem itemLabel="Selecione uma raça"
+							itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItems value="#{perdidoBean.racas}" var="raca" itemLabel="#{raca.descricao}" itemValue="#{raca}" />
+					</p:selectOneMenu>
+				</div>
 			</div>
 			
 			
@@ -64,7 +75,7 @@
 					style="width: 100%;">
 					<f:selectItem itemLabel="#{placeHolderBean.selSexo}"
 						itemValue="" noSelectionOption="true" />
-					<f:selectItems value="#{consultaPerdidoBean.sexos}" />
+					<f:selectItems value="#{perdidoBean.sexos}" />
 				</p:selectOneMenu>
 
 				

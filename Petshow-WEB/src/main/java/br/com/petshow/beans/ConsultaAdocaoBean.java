@@ -66,6 +66,7 @@ public class ConsultaAdocaoBean extends SuperBean<Adocao> implements Serializabl
 		obterAdocoesDisponiveis();
 		obterAdocoesPorPerfil();
 		setTotalRows(getAdocoesDisponiveis().size());
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 	public ConsultaAdocaoBean (){
 		super();

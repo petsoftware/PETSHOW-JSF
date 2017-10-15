@@ -27,7 +27,7 @@ public class EnderecoBean {
 	@PostConstruct
 	public void ini() {
 		callEnderecoRest = new CallEnderecoRest();
-		
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 	public EnumUF[] getUfs(){
 		return EnumUF.values();

@@ -37,6 +37,7 @@ public class DetalheAdocaoBean extends SuperBean<Adocao>{
 		this.adocao= new Adocao();
 		getAdocaoBanco();
 		verificarSeUsuarioLogado();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 	
 	private void verificarSeUsuarioLogado() {

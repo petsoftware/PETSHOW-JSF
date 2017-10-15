@@ -18,6 +18,7 @@ public class IndexBeans extends SuperBean<EnviarMensagem> {
 	@PostConstruct
 	public void init() {
 		enviarMensagem = new EnviarMensagem();
+		System.out.println("@PostConstruct"+this.getClass().getName());
 	}
 	public void enviar() {
 		try {

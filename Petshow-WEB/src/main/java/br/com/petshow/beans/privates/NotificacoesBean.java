@@ -36,7 +36,7 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 	
 	@PostConstruct
 	public void init() {
-		
+		System.out.println("@PostConstruct"+this.getClass().getName());
 		getMessages();
 	}
 	
