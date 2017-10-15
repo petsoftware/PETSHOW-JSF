@@ -1,6 +1,5 @@
 package br.com.petshow.beans.privates;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,13 +9,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.petshow.beans.SuperBean;
-import br.com.petshow.enums.EnumAssuntoNotificacao;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Notificacao;
-import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.CallNotificacaoRest;
+import br.com.petshow.web.util.CallPerfilAdocaoRest;
 /**
  * Notificacoes do usuario
  * @author Rafael Rocha
@@ -43,7 +40,7 @@ public class NotificacoesCountBean extends SuperBean<Notificacao> {
 		try {
 			
 			setQtMsgNaoLidas(CallNotificacaoRest.getCountNotificacoesUsuario(getUsuarioLogado().getId()));
-			setQtAdocoesPerfil(0);
+			setQtAdocoesPerfil(CallPerfilAdocaoRest.getCountAnimalDisponiveisAdocaoPorPerfil(getUsuarioLogado()));
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			e.printStackTrace();
 		}
