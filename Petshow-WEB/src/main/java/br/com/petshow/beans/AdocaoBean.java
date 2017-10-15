@@ -15,6 +15,7 @@ import org.primefaces.event.FileUploadEvent;
 import br.com.petshow.enums.EnumFaseVida;
 import br.com.petshow.enums.EnumPorteAnimal;
 import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumSizePhoto;
 import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -128,9 +129,9 @@ public class AdocaoBean extends SuperBean<Adocao>{
 
 		if(this.adocao!=null){
 			if(adocao.getFotos().size() >= 3){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de imagens excedido", "Só é permitido por até 5 imagens!"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de imagens excedido", "Só é permitido por até 3 imagens!"));
 			}else{
-				adocao.getFotos().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+				adocao.getFotos().add(ImagemUtil.transformBase64AsString(ImagemUtil.resizeImage(event.getFile(), EnumSizePhoto.ADOCAO)));
 			}
 		}
 	}

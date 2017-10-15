@@ -15,6 +15,7 @@ import org.primefaces.event.FileUploadEvent;
 import br.com.petshow.enums.EnumAchadoPerdido;
 import br.com.petshow.enums.EnumCor;
 import br.com.petshow.enums.EnumSexo;
+import br.com.petshow.enums.EnumSizePhoto;
 import br.com.petshow.enums.EnumTipoAnimal;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -135,7 +136,7 @@ public class PerdidoBean extends SuperBean<Perdido> {
 			if(perdido.getFotos().size() >= 3){
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de imagens ultrapassado!", "Só é permitido por até 3 imagens!"));
 			}else{
-				perdido.getFotos().add(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+				perdido.getFotos().add(ImagemUtil.transformBase64AsString(ImagemUtil.resizeImage(event.getFile(), EnumSizePhoto.PERDIDO)));
 			}
 		}
 	}

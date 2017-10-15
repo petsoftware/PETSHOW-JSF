@@ -13,6 +13,7 @@ import javax.servlet.http.Part;
 import org.primefaces.event.FileUploadEvent;
 
 import br.com.petshow.enums.EnumFlTpEstabelecimento;
+import br.com.petshow.enums.EnumSizePhoto;
 import br.com.petshow.enums.EnumTipoUser;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -184,7 +185,7 @@ public class UsuarioBean extends SuperBean<Usuario>{
 	public void enviaImagem(FileUploadEvent event) {
         
         if(this.usuario!=null){
-        	this.usuario.setFoto(ImagemUtil.transformBase64AsString(event.getFile().getContents()));
+        	this.usuario.setFoto(ImagemUtil.transformBase64AsString(ImagemUtil.resizeImage(event.getFile(), EnumSizePhoto.PERFIL)));
         }
 	}
 
