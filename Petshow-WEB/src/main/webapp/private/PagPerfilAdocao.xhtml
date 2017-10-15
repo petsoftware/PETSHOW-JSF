@@ -105,7 +105,7 @@
 								<strong>
 									<h:outputText value="Não quero mais receber notificações" />
 						        </strong>
-						        <p:selectBooleanCheckbox value="#{not perfilAdocaoBean.perfilAdocao.flAtivo}">
+						        <p:selectBooleanCheckbox value="#{perfilAdocaoBean.flNaoReceberNotificacao}">
 						            <p:ajax  listener="#{perfilAdocaoBean.salvar}" />
 						        </p:selectBooleanCheckbox>
 					        </span>
