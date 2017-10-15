@@ -21,13 +21,16 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 	
 	private PerfilAdocao perfilAdocao;
 	private CallPerfilAdocaoRest perfilAdocaoRest;
-	
+	private boolean flNaoReceberNotificacao = false;
 	@PostConstruct
 	public void init() { 
 		
 		perfilAdocaoRest = new CallPerfilAdocaoRest();
 		try {
 			perfilAdocao	 = perfilAdocaoRest.getSingleResult(getUsuarioLogado());
+			if(perfilAdocao != null){
+				setFlNaoReceberNotificacao(!perfilAdocao.isFlAtivo());
+			}
 			System.out.println("@PostConstruct"+this.getClass().getName());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			MessagesBeanUtil.erroMessage("erro ao tentar carregar o perfil de adoção da base da dados.", e.getMessage());
@@ -43,6 +46,7 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 	
 	public void salvar() {
 		try {
+			perfilAdocao.setFlAtivo(!isFlNaoReceberNotificacao());
 			perfilAdocao = perfilAdocaoRest.salvarNaAPIRest(getPerfilAdocao());
 		} catch (Exception e) {
 			MessagesBeanUtil.erroMessage("Erro ao tentar salvar: ", e.getMessage());
@@ -70,5 +74,13 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 	
 	public EnumSexo[] getSexoAnimal() {
 		return EnumSexo.values();
+	}
+
+	public boolean isFlNaoReceberNotificacao() {
+		return flNaoReceberNotificacao;
+	}
+
+	public void setFlNaoReceberNotificacao(boolean flNaoReceberNotificacao) {
+		this.flNaoReceberNotificacao = flNaoReceberNotificacao;
 	}
 }
