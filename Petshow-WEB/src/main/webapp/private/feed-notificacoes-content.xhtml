@@ -34,107 +34,76 @@
 				<ui:repeat var="notificacao" value="#{notificacoesBean.notificacoes}">
 					<li class="left clearfix">
 						<span class="chat-img pull-left">
-							<h:panelGroup  rendered="#{notificacao.usuarioRemetente == null}">
-								<img  src="#{request.contextPath}/resources/images/users-64.png" alt="User Avatar"	class="img-circle-small" />
-							</h:panelGroup>
-							<h:graphicImage rendered="#{notificacao.usuarioRemetente != null}"
+							
+							
+							
+							<h:panelGroup rendered="#{notificacao.adocao != null}">
+								<h:panelGroup  rendered="#{notificacao.adocao.fotos.size() == 0}">
+									<img  src="#{request.contextPath}/resources/images/imgSemFoto.jpg" alt="User Avatar"	class="img-circle-small" />
+								</h:panelGroup>
+								<h:graphicImage rendered="#{notificacao.usuarioRemetente != null}"
 									styleClass="img-circle-small"
 									stream="false" cache="false"
-									url="data:image/jpg;base64,#{notificacao.usuarioRemetente.foto}" id="visualizacao"
+									url="data:image/jpg;base64,#{notificacao.adocao.fotos.get(0)}" 
 									alt="Visualização da foto do usuário" />
+							</h:panelGroup>	
+								
+							<h:panelGroup rendered="#{notificacao.perdido != null}">	
+								<h:panelGroup  rendered="#{notificacao.perdido.fotos.size() == 0}">
+									<img  src="#{request.contextPath}/resources/images/imgSemFoto.jpg" alt="User Avatar"	class="img-circle-small" />
+								</h:panelGroup>
+								<h:graphicImage rendered="#{notificacao.perdido.fotos.size() > 0}"
+									styleClass="img-circle-small"
+									stream="false" cache="false"
+									url="data:image/jpg;base64,#{notificacao.perdido.fotos.get(0)}"
+									alt="Visualização da foto do usuário" />
+							</h:panelGroup>
+									
+									
 						</span>
 						<span class="chat-img pull-left">
-							<h:panelGroup rendered="#{notificacao.usuarioRemetente == null}" >
-									<strong class="primary-font"><p:outputLabel style="font-variant: small-caps" value="#{notificacao.nome}"/> </strong>
-								</h:panelGroup>
-								<h:panelGroup rendered="#{notificacao.usuarioRemetente != null}" >
-									<strong class="primary-font"><p:outputLabel style="font-variant: small-caps" value="#{notificacao.usuarioRemetente.nome}"/> </strong>
-								</h:panelGroup>
+							<h:panelGroup rendered="#{notificacao.perdido != null}">
+								<strong class="primary-font"><p:outputLabel style="font-variant: small-caps" value="#{notificacao.perdido.nome} "/> </strong>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{notificacao.adocao != null}">
+								<strong class="primary-font"><p:outputLabel style="font-variant: small-caps" value="#{notificacao.adocao.titulo}"/> </strong>
+							</h:panelGroup>
+								
+						</span>
+						
+						<span class="chat-img pull-right">
+							<h:panelGroup rendered="#{notificacao.perdido != null}">
+								 <h:commandButton value="Ver Perdido" type="submit" class="btn btn-link"   style="padding-bottom:5px"/>
+							 </h:panelGroup>
+							<h:panelGroup rendered="#{notificacao.adocao != null}">
+						 		<h:commandButton value="Ver Anúncio" type="submit" class="btn btn-link"   style="padding-bottom:5px"/>
+						 	</h:panelGroup>
 						</span>
 						
 						<div class="chat-body clearfix">
-							<div class="row alert-warning-div">
-								<div class="alert-warning-div"> 
-									<div class="pull-right">
-										<h:panelGroup rendered="#{notificacao.perdido != null}">
-											<div class="col-md-4">
-													<h:panelGroup  rendered="#{notificacao.perdido.fotos.size() == 0}">
-														<img class="img-fluid"
-															src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
-													</h:panelGroup>
-													<h:graphicImage rendered="#{notificacao.perdido.fotos.size() > 0}"
-																		style="width:100%;height:100%;padding-top : 4px;border-radius:8px;"
-																		stream="false" cache="false"
-																		url="data:image/jpg;base64,#{notificacao.perdido.fotos.get(0)}" id="imgAnuncioPerdido"
-																		alt="Visualização do anúncio de animal perdido" />
-														
-												</div>
-												<div class="col-md-4">
-													<div class="row">
-														<kbd> #{notificacao.perdido.nome} </kbd>
-													</div>
-													<div class="row">
-														<div>Perdido desde:</div>
-														<div> 
-															
-															<p:outputLabel value="#{notificacao.perdido.dtPerdidoAchado}"> 
+							<div class="row ">
+							
+						        
+						       
+								<div class="header">
+								
+								      
+								 
+								</div>
+								
+								<h:panelGroup rendered="#{notificacao.perdido != null}">
+									<strong class="primary-font">Perdido em :&#160; <p:outputLabel value="#{notificacao.perdido.dtPerdidoAchado}"> 
 																<f:convertDateTime pattern="dd/MM/yyyy"/>
-															</p:outputLabel>
-															
-														</div>
-													</div>
-												</div>
-										</h:panelGroup>
-										<h:panelGroup rendered="#{notificacao.adocao != null}">
-											<div class="col-md-4">
-												<h:panelGroup  rendered="#{notificacao.adocao.fotos.size() == 0}">
-													<img class="img-fluid"
-														src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
-												</h:panelGroup>
-												<h:graphicImage rendered="#{notificacao.adocao.fotos.size() > 0}"
-																	style="width:100%;height:100%;padding-top : 4px;border-radius:8px;"
-																	stream="false" cache="false"
-																	url="data:image/jpg;base64,#{notificacao.adocao.fotos.get(0)}" id="imgAnuncioAdocao"
-																	alt="Visualização do anúncio de animal perdido" />
-														
-											</div>
-											<div class="col-md-4">
-												<div class="row">
-													<kbd> #{notificacao.adocao.titulo} </kbd>
-												</div>
-												<div class="row">
-													<div>Anúnciado em:</div>
-													<div> 
-														
-														<p:outputLabel value="#{notificacao.adocao.dataCadastro}"> 
+															</p:outputLabel> </strong>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificacao.adocao != null}">
+									<strong class="primary-font">Anunciado em :&#160;<p:outputLabel value="#{notificacao.adocao.dataCadastro}"> 
 															<f:convertDateTime pattern="dd/MM/yyyy"/>
-														</p:outputLabel>
-														
-													</div>
-												</div>
-											</div>
-										</h:panelGroup>
-										
-									</div>
-								</div>							
-							</div>
-							<div class="header">
-								
-								<h:panelGroup id="jaLigp" rendered="#{not notificacao.flLida}">
-									<span class="span-attention">
-										<strong>
-											<h:outputText value="Já li, retire." />
-								        </strong>
-								        <p:selectBooleanCheckbox value="#{notificacao.flLida}">
-								            <p:ajax update="jaLigp" listener="#{notificacoesBean.jaLiMensagem(notificacao)}" />
-								        </p:selectBooleanCheckbox>
-							        </span>
-						        </h:panelGroup>
-								<small class="pull-right text-muted"> 
-									<i class="fa fa-clock-o fa-fw"></i> #{notificacao.getTempoDePublicacao}
-								</small>
-								
-							</div>
+														</p:outputLabel> </strong>
+								</h:panelGroup>
+							</div>				
+						
+							
 							<div class="row" style="width:100%;">
 								<h:panelGroup rendered="#{not empty notificacao.mensagemRespondida}">
 									<div class="alert alert-info fade in alert-dismissable" style="width: #{notificacao.mensagemRespondida.length() + 8};">
@@ -148,26 +117,54 @@
 									</div>
 								</h:panelGroup>
 							</div>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							<div class="row">
-								<div class="alert alert-success pull-right" style="width:100%;">
+								<div class="alert alert-success pull-right" style="width:100%; background-color: #FCF1E0; color: #542B11">
 										<div class="row">
-											<h:graphicImage rendered="#{notificacao.usuarioRemetente != null}"
-											styleClass="img-circle-x-small"
-											style="padding: 8px;"
-											stream="false" cache="false"
-											url="data:image/jpg;base64,#{notificacao.usuarioRemetente.foto}" id="imgResp"
-											alt="Visualização da foto do usuário" />
-											<strong>#{notificacao.usuarioRemetente.nome}</strong>
-											<div class="pull-right" style="padding-left: 5px;">
-												<p:outputLabel value="#{notificacao.dtNotificacao}">
-													<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
-												</p:outputLabel>
+											<div class ="col-md-2">
+											
+												<h:graphicImage rendered="#{notificacao.usuarioRemetente != null}"
+												styleClass="img-circle-x-small"
+												style="padding: 8px;"
+												stream="false" cache="false"
+												url="data:image/jpg;base64,#{notificacao.usuarioRemetente.foto}" id="imgResp"
+												alt="Visualização da foto do usuário" />
+												<strong>#{notificacao.usuarioRemetente.nome}</strong>
 											</div>
+											
+										
+										<div class="col-md-8" >
+											
+											
+<!-- 												<p:outputLabel  value="#{notificacao.msgNotificacao}"/> -->
+											
+											
+ 												<p:outputLabel  value="dadaçsldkas dja ajdk jaksdj akdjak jklajdkajs kajssk dasjks jask jdakljd akjd klajslkd ajkldja lkjdalk dka jdkaj akj skdaj dkaj dkaj kasj kldasj klaj klaj lakj akj asj ksdaj kajs kajksd akd akdj akak jsakjaskjak sak jdakj klajlkaj dkaj skjaldadaçsldkas dja ajdk jaksdj akdjak jklajdkajs kajssk dasjks jask jdakljd akjd klajslkd ajkldja lkjdalk dka jdkaj akj skdaj dkaj dkaj kasj kldasj klaj klaj lakj akj asj ksdaj kajs kajksd akd akdj akak jsakjaskjak sak jdakj klajlkaj dkaj skjaldadaçsldkas dja ajdk jaksdj akdjak jklajdkajs kajssk dasjks jask jdakljd akjd klajslkd ajkldja lkjdalk dka jdkaj akj skdaj dkaj dkaj kasj kldasj klaj klaj lakj akj asj ksdaj kajs kajksd akd akdj akak jsakjaskjak sak jdakj klajlkaj dkaj skjaldadaçsldkas dja ajdk jaksdj akdjak jklajdkajs kajssk dasjks jask jdakljd akjd klajslkd ajkldja lkjdalk dka jdkaj akj skdaj dkaj dkaj kasj kldasj klaj klaj lakj akj asj ksdaj kajs kajksd akd akdj akak jsakjaskjak sak jdakj klajlkaj dkaj skjal"/>
+											
 										</div>
-										<div class="row" style="padding: 8px;">
-											<p>	#{notificacao.msgNotificacao}</p>
-										</div>
-									
+										<div class="col-md-2">
+												<div class="row">
+													<p:outputLabel  class="pull-right" value="#{notificacao.dtNotificacao}" style="padding-right:5px">
+														<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+													</p:outputLabel>
+											</div>
+												<div class="row">
+													<small class="pull-right text-muted" style="padding-right:5px"> 
+														<i class="fa fa-clock-o fa-fw"></i> #{notificacao.getTempoDePublicacao}
+													</small>
+												</div>
+												
+											</div>
+									</div>
 								</div>
 							</div>
 							<div class="row">
@@ -211,7 +208,22 @@
 							    </div>							    
 							</p:dialog>
 						</div>
+						<div class="row pull-right" style="padding-bottom:2px">
+							
+								<h:panelGroup id="jaLigp" rendered="#{not notificacao.flLida}"  style = " right: 0px;">
+									<span class="span-attention">
+										<strong>
+											<h:outputText value="Já li, retire." />
+								        </strong>
+								        <p:selectBooleanCheckbox value="#{notificacao.flLida}">
+								            <p:ajax update="jaLigp" listener="#{notificacoesBean.jaLiMensagem(notificacao)}" />
+								        </p:selectBooleanCheckbox>
+							        </span>
+						        </h:panelGroup>
+						     
+						</div>        
 					</li>
+					
 				</ui:repeat>
 				
 			</ul>
