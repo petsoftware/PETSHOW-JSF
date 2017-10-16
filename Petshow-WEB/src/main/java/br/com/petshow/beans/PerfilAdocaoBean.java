@@ -22,6 +22,14 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 	private PerfilAdocao perfilAdocao;
 	private CallPerfilAdocaoRest perfilAdocaoRest;
 	private boolean flNaoReceberNotificacao = false;
+	private boolean flTemPerfil				= false;
+	private String estado = "Não informado";
+	private String cidade = "Não informado";
+	private String sexo   = "Não informado";
+	private String tipo   = "Não informado";
+	private String fase   = "Não informado";
+	private String porte   = "Não informado";
+	
 	@PostConstruct
 	public void init() { 
 		
@@ -30,6 +38,10 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 			perfilAdocao	 = perfilAdocaoRest.getSingleResult(getUsuarioLogado());
 			if(perfilAdocao != null){
 				setFlNaoReceberNotificacao(!perfilAdocao.isFlAtivo());
+				if(perfilAdocao.getId() > 0){
+					setFlTemPerfil(true);
+					
+				}
 			}
 			System.out.println("@PostConstruct"+this.getClass().getName());
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
@@ -42,6 +54,12 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 			perfilAdocao 	 = new PerfilAdocao(getUsuarioLogado());
 		}
 		
+	}
+	
+	public void preencherQuadroDoPerfil() {
+		if(this.perfilAdocao != null){
+			setCidade(perfilAdocao.getCidade().getNome());
+		}
 	}
 	
 	public void salvar() {
@@ -82,5 +100,65 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 
 	public void setFlNaoReceberNotificacao(boolean flNaoReceberNotificacao) {
 		this.flNaoReceberNotificacao = flNaoReceberNotificacao;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getFase() {
+		return fase;
+	}
+
+	public void setFase(String fase) {
+		this.fase = fase;
+	}
+
+	public String getPorte() {
+		return porte;
+	}
+
+	public void setPorte(String porte) {
+		this.porte = porte;
+	}
+
+
+
+	public boolean isFlTemPerfil() {
+		return flTemPerfil;
+	}
+
+
+
+	public void setFlTemPerfil(boolean flTemPerfil) {
+		this.flTemPerfil = flTemPerfil;
 	}
 }

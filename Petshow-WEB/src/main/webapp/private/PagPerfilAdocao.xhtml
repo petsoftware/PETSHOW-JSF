@@ -101,14 +101,7 @@
 				 	     	</p:selectOneMenu>
 						</div>
 						<div class="ui-grid-row">
-							<span class="span-attention">
-								<strong>
-									<h:outputText value="Não quero mais receber notificações" />
-						        </strong>
-						        <p:selectBooleanCheckbox value="#{perfilAdocaoBean.flNaoReceberNotificacao}">
-						            <p:ajax  listener="#{perfilAdocaoBean.salvar}" />
-						        </p:selectBooleanCheckbox>
-					        </span>
+							
 						</div>
 						<!-- Fim das divs que definem os layouts  -->	
 					</div>
@@ -125,6 +118,42 @@
 							</div>
 						</p:panel>
 					</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4  box-mensagem">
+					<div class="row">
+						<p:outputLabel value="Estado:" style="padding-left:5px;"/>
+						<p:outputLabel value="#{}" style="padding-left:5px; color:#0e75af"/>
+					</div>
+					<div class="row">
+						<p:outputLabel value="Cidade:" style="padding-left:5px;"/>
+					</div>
+					<div class="row">
+						<p:outputLabel value="Sexo:" style="padding-left:5px;"/>
+					</div>
+					<div class="row">
+						<p:outputLabel value="Tipo:" style="padding-left:5px;"/>
+					</div>
+					<div class="row">
+						<p:outputLabel value="Fase:" style="padding-left:5px;"/>
+					</div>
+					<div class="row">
+						<p:outputLabel value="Porte" style="padding-left:5px;"/>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<span class="span-attention">
+						<strong>
+							<h:outputText value="Não receber mais notificações" />
+				        </strong>
+				        <p:selectBooleanCheckbox value="#{perfilAdocaoBean.flNaoReceberNotificacao}">
+				            <p:ajax  listener="#{perfilAdocaoBean.salvar}" />
+				        </p:selectBooleanCheckbox>
+			        </span>
+				</div>
+			</div>
+			<div class="row">
+				
 			</div>								
 		</div>																
 	</ui:define>
