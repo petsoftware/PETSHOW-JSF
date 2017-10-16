@@ -14,25 +14,24 @@
 	    	});
 	    </script>
 
+<div class="hidden-xs hidden-sm" > 
+	 <nav class="navbar navbar-default navbar-static-top " role="navigation" style="margin-bottom: 0">
 
-	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target=".navbar-collapse">
 
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"> 
+						</span>
+						<i style="color:#333" class="fa fa-angle-double-down" aria-hidden="true"></i>
+						<span class="icon-bar"> </span>
 
-				<span class="icon-bar"> 
-				</span>
-				<i style="color:#333" class="fa fa-angle-double-down" aria-hidden="true"></i>
-				<span class="icon-bar"> </span>
+					</button>
+				</div>
 
-			</button>
-		</div>
+			<div class="navbar-collapse collapse" style="padding: 0;">
 
-		<div class="navbar-collapse collapse" style="padding: 0;">
-
-			<pe:tooltip global="true" />
-
+		
 			<div class="nav navbar-nav navbar-left">
 				<p:commandLink id="menu-toggle"
 					styleClass="btn btn-default navbar-toggle">
@@ -96,7 +95,7 @@
 								  
 						</a></li>
 						
-					</ul> <!-- /.dropdown-alerts --></li>
+					</ul></li>
 				<li>
 					<div class="dropdown">
 						<button id="dropdownMenu1" class="btn btn-default dropdown-toggle"
@@ -113,20 +112,28 @@
 									outcome="private-usuario">
 									<i class="fa fa-user" aria-hidden="true" />
 				                			#{loginBean.userName}
-				                		</p:link> <pe:tooltip for="lnk-edit-user" /></li>
+				                		</p:link></li>
 							<li role="separator" class="divider"></li>
 							<li><p:commandLink id="btn-sair-adm" onstart="paceStart();"
 									process="@this" title="Sair do sistema - efetuar logout"
 									action="#{loginBean.logout}">
 									<i class="fa fa-sign-out"></i>
 				                			SAIR
-				                		</p:commandLink> <pe:tooltip for="btn-sair-adm" /></li>
+				                		</p:commandLink> </li>
 						</ul>
 					</div>
 				</li>
 			</ul>
 		</div>
-	</nav>
+	</nav> 
+	</div>
+	
+					<p:commandLink style="position:absolute;right:3px;top:0px;color:red" onstart="paceStart();"
+									process="@this" title="Sair do sistema - efetuar logout"
+									action="#{loginBean.logout}">
+									<i class="fa fa-sign-out"></i>
+				                			SAIR
+				                		</p:commandLink>
 </ui:composition>
 
 </html>

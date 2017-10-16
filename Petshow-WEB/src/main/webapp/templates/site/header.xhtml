@@ -61,7 +61,7 @@
 							style="margin-right:4px" icon="fa fa-times" value="Sair"
 							process="@this" title="Fecha a janela sem efetuar o login"
 							oncomplete="PF('edlg').hide();" actionListener="#{loginBean.limparCampos}" />
-						<pe:tooltip for="sair" />
+						
 
 						<p:commandButton id="confirmar"
 							styleClass="btn btn-entrar btn-lg navbar-btn" icon="fa fa-check"
@@ -69,7 +69,7 @@
 							title="Informe o usuário e a senha e depois clique neste botão para efetuar o login"
 							value="Confirmar" update="usuario,senha,entrarMsgsDialog"
 							onclick="paceStart();" oncomplete="Pace.restart();" />
-						<pe:tooltip for="confirmar" />
+						
 					</f:facet>
 					<input type="hidden" name="${_csrf.parameterName}"
 						value="${_csrf.token}" />
@@ -253,7 +253,8 @@
 				<h:form id="form" prependId="false">
 					<ul class="navbar-nav ml-auto">
 						<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}"
-							style="margin-right: 15px;"><p:commandButton id="entrar"
+							style="margin-right: 15px;">
+							<p:commandButton id="entrar"
 								styleClass="btn btn-warning btn-lg navbar-btn" value="Fazer Login"
 								process="@this" 
 								oncomplete="PF('edlg').show();"
@@ -261,7 +262,10 @@
 								icon="fa fa-fw fa-user">
 								<p:ajax resetValues="true" />
 								
-							</p:commandButton> <pe:tooltip for="entrar" /></li>
+							</p:commandButton>
+						
+								 
+							 </li>
 	
 						<li class="#{loginBean.logado ? 'nao-exibir' : 'exibir'}">
 							<p:commandButton
@@ -271,7 +275,7 @@
 								title="Solicitar cadastro de usuário"
 								oncomplete="PF('cdlg').show();">
 								<p:ajax resetValues="true" />
-							</p:commandButton> <pe:tooltip for="cadastrar" />
+							</p:commandButton>
 						</li>
 	
 						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}">
@@ -279,14 +283,14 @@
 							<p:link outcome="sucessoLoginComumUser" id="lnkAdmArea" title="Voltar para sua área pessoal">
 								<h:outputText style="font-variant: small-caps;font-weight: bold;font-size: 1.5em;" value="#{loginBean.userName} - ENTRAR" />
 							</p:link>
-							<pe:tooltip for="lnkAdmArea" />
+							
 						</li>
 	
 						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'} nav-item"><p:commandLink styleClass="nav-link"
 								id="sair" title="Sair?" process="@this" style="color: black;"
 								action="#{loginBean.logout}" ajax="false">
 								<i class="fa fa-sign-out"></i>SAIR
-							</p:commandLink> <pe:tooltip for="sair" /></li>
+							</p:commandLink> </li>
 					</ul>
 					<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
 				</h:form>

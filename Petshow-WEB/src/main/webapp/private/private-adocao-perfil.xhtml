@@ -12,7 +12,7 @@
 
 	<ui:param name="activeAnuncio" value="active" />
 	<ui:param name="pageIcon" value="bullhorn" />
-	<ui:param name="pageTitle" value="ANÚNCIO" />
+	<ui:param name="pageTitle" value="ANIMAIS PARA SEU PERFIL" />
 
 	<ui:define name="header">
 
@@ -21,12 +21,8 @@
 	<ui:define name="body">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4">
-					<h6>TOTAL DE RESULTADOS ENCONTRADOS </h6> 
-				</div>
-				<div class="col-md-4">
-					<h5 style="color: #F47D30">#{consultaAdocaoBean.totalRowsAdocaoPerfil}</h5>
-				</div>
+				<h6>ANIMAIS QUE SE ENCAIXARAM NO SEU PERFIL :  #{consultaAdocaoBean.totalRowsAdocaoPerfil}</h6>
+					
 			</div>	
 			<div class="row">						
 				<div class="consulta-result col-sm-8">
@@ -38,13 +34,13 @@
 									<img class="img-fluid" src="#{request.contextPath}/resources/images/emo-icons/sad-64.png" />
 								</div>
 								<div class="col-md-6">
-									<p> Ops!!! Nenhum animal com o seu perfil desejado foi encontrado. Você pode mudar o seu perfil de adoção para tona-lo mais abrangente.</p>
+									<p> Ops!!! Nenhum animal com o seu perfil desejado foi encontrado. Você pode mudar o seu perfil de adoção para torna-lo mais abrangente.</p>
 								</div>
 							</div>
 						</p:panel>
 						<ui:repeat var="adocao"
 							value="#{consultaAdocaoBean.adocoesDisponiveisPorPerfil}">
-							<p:link outcome="private-adocao-detalhe"  styleClass="btn-detalhes">
+							<p:link outcome="/adocao-detalhe-site.xhtml"  styleClass="btn-detalhes">
 								<f:param name="id" value="#{adocao.id}"></f:param>
 								<div class="div-click" onclick="#">
 									<p:panel

@@ -99,10 +99,152 @@
              		</p:link>
              		
      		</li>
+     		
+     		
+     			<li class=" visible-xs visible-sm">
+     			
+     				<a href="#{request.contextPath}/private/private-notificacoes.xhtml">
+					
+							<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas == 0}">
+								<i class="fa fa-envelope fa-fw"></i> 
+							</h:panelGroup>
+							<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
+								<i style="color: red;" class="fa fa-envelope faa-horizontal animated"></i>
+							</h:panelGroup>
+							Mensagens 
+							<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
+								<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
+							</h:panelGroup>	
+					
+								
+								  
+				</a>
+				
+			</li>
+			
+			<li  class=" visible-xs visible-sm">
+				<a href="#{request.contextPath}/private/private-adocao-perfil.xhtml">
+				<div>
+					<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil == 0}">
+						<i class="fa fa-heart fa-fw"></i> 
+					</h:panelGroup>
+					<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+						<i style="color: red;" class="fa fa-heart faa-pulse animated"></i>
+					</h:panelGroup>
+					Adoções no Perfil
+					<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+						<span style="background-color: red !important;" class="badge badge-notify">#{notificacoesCountBean.qtAdocoesPerfil}</span>
+					</h:panelGroup>	
+				</div>
+								
+								  
+				</a>
+			</li>
+     		
+     		<li  class=" visible-xs visible-sm">
+     			<a style="color: #26816a; font-variant: small-caps" href="#{request.contextPath}/index.xhtml">Voltar ao Site</a>
+     		</li>
+     		<li  class=" visible-xs visible-sm">
+     			<h:form>
+     			 	<p:commandLink style ="color:red" onstart="paceStart();" process="@this" title="Sair do sistema - efetuar logout" action="#{loginBean.logout}">
+     					<i class="fa fa-sign-out"></i>
+				    	SAIR
+					</p:commandLink> 
+				</h:form>
+			</li>
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
+     		
      		<!--  <div class="col-lg-5 mr-auto" style="width: 250px; height: 250px; padding-top: 10px;">
 				<img style="width: 100%;" class="img-fluid img-circle"	src="#{request.contextPath}/resources/images/logos/logo-petmooby.jpeg" />
 			</div>	 -->			      					      	
-      
+<!--       		<div class="d-sm-block d-md-none d-lg-none d-xl-none"> -->
+<!--       			<ul class="nav navbar-nav navbar-left menu-top" style="margin: 0;"> -->
+<!-- 				<li> -->
+
+<!-- 					<h4 style="padding-left: 15px; font-variant: small-caps">#{loginBean.userName}</h4> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
+		<!-- 	<ul class="nav navbar-nav navbar-right menu-top" style="margin: 0;">
+				<li><a style="font-variant: small-caps" href="#{request.contextPath}/index.xhtml">Voltar ao
+						Site</a></li>
+				<li class="dropdown">
+					<a class="nav-link dropdown-toggle mr-lg-2"	data-toggle="dropdown" href="#"> 
+						<h:panelGroup rendered="#{not notificacoesCountBean.renderNotificacao}">
+							<i class="fa fa-bell fa-fw"></i>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{notificacoesCountBean.renderNotificacao}">
+							<i class="fa fa-bell faa-ring animated" style="color: red;"></i>
+            			</h:panelGroup>
+						<i class="fa fa-caret-down"></i>	
+					</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						
+						<li><a href="#{request.contextPath}/private/private-notificacoes.xhtml">
+								<div>
+									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas == 0}">
+										<i class="fa fa-envelope fa-fw"></i> 
+									</h:panelGroup>
+									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
+										<i style="color: red;" class="fa fa-envelope faa-horizontal animated"></i>
+									</h:panelGroup>
+									Mensagens 
+									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
+										<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
+									</h:panelGroup>	
+								</div>
+								
+								  
+						</a></li>
+						<li><a href="#{request.contextPath}/private/private-adocao-perfil.xhtml">
+								<div>
+									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil == 0}">
+										<i class="fa fa-heart fa-fw"></i> 
+									</h:panelGroup>
+									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+										<i style="color: red;" class="fa fa-heart faa-pulse animated"></i>
+									</h:panelGroup>
+									Adoções no Perfil
+									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+										<span style="background-color: red !important;" class="badge badge-notify">#{notificacoesCountBean.qtAdocoesPerfil}</span>
+									</h:panelGroup>	
+								</div>
+								
+								  
+						</a></li>
+						
+					</ul> /.dropdown-alerts</li>
+				<li>
+					
+				</li>
+			</ul> -->
+      		
+<!--       		</div> -->
 	
 </ui:composition>
 
