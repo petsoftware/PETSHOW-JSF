@@ -7,6 +7,24 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
+<script>
+
+
+function divNav(){
+	
+	if($( '#navBarButton' ).attr( "aria-expanded" ) == 'true'){
+		$('#navBarButton').click() ;
+	}
+	
+	
+}
+
+
+</script>
+
+
+
+
 	<div id="lightbox" class="ui-widget-overlay">
 		<div class="ui-spinner">
    			<i style="color: green !important;" class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -227,27 +245,27 @@
 			
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
-				aria-expanded="false" aria-label="Toggle navigation">
+				aria-expanded="false" aria-label="Toggle navigation"  id="navBarButton">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<div style="float: left;padding-top: 15px;">
 					<ui:include src="menu-content.xhtml" />
 				</div>
-				<ul class="navbar-nav ml-auto" style="padding-right: 15px;">
+				<ul class="navbar-nav ml-auto"  style="padding-right: 15px;">
 					<li>
 						<a href="./index.xhtml">
 							<i class="fa fa-home fa-2x" aria-hidden="true"></i>
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#{request.contextPath}/index.xhtml#quem-somos">Quem somos?</a>
+						<a class="nav-link" onclick="divNav()" href="#{request.contextPath}/index.xhtml#quem-somos">Quem somos?</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#{request.contextPath}/index.xhtml#ongs">ONG's</a>
+						<a class="nav-link" onclick="divNav()" href="#{request.contextPath}/index.xhtml#ongs">ONG's</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#{request.contextPath}/index.xhtml#contato">Contate-nos</a>
+						<a class="nav-link" onclick="divNav()"  href="#{request.contextPath}/index.xhtml#contato">Contate-nos</a>
 					</li>
 				</ul>
 				<h:form id="form" prependId="false">
@@ -260,7 +278,7 @@
 								oncomplete="PF('edlg').show();"
 								title="Entrar no sistema de gestão"
 								icon="fa fa-fw fa-user">
-								<p:ajax resetValues="true" />
+								<p:ajax resetValues="true"  />
 								
 							</p:commandButton>
 						
