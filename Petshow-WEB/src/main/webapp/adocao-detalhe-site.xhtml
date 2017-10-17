@@ -8,13 +8,30 @@
 
 <ui:composition template="#{pageHelperBean.mainTemplateSite}">
 
+	
+   
+   
 	<ui:define name="header">
 
 	</ui:define>
 	<f:metadata>
 		<f:viewParam name="id" value="#{detalheAdocaoBean.id}" />
 	</f:metadata>
+	
+	<ui:define name="metadata">
+			<meta name="og:url"  content="http://petmooby.com.br/pet/adocao-detalhe-site.xhtml?id=#{detalheAdocaoBean.adocao.id}" />
+			<meta name="og:type" content="article" />
+		    <meta name="og:title" content="PETMOOBY - #{detalheAdocaoBean.adocao.titulo} para adoção"/>
+		    <meta name="og:description" content="#{detalheAdocaoBean.adocao.descAdocao}" />
+		    <meta name="og:image" content="data:image/jpg;base64,#{detalheAdocaoBean.adocao.fotos.get(0)}" /> 
+	
+
+    </ui:define>
+	
 	<ui:define name="body">
+	
+	
+    
 		<script type="text/javascript">
 			jQuery(function($) {
 
@@ -25,6 +42,7 @@
 
 		<section class="content-section-a">
 			<div class="container">
+			
 				<ui:include src="content-adocao-detalhe.xhtml" >
 				
 				</ui:include>
