@@ -14,56 +14,214 @@
 	    	});
 	    </script>
 
-<div class="hidden-xs hidden-sm" > 
+<div  > 
 	 <nav class="navbar navbar-default navbar-static-top " role="navigation" style="margin-bottom: 0">
 
 				<div class="navbar-header">
-					 <button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target=".navbar-collapse">
-
-						<span class="icon-bar"> 
-						</span>
-						<i style="color:#333" class="fa fa-angle-double-down" aria-hidden="true"></i>
-						<span class="icon-bar"> </span>
+					 <button type="button" class="navbar-toggle collapsed" 	data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span> 
+						<span class="icon-bar"></span>
 
 					</button>
 				</div>
 
 			<div class="navbar-collapse collapse" style="padding: 0;">
 
+				<div class="hidden-sm hidden-xs">
+						<div class="nav navbar-nav navbar-left">
+							<p:commandLink id="menu-toggle"
+								styleClass="btn btn-default navbar-toggle">
+								<i class="fa fa-angle-double-left"></i>
+							</p:commandLink>
+						</div>
+				</div>
+					<input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
+					<div class="hidden-sm hidden-xs">
+						<ul class="nav navbar-nav navbar-left menu-top" style="margin: 0;">
+							<li>
 		
-			<div class="nav navbar-nav navbar-left">
-				<p:commandLink id="menu-toggle"
-					styleClass="btn btn-default navbar-toggle">
-					<i class="fa fa-angle-double-left"></i>
-				</p:commandLink>
-			</div>
-
-			<input type="hidden" name="${_csrf.parameterName}"
-				value="${_csrf.token}" />
-			<ul class="nav navbar-nav navbar-left menu-top" style="margin: 0;">
-				<li>
-
-					<h4 style="padding-left: 15px; font-variant: small-caps">#{loginBean.userName}</h4>
-				</li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right menu-top" style="margin: 0;">
-				<li><a style="font-variant: small-caps" href="#{request.contextPath}/index.xhtml">Voltar ao
-						Site</a></li>
-				<li class="dropdown">
-					<a class="nav-link dropdown-toggle mr-lg-2"	data-toggle="dropdown" href="#"> 
-						<h:panelGroup rendered="#{not notificacoesCountBean.renderNotificacao}">
-							<i class="fa fa-bell fa-fw"></i>
-						</h:panelGroup>
-						<h:panelGroup rendered="#{notificacoesCountBean.renderNotificacao}">
-							<i class="fa fa-bell faa-ring animated" style="color: red;"></i>
-            			</h:panelGroup>
-						<i class="fa fa-caret-down"></i>	
-					</a>
-					<ul class="dropdown-menu dropdown-alerts">
+							<h4 style="padding-left: 15px; font-variant: small-caps">#{loginBean.userName}</h4>
+						</li>
+						</ul>
+					</div>	
+					<ul class="nav navbar-nav navbar-right menu-top" style="margin: 0;">
 						
-						<li><a href="#{request.contextPath}/private/private-notificacoes.xhtml">
-								<div>
+						
+						
+					
+						<li class="hidden-sm hidden-xs"><a style="font-variant: small-caps" href="#{request.contextPath}/index.xhtml">Voltar ao Site</a></li>
+						<li class="dropdown hidden-sm hidden-xs">
+							<a class="nav-link dropdown-toggle mr-lg-2"	data-toggle="dropdown" href="#"> 
+								<h:panelGroup rendered="#{not notificacoesCountBean.renderNotificacao}">
+									<i class="fa fa-bell fa-fw"></i>
+								</h:panelGroup>
+								<h:panelGroup rendered="#{notificacoesCountBean.renderNotificacao}">
+									<i class="fa fa-bell faa-ring animated" style="color: red;"></i>
+		            			</h:panelGroup>
+								<i class="fa fa-caret-down"></i>	
+							</a>
+							<ul class="dropdown-menu dropdown-alerts">
+								
+								<li><a href="#{request.contextPath}/private/private-notificacoes.xhtml">
+										<div>
+											<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas == 0}">
+												<i class="fa fa-envelope fa-fw"></i> 
+											</h:panelGroup>
+											<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
+												<i style="color: red;" class="fa fa-envelope faa-horizontal animated"></i>
+											</h:panelGroup>
+											Mensagens 
+											<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
+												<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
+											</h:panelGroup>	
+										</div>
+										
+										  
+								     </a>
+								</li>
+								<li><a href="#{request.contextPath}/private/private-adocao-perfil.xhtml">
+										<div>
+											<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil == 0}">
+												<i class="fa fa-heart fa-fw"></i> 
+											</h:panelGroup>
+											<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+												<i style="color: red;" class="fa fa-heart faa-pulse animated"></i>
+											</h:panelGroup>
+											Adoções no Perfil
+											<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+												<span style="background-color: red !important;" class="badge badge-notify">#{notificacoesCountBean.qtAdocoesPerfil}</span>
+											</h:panelGroup>	
+										</div>
+										
+										  
+								</a></li>
+								
+							</ul>
+						
+						</li>
+					
+						<li class="hidden-sm hidden-xs">
+							<div class="dropdown">
+								<button id="dropdownMenu1" class="btn btn-default dropdown-toggle"
+									type="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="true">
+									<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+									<h:outputText value="#{loginBean.usuario}" />
+									<span class="caret"></span>
+								</button>
+		
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									<li><p:link onclick="paceStart();" id="lnk-edit-user"
+											title="Clique aqui para editar os dados do Usuário"
+											outcome="private-usuario">
+											<i class="fa fa-user" aria-hidden="true" />
+						                			#{loginBean.userName}
+						                		</p:link>
+						            </li>
+									<li role="separator" class="divider"></li>
+									<li><p:commandLink id="btn-sair-adm" onstart="paceStart();"
+											process="@this" title="Sair do sistema - efetuar logout"
+											action="#{loginBean.logout}">
+											<i class="fa fa-sign-out"></i>
+						                			SAIR
+						                		</p:commandLink> 
+						            </li>
+								</ul>
+							</div>
+						</li>
+					
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						
+						<li class="visible-xs visible-sm">		      		
+		           			<p:link  style="background-color:white" title="Sua página inical" outcome="private-inicio" onclick="paceStart();">				            			                			
+		              		<div class="media media-left-menu">
+		              			<div class="media-left">
+		              				<i class="fa fa-home"></i>
+		              			</div>
+		              			<div class="media-body">INÍCIO</div>
+		              		</div>
+		             		</p:link>
+		             		
+		     			</li>
+		     			<li class="visible-xs visible-sm">		      		
+		           	<p:link  style="background-color:white" title="Anunciar que seu PET foi perdido" outcome="private-anunciar-perdido" onclick="paceStart();">				            			                			
+		              		<div class="media media-left-menu">
+		              			<div class="media-left">
+		              				<i class="fa fa-bullhorn"></i>
+		              			</div>
+		              			<div class="media-body">ACHADO/PERDIDO</div>
+		              		</div>
+		             		</p:link>
+		             		
+		     		</li>
+		     		<li class="visible-xs visible-sm">		      		
+		           	<p:link  style="background-color:white" title="Anunciar a adoção de algum animal." outcome="private-anunciar-adocao" onclick="paceStart();">				            			                			
+		              		<div class="media media-left-menu">
+		              			<div class="media-left">
+		              				<i class="fa fa-bullhorn"></i>
+		              			</div>
+		              			<div class="media-body">ANUNCIAR ADOÇÃO</div>
+		              		</div>
+		             		</p:link>
+		             		
+		     		</li>
+		     			<li  class="visible-xs visible-sm">		      		
+		            	<p:link style="background-color:white" title="Perfil de Adoção" outcome="perfil-adocao" onclick="paceStart();">				            			                			
+		               		<div class="media media-left-menu">
+		               			<div class="media-left">
+		               				<i class="fa fa-star-half-o"></i>
+		               			</div>
+		               			<div class="media-body">PERFIL DE ADOÇÃO</div>
+		               		</div>
+		              		</p:link>
+		      		</li>
+		     		<li class="visible-xs visible-sm">		      		
+		           	<p:link  style="background-color:white" title="Veja ou altere o seu perfil" outcome="private-meus-dados" onclick="paceStart();">				            			                			
+		              		<div class="media media-left-menu">
+		              			<div class="media-left">
+		              				<i class="fa fa-pencil-square-o"></i>
+		              			</div>
+		              			<div class="media-body">MEU PERFIL</div>
+		              		</div>
+		             		</p:link>
+		             		
+		     		</li>
+		     		<li class="visible-xs visible-sm">		      		
+		           	<p:link  style="background-color:white" title="Veja as promoções que temos pra você"  onclick="return alert('Em breve as promoções dos petshops mais próximos de você')">				            			                			
+		              		<div class="media media-left-menu">
+		              			<div class="media-left">
+		              				<i class="fa fa-tags"></i>
+		              			</div>
+		              			<div class="media-body">PROMOÇÕES</div>
+		              		</div>
+		             		</p:link>
+		             		
+		     		</li>
+		     		
+		     		
+		     			<li class=" visible-xs visible-sm">
+		     			
+		     				<a href="#{request.contextPath}/private/private-notificacoes.xhtml">
+							
 									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas == 0}">
 										<i class="fa fa-envelope fa-fw"></i> 
 									</h:panelGroup>
@@ -74,66 +232,50 @@
 									<h:panelGroup rendered="#{notificacoesCountBean.qtMsgNaoLidas > 0}">
 										<span style="background-color: red !important;" class="badge badge-notify">#{headerBean.qtMsgNaoLidas}</span>
 									</h:panelGroup>	
-								</div>
-								
-								  
-						</a></li>
-						<li><a href="#{request.contextPath}/private/private-adocao-perfil.xhtml">
-								<div>
-									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil == 0}">
-										<i class="fa fa-heart fa-fw"></i> 
-									</h:panelGroup>
-									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
-										<i style="color: red;" class="fa fa-heart faa-pulse animated"></i>
-									</h:panelGroup>
-									Adoções no Perfil
-									<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
-										<span style="background-color: red !important;" class="badge badge-notify">#{notificacoesCountBean.qtAdocoesPerfil}</span>
-									</h:panelGroup>	
-								</div>
-								
-								  
-						</a></li>
+							
+										
+										  
+						</a>
 						
-					</ul></li>
-				<li>
-					<div class="dropdown">
-						<button id="dropdownMenu1" class="btn btn-default dropdown-toggle"
-							type="button" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="true">
-							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
-							<h:outputText value="#{loginBean.usuario}" />
-							<span class="caret"></span>
-						</button>
-
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-							<li><p:link onclick="paceStart();" id="lnk-edit-user"
-									title="Clique aqui para editar os dados do Usuário"
-									outcome="private-usuario">
-									<i class="fa fa-user" aria-hidden="true" />
-				                			#{loginBean.userName}
-				                		</p:link></li>
-							<li role="separator" class="divider"></li>
-							<li><p:commandLink id="btn-sair-adm" onstart="paceStart();"
-									process="@this" title="Sair do sistema - efetuar logout"
-									action="#{loginBean.logout}">
-									<i class="fa fa-sign-out"></i>
-				                			SAIR
-				                		</p:commandLink> </li>
-						</ul>
-					</div>
-				</li>
+					</li>
+					
+					<li  class=" visible-xs visible-sm">
+						<a href="#{request.contextPath}/private/private-adocao-perfil.xhtml">
+						<div>
+							<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil == 0}">
+								<i class="fa fa-heart fa-fw"></i> 
+							</h:panelGroup>
+							<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+								<i style="color: red;" class="fa fa-heart faa-pulse animated"></i>
+							</h:panelGroup>
+							Adoções no Perfil
+							<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil > 0}">
+								<span style="background-color: red !important;" class="badge badge-notify">#{notificacoesCountBean.qtAdocoesPerfil}</span>
+							</h:panelGroup>	
+						</div>
+										
+										  
+						</a>
+					</li>
+		     		
+		     		<li  class=" visible-xs visible-sm">
+		     			<a style="color: #26816a; font-variant: small-caps" href="#{request.contextPath}/index.xhtml">Voltar ao Site</a>
+		     		</li>
+		     		<li  class=" visible-xs visible-sm">
+		     			
+		     			 	<p:commandLink style ="color:red" onstart="paceStart();" process="@this" title="Sair do sistema - efetuar logout" action="#{loginBean.logout}">
+		     					<i class="fa fa-sign-out"></i>
+						    	SAIR
+							</p:commandLink> 
+						
+					</li>
+		     		
 			</ul>
-		</div>
+			</div>
 	</nav> 
 	</div>
 	
-					<p:commandLink style="position:absolute;right:3px;top:0px;color:red" onstart="paceStart();"
-									process="@this" title="Sair do sistema - efetuar logout"
-									action="#{loginBean.logout}">
-									<i class="fa fa-sign-out"></i>
-				                			SAIR
-				                		</p:commandLink>
+					
 </ui:composition>
 
 </html>

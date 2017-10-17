@@ -54,7 +54,7 @@
              		
      		</li>
      		 -->
-     		<li>		      		
+     		<li class="#{onlySmall}">		      		
             	<p:link styleClass="#{activeAnuncio}" title="Perfil de Adoção" outcome="perfil-adocao" onclick="paceStart();">				            			                			
                		<div class="media media-left-menu">
                			<div class="media-left">
@@ -101,7 +101,7 @@
      		</li>
      		
      		
-     			<li class=" visible-xs visible-sm">
+     			<li style="display:none">
      			
      				<a href="#{request.contextPath}/private/private-notificacoes.xhtml">
 					
@@ -122,7 +122,7 @@
 				
 			</li>
 			
-			<li  class=" visible-xs visible-sm">
+			<li  style="display:none" >
 				<a href="#{request.contextPath}/private/private-adocao-perfil.xhtml">
 				<div>
 					<h:panelGroup rendered="#{notificacoesCountBean.qtAdocoesPerfil == 0}">
@@ -141,10 +141,10 @@
 				</a>
 			</li>
      		
-     		<li  class=" visible-xs visible-sm">
+     		<li   style="display:none">
      			<a style="color: #26816a; font-variant: small-caps" href="#{request.contextPath}/index.xhtml">Voltar ao Site</a>
      		</li>
-     		<li  class=" visible-xs visible-sm">
+     		<li   style="display:none">
      			<h:form>
      			 	<p:commandLink style ="color:red" onstart="paceStart();" process="@this" title="Sair do sistema - efetuar logout" action="#{loginBean.logout}">
      					<i class="fa fa-sign-out"></i>
