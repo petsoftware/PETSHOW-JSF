@@ -296,18 +296,26 @@ function divNav(){
 							</p:commandButton>
 						</li>
 	
-						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}">
+						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}" style="padding-top:3px;padding-right:10px">
 							<i class="fa fa-user" style="color: black;"></i>
-							<p:link outcome="sucessoLoginComumUser" id="lnkAdmArea" title="Voltar para sua área pessoal">
-								<h:outputText style="font-variant: small-caps;font-weight: bold;font-size: 1.5em;" value="#{loginBean.userName} - ENTRAR" />
+							<h:outputText class ="nav-item"  value="&#160; #{loginBean.userName}" />
+							
+						
+							
+						</li>
+						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'}" style="padding-top:5px;padding-right:10px">
+								
+							<p:link outcome="sucessoLoginComumUser" id="lnkAdmArea" title="Voltar para sua área pessoal" style=" text-decoration:none;">
+								 <h:outputText class="noLineLink" style="border-radius:5px; padding:3px;Background-color:orange; color:white; text-decoration:none; "  value="&#160;&#160;ENTRAR&#160;&#160;" />
 							</p:link>
+						
 							
 						</li>
 	
-						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'} nav-item"><p:commandLink styleClass="nav-link"
-								id="sair" title="Sair?" process="@this" style="color: black;"
+						<li class="#{loginBean.logado ? 'exibir' : 'nao-exibir'} nav-item" style="padding-top:5px" ><p:commandLink 
+								id="sair" title="Sair?" process="@this" style="color: black; text-decoration:none;"
 								action="#{loginBean.logout}" ajax="false">
-								<i class="fa fa-sign-out"></i>SAIR
+								 <h:outputText style="border-radius:5px; padding:3px;Background-color:red; color:white; "  value="&#160;&#160;&#160;SAIR&#160;&#160;&#160;" />
 							</p:commandLink> </li>
 					</ul>
 					<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
