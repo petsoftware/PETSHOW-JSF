@@ -23,7 +23,7 @@ public class IndexBeans extends SuperBean<EnviarMensagem> {
 	public void enviar() {
 		try {
 			StringBuilder message = new StringBuilder();
-			message.append("Mensagem recebida do site - áre de contato.").append("\n")
+			message.append("Mensagem recebida do site - área de contato.").append("\n")
 			.append("Remetente: ").append(getEnviarMensagem().getEmail()).append("\n")
 			.append("Contato: ").append(getEnviarMensagem().getContato()).append("\n")
 			.append("Mensagem enviada:").append("\n")

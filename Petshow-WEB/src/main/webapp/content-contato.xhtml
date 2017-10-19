@@ -9,6 +9,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html" >
 
+
+
+
 	<h:form>
 			<div class="container">
 
@@ -30,7 +33,7 @@
 					</div>
 				
 					<div class="row" style="padding-top:5px !important;">
-						<p:inputText value="#{indexBeans.enviarMensagem.contato}" placeholder="TELEFONE" style = "width: 55%; padding-top:5px !important;" />
+						<p:inputText class= "onlyTelephone" id="telefoneContato" value="#{indexBeans.enviarMensagem.contato}" placeholder="TELEFONE" style = "width: 55%; padding-top:5px !important;" />
 					</div>
 					
 					<div class="row" style="padding-top:5px !important;">
