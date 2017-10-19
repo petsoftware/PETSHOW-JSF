@@ -28,7 +28,7 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 	private String sexo   = "Não informado";
 	private String tipo   = "Não informado";
 	private String fase   = "Não informado";
-	private String porte   = "Não informado";
+	private String porte  = "Não informado";
 	
 	@PostConstruct
 	public void init() { 
@@ -40,7 +40,7 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 				setFlNaoReceberNotificacao(!perfilAdocao.isFlAtivo());
 				if(perfilAdocao.getId() > 0){
 					setFlTemPerfil(true);
-					
+					preencherQuadroDoPerfil();
 				}
 			}
 			System.out.println("@PostConstruct"+this.getClass().getName());
@@ -58,7 +58,24 @@ public class PerfilAdocaoBean extends SuperBean<PerfilAdocao> {
 	
 	public void preencherQuadroDoPerfil() {
 		if(this.perfilAdocao != null){
-			setCidade(perfilAdocao.getCidade().getNome());
+			if(perfilAdocao.getCidade() != null){
+				setCidade(perfilAdocao.getCidade().getNome());
+			}
+			if(perfilAdocao.getFaseVida() != null){
+				setFase(perfilAdocao.getFaseVida().name());
+			}
+			if(perfilAdocao.getPorteAnimal() != null){
+				setPorte(perfilAdocao.getPorteAnimal().name());
+			}
+			if(perfilAdocao.getSexo() != null){
+				setSexo(perfilAdocao.getSexo().name());
+			}
+			if(perfilAdocao.getTipoAnimal() != null){
+				setTipo(perfilAdocao.getTipoAnimal().name());
+			}
+			if(perfilAdocao.getUf() != null){
+				setEstado(perfilAdocao.getUf().getLabel());
+			}
 		}
 	}
 	

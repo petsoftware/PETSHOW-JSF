@@ -119,29 +119,41 @@
 						</p:panel>
 					</div>
 			</div>
-			<div class="row">
-				<div class="col-md-4  box-mensagem">
+			<div class="row" style="padding-top:10px;padding-bottom: 2.5px;">
+				<div class="col-md-4  box-mensagem"  >
+					<div class="row">
+						<p:outputLabel value="Meu perfil de Adoção" style="padding-left:5px;"/>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="padding-bottom: 5px;">
+				<div class="col-md-4  box-mensagem"  style="background-color: #F9FBFD !important">
 					<div class="row">
 						<p:outputLabel value="Estado:" style="padding-left:5px;"/>
-						<p:outputLabel value="#{}" style="padding-left:5px; color:#0e75af"/>
+						<p:outputLabel value="#{perfilAdocaoBean.estado}" style="padding-left:5px; color:#0e75af"/>
 					</div>
 					<div class="row">
 						<p:outputLabel value="Cidade:" style="padding-left:5px;"/>
+						<p:outputLabel value="#{perfilAdocaoBean.cidade}" style="padding-left:5px; color:#0e75af"/>
 					</div>
 					<div class="row">
 						<p:outputLabel value="Sexo:" style="padding-left:5px;"/>
+						<p:outputLabel value="#{perfilAdocaoBean.sexo}" style="padding-left:5px; color:#0e75af"/>
 					</div>
 					<div class="row">
 						<p:outputLabel value="Tipo:" style="padding-left:5px;"/>
+						<p:outputLabel value="#{perfilAdocaoBean.tipo}" style="padding-left:5px; color:#0e75af"/>
 					</div>
 					<div class="row">
 						<p:outputLabel value="Fase:" style="padding-left:5px;"/>
+						<p:outputLabel value="#{perfilAdocaoBean.fase}" style="padding-left:5px; color:#0e75af"/>
 					</div>
 					<div class="row">
 						<p:outputLabel value="Porte" style="padding-left:5px;"/>
+						<p:outputLabel value="#{perfilAdocaoBean.porte}" style="padding-left:5px; color:#0e75af"/>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-4" style="padding-top: 10px; padding-bottom: 10px;">
 					<span class="span-attention">
 						<strong>
 							<h:outputText value="Não receber mais notificações" />
