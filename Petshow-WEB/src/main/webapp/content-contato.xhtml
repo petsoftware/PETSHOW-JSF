@@ -37,12 +37,12 @@
 					</div>
 					
 					<div class="row" style="padding-top:5px !important;">
-						<p:inputText value="#{indexBeans.enviarMensagem.email}" placeholder="E-MAIL" style = "width: 70%;padding-top:5px;" required="true" requiredMessage="Informe um e-mail de contato."/>
+						<p:inputText class="email-validation" value="#{indexBeans.enviarMensagem.email}" placeholder="E-MAIL" style = "width: 70%;padding-top:5px;" required="true" requiredMessage="Informe um e-mail de contato."/>
 					</div>
 					
 					<div class="row" style="padding-top:5px !important;">
 						<p:inputTextarea value="#{indexBeans.enviarMensagem.mensagem}" id="txtMensagem" placeholder="ESCREVA SUA MENSAGEM AQUI" rows="8" cols="40" 
-						counter="display" maxlength="300" counterTemplate="{0} characters faltando." autoResize="false" required="true" 
+						counter="display" maxlength="300" counterTemplate="{0} caracteres faltando." autoResize="false" required="true" 
 						requiredMessage="Informe a mensagem que você deseja nos enviar." style="padding-top:5px;"/>
 	    				
     				</div>
