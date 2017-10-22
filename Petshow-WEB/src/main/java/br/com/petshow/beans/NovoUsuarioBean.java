@@ -11,6 +11,7 @@ import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Usuario;
 import br.com.petshow.util.MD5EncriptUtil;
+import br.com.petshow.util.ValidationUtil;
 import br.com.petshow.web.util.CallUsuarioRest;
 import br.com.petshow.web.util.RestUtilCall;
 
@@ -18,6 +19,7 @@ import br.com.petshow.web.util.RestUtilCall;
 @ManagedBean
 @ViewScoped
 public class NovoUsuarioBean {
+	
 
 	private Usuario usuario;
 	private String senha;
@@ -45,21 +47,21 @@ public class NovoUsuarioBean {
 				usuario.setPassword(MD5EncriptUtil.toMD5(getSenha()));
 				usuario.setFlPreCadastro(true);
 				usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:","Usuário Cadastrado com sucesso!"));
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, ":)","Em instante você receberá um e-mail para completar o seu cadastro!"));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:Usuário Cadastrado com sucesso!",""));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, ":) Em instante você receberá um e-mail para completar o seu cadastro!",""));
 				this.usuario = new Usuario();
 				return null;
 			}else{
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informações incorretas:", validate));
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informações incorretas:"+validate, ""));
 				return null;
 			}
 		} catch (ExceptionErroCallRest  e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:"+e.getMessage(), ""));
 
 		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro:"+e.getMessage(), ""));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:Favor entrar em contato com o admistrador do sistema!", ""));
 			e.printStackTrace();
 		}
 		return null;
@@ -180,19 +182,40 @@ public class NovoUsuarioBean {
 		String email = "";
 		try {
 			email = getUsuario().getEmail();
-			Usuario user = new CallUsuarioRest().getUserByLoginName(getUsuario().getEmail());
-			if(user != null){
-				if(user.getId() > 0){
-					temUser = true;
+			if(! email.trim().equals("")){
+				
+			
+			    
+			    if(!ValidationUtil.isEmailValid(email)){
+			    	FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Formato do E-mail inválido!",""));
+			    	getUsuario().setEmail("");
+			    	return;
+			    }
+			    
+			    
+				Usuario user = new CallUsuarioRest().getUserByLoginName(getUsuario().getEmail());
+				if(user != null){
+					if(user.getId() > 0){
+						temUser = true;
+					}
 				}
-			}
-			if(temUser){
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "","E-mail " + email +" já existe."));
+				if(temUser){
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "E-mail já possui cadastro.",""));
+					getUsuario().setEmail("");
+			    	return;
+				}else{
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "E-mail disponível.",""));
+				}
 			}else{
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "","E-mail disponível."));
+				FacesContext.getCurrentInstance().addMessage(null, null);
 			}
-		} catch (ExceptionErroCallRest | ExceptionValidation e) {
-			// TODO Auto-generated catch block
+		} catch (ExceptionErroCallRest  e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:"+e.getMessage(), ""));
+
+		} catch (ExceptionValidation e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro:"+e.getMessage(), ""));
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:Favor entrar em contato com o admistrador do sistema!", ""));
 			e.printStackTrace();
 		}
 		

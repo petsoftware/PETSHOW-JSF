@@ -7,6 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
+
 <script>
 
 
@@ -18,6 +19,37 @@ function divNav(){
 	
 	
 }
+
+function topShow(dialog){
+	
+	
+	$('.dialog-cadastrar').css("top",Math.max(10) + "px");
+    $('.dialog-cadastrar').css("left",Math.max(0, (($(window).width() - $('.dialog-cadastrar').outerWidth()) / 2) + $(window).scrollLeft()) + "px");
+   
+    $('.dialog-cadastrar').show();
+    $('.dialog-cadastrar').css("z-index",Math.max(10)  );
+   
+	
+}
+
+	function validarEmail(){
+	   
+	      var email = $(".email-validation").val();
+	      if(email != "")
+	      {
+	    	
+	    		var filtro = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+				if(filtro.test(email) == false){
+					 alert("Formato de e-mail inválido!")
+	        		 
+	        	 	 $(".email-validation").val("")
+	        	 	 
+	        	 	 setTimeout(function() { $('.email-validation').focus() }, 55);
+	        	 	 
+				}
+	      }
+	 
+	}
 
 
 </script>
@@ -40,11 +72,11 @@ function divNav(){
 			<input type="hidden" name="${_csrf.parameterName}"	value="${_csrf.token}" />
 			<h:form id="formEntrar">
 
-				<p:dialog id="entrarDialog" header="Entrar" widgetVar="edlg"
+				<p:dialog id="entrarDialog" style="top:0px " header="Entrar" widgetVar="edlg"
 					modal="true" showEffect="fade" hideEffect="fade" width="300"
 					resizable="false" responsive="true">
 
-					<p:messages id="entrarMsgsDialog" styleClass="ui-messages-dialog"
+					<p:messages id="entrarMsgsDialog" styleClass="ui-messages-dialog "
 						showSummary="false" showDetail="true" closable="true"
 						showIcon="false" />
 
@@ -95,19 +127,19 @@ function divNav(){
 
 			</h:form>
 
-			<h:form id="formCadastrar">
+			<h:form id="formCadastrar" class="event-close-click">
 
-				<p:dialog id="cadastrarDialog" header="Cadastrar" widgetVar="cdlg"
+				<p:dialog id="cadastrarDialog" header="Cadastrar" widgetVar="cdlg" class ="dialog-cadastrar"
 					modal="true" showEffect="fade" hideEffect="fade" width="400"
-					resizable="false" responsive="true">
+					resizable="true" responsive="true"  >
 
 					<p:messages id="cadastrarMsgsDialog"
-						styleClass="ui-messages-dialog" showSummary="true"
-						showDetail="true" closable="true" showIcon="false" />
+						styleClass="ui-messages-dialog object-close-click" showSummary="true"
+						showDetail="false" closable="true" showIcon="false" />
 
 					<div class="ui-grid ui-grid-responsive">
 						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
+							<div class="ui-grid-col-12,">
 								<div class="inputTextGroupLeft">
 								Quem sou eu?
 								</div>
@@ -136,7 +168,7 @@ function divNav(){
 									<h:panelGroup rendered="#{novoUsuarioBean.renderizarNome}">
 										<p:inputText id="usuario" style="width:100%;" label="Usuário"
 											placeholder="#{novoUsuarioBean.textUsuario}" title="Usuário" 
-											value="#{novoUsuarioBean.usuario.nome}" required="true" maxlength="60">
+											value="#{novoUsuarioBean.usuario.nome}" required="true" requiredMessage="Usuário deve ser informado!" maxlength="60">
 											<f:validateLength minimum="3" />
 										</p:inputText>
 										<i class="fa fa-user"></i>
@@ -150,27 +182,16 @@ function divNav(){
 									<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
 										<p:inputText id="email" style="width:100%;" label="E-mail"
 											placeholder="E-mail" title="E-mail" maxlength="50"
-											value="#{novoUsuarioBean.usuario.email}" required="true">
-											<p:ajax event="blur" listener="#{novoUsuarioBean.verificarEmail}"  process="email" update="cadastrarMsgsDialog"/>
+											value="#{novoUsuarioBean.usuario.email}" required="true"  styleClass="email-validation"  requiredMessage="O E-mail deve ser informado!">
+											<!-- <p:ajax event="blur" onstart="validarEmail()"  /> -->
+											 <p:ajax event="blur" listener="#{novoUsuarioBean.verificarEmail}" process="email" update="cadastrarMsgsDialog,email"/>
 										</p:inputText>
 										<i class="fa fa-envelope"></i>
 									</h:panelGroup>
 								</div>
 							</div>
 						</div>
-						<div class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col-12">
-								<div class="inputTextGroupLeft">
-									<h:panelGroup rendered="#{novoUsuarioBean.renderizarEmail}">
-										<p:inputText id="txtEmailConf" style="width:100%;" label="E-mail"
-											placeholder="Digite novamente o e-mail" title="Confirme o e-mail" maxlength="50"
-											value="#{novoUsuarioBean.confirmEmail}" required="true" >
-										</p:inputText>
-										<i class="fa fa-envelope"></i>
-									</h:panelGroup>
-								</div>
-							</div>
-						</div>
+						
 						<div class="ui-grid-row ui-grid-row-custom">
 							<div class="ui-grid-col-12">
 								<h:panelGroup  rendered="#{novoUsuarioBean.renderizarCNPJ}">
@@ -195,7 +216,7 @@ function divNav(){
 										<p:password id="senha" style="width:50%;" label="Senha"
 											placeholder="Senha" title="Senha"
 											value="#{novoUsuarioBean.senha}" autocomplete="new-password"
-											required="true" maxlength="14">
+											required="true" requiredMessage="A senha deve ser informada!" maxlength="14">
 										</p:password>
 										<i class="fa fa-lock"></i>
 									</div>
@@ -207,19 +228,16 @@ function divNav(){
 										<p:password id="txtConfSenha" style="width:50%;" label="Senha"
 											placeholder="Confirme a senha" title="Senha"
 											value="#{novoUsuarioBean.confSenha}"
-											autocomplete="new-password" required="true" maxlength="14">
+											autocomplete="new-password" required="true" maxlength="14" requiredMessage="A confirmação da senha deve ser informada!">
 										</p:password>
 										<i class="fa fa-lock"></i>
 									</div>
 								</div>
 							</div>
-						</h:panelGroup>
-					</div>
-					</h:panelGroup>
-					<f:facet name="footer">
-
-						<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
-							style="margin-right:4px" icon="fa fa-times" value="Sair"
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
+							style="margin-right:4px;float: right;" icon="fa fa-times" value="Sair"
 							process="@this" oncomplete="PF('cdlg').hide();" />
 
 						<p:commandButton id="btnConfNovoUsu"
@@ -228,7 +246,16 @@ function divNav(){
 							title="Confirme após informar todos os dados"
 							update="cadastrarMsgsDialog"
 							onclick="paceStart();" oncomplete="Pace.restart();"
-							action="#{novoUsuarioBean.solicitarCadastro}" />
+							action="#{novoUsuarioBean.solicitarCadastro}" style="float: right;"/>
+								</div>
+							</div>
+							
+						</h:panelGroup>
+					</div>
+					</h:panelGroup>
+					<f:facet name="footer">
+
+						
 
 					</f:facet>
 					<input type="hidden" name="${_csrf.parameterName}"
@@ -291,7 +318,7 @@ function divNav(){
 								value="Quero me Cadastrar" process="@this"
 								icon="fa fa-fw fa-user-plus"
 								title="Solicitar cadastro de usuário"
-								oncomplete="PF('cdlg').show();">
+								oncomplete="topShow('cdlg')">
 								<p:ajax resetValues="true" />
 							</p:commandButton>
 						</li>
