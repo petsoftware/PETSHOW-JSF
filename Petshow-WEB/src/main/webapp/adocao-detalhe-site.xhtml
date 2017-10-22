@@ -19,11 +19,11 @@
 	</f:metadata>
 	
 	<ui:define name="metadata">
-			<meta name="og:url"  content="http://petmooby.com.br/pet/adocao-detalhe-site.xhtml?id=#{detalheAdocaoBean.adocao.id}" />
-			<meta name="og:type" content="article" />
-		    <meta name="og:title" content="PETMOOBY - #{detalheAdocaoBean.adocao.titulo} para adoção"/>
-		    <meta name="og:description" content="#{detalheAdocaoBean.adocao.descAdocao}" />
-		    <meta name="og:image" content="data:image/jpg;base64,#{detalheAdocaoBean.adocao.fotos.get(0)}" /> 
+			<meta property="og:url"  content="http://petmooby.com.br/pet/adocao-detalhe-site.xhtml?id=#{detalheAdocaoBean.adocao.id}" />
+			<meta property="og:type" content="article" />
+		    <meta property="og:title" content="PETMOOBY - #{detalheAdocaoBean.adocao.titulo} para adoção"/>
+		    <meta property="og:description" content="#{detalheAdocaoBean.adocao.descAdocao}" />
+		    <meta property="og:image" content="data:image/jpg;base64,#{detalheAdocaoBean.adocao.fotos.get(0)}" /> 
 	
 
     </ui:define>
