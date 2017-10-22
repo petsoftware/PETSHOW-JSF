@@ -97,7 +97,7 @@ function topShow(dialog){
 								<div class="inputTextGroupLeft">
 									<p:password id="senha" style="width:100%;" label="Senha"
 										placeholder="Senha" title="Senha" value="#{loginBean.senha}"
-										required="true" requiredMessage="A senha é obrigatória">
+										required="true" requiredMessage="Por favor informe a senha">
 									</p:password>
 									<i class="fa fa-lock"></i>
 								</div>
@@ -238,13 +238,14 @@ function topShow(dialog){
 								<div class="ui-grid-col-12">
 									<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
 							style="margin-right:4px;float: right;" icon="fa fa-times" value="Sair"
-							process="@this" oncomplete="PF('cdlg').hide();" />
+							process="@this" oncomplete="PF('cdlg').hide();"
+							action="#{novoUsuarioBean.cleanUser()}" update="pnlgFields"  />
 
 						<p:commandButton id="btnConfNovoUsu"
 							styleClass="btn btn-info btn-lg" icon="fa fa-check"
 							value="Confirmar" type="submit"
 							title="Confirme após informar todos os dados"
-							update="cadastrarMsgsDialog"
+							update="cadastrarMsgsDialog,pnlgFields"
 							onclick="paceStart();" oncomplete="Pace.restart();"
 							action="#{novoUsuarioBean.solicitarCadastro}" style="float: right;"/>
 								</div>

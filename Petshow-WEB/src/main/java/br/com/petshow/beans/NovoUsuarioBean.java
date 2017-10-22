@@ -47,8 +47,8 @@ public class NovoUsuarioBean {
 				usuario.setPassword(MD5EncriptUtil.toMD5(getSenha()));
 				usuario.setFlPreCadastro(true);
 				usuario = RestUtilCall.postEntity(usuario, "usuario/precadastro",Usuario.class);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "OK:Usuário Cadastrado com sucesso!",""));
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, ":) Em instante você receberá um e-mail para completar o seu cadastro!",""));
+				
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Em instantes será enviado um e-mail de confirmação para "+usuario.getEmail()+"! Acesse o link no e-mail para poder usar nosso sistema!",""));
 				this.usuario = new Usuario();
 				return null;
 			}else{
@@ -82,9 +82,10 @@ public class NovoUsuarioBean {
 				if(!tipoUsuario.equalsIgnoreCase("U")){
 					result = "CNPJ deve ser informado.";
 				}
-			}else if(!usuario.getEmail().equals(getConfirmEmail())){
-				result = "E-mail não confere. Verifique se ele está correto.";
 			}
+//			else if(!usuario.getEmail().equals(getConfirmEmail())){
+//				result = "E-mail não confere. Verifique se ele está correto.";
+//			}
 		}else{
 			result = "Usuário não informado ou nulo";
 		}
@@ -167,6 +168,7 @@ public class NovoUsuarioBean {
 			setTextUsuario("SEU NOME");
 			usuario.setFlTpEstabelecimento(EnumFlTpEstabelecimento.USER);
 		}
+		getUsuario().setEmail("");
 	}
 
 	public String getTipoUsuario() {
@@ -227,5 +229,8 @@ public class NovoUsuarioBean {
 
 	public void setConfirmEmail(String confirmEmail) {
 		this.confirmEmail = confirmEmail;
+	}
+	public void cleanUser(){
+		this.usuario = new Usuario();
 	}
 }
