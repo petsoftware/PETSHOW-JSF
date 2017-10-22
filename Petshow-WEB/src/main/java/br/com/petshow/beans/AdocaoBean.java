@@ -100,7 +100,7 @@ public class AdocaoBean extends SuperBean<Adocao>{
 		try{
 			if(validar(adocao)){
 				adocao = postEntity(adocao, "adocao/salvar", Adocao.class);
-				MessagesBeanUtil.infor("Seu anúncio foi registrado com sucesso!");
+				MessagesBeanUtil.infor("Seu anúncio de adoção foi registrado com sucesso!");
 				obterAdocoesAnunciadasDoUsuario();
 				novaAdocao();
 			}
@@ -116,7 +116,7 @@ public class AdocaoBean extends SuperBean<Adocao>{
 		try{
 			if(validar(adocao)){
 				adocao = postEntity(adocao, "adocao/salvar", Adocao.class);
-				MessagesBeanUtil.infor("Seu anúncio foi alterado com sucesso!");
+				MessagesBeanUtil.infor("Seu anúncio de adoção  foi alterado com sucesso!");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -182,7 +182,7 @@ public class AdocaoBean extends SuperBean<Adocao>{
 			}else if(adocao.getEndereco().getCidade() == null){
 				msg = "Favor informar a cidade";
 			}else if(adocao.getTitulo().trim().isEmpty()){
-				msg = "Por favor informe o título";
+				msg = "Por favor informe o nome do animal";
 			}
 		}else{
 			msg = "";
