@@ -56,7 +56,7 @@ public class LoginBean {
 					return "sucessoLoginComumUser";
 				}
 			}
-			return "sucessoLogin";
+			return "sucessoLoginComumUser";
 		}else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha no login!", validate));
 			return null;
