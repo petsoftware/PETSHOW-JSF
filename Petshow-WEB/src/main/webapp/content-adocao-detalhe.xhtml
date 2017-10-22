@@ -178,20 +178,20 @@
 					<p:messages id="msgEnviar" />
 					<div style="padding-left: 15px">
 						<div class="row">
-							<h:outputLabel value="Nome:" for="txtNome" rendered="#{not detalheAdocaoBean.temUsuarioLogado}" />
+							<h:outputLabel value="Nome:" for="txtNome" />
 						</div>
 						<div class="row">
-							<p:inputText id="txtNome" required="true" maxlength="15" rendered="#{not detalheAdocaoBean.temUsuarioLogado}"
+							<p:inputText id="txtNome" required="true" maxlength="15" 
 								value="#{detalheAdocaoBean.nome}" style="width:95%;"/>
 						</div>
 					</div>
 					<div style="padding-left: 15px">
 						<div class="row">
-							<p:outputLabel value="E-mail:" for="txtEmail" rendered="#{not detalheAdocaoBean.temUsuarioLogado}"/>
+							<p:outputLabel value="E-mail:" for="txtEmail" />
 						</div>
 						<div class="row">
 							<p:inputText id="txtEmail" required="true" maxlength="50"
-								value="#{detalheAdocaoBean.email}" rendered="#{not detalheAdocaoBean.temUsuarioLogado}"
+								value="#{detalheAdocaoBean.email}" 
 								requiredMessage="informe seu e-mail!" style="width:95%;"
 								validatorMessage="E-mail não está em formato válido!">
 								<f:validateRegex
@@ -201,11 +201,11 @@
 					</div>
 					<div style="padding-left: 15px">
 						<div class="row">
-							<p:outputLabel value="Telefone:" for="txtTel" rendered="#{not detalheAdocaoBean.temUsuarioLogado}"/>
+							<p:outputLabel value="Telefone:" for="txtTel"/>
 						</div>
 						<div class="row">
 							<p:inputMask mask="(99)999999999" id="txtTel" maxlength="20" style="width:50%;"
-								value="#{detalheAdocaoBean.telefone}" rendered="#{not detalheAdocaoBean.temUsuarioLogado}"/>
+								value="#{detalheAdocaoBean.telefone}" />
 						</div>
 					</div>
 					<div style="padding-left: 15px">

@@ -13,6 +13,7 @@ import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Notificacao;
 import br.com.petshow.model.Perdido;
+import br.com.petshow.model.Usuario;
 import br.com.petshow.util.FormatacaoUtil;
 import br.com.petshow.web.util.CallNotificacaoRest;
 import br.com.petshow.web.util.MessagesBeanUtil;
@@ -29,8 +30,9 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 	private String mensagem;
 	private String id;
 	private String tipo;
-	private boolean temUsuarioLogado;
 	private boolean encontrado;
+	
+	private Usuario usuario= null;
 	
 	@PostConstruct
 	public void init() {
@@ -45,14 +47,18 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 		}
 		verificarSeUsuarioLogado();
 	}
+	
+	private void preencherCampos(Usuario usuario) {
+		nome = usuario.getNome();
+		email = usuario.getEmail();
+		
+	}
+	
 
 	private void verificarSeUsuarioLogado() {
 		if(getUsuarioLogado() != null){
-			if(getUsuarioLogado().getId() > 0){
-				setTemUsuarioLogado(true);
-			}else{
-				setTemUsuarioLogado(false);
-			}
+			usuario =  getUsuarioLogado();
+			preencherCampos( usuario);
 		}
 	}
 
@@ -85,8 +91,8 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 			notificacao.setTpNotificacao("P");
 			notificacao.setAssuntoNotificacao(EnumAssuntoNotificacao.PERDIDO);
 			notificacao.setUsuarioDestinatario(getPerdido().getUsuario());
-			if(isTemUsuarioLogado()){
-				notificacao.setUsuarioRemetente(getUsuarioLogado());
+			if(usuario!=null){
+				notificacao.setUsuarioRemetente(usuario);
 			}else{
 				notificacao.setUsuarioRemetente(null);
 			}
@@ -221,13 +227,7 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 		this.telefone = telefone;
 	}
 
-	public boolean isTemUsuarioLogado() {
-		return temUsuarioLogado;
-	}
-
-	public void setTemUsuarioLogado(boolean temUsuarioLogado) {
-		this.temUsuarioLogado = temUsuarioLogado;
-	}
+	
 
 	public String getTipo() {
 		return tipo;

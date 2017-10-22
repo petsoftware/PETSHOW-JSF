@@ -148,19 +148,19 @@
 							<p:messages id="msgEnviar" />
 							<div style="padding-left: 15px">
 								<div class="row">
-									<h:outputLabel rendered="#{not detalhePerdidoBean.temUsuarioLogado}" value="Nome:" for="txtNome" />
+									<h:outputLabel  value="Nome:" for="txtNome" />
 								</div>
 								<div class="row">
-									<p:inputText id="txtNome" rendered="#{not detalhePerdidoBean.temUsuarioLogado}" required="true" maxlength="40"
+									<p:inputText id="txtNome"  required="true" maxlength="40"
 										value="#{detalhePerdidoBean.nome}" style="width:95%;"/>
 								</div>
 							</div>
 							<div style="padding-left: 15px">
 								<div class="row">
-									<p:outputLabel rendered="#{not detalhePerdidoBean.temUsuarioLogado}" value="E-mail:" for="txtEmail" />
+									<p:outputLabel  value="E-mail:" for="txtEmail" />
 								</div>
 								<div class="row">
-									<p:inputText rendered="#{not detalhePerdidoBean.temUsuarioLogado}" id="txtEmail" required="true" maxlength="70"
+									<p:inputText id="txtEmail" required="true" maxlength="70"
 										value="#{detalhePerdidoBean.email}"
 										requiredMessage="informe seu e-mail!" style="width:95%;"
 										validatorMessage="E-mail não está em formato válido!">
@@ -171,10 +171,10 @@
 							</div>
 							<div style="padding-left: 15px">
 								<div class="row">
-									<p:outputLabel rendered="#{not detalhePerdidoBean.temUsuarioLogado}" value="Telefone:" for="txtTel" />
+									<p:outputLabel value="Telefone:" for="txtTel" />
 								</div>
 								<div class="row">
-									<p:inputMask rendered="#{not detalhePerdidoBean.temUsuarioLogado}" mask="(99)999999999" id="txtTel" maxlength="20" style="width:50%;"
+									<p:inputMask  mask="(99)999999999" id="txtTel" maxlength="20" style="width:50%;"
 										value="#{detalhePerdidoBean.telefone}" />
 								</div>
 							</div>
