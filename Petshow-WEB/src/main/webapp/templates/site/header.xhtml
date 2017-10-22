@@ -110,7 +110,7 @@ function topShow(dialog){
 						<p:commandButton id="sair" styleClass="btn btn-default btn-lg"
 							style="margin-right:4px" icon="fa fa-times" value="Sair"
 							process="@this" title="Fecha a janela sem efetuar o login"
-							oncomplete="PF('edlg').hide();" actionListener="#{loginBean.limparCampos}" />
+							oncomplete="PF('edlg').hide();" actionListener="#{loginBean.limparCampos}"  update="usuario,senha" />
 						
 
 						<p:commandButton id="confirmar"
