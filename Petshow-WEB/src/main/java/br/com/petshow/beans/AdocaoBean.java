@@ -183,7 +183,14 @@ public class AdocaoBean extends SuperBean<Adocao>{
 				msg = "Favor informar a cidade";
 			}else if(adocao.getTitulo().trim().isEmpty()){
 				msg = "Por favor informe o nome do animal";
+			}else if(adocao.getFase() == null){
+				msg = "Por favor informe se o animal a fase do animal :é filhote, adulto ou idoso?";
+			}else if(adocao.getFlSexo() == null){
+				msg = "Por favor informe se o animal é macho ou fêmea";
+			}else if(adocao.getFotos().size() == 0 ){
+				msg = "Por favor selecione ao menos uma foto";
 			}
+			
 		}else{
 			msg = "";
 		}

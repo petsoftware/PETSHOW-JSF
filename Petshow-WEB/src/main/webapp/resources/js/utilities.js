@@ -6,9 +6,11 @@ jQuery(function($){
 			
     		
     	   $(".onlyTelephone").mask("(99) - 999999999");
+    	   $(".onlyNumber").mask("999999999");
+    	   $(".onlyDDD").mask("99");
     	  
     	   $( ".email-validation" ).blur(function validarEmail(){
-    		  
+    		
     		      var email = $(".email-validation").val();
     		      if(email != "")
     		      {
