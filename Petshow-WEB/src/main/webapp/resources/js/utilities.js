@@ -8,6 +8,7 @@ jQuery(function($){
     	   $(".onlyTelephone").mask("(99) - 999999999");
     	   $(".onlyNumber").mask("999999999");
     	   $(".onlyDDD").mask("99");
+    	   $(".onlyNumberCnpj").mask("99999999999999");
     	  
     	   $( ".email-validation" ).blur(function validarEmail(){
     		

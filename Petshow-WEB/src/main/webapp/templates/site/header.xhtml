@@ -198,7 +198,7 @@ function topShow(dialog){
 									<div class="inputTextGroupLeft">
 										<p:inputText id="txtCNPJ" style="width:100%;" label="CNPJ"
 											value="#{novoUsuarioBean.usuario.cnpjCpf}" placeholder="CNPJ - SOMENTE NÚMEROS"
-											title="CNPJ" required="#{novoUsuarioBean.renderizarCNPJ}" 
+											title="CNPJ" required="#{novoUsuarioBean.renderizarCNPJ}"  class="onlyNumberCnpj"
 											requiredMessage="O CNPJ neste caso é necessário" maxlength="14"
 											>
 											<f:validator
