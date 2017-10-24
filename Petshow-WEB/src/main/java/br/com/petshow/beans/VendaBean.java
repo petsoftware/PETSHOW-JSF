@@ -158,13 +158,13 @@ public class VendaBean {
 
 	public void selecionar(Venda venda){
 		this.venda=venda;
-		
-		if(venda.getEstado()!=null){
-			getAutoCompleteBean().consultaCidades(venda.getEstado());
-			if(venda.getCidade()!=null){
-				getAutoCompleteBean().consultaBairros(venda.getCidade());;
-			}
-		}
+//		
+//		if(venda.getEstado()!=null){
+//			getAutoCompleteBean().consultaCidades(venda.getEstado());
+//			if(venda.getCidade()!=null){
+//				getAutoCompleteBean().consultaBairros(venda.getCidade());;
+//			}
+//		}
 		
 
 	}

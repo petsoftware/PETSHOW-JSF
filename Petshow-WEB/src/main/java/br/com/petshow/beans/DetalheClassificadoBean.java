@@ -1,23 +1,17 @@
 package br.com.petshow.beans;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
 
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
-import br.com.petshow.model.Anuncio;
 import br.com.petshow.model.Venda;
 import br.com.petshow.util.FormatacaoUtil;
-import br.com.petshow.util.ValidationUtil;
-import br.com.petshow.web.util.CallVendaRest;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
@@ -161,28 +155,28 @@ public class DetalheClassificadoBean {
 		this.mensagem = mensagem;
 	}
 	
-	public String getEstado() {
-		if(venda.getEstado() !=null){
-			return venda.getEstado().getNome();
-		}else{
-			return "Não Informado";
-		}
-		
-	}
-	public String getCidade() {
-		if(venda.getCidade() !=null){
-			return venda.getCidade().getNome();
-		}else{
-			return "Não Informado";
-		}
-	}
-	public String getBairro() {
-		if(venda.getBairro() !=null){
-			return venda.getBairro().getNome();
-		}else{
-			return "Não Informado";
-		}
-	}
+//	public String getEstado() {
+//		if(venda.getEstado() !=null){
+//			return venda.getEstado().getNome();
+//		}else{
+//			return "Não Informado";
+//		}
+//		
+//	}
+//	public String getCidade() {
+//		if(venda.getCidade() !=null){
+//			return venda.getCidade().getNome();
+//		}else{
+//			return "Não Informado";
+//		}
+//	}
+//	public String getBairro() {
+//		if(venda.getBairro() !=null){
+//			return venda.getBairro().getNome();
+//		}else{
+//			return "Não Informado";
+//		}
+//	}
 
 	public String getId() {
 		return id;

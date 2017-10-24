@@ -48,6 +48,11 @@
 			<redirect />
 		</navigation-case>
 		<navigation-case>
+			<from-outcome>private-classificados</from-outcome>
+			<to-view-id>/private/private-classificado.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
 			<from-outcome>perdido-detalhe</from-outcome>
 			<to-view-id>/perdido-detalhe-site.xhtml</to-view-id>
 			<redirect />
