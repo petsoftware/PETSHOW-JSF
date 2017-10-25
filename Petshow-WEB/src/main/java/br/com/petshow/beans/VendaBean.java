@@ -13,6 +13,8 @@ import javax.servlet.http.Part;
 
 import org.primefaces.event.FileUploadEvent;
 
+import br.com.petshow.enums.EnumCategoria;
+import br.com.petshow.enums.EnumTipoClassificado;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Bairro;
@@ -44,6 +46,8 @@ public class VendaBean {
 	private Part imagem2;
 	private Part imagem3;
 	private List<String> tempList = new ArrayList<>();
+	private List<EnumCategoria> categorias;
+	private EnumTipoClassificado tipoClassificado;
 
 	public List<String> getTempList() {
 		return tempList;
@@ -284,6 +288,35 @@ public class VendaBean {
 			}
 		}
 		return false;
+	}
+	
+	public EnumTipoClassificado[] getTiposClassificado() {
+		return EnumTipoClassificado.values();
+	}
+	
+	public List<EnumCategoria> obterCategoriaByTtype(EnumTipoClassificado type) {
+		setCategorias(EnumCategoria.getListEnum(type));
+		return getCategorias();
+	}
+
+
+	public List<EnumCategoria> getCategorias() {
+		return categorias;
+	}
+
+
+	public void setCategorias(List<EnumCategoria> categorias) {
+		this.categorias = categorias;
+	}
+
+
+	public void setTipoClassificado(EnumTipoClassificado tipoClassificado) {
+		this.tipoClassificado = tipoClassificado;
+	}
+
+
+	public EnumTipoClassificado getTipoClassificado() {
+		return tipoClassificado;
 	}
 	
 }

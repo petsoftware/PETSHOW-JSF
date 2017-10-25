@@ -96,7 +96,7 @@
 									<f:param name="id" value="#{venda.id}"></f:param>
 									<div class="div-click" onclick="#">
 										<p:panel
-											header="#{venda.usuario.nome}   -   (#{venda.dddCelular})  #{venda.telefoneCelular}"
+											header="#{venda.descResumida}   -   (#{venda.dddCelular})  #{venda.telefoneCelular}"
 											styleClass="box">
 											 <f:facet name="actions">
 											 	<div class="ui-panel-titlebar-icon">
@@ -125,8 +125,12 @@
 														<h6 style="text-align: justify;text-justify: inter-word; padding-left: 15px;" >#{venda.endereco.cidade.nome} - #{venda.endereco.uf.label}</h6>
 													</div>
 												</div>
-		
 											</div>
+											
+												<div style="float: right;">
+													<h6 style="color: #28a745;" >R$ #{venda.vlVenda}</h6>
+												</div>
+											
 										</p:panel>
 									</div>
 								</p:link>
