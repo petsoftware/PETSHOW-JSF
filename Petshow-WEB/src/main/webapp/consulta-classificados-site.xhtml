@@ -28,7 +28,9 @@
 						<div class="row">
 
 							<div class="col-md-12">
-								<p:selectOneMenu id="cbEstado" value="#{consultaClassificadoBean.uf}"  style="width: 100%;" required="false">
+								<p:selectOneMenu id="cbEstado" value="#{consultaClassificadoBean.uf}"  style="width: 100%;" required="true"
+									requiredMessage="Por favor nos diga o seu Estado."
+								>
 									<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
 									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
 										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(consultaClassificadoBean.uf)}" />
@@ -45,18 +47,35 @@
 							</div>
 						</div>
 
+						
 						<div class="row">
 							<div class="col-md-12">
-								<p:selectOneMenu id="cbCategoria" style="width: 100%;"
-									value="#{consultaClassificadoBean.categoria}">
-									<f:selectItem itemLabel="Escolha uma categoria"
-										itemValue="#{null}" noSelectionOption="true" />
-									<f:selectItems value="#{consultaClassificadoBean.categorias}" var="categ" itemLabel="#{categ.descricao}"  itemValue="#{categ}"/>
-								</p:selectOneMenu>
+								 <p:selectOneMenu id="cbServiceProd" value="#{consultaClassificadoBean.tpClassificado}" required="true" style="width: 100%;"
+								 requiredMessage="É um serviço ou um produto?">
+									<f:selectItem itemLabel="Selecione uma opção" itemValue="#{null}"/>
+									<f:selectItems var="serv" value="#{consultaClassificadoBean.tiposDeClassicados}"  itemValue="#{serv}"/>
+										<p:ajax event="change" update="cbCateg" listener="#{consultaClassificadoBean.obterCategoriaByTtype(consultaClassificadoBean.tpClassificado)}" />
+								 </p:selectOneMenu>
 							</div>
 						</div>
-						
-						
+						<div class="row">
+							<div class="col-md-12">
+								 <p:selectOneMenu id="cbCateg" required="false" style="width: 100%;">
+									<f:selectItem itemLabel="Selecione uma Categoria" itemValue="#{null}"/>
+									<f:selectItems  var="categ" value="#{consultaClassificadoBean.categorias}" itemLabel="#{categ.descricao}" itemValue="#{categ}" />
+								 </p:selectOneMenu>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								
+									<p:outputLabel value="O Que você procura?"/>
+								
+								
+									<p:inputText value="#{consultaClassificadoBean.descResumida}" maxlength="45"/>
+								
+							</div>
+						</div>
 						<div class="row">
 							<div class="col-md-12">
 								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;"  icon="fa fa-fw fa-search" 

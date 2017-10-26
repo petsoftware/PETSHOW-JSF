@@ -10,6 +10,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.com.petshow.enums.EnumCategoria;
+import br.com.petshow.enums.EnumTipoClassificado;
 import br.com.petshow.enums.EnumUF;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
@@ -33,8 +34,10 @@ public class ConsultaClassificadoBean {
 	private Cidade cidade;
 	private EnumUF uf;
 	private EnumCategoria categoria;
+	private EnumTipoClassificado tpClassificado;
+	private String descResumida;
 	private Bairro bairro;
-	
+	private List<EnumCategoria> categorias;
 	@PostConstruct
 	public void init() {
 		this.vendas = new ArrayList<Venda>();
@@ -49,7 +52,12 @@ public class ConsultaClassificadoBean {
 	public List<Venda> buscar() {
 		VendasQuery query = new VendasQuery();
 		try {
-			setVendas(restVenda.buscarAnunciosClassificador(query ));
+			query.setCategoria(getCategoria());
+			query.setCidade(getCidade());
+			query.setDescResumida(getDescResumida());
+			query.setEnumTipoClassificado(getTpClassificado());
+			query.setUf(getUf());
+			setVendas(restVenda.buscarAnunciosClassificador(query));
 			return getVendas();
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
 			return new ArrayList<>();
@@ -63,10 +71,7 @@ public class ConsultaClassificadoBean {
 	public void selecionar(Venda venda){
 
 	}
-	
-	public EnumCategoria[] getCategorias() {
-		return EnumCategoria.values();
-	}
+
 	
 	public List<Venda> getVendasBanco() {
 		try {
@@ -91,6 +96,11 @@ public class ConsultaClassificadoBean {
 		
 		
 		return vendas;
+	}
+	
+	public List<EnumCategoria> obterCategoriaByTtype(EnumTipoClassificado type) {
+		setCategorias(EnumCategoria.getListEnum(type));
+		return categorias;
 	}
 	
 	public List<Venda> getVendas() {
@@ -161,6 +171,28 @@ public class ConsultaClassificadoBean {
 	}
 	public void setCategoria(EnumCategoria categoria) {
 		this.categoria = categoria;
+	}
+	public EnumTipoClassificado getTpClassificado() {
+		return tpClassificado;
+	}
+	public void setTpClassificado(EnumTipoClassificado tpClassificado) {
+		this.tpClassificado = tpClassificado;
+	}
+	public String getDescResumida() {
+		return descResumida;
+	}
+	public void setDescResumida(String descResumida) {
+		this.descResumida = descResumida;
+	}
+	public void setCategorias(List<EnumCategoria> categorias) {
+		this.categorias = categorias;
+	}
+	
+	public EnumTipoClassificado[] getTiposDeClassicados() {
+		return EnumTipoClassificado.values();
+	}
+	public List<EnumCategoria> getCategorias() {
+		return categorias;
 	}
 	
 }
