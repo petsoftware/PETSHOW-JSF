@@ -25,6 +25,7 @@ import br.com.petshow.util.CollectionUtil;
 import br.com.petshow.web.util.CallPerdidoRest;
 import br.com.petshow.web.util.CallRacasRest;
 import br.com.petshow.web.util.ImagemUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
@@ -86,16 +87,49 @@ public class PerdidoBean extends SuperBean<Perdido> {
 		String msg = "";
 		if(perdido != null){
 			if(perdido.getEndereco().getUf() == null){
-				msg = "Por favor selecione o estado";
+				msg = "Por favor selecione o estado!";
 			}else if(perdido.getEndereco().getCidade() == null){
-				msg = "Por favor informe a cidade.";
+				msg = "Por favor informe a cidade!";
 			}else if(perdido.getNome().trim().isEmpty() ){
-				msg = "Por favor informe o nome.";
+				msg = "Por favor informe o nome!";
 			}else if(perdido.getDtPerdidoAchado() == null ){
-				msg = "Por favor informe a data em que ele se perdeu.";
+				msg = "Por favor informe a data do acontecimento!";
 			}else if(perdido.getFlAcontecimento() == null ){
-				msg = "For favor diga se ele foi achado ou perdido.";
+				msg = "Por favor diga se ele foi achado ou perdido!";
+			}else if(perdido.getDddCelular() == null || perdido.getDddCelular() ==0){
+				msg = "Por favor informe seu DDD!";
+			}else if(perdido.getTelefoneCelular() == null || perdido.getTelefoneCelular() ==0 ){
+				msg = "Por favor informe seu número para contato!";
+			}else if(perdido.getTelefoneCelular() < 9999999 ){
+				msg = "Por favor informe um número com 8 ou 9 dígitos! ";
+			}else if(perdido.getDddCelular() < 9 ){
+				msg = "Por favor informe um DDD com  2 dígitos! ";
+			}else if(perdido.getTpAnimal() == null){
+				msg = "Por favor informe o tipo de animal! ";
+			}else if(perdido.getDescAcontecimento() == null){
+				msg = "Por favor fale sobre o acontecimento! ";
+			}else if(perdido.getDescAcontecimento().length() < 20){
+				msg = "Por favor fale um pouco mais sobre como aconteceu! ";
+			}else if(perdido.getFotos().size() == 0){
+				msg = "Por favor coloque pelo menos uma foto do animal! ";
 			}
+			
+			if(perdido.getFlAcontecimento() != null &&
+				perdido.getFlAcontecimento() == EnumAchadoPerdido.PERDIDO &&
+				perdido.getTpAnimal() != null &&
+				(perdido.getTpAnimal() == EnumTipoAnimal.CACHORRO || perdido.getTpAnimal() == EnumTipoAnimal.GATO)){
+				if(perdido.getRaca()== null)
+					msg = "Por favor informe a raça do animal! ";
+				if(perdido.getTpCorPrincipal() == null)
+					msg = "Por favor informe a cor predominante do animal! ";
+			}
+			
+			if(perdido.getTpAnimal() != null &&
+			   perdido.getTpAnimal() == EnumTipoAnimal.CACHORRO && 
+			   perdido.getFlSexo() == null){
+					msg = "Por favor informe o sexo do animal! ";
+				}
+			
 		}else{
 			msg = "Objeto perdido veio nulo";
 		}
@@ -134,6 +168,7 @@ public class PerdidoBean extends SuperBean<Perdido> {
 
 		if(this.perdido!=null){
 			if(perdido.getFotos().size() >= 3){
+				
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Número de imagens ultrapassado!", "Só é permitido por até 3 imagens!"));
 			}else{
 				perdido.getFotos().add(ImagemUtil.transformBase64AsString(ImagemUtil.resizeImage(event.getFile(), EnumSizePhoto.PERDIDO)));
@@ -224,12 +259,14 @@ public class PerdidoBean extends SuperBean<Perdido> {
 			if(perdido.getFlAcontecimento() != null){
 				if(perdido.getFlAcontecimento().equals(EnumAchadoPerdido.PERDIDO)){
 					setDescricao("Qual é o nome do seu PET?");
+					perdido.setNome("");
 				}else{
 					setDescricao("Sugira um nome ou deixe como estar.");
 					perdido.setNome("PET encontrado");
 				}
 				setRedenrizarCampos(true);
 			}else{
+				perdido.setNome("");
 				setRedenrizarCampos(false);
 			}
 		}

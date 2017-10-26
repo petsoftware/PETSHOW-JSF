@@ -39,9 +39,9 @@
 				</p:selectOneMenu>
 			</div>
 			
-			<div class="row"> <p:outputLabel value="#{perdidoBean.descricao}"/></div>
+			<div class="row"> <p:outputLabel value="#{perdidoBean.descricao}" rendered="#{perdidoBean.redenrizarCampos}"/></div>
 			<div class="row">
-				<p:inputText placeholder="NOME DO SEU PET" maxlength="15" id="txtNome" a:autofocus="true"
+				<p:inputText placeholder="NOME DO SEU PET" maxlength="15" id="txtNome" a:autofocus="true" rendered="#{perdidoBean.redenrizarCampos}"
 					value="#{perdidoBean.perdido.nome}" required="false" requiredMessage="Favor informar o nome do PET"/>
 			</div>
 					
@@ -85,16 +85,16 @@
 			<div class="row">
 				<p:calendar id="dtPerdido" style="width: 100%;" locale="pt"
 					pattern="dd/MM/yyyy" mask="true" requiredMessage="Por favor informe a data do acontecimento."
-					value="#{perdidoBean.perdido.dtPerdidoAchado}" required="false"  placeholder="__/__/____"/>
+					value="#{perdidoBean.perdido.dtPerdidoAchado}"  placeholder="__/__/____"/>
 
 			</div>
 			
 			<div class="row"><p:outputLabel value="Contato"/></div>
 			<div class="row">
-				<p:inputText placeholder="DDD" maxlength="2" size="5"
-					value="#{perdidoBean.perdido.dddCelular}" />
+				<p:inputText placeholder="DDD" maxlength="2" size="5" 
+					value="#{perdidoBean.perdido.dddCelular}" class="onlyDDD" />
 				<p:inputText placeholder="Número" maxlength="9"
-					value="#{perdidoBean.perdido.telefoneCelular}" />
+					value="#{perdidoBean.perdido.telefoneCelular}" class="onlyNumber" />
 			</div>
 			
 			
