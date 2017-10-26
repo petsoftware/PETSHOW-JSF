@@ -189,6 +189,16 @@ public class AdocaoBean extends SuperBean<Adocao>{
 				msg = "Por favor informe se o animal é macho ou fêmea";
 			}else if(adocao.getFotos().size() == 0 ){
 				msg = "Por favor selecione ao menos uma foto";
+			}else if(adocao.getTelefoneCelular() == null || adocao.getTelefoneCelular() ==0 ){
+				msg = "Por favor informe seu número para contato!";
+			}else if(adocao.getTelefoneCelular() < 9999999 ){
+				msg = "Por favor informe um número com 8 ou 9 dígitos! ";
+			}else if(adocao.getDddCelular() < 9 ){
+				msg = "Por favor informe um DDD com  2 dígitos! ";
+			}else if(adocao.getDescAdocao() == null){
+				msg = "Por favor fale sobre o animal! ";
+			}else if(adocao.getDescAdocao().length() < 20){
+				msg = "Por favor fale um pouco mais sobre o animal! ";
 			}
 			
 		}else{

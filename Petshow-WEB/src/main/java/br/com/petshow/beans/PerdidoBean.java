@@ -112,6 +112,8 @@ public class PerdidoBean extends SuperBean<Perdido> {
 				msg = "Por favor fale um pouco mais sobre como aconteceu! ";
 			}else if(perdido.getFotos().size() == 0){
 				msg = "Por favor coloque pelo menos uma foto do animal! ";
+			}else if(perdido.getDtPerdidoAchado().getTime() > new Date().getTime()){
+				msg = "A data do acontecimento não pode ser maior que hoje! ";
 			}
 			
 			if(perdido.getFlAcontecimento() != null &&

@@ -193,8 +193,8 @@
 				<div class="form-group">
 					<p:inputTextarea id="txtMensagem"
 						placeholder="FALE COMO ACONTECEU E CARACTERÍSTICAS DO ANIMAL"
-						rows="7" style="width:100%" counter="display" maxlength="700" required="false" requiredMessage="Favor informar o que aconteceu"
-						counterTemplate="{0} characters faltando." 
+						rows="7" style="width:100%" counter="display" maxlength="1000" required="false" requiredMessage="Favor informar o que aconteceu"
+						counterTemplate="{0} Caracteres faltando." 
 						value="#{perdidoBean.perdido.descAcontecimento}" />
 						<p:outputLabel id="display"  />
 				</div>
@@ -255,7 +255,7 @@
 				        	<h:outputText value="#{perdido.nome}" />
 				        </p:column>
 				        
-				        <p:column headerText="Data do Acontecimento" width="120">
+				        <p:column headerText="Data" width="120">
 							<h:outputText value="#{perdido.dtPerdidoAchado}">
 								<f:convertDateTime pattern="dd/MM/yyyy"
 									timeZone="America/Recife" />
@@ -273,21 +273,23 @@
 						
 				        <p:column style="width:15%;text-align: center;">
 							<p:commandButton actionListener="#{perdidoBean.foiEncontrado(perdido)}"
-								type="submit" value="Foi Encontrado" id="btnAdotar" styleClass="btn btn-primary"
+								type="submit" value="Marcar como Encontrado" id="btnAdotar" styleClass="btn btn-primary"
 								rendered="#{not perdido.flEncontrado}" title="Marcar como animal encontrado?" 
 								ajax="true"
 								process="@this"
-								update="grid"
+								update="grid" 
 							/>
 							<p:commandButton
 								actionListener="#{perdidoBean.naoFoiEncontrado(perdido)}" type="submit"
-								value="Não Encontrado" id="btnNaoEncontrado" styleClass="btn btn-danger" title="Marcar como NÃO encontrado?"
+								value="Marcar como não Encontrado" id="btnNaoEncontrado" styleClass="btn btn-danger" title="Marcar como NÃO encontrado?"
 								rendered="#{perdido.flEncontrado}" 
 								ajax="true"
 								process="@this"
 								update="grid"
 								>
 							</p:commandButton>
+							
+							
 						</p:column>
 				  									        							        																        					                		                		               	
 				    </p:dataTable>
