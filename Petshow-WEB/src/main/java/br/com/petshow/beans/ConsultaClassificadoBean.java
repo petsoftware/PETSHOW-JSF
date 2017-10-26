@@ -1,28 +1,25 @@
 package br.com.petshow.beans;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.Part;
 
+import br.com.petshow.enums.EnumCategoria;
+import br.com.petshow.enums.EnumTipoClassificado;
+import br.com.petshow.enums.EnumUF;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Bairro;
 import br.com.petshow.model.Cidade;
 import br.com.petshow.model.Estado;
-import br.com.petshow.model.Usuario;
 import br.com.petshow.model.Venda;
-import br.com.petshow.role.UsuarioRole;
+import br.com.petshow.objects.query.VendasQuery;
 import br.com.petshow.web.util.CallVendaRest;
-import br.com.petshow.web.util.ImagemUtil;
-import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
@@ -35,8 +32,12 @@ public class ConsultaClassificadoBean {
 	private String palavraChave;
 	private Estado estado;
 	private Cidade cidade;
-	
-	
+	private EnumUF uf;
+	private EnumCategoria categoria;
+	private EnumTipoClassificado tpClassificado;
+	private String descResumida;
+	private Bairro bairro;
+	private List<EnumCategoria> categorias;
 	@PostConstruct
 	public void init() {
 		this.vendas = new ArrayList<Venda>();
@@ -47,18 +48,31 @@ public class ConsultaClassificadoBean {
 	public ConsultaClassificadoBean (){
 		super();
 	}
-
 	
-		
+	public List<Venda> buscar() {
+		VendasQuery query = new VendasQuery();
+		try {
+			query.setCategoria(getCategoria());
+			query.setCidade(getCidade());
+			query.setDescResumida(getDescResumida());
+			query.setEnumTipoClassificado(getTpClassificado());
+			query.setUf(getUf());
+			setVendas(restVenda.buscarAnunciosClassificador(query));
+			return getVendas();
+		} catch (ExceptionErroCallRest | ExceptionValidation e) {
+			return new ArrayList<>();
+		}
+	}
+	
 	public String redirectDetalhe(long id){
 		return "classificado-detalhe?id="+id;
 	}
 	
 	public void selecionar(Venda venda){
-	
-		
 
 	}
+
+	
 	public List<Venda> getVendasBanco() {
 		try {
 			long idEstado=0;
@@ -70,7 +84,6 @@ public class ConsultaClassificadoBean {
 				idCidade=cidade.getId();
 			}
 			vendas=restVenda.getListVenda(palavraChave, idCidade, idEstado);
-
 		} catch (ExceptionErroCallRest  e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
 
@@ -84,8 +97,11 @@ public class ConsultaClassificadoBean {
 		
 		return vendas;
 	}
-
-
+	
+	public List<EnumCategoria> obterCategoriaByTtype(EnumTipoClassificado type) {
+		setCategorias(EnumCategoria.getListEnum(type));
+		return categorias;
+	}
 	
 	public List<Venda> getVendas() {
 		return vendas;
@@ -106,9 +122,6 @@ public class ConsultaClassificadoBean {
 		this.restVenda = restVenda;
 	}
 
-
-	
-
 	public AutoCompleteBean getAutoCompleteBean() {
 		return autoCompleteBean;
 	}
@@ -118,52 +131,68 @@ public class ConsultaClassificadoBean {
 		this.autoCompleteBean = autoCompleteBean;
 	}
 
-
-
-
-
 	public String getPalavraChave() {
 		return palavraChave;
 	}
-
-
-
-
 
 	public void setPalavraChave(String palavraChave) {
 		this.palavraChave = palavraChave;
 	}
 
-
-
-
-
 	public Estado getEstado() {
 		return estado;
 	}
-
-
-
-
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
 
-
-
-
-
 	public Cidade getCidade() {
 		return cidade;
 	}
 
-
-
-
-
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+	public EnumUF getUf() {
+		return uf;
+	}
+	public void setUf(EnumUF uf) {
+		this.uf = uf;
+	}
+	public Bairro getBairro() {
+		return bairro;
+	}
+	public void setBairro(Bairro bairro) {
+		this.bairro = bairro;
+	}
+	public EnumCategoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(EnumCategoria categoria) {
+		this.categoria = categoria;
+	}
+	public EnumTipoClassificado getTpClassificado() {
+		return tpClassificado;
+	}
+	public void setTpClassificado(EnumTipoClassificado tpClassificado) {
+		this.tpClassificado = tpClassificado;
+	}
+	public String getDescResumida() {
+		return descResumida;
+	}
+	public void setDescResumida(String descResumida) {
+		this.descResumida = descResumida;
+	}
+	public void setCategorias(List<EnumCategoria> categorias) {
+		this.categorias = categorias;
+	}
+	
+	public EnumTipoClassificado[] getTiposDeClassicados() {
+		return EnumTipoClassificado.values();
+	}
+	public List<EnumCategoria> getCategorias() {
+		return categorias;
 	}
 	
 }

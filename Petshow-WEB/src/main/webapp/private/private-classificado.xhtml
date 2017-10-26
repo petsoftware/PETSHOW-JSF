@@ -86,7 +86,7 @@
 									<div class="ui-grid-row">
 										<p:inputTextarea rows="6" cols="33" id="txtDesc"
 											value="#{vendaBean.venda.descricao}"
-											
+											maxlength="255"
 											requiredMessage="Informe o campo de Descrição!" />
 									</div>
 								</div>
@@ -125,7 +125,39 @@
 									</div>
 								</div>
 							</div>
-
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<p:outputLabel value="Serviço ou Produto?"/>
+									</div>
+								
+									<div class="ui-grid-row">
+										<div class="form-group">
+											 <p:selectOneMenu id="cbServiceProd" value="#{vendaBean.tipoClassificado}" required="false" style="width: 100%;">
+												<f:selectItem itemLabel="Selecione uma opção" itemValue="#{null}"/>
+												<f:selectItems var="serv" value="#{vendaBean.tiposClassificado}"  itemValue="#{serv}"/>
+													<p:ajax event="change" update="cbCateg" listener="#{vendaBean.obterCategoriaByTtype(vendaBean.tipoClassificado)}" />
+											 </p:selectOneMenu>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ui-grid-row ui-grid-row-custom">
+								<div class="ui-grid-col-12">
+									<div class="ui-grid-row">
+										<p:outputLabel value="Categoria"/>
+									</div>
+								
+									<div class="ui-grid-row">
+										<div class="form-group">
+											 <p:selectOneMenu id="cbCateg" required="false" style="width: 100%;">
+												<f:selectItem itemLabel="Selecione uma Categoria" itemValue="#{null}"/>
+												<f:selectItems  var="categ" value="#{vendaBean.categorias}" itemLabel="#{categ.descricao}" itemValue="#{categ}" />
+											 </p:selectOneMenu>
+										</div>
+									</div>
+								</div>
+							</div>
 							<p:fileUpload fileUploadListener="#{vendaBean.enviaImagem}"
                               update="pnlFotos,msgs"
                               ajax="true"

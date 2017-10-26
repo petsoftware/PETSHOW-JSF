@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="#{pageHelperBean.mainTemplateSite}">
+
+
+
+	<ui:define name="body">
+		<section class="content-section-a">
+			<div class="container">
+				<div class="row">
+					<img class="img-fluid" src="#{request.contextPath}/resources/images/dog-lost-green-64.png" />	<h4 style="padding-top: 15px;color: #45a900;">CLASSIFICADOS</h4>
+				</div>
+				<div class="row">
+					<div class="consulta-col col-md-4" >
+						<div class="row">
+							<div class="col-md-12">
+								<h5 class="h5-font">FILTRAR A BUSCA POR:</h5>
+							</div>
+						</div>
+						<div class="row">
+
+							<div class="col-md-12">
+								<p:selectOneMenu id="cbEstado" value="#{consultaClassificadoBean.uf}"  style="width: 100%;" required="true"
+									requiredMessage="Por favor nos diga o seu Estado."
+								>
+									<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
+									<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+										<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(consultaClassificadoBean.uf)}" />
+								 </p:selectOneMenu>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p:selectOneMenu id="cbCidade" value="#{consultaClassificadoBean.cidade}" converter="cidadeConverter" style="width: 100%;"
+									required="false" >
+									<f:selectItem itemLabel="#{placeHolderBean.selCidade}"/>
+									<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+								</p:selectOneMenu>
+							</div>
+						</div>
+
+						
+						<div class="row">
+							<div class="col-md-12">
+								 <p:selectOneMenu id="cbServiceProd" value="#{consultaClassificadoBean.tpClassificado}" required="true" style="width: 100%;"
+								 requiredMessage="É um serviço ou um produto?">
+									<f:selectItem itemLabel="É serviço ou Produto?" itemValue="#{null}"/>
+									<f:selectItems var="serv" value="#{consultaClassificadoBean.tiposDeClassicados}"  itemValue="#{serv}"/>
+										<p:ajax event="change" update="cbCateg" listener="#{consultaClassificadoBean.obterCategoriaByTtype(consultaClassificadoBean.tpClassificado)}" />
+								 </p:selectOneMenu>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								 <p:selectOneMenu id="cbCateg" required="false" style="width: 100%;">
+									<f:selectItem itemLabel="Selecione uma Categoria" itemValue="#{null}"/>
+									<f:selectItems  var="categ" value="#{consultaClassificadoBean.categorias}" itemLabel="#{categ.descricao}" itemValue="#{categ}" />
+								 </p:selectOneMenu>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<!-- 
+								<div class="row" style="width:100%">
+									<p:outputLabel value="O Que você procura?"/>
+								</div>
+								<div class="row" style="width:100%">
+								 -->	
+									<p:inputText value="#{consultaClassificadoBean.descResumida}" maxlength="45" style="width:100%" placeholder="O que você procura?"/>
+								<!-- 
+								</div>
+								 -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;"  icon="fa fa-fw fa-search" 
+									action="#{consultaClassificadoBean.buscar}" ajax="false"
+									value="BUSCAR" update="panelVendas" id="btConsulta" />
+							</div>
+						</div>
+						<div class="row" style="padding-top:5px;">
+							<div class="col-md-12">
+								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;background-color:#ff8507"  image="gravar" 
+									action="private-classificados" rendered="true"
+									value="ANUNCIAR VENDA"  id="btnAnunciarVenda" ajax="false"/>
+								
+							</div>
+						</div>
+					</div>
+					<div class="consulta-result col-sm-8">
+						<div class="col-sm-12">
+							<div class="row">
+								<h6>TOTAL DE RESULTADOS ENCONTRADOS: &#160;</h6> <h5 style="color: #F47D30"> <ui:remove>#{consultaClassificadoBean.totalRows}</ui:remove> </h5>
+							</div>
+						</div>	
+						<h:panelGroup id="panelVendas">
+							<p:panel header="SEM RESULTADO" rendered="#{empty consultaClassificadoBean.vendas}">
+								<div class="row">
+									<div class="col-md-4">
+										<img class="img-fluid" src="#{request.contextPath}/resources/images/emo-icons/sad-64.png" />
+									</div>
+									<div class="col-md-6">
+										<p> Ops!!! Nenhum resultado encontrado. Faça uma consulta diferente escolhendo outras opções.</p>
+									</div>
+								</div>
+							</p:panel>
+							<ui:repeat var="venda"
+								value="#{consultaClassificadoBean.vendas}">
+								<p:link outcome="perdido-detalhe" styleClass="btn-detalhes">
+									<f:param name="id" value="#{venda.id}"></f:param>
+									<div class="div-click" onclick="#">
+										<p:panel
+											header="#{venda.descResumida}   -   (#{venda.dddCelular})  #{venda.telefoneCelular}"
+											styleClass="box">
+											 <f:facet name="actions">
+											 	<div class="ui-panel-titlebar-icon">
+									            	#{venda.getTempoDePublicacao} 
+									            	<i class="fa fa-clock-o" aria-hidden="true"></i>
+									            </div>
+		        							</f:facet>
+											<div class="row">
+												<div class="col-md-4">
+													<h:panelGroup  rendered="#{venda.fotos.size() == 0}">
+														<img class="img-fluid"
+															src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+													</h:panelGroup>
+													<h:graphicImage rendered="#{venda.fotos.size() > 0}"
+																		style="width:100%;height:100%;"
+																		stream="false" cache="false"
+																		url="data:image/jpg;base64,#{venda.fotos.get(0)}" id="visualizacao"
+																		alt="Visualização do anúncio" />
+														
+												</div>
+												<div class="col-md-8">
+													<h6 style="text-align: justify;text-justify: inter-word;">#{venda.descricao}</h6>
+												</div>
+												<div class="row">
+													<div style="padding-top: 10px;">
+														<h6 style="text-align: justify;text-justify: inter-word; padding-left: 15px;" >#{venda.endereco.cidade.nome} - #{venda.endereco.uf.label}</h6>
+													</div>
+												</div>
+											</div>
+											
+												<div style="float: right;">
+													<h6 style="color: #28a745;" >R$ #{venda.vlVenda}</h6>
+												</div>
+											
+										</p:panel>
+									</div>
+								</p:link>
+							</ui:repeat>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
+		</section>
+	</ui:define>
+
+</ui:composition>
+
+</html>
+
+
