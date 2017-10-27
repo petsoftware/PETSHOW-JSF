@@ -51,7 +51,7 @@ public class DetalhePerdidoBean extends SuperBean<Perdido>{
 	private void preencherCampos(Usuario usuario) {
 		nome = usuario.getNome();
 		email = usuario.getEmail();
-		if(usuario.getDdd() > 0 && usuario.getTelefone()>0){
+		if(usuario.getDdd() != null && usuario.getTelefone() !=null && usuario.getDdd() > 0 && usuario.getTelefone()>0){
 			telefone = usuario.getDdd()+""+usuario.getTelefone();
 		}
 		

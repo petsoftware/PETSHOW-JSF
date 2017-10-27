@@ -88,7 +88,11 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 		if(notificacao.getUsuarioRemetente() != null){
 			try {
 				notificacaoResp.setAssuntoNotificacao(EnumAssuntoNotificacao.PERDIDO);
-				notificacaoResp.setContato(notificacao.getUsuarioDestinatario().getTelefone()+"");
+				if(notificacao.getUsuarioDestinatario().getDdd() != null && notificacao.getUsuarioDestinatario().getTelefone() !=null){
+					notificacaoResp.setContato(notificacao.getUsuarioDestinatario().getDdd()+ " - "+notificacao.getUsuarioDestinatario().getTelefone());
+				}else{
+					notificacaoResp.setContato("");
+				}
 				notificacaoResp.setDtNotificacao(new Date());
 				notificacaoResp.setEmail(notificacao.getUsuarioDestinatario().getEmail());
 				notificacaoResp.setFlEnviada(false);
@@ -126,7 +130,13 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 		if(notificacao.getUsuarioRemetente() != null){
 			try {
 				notificacaoResp.setAssuntoNotificacao(EnumAssuntoNotificacao.PERDIDO);
-				notificacaoResp.setContato(notificacao.getUsuarioDestinatario().getTelefone()+"");
+				
+				if(notificacao.getUsuarioDestinatario().getDdd() != null && notificacao.getUsuarioDestinatario().getTelefone() !=null){
+					notificacaoResp.setContato(notificacao.getUsuarioDestinatario().getDdd()+ " - "+notificacao.getUsuarioDestinatario().getTelefone());
+				}else{
+					notificacaoResp.setContato("");
+				}
+				
 				notificacaoResp.setDtNotificacao(new Date());
 				notificacaoResp.setEmail(notificacao.getUsuarioDestinatario().getEmail());
 				notificacaoResp.setFlEnviada(false);

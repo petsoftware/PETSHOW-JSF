@@ -57,10 +57,10 @@
 					<div class="row">
 					<div class="form-group">
 						<p:inputText id="txtDDD1" value="#{usuarioBean.usuario.ddd}"
-							maxlength="2" size="2" />
+							maxlength="2" size="2"  class="onlyDDD" />
 						<p:outputLabel value="/" />
 						<p:inputText id="txtTel1" size="9"
-							value="#{usuarioBean.usuario.telefone}" maxlength="9" />
+							value="#{usuarioBean.usuario.telefone}" maxlength="9" class="onlyNumber" />
 							</div>
 					</div>
 
@@ -70,11 +70,11 @@
 					</div>
 					<div class="row">
 					<div class="form-group">
-						<p:inputText id="txtDDD2" size="2"
+						<p:inputText id="txtDDD2" size="2" class="onlyDDD"
 							value="#{usuarioBean.usuario.ddd2}" maxlength="2" />
 						<p:outputLabel value="/" />
 						<p:inputText id="txtTel2" size="9"
-							value="#{usuarioBean.usuario.telefone2}" maxlength="8" />
+							value="#{usuarioBean.usuario.telefone2}" maxlength="8" class="onlyNumber"/>
 							</div>
 					</div>
 
