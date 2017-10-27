@@ -73,10 +73,17 @@
 						
 						<span class="chat-img pull-right">
 							<h:panelGroup rendered="#{notificacao.perdido != null}">
-								 <h:commandButton value="Ver Perdido" type="submit" class="btn btn-link"   style="padding-bottom:5px"/>
+								<p:link  outcome="/perdido-detalhe-site.xhtml"  styleClass="btn btn-link" style="padding-bottom:5px">
+								<f:param name="id" value="#{notificacao.perdido.id}"></f:param>
+								Ver Anúncio
+								</p:link>
 							 </h:panelGroup>
 							<h:panelGroup rendered="#{notificacao.adocao != null}">
-						 		<h:commandButton value="Ver Anúncio" type="submit" class="btn btn-link"   style="padding-bottom:5px"/>
+							<p:link  outcome="/adocao-detalhe-site.xhtml"  styleClass="btn btn-link" style="padding-bottom:5px">
+								<f:param name="id" value="#{notificacao.adocao.id}"></f:param>
+								Ver Anúncio
+								</p:link>
+						 	
 						 	</h:panelGroup>
 						</span>
 						
