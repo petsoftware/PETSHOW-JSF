@@ -25,6 +25,7 @@ import br.com.petshow.role.UsuarioRole;
 import br.com.petshow.util.CollectionUtil;
 import br.com.petshow.web.util.CallVendaRest;
 import br.com.petshow.web.util.ImagemUtil;
+import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
@@ -161,7 +162,13 @@ public class VendaBean {
 	}
 
 	public void selecionar(Venda venda){
-		this.venda=venda;
+		if(venda != null){
+			
+			this.venda=venda;
+		}else{
+			MessagesBeanUtil.infor("", "Venda selecionada não é válida.");
+		}
+		
 //		
 //		if(venda.getEstado()!=null){
 //			getAutoCompleteBean().consultaCidades(venda.getEstado());

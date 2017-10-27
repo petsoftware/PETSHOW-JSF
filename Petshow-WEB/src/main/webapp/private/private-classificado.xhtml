@@ -150,7 +150,7 @@
 								
 									<div class="ui-grid-row">
 										<div class="form-group">
-											 <p:selectOneMenu id="cbCateg" required="false" style="width: 100%;">
+											 <p:selectOneMenu value="#{vendaBean.venda.categoria}" id="cbCateg" required="false" style="width: 100%;">
 												<f:selectItem itemLabel="Selecione uma Categoria" itemValue="#{null}"/>
 												<f:selectItems  var="categ" value="#{vendaBean.categorias}" itemLabel="#{categ.descricao}" itemValue="#{categ}" />
 											 </p:selectOneMenu>
@@ -215,9 +215,16 @@
 										<h:outputLabel value="Valor" for="txtValor" />
 									</div>
 									<div class="ui-grid-row">
+										<!-- 
 										<p:inputText id="txtValor" validator="numeroValidator"
 											value="#{vendaBean.venda.vlVenda}"
 											validatorMessage="Campo de valor aceita somente numericos!" />
+										 -->
+										<p:inputNumber id="txtValor" value="#{vendaBean.venda.vlVenda}" maxValue="10000"
+											symbol="R$ "  decimalSeparator="," thousandSeparator="."
+										/>
+										
+										
 									</div>
 								</div>
 							</div>
@@ -238,7 +245,7 @@
 																cache="false" 
 																url="data:image/jpg;base64,#{foto}"
 																id="visualizacao" 
-																alt="Visualização do anuncio"
+																alt="Visualização do Classificado PET"
 																/>
 															<span style="font-size:58px;display:#{foto.isEmpty() ? 'inline-block' : 'none'  }" class="fa-stack fa-lg">
 															  <i class="fa fa-camera fa-stack-1x"></i>

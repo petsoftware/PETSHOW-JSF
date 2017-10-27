@@ -17,7 +17,6 @@ import br.com.petshow.model.Adocao;
 import br.com.petshow.model.Notificacao;
 import br.com.petshow.web.util.CallAnimalRest;
 import br.com.petshow.web.util.CallNotificacaoRest;
-import br.com.petshow.web.util.CallPerfilAdocaoRest;
 /**
  * Notificacoes do usuario
  * @author Rafael Rocha
@@ -88,7 +87,7 @@ public class NotificacoesBean extends SuperBean<Notificacao> {
 		if(notificacao.getUsuarioRemetente() != null){
 			try {
 				notificacaoResp.setAssuntoNotificacao(EnumAssuntoNotificacao.PERDIDO);
-				if(notificacao.getUsuarioDestinatario().getDdd() > 0 && notificacao.getUsuarioDestinatario().getTelefone() > 0){
+				if(notificacao.getUsuarioDestinatario().getDdd() != null && notificacao.getUsuarioDestinatario().getTelefone() !=null){
 					notificacaoResp.setContato(notificacao.getUsuarioDestinatario().getDdd()+ " - "+notificacao.getUsuarioDestinatario().getTelefone());
 				}else{
 					notificacaoResp.setContato("");

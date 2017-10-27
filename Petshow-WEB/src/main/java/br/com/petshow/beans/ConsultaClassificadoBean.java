@@ -49,7 +49,7 @@ public class ConsultaClassificadoBean {
 		super();
 	}
 	
-	public List<Venda> buscar() {
+	public String buscar() {
 		VendasQuery query = new VendasQuery();
 		try {
 			query.setCategoria(getCategoria());
@@ -58,9 +58,9 @@ public class ConsultaClassificadoBean {
 			query.setEnumTipoClassificado(getTpClassificado());
 			query.setUf(getUf());
 			setVendas(restVenda.buscarAnunciosClassificador(query));
-			return getVendas();
+			return null;
 		} catch (ExceptionErroCallRest | ExceptionValidation e) {
-			return new ArrayList<>();
+			return null;
 		}
 	}
 	

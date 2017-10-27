@@ -100,12 +100,17 @@ public class DetalheClassificadoBean {
 		}
 	}
 	public String getTelCelVendedor(){
-		if(venda ==null || venda.getUsuario().getDdd() ==0 || venda.getUsuario().getTelefone()==0){
+		if(naoInformouContato()){
 			return "Não Informado";
 		}else{
 			return FormatacaoUtil.telefoneComDDD(venda.getUsuario().getDdd(), venda.getUsuario().getTelefone(), false);
 			
 		}
+	}
+
+	private boolean naoInformouContato() {
+		return venda ==null || venda.getUsuario().getDdd() ==0 || venda.getUsuario().getTelefone()==0 ||  
+			   venda.getUsuario().getDdd() !=null || venda.getUsuario().getTelefone() !=null;
 	}
 	public String getDataAnunciada(){
 		if(venda !=null ){

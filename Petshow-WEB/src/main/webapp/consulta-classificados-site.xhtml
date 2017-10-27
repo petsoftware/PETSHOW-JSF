@@ -60,7 +60,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								 <p:selectOneMenu id="cbCateg" required="false" style="width: 100%;">
+								 <p:selectOneMenu value="#{consultaClassificadoBean.categoria}" id="cbCateg" required="false" style="width: 100%;">
 									<f:selectItem itemLabel="Selecione uma Categoria" itemValue="#{null}"/>
 									<f:selectItems  var="categ" value="#{consultaClassificadoBean.categorias}" itemLabel="#{categ.descricao}" itemValue="#{categ}" />
 								 </p:selectOneMenu>
@@ -68,16 +68,7 @@
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<!-- 
-								<div class="row" style="width:100%">
-									<p:outputLabel value="O Que você procura?"/>
-								</div>
-								<div class="row" style="width:100%">
-								 -->	
-									<p:inputText value="#{consultaClassificadoBean.descResumida}" maxlength="45" style="width:100%" placeholder="O que você procura?"/>
-								<!-- 
-								</div>
-								 -->
+								<p:inputText value="#{consultaClassificadoBean.descResumida}" maxlength="45" style="width:100%" placeholder="O que você procura?"/>
 							</div>
 						</div>
 						<div class="row">
@@ -91,7 +82,9 @@
 							<div class="col-md-12">
 								<p:commandButton styleClass="btn btn-success btn-lg" style="width: 100%;background-color:#ff8507"  image="gravar" 
 									action="private-classificados" rendered="true"
-									value="ANUNCIAR VENDA"  id="btnAnunciarVenda" ajax="false"/>
+									value="ANUNCIAR VENDA"  id="btnAnunciarVenda" ajax="true" immediate="true">
+									<f:ajax />
+								</p:commandButton>
 								
 							</div>
 						</div>
@@ -115,7 +108,7 @@
 							</p:panel>
 							<ui:repeat var="venda"
 								value="#{consultaClassificadoBean.vendas}">
-								<p:link outcome="perdido-detalhe" styleClass="btn-detalhes">
+								<p:link outcome="classificado-detalhe" styleClass="btn-detalhes">
 									<f:param name="id" value="#{venda.id}"></f:param>
 									<div class="div-click" onclick="#">
 										<p:panel
@@ -151,7 +144,10 @@
 											</div>
 											
 												<div style="float: right;">
-													<h6 style="color: #28a745;" >R$ #{venda.vlVenda}</h6>
+													<p:outputLabel title="Este item custa #{venda.vlVenda}" value="#{venda.vlVenda}" style="color: #28a745;font-size:large !important; font-weight: bold !important;">
+														<f:convertNumber type="currency" currencySymbol="R$"/>
+													</p:outputLabel>
+													
 												</div>
 											
 										</p:panel>

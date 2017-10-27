@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{pageHelperBean.mainTemplateSite}">
+
+	<ui:define name="header">
+
+	</ui:define>
+	<f:metadata>
+		<f:viewParam name="id" value="#{detalheClassificadoBean.id}" />
+	</f:metadata>
+	<ui:define name="body">
+		<script type="text/javascript">
+			jQuery(function($) {
+
+				$("input.txtTel").mask("99999999999");
+
+			});
+		</script>
+
+		<section class="content-section-a">
+			<div class="container">
+				<div class="row box-titulo">
+					<div class="col-md-4">
+						
+					</div>
+					<div class="col-md-4">
+						<h4>#{detalheClassificadoBean.venda.descResumida}</h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+							<div class="row">
+								<div class="col-md-11" style=" margin-top: 20px;">
+									
+									<p:galleria value="#{detalheClassificadoBean.venda.fotos}" var="foto"   class ="d-none d-md-block" panelWidth="600"  panelHeight="400" >
+										<h:graphicImage url="data:image/jpg;base64,#{foto}" style="width:100%;height:100% "  id="visualizacao1" title="" />
+									</p:galleria>
+							
+									<p:galleria value="#{detalheClassificadoBean.venda.fotos}" var="foto" 	panelWidth="342"  panelHeight="216"  class ="d-sm-block d-md-none d-lg-none d-xl-none">
+										<h:graphicImage url="data:image/jpg;base64,#{foto}"	style="width:100%;height:100%"  id="visualizacao2" title="" />
+									</p:galleria>
+								</div>
+												
+							</div>
+							<div class="row">
+								
+								<div class="col-md-7">
+									<h:outputLabel id="txtDesc" value="#{detalheClassificadoBean.venda.descricao}" />
+								</div>
+						
+						
+								<div class="col-md-4  box-mensagem"  style = "background-color:#DDFFDC;font-size: 13px;padding-top: 10px;padding-bottom: 10px; margin: 0px 10px 15px 15px;">
+									<div class="row"	style="padding-left: 20px">
+										<h:outputLabel value="Caracteristicas do animal"
+											style=" font-weight: bold !important;" />
+									</div>
+									
+									
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Data:&#160;" style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblDataCadastro"  value="#{detalheClassificadoBean.venda.dataCadastro}">
+											<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
+										</h:outputLabel>
+									</div>
+	
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Tipo:&#160;" style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblTipo"
+											value="#{detalheClassificadoBean.venda.categoria.descricao}">
+										</h:outputLabel>
+									</div>
+									<!-- 
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Raça:&#160;" style="font-weight: 800 !important;color:#28a745;" />
+										<h:outputLabel id="lblRaca"
+											value="#{detalheClassificadoBean.racaInformado()}">
+										</h:outputLabel>
+									</div>
+	
+	
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Sexo:&#160;" style="font-weight: 800 !important; color:#28a745; " />
+										<h:outputLabel id="lblSexo"
+											value="#{detalheClassificadoBean.perdido.flSexo}">
+										</h:outputLabel>
+									</div>
+									 -->
+									<div class="row" style = "padding-left: 20px">
+										<h:outputLabel value="Valor:&#160;"
+											style="font-size:medium !important; font-weight: bold !important;color:#28a745; padding-bottom: 0px;
+    										padding-top: 5px;" />
+										
+										<p:outputLabel title="Este item custa #{detalheClassificadoBean.venda.vlVenda}" value="#{detalheClassificadoBean.venda.vlVenda}" style="color: #f05565;font-size:large !important; font-weight: bold !important;">
+											<f:convertNumber type="currency" currencySymbol="R$"/>
+										</p:outputLabel>
+										
+									</div>
+											
+								</div>			
+									
+							</div>
+							
+					</div>
+						
+						
+					<div class="col-md-4" style="padding-top: 5px; margin-top: 20px;">
+						<div class="row" style="padding-right: 4px !important;">
+							<div class="div-detalhe"  style="background-color:#E8F1E7">
+								<div class="row d-sm-block d-md-none d-lg-none d-xl-none">
+									<h:outputLabel value="Contato"   style="padding-left: 8px; font-variant: small-caps;"/>
+								</div>
+								<div class="row">
+									<i class="fa fa-user"></i>
+									<h:outputLabel id="lblUserAnuncio" style="padding-left: 8px; font-variant: small-caps;"
+										value="#{detalheClassificadoBean.venda.usuario.nome}">
+									</h:outputLabel>
+								</div>
+								<!-- <div class="row">
+									<i class="fa fa-phone-square"></i> 
+									<h:outputLabel id="lblTelFixo" style="padding-left: 8px; font-variant: small-caps;"
+										value="#{detalheClassificadoBean.telResFormatado}">
+									</h:outputLabel>
+								</div> -->
+								<div class="row">
+									<i class="fa fa-phone-square"></i> 
+									<h:outputLabel id="lblTelCelular" style="padding-left: 8px; font-variant: small-caps;"
+										value="#{detalheClassificadoBean.telCelFormatado}">
+									</h:outputLabel>
+								</div>
+	
+								<div class="row">
+									<i class="fa fa-map-marker"></i> 
+									<h:outputLabel id="lblCidade" style="padding-left: 8px; font-variant: small-caps;"
+										value="#{detalheClassificadoBean.venda.endereco.cidade.nome}" /> - 
+									<h:outputLabel id="lblEstado" style="font-variant: small-caps;"
+										value="#{detalheClassificadoBean.venda.endereco.uf.label}" />	
+								</div>
+								
+							</div>
+						</div>
+							<div class="box-mensagem" style="padding: 15px">
+							<p:messages id="msgEnviar" />
+							<div style="padding-left: 15px">
+								<div class="row">
+									<h:outputLabel  value="Nome:" for="txtNome" />
+								</div>
+								<div class="row">
+									<p:inputText id="txtNome"  required="true" maxlength="40"
+										value="#{detalheClassificadoBean.nome}" style="width:95%;"/>
+								</div>
+							</div>
+							<div style="padding-left: 15px">
+								<div class="row">
+									<p:outputLabel  value="E-mail:" for="txtEmail" />
+								</div>
+								<div class="row">
+									<p:inputText id="txtEmail" required="true" maxlength="70"
+										value="#{detalheClassificadoBean.email}"
+										requiredMessage="informe seu e-mail!" style="width:95%;"
+										validatorMessage="E-mail não está em formato válido!">
+										<f:validateRegex
+											pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+									</p:inputText>
+								</div>
+							</div>
+							<div style="padding-left: 15px">
+								<div class="row">
+									<p:outputLabel value="Telefone:" for="txtTel" />
+								</div>
+								<div class="row">
+									<p:inputMask  mask="(99)999999999" id="txtTel" maxlength="20" style="width:50%;"
+										value="#{detalheClassificadoBean.telefone}" />
+								</div>
+							</div>
+							<div style="padding-left: 15px">
+								<div class="row">
+									<h:outputLabel value="Mensagem:" for="txtMensagem" />
+								</div>
+								<div class="row">
+									<p:inputTextarea id="txtMensagem" required="true" style="width:95%;" counterTemplate="{0} caracteres faltando." counter="display"
+										maxlength="600" rows="9" value="#{detalheClassificadoBean.mensagem}" />
+										<p:outputLabel id="display" />
+								</div>
+							</div>
+							<div style="padding-left: 15px;padding-right: 15px;padding-bottom: 20px;">	
+								<div class="row">
+									<p:commandButton action="#{detalheClassificadoBean.enviar}" styleClass="btn btn-success btn-lg button" icon="fa fa-fw fa-send"
+										type="submit" value="Enviar Mensagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"/>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+				
+					<div class="row " style="padding-top: 10px; padding-left: 15px;">
+						<h:outputLabel value="Anunciado em:&#160;" for="lblDataAnuncio" />
+						<h:outputLabel id="lblDataAnuncio"
+							value="#{detalheClassificadoBean.dataAnunciada}">
+						</h:outputLabel>
+					</div>
+			
+			</div>
+		</section>
+
+	</ui:define>
+
+</ui:composition>
+
+</html>
+
