@@ -31,7 +31,7 @@
 
 
 	<div id="sidebar-wrapper">
-   		<div class="sidebar-brand">
+   		<div class="sidebar-brand" style ="background-color: #5cb85c !important; ">
    			<h:form id="frm-left" enctype="multipart/form-data">
     			<div style="width: 205px; height: 205px" align="center">
 						<h:graphicImage rendered="#{usuarioBean.temFoto}"
@@ -41,7 +41,7 @@
 							id="visualizacao" alt="Visualização do anuncio" />
 						<h:panelGroup  rendered="#{not usuarioBean.temFoto}">
 							<img class="img-circle"
-								src="#{request.contextPath}/resources/images/imgSemFoto.jpg" />
+								src="#{request.contextPath}/resources/images/logos/logo-petmooby.jpeg" />
 						</h:panelGroup>
 					
            		</div>
