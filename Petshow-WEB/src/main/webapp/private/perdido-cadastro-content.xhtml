@@ -203,7 +203,7 @@
 			
 			<!-- GRID DOS PERDIDOS -->
 			
-			<div class="row">
+			<div class="row hidden-xs">
 				<div class="ui-grid-col-12">
 					<p:dataTable id="grid"
 			   			var="perdido"
@@ -218,7 +218,7 @@
 				        tabindex="-1">
 				        
 		                <f:facet name="header" style="background-color: red important!">
-		                	<p:outputLabel value="Meus animais perdidos" />
+		                	<p:outputLabel value="Meus animais perdidos/achados" />
 		                </f:facet>
 		                  <p:column headerText="Opções" style="text-align:center;" width="90">
 							<p:commandButton 
@@ -262,7 +262,7 @@
 							</h:outputText>
 						</p:column>
 				        
-				        <p:column headerText="Encontrado" width="100">
+				        <p:column headerText="Voltou ao lar" width="100">
 							<h:outputText value="#{perdido.isFoiEncontrado()}">
 								
 							</h:outputText>
@@ -273,21 +273,24 @@
 						
 				        <p:column style="width:15%;text-align: center;">
 							<p:commandButton actionListener="#{perdidoBean.foiEncontrado(perdido)}"
-								type="submit" value="Marcar como Encontrado" id="btnAdotar" styleClass="btn btn-primary"
+								type="submit" value="Voltou para casa?" id="btnAdotar" styleClass="btn btn-primary"
 								rendered="#{not perdido.flEncontrado}" title="Marcar como animal encontrado?" 
 								ajax="true"
 								process="@this"
 								update="grid" 
 							/>
-							<p:commandButton
-								actionListener="#{perdidoBean.naoFoiEncontrado(perdido)}" type="submit"
-								value="Marcar como não Encontrado" id="btnNaoEncontrado" styleClass="btn btn-danger" title="Marcar como NÃO encontrado?"
-								rendered="#{perdido.flEncontrado}" 
-								ajax="true"
-								process="@this"
-								update="grid"
-								>
-							</p:commandButton>
+							
+							<h:outputText style="color:green" value="EM CASA !!!" rendered="#{perdido.flEncontrado}" />
+							
+<!-- 							<p:commandButton -->
+<!-- 								actionListener="#{perdidoBean.naoFoiEncontrado(perdido)}" type="submit" -->
+<!-- 								value="Marcar como não Encontrado" id="btnNaoEncontrado" styleClass="btn btn-danger" title="Marcar como NÃO encontrado?" -->
+<!-- 								rendered="#{perdido.flEncontrado}"  -->
+<!-- 								ajax="true" -->
+<!-- 								process="@this" -->
+<!-- 								update="grid" -->
+<!-- 								> -->
+<!-- 							</p:commandButton> -->
 							
 							
 						</p:column>
@@ -295,9 +298,94 @@
 				    </p:dataTable>
 		        </div>
 		  	</div>
-			<!-- GRID DOS PERDIDOS -->
+			<!-- GRID DOS PERDIDOS mobile-->
 	
-	
+				<div class="row hidden-sm hidden-md hidden-lg" >
+				<div >
+					<p:dataTable id="grid2"
+			   			var="perdido"
+			   			emptyMessage="Nenhum animal perdido cadastrado"
+			   			scrollHeight="157"
+						
+		                resizableColumns="true"
+		                value="#{perdidoBean.perdidos}"
+		                paginator="#{perdidoBean.perdidos.size() > 12}" 
+		                rows="13"
+		                paginatorPosition="bottom" 
+				        tabindex="-1">
+				        
+		                <f:facet name="header" >
+		                	<p:outputLabel value="Meus animais perdidos/achados" />
+		                </f:facet>
+		                  <p:column  style="text-align:center;" width="80">
+		                  
+		                   <div class="row"  style="background-color: #FFF3EA"> 
+								<div class="col-xs-6 " style="padding-top:7px">
+							 		<h:outputText  style="text-align:left;  font-weight: bold;" value="#{perdido.nome}" />
+								</div>
+								<div class="col-xs-6">
+										<p:commandButton 
+								actionListener="#{perdidoBean.selecionar(perdido)}"
+								type="submit" 
+								styleClass="btn btn-info btn-lg pull-right"
+								icon="fa fa-pencil-square-o" 
+								title="Clique aqui para alterar alguma informação"
+								ajax="true"
+								process="@this"
+								update="@form"
+								oncomplete="setFocus('txtNome')"
+								style="padding-right:5px"
+								>
+									<f:ajax render="@form"/>
+								</p:commandButton>
+							<p:commandButton
+								action="#{perdidoBean.excluir(perdido.id)}"
+								type="submit" 
+								styleClass="btn btn-danger btn-lg  pull-right"
+								icon="fa fa-trash-o"
+								title="Excluir este anúncio de Perdido?"
+								ajax="true"
+								process="@this"
+								update="grid"
+								 >
+								 	<f:ajax execute="@all" render="@form"/>
+								 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+								</p:commandButton>
+								</div>
+							</div>
+		                  
+			             <div class="row "> Voltou ao Lar: <h:outputText value="#{perdido.isFoiEncontrado()}"/>  </div>
+			                  
+			                  
+							 <div class="row ">Data do anúncio: 
+							 	<h:outputText value="#{perdido.dtPerdidoAchado}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
+									</h:outputText>
+							</div>
+							
+							
+							
+							
+							
+							
+							 <div class="row ">
+							 	<p:commandButton actionListener="#{perdidoBean.foiEncontrado(perdido)}"
+									type="submit" value="Voltou para casa?" id="btnAdotar" styleClass="btn btn-primary"
+									rendered="#{not perdido.flEncontrado}" title="Marcar como animal encontrado?" 
+									ajax="true"
+									process="@this"
+									update="grid" />
+<!-- 									<h:outputText style="color:green" value="EM CASA !!!" rendered="#{perdido.flEncontrado}" /> -->
+								</div>
+								
+								
+						</p:column>
+		                
+				       
+				  									        							        																        					                		                		               	
+				    </p:dataTable>
+		        </div>
+		  	</div>
 	
 	
 	

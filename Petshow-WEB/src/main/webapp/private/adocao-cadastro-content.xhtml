@@ -245,8 +245,8 @@
 			<div class="row">
 				
 			</div>
-	
-			<div class="ui-grid-row ui-grid-row-custom">
+	<!--  grid computador -->
+			<div class="ui-grid-row ui-grid-row-custom hidden-xs">
 				<div class="ui-grid-col-12">
 					<p:dataTable id="grid"
 			   			var="adocao"
@@ -340,6 +340,107 @@
 		  	</div>
 			<!-- fim div da grid -->
 			
+			
+			
+			<!--  grid Mobile -->
+			<div class="ui-grid-row ui-grid-row-custom hidden-sm hidden-md hidden-lg">
+				<div class="ui-grid-col-12">
+					<p:dataTable id="grid2"
+			   			var="adocao"
+			   			emptyMessage="Nenhum animal para adoção"
+			   			
+						scrollable="false"
+		                resizableColumns="false"
+		                value="#{adocaoBean.adocoes}"
+		                paginator="#{adocaoBean.adocoes.size() > 12}" 
+		                rows="13"
+		                paginatorPosition="bottom" 
+				        tabindex="-1">
+				        
+		                <f:facet name="header">
+		                	<p:outputLabel value="Meus animais para Adoção" />
+		                </f:facet>
+		                
+		                    <p:column  style="text-align:center;" width="80">
+		                  
+		                   <div class="row"  style="background-color: #FFF3EA"> 
+								<div class="col-xs-6 " style="padding-top:7px">
+							 		<h:outputText  style="text-align:left;  font-weight: bold;" value="#{adocao.titulo}" />
+								</div>
+								<div class="col-xs-6">
+										<p:commandButton 
+								actionListener="#{adocaoBean.selecionar(adocao)}"
+								type="submit" 
+								styleClass="btn btn-info btn-lg pull-right"
+								icon="fa fa-pencil-square-o" 
+								title="Clique aqui para alterar alguma informação"
+								ajax="true"
+								process="@this"
+								update="@form"
+								oncomplete="setFocus('txtNome')"
+								style="padding-right:5px"
+								>
+									<f:ajax render="@form"/>
+								</p:commandButton>
+							<p:commandButton
+								action="#{adocaoBean.excluirAdocao(adocao.id)}"
+								type="submit" 
+								styleClass="btn btn-danger btn-lg  pull-right"
+								icon="fa fa-trash-o"
+								title="Excluir este anúncio de Perdido?"
+								ajax="true"
+								process="@this"
+								update="grid"
+								 >
+								 	<f:ajax execute="@all" render="@form"/>
+								 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este animal" icon="fa fa-exclamation-triangle" />
+								</p:commandButton>
+								</div>
+							</div>
+		                  
+			               
+			                  
+							 <div class="row ">Data Cadastro: 
+							 	<h:outputText value="#{adocao.dataCadastro}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
+									</h:outputText>
+							</div>
+							 <div class="row ">Data da adoção: 
+							 	<h:outputText value="#{adocao.dataAdocao}">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
+									</h:outputText>
+							</div>
+
+							
+							 <div class="row ">
+							 		<p:commandButton actionListener="#{adocaoBean.marcarComoAdotado(adocao)}"
+								type="submit" value="Já Foi adotado?" id="btnAdotar" styleClass="btn btn-primary"
+								rendered="#{not adocao.flAdotado}" title="Marcar como animal adotado" 
+								ajax="true" 
+								process="@this"
+								update="grid"
+							/>
+							<p:commandButton
+								actionListener="#{adocaoBean.marcarComoNAOAdotado(adocao)}" type="submit"
+								value="Não Adotado?" id="btnNaoAdotado" styleClass="btn btn-danger" title="Marcar como NÃO adotado?Ou seja, o animal ainda não foi adotado."
+								rendered="#{adocao.flAdotado}" 
+								ajax="true"
+								process="@this"
+								update="grid"
+								>
+							</p:commandButton>
+								</div>
+								
+								
+						</p:column>
+				  									        							        																        					                		                		               	
+				    </p:dataTable>
+		        </div>
+		  	</div>
+		
+			
+			
+			<!-- fim div da grid -->
 	</div>		
 </ui:composition>
 <h:body>
