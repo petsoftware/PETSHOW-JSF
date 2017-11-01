@@ -271,14 +271,16 @@
 				        
 				      
 						
-				        <p:column style="width:15%;text-align: center;">
+				        <p:column style="width:22%;text-align: center;">
 							<p:commandButton actionListener="#{perdidoBean.foiEncontrado(perdido)}"
 								type="submit" value="Voltou para casa?" id="btnAdotar" styleClass="btn btn-primary"
 								rendered="#{not perdido.flEncontrado}" title="Marcar como animal encontrado?" 
 								ajax="true"
 								process="@this"
 								update="grid" 
-							/>
+							/><p:button outcome="/perdido-detalhe-site.xhtml" value="Ver anúncio"  rendered="#{not perdido.flEncontrado}"  styleClass="btn btn-info ">
+   									 <f:param name="id" value="#{perdido.id}"></f:param> 
+									</p:button>
 							
 							<h:outputText style="color:green" value="EM CASA !!!" rendered="#{perdido.flEncontrado}" />
 							
@@ -319,7 +321,7 @@
 		                </f:facet>
 		                  <p:column  style="text-align:center;" width="80">
 		                  
-		                   <div class="row"  style="background-color: #FFF3EA"> 
+		                   <div class="row"   style="background-color: #FFF3EA;padding-top:5px"> 
 								<div class="col-xs-6 " style="padding-top:7px">
 							 		<h:outputText  style="text-align:left;  font-weight: bold;" value="#{perdido.nome}" />
 								</div>
@@ -354,10 +356,10 @@
 								</div>
 							</div>
 		                  
-			             <div class="row "> Voltou ao Lar: <h:outputText value="#{perdido.isFoiEncontrado()}"/>  </div>
+			             <div class="row " style="padding-top:5px"> Voltou ao Lar: <h:outputText value="#{perdido.isFoiEncontrado()}"/>  </div>
 			                  
 			                  
-							 <div class="row ">Data do anúncio: 
+							 <div class="row "  style="padding-top:5px">Data do anúncio: 
 							 	<h:outputText value="#{perdido.dtPerdidoAchado}">
 									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
 									</h:outputText>
@@ -368,7 +370,7 @@
 							
 							
 							
-							 <div class="row ">
+							 <div class="row "  style="padding-top:5px">
 							 	<p:commandButton actionListener="#{perdidoBean.foiEncontrado(perdido)}"
 									type="submit" value="Voltou para casa?" id="btnAdotar" styleClass="btn btn-primary"
 									rendered="#{not perdido.flEncontrado}" title="Marcar como animal encontrado?" 
@@ -377,7 +379,11 @@
 									update="grid" />
 <!-- 									<h:outputText style="color:green" value="EM CASA !!!" rendered="#{perdido.flEncontrado}" /> -->
 								</div>
-								
+								 <div class="row " style="padding-top:5px">
+									<p:button outcome="/perdido-detalhe-site.xhtml" value="Ver anúncio"  rendered="#{not perdido.flEncontrado}"  styleClass="btn btn-info ">
+   									 <f:param name="id" value="#{perdido.id}"></f:param> 
+									</p:button>
+								</div>
 								
 						</p:column>
 		                
