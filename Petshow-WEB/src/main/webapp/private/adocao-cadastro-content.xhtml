@@ -291,6 +291,8 @@
 								 	<f:ajax execute="@all" render="@form"/>
 								 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
 								</p:commandButton>
+								
+								
 						</p:column>
 						
 		                
@@ -330,9 +332,19 @@
 								rendered="#{adocao.flAdotado}" 
 								ajax="true"
 								process="@this"
-								update="grid"
+								update="grid" 
 								>
 							</p:commandButton>
+							
+						
+								<p:button outcome="/adocao-detalhe-site.xhtml" value="Ver anúncio"  rendered="#{not adocao.flAdotado}"  styleClass="btn btn-info ">
+   									 <f:param name="id" value="#{adocao.id}"></f:param> 
+								</p:button>
+						
+							
+<!-- 							<p:link value="Ver anúncio" outcome="/adocao-detalhe-site.xhtml"  styleClass=" .btn-sm" style="text="> -->
+<!-- 									<f:param name="id" value="#{adocao.id}"></f:param> -->
+<!-- 								</p:link> -->
 						</p:column>
 				  									        							        																        					                		                		               	
 				    </p:dataTable>
@@ -368,6 +380,19 @@
 							 		<h:outputText  style="text-align:left;  font-weight: bold;" value="#{adocao.titulo}" />
 								</div>
 								<div class="col-xs-6">
+								<p:commandButton
+								action="#{adocaoBean.excluirAdocao(adocao.id)}"
+								type="submit" 
+								styleClass="btn btn-danger btn-lg  pull-right"
+								icon="fa fa-trash-o"
+								title="Excluir este anúncio de Perdido?"
+								ajax="true"
+								process="@this"
+								update="grid"
+								 >
+								 	<f:ajax execute="@all" render="@form"/>
+								 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este animal" icon="fa fa-exclamation-triangle" />
+								</p:commandButton>
 										<p:commandButton 
 								actionListener="#{adocaoBean.selecionar(adocao)}"
 								type="submit" 
@@ -382,37 +407,26 @@
 								>
 									<f:ajax render="@form"/>
 								</p:commandButton>
-							<p:commandButton
-								action="#{adocaoBean.excluirAdocao(adocao.id)}"
-								type="submit" 
-								styleClass="btn btn-danger btn-lg  pull-right"
-								icon="fa fa-trash-o"
-								title="Excluir este anúncio de Perdido?"
-								ajax="true"
-								process="@this"
-								update="grid"
-								 >
-								 	<f:ajax execute="@all" render="@form"/>
-								 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este animal" icon="fa fa-exclamation-triangle" />
-								</p:commandButton>
+							
 								</div>
 							</div>
 		                  
 			               
 			                  
-							 <div class="row ">Data Cadastro: 
+							 <div class="row " style="padding-top:5px">Data Cadastro: 
 							 	<h:outputText value="#{adocao.dataCadastro}">
 									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
 									</h:outputText>
 							</div>
-							 <div class="row ">Data da adoção: 
-							 	<h:outputText value="#{adocao.dataAdocao}">
+							 <div class="row " style="padding-top:5px"> 
+							 <h:outputText value="Data da adoção:" rendered="#{adocao.flAdotado}" />
+							 	<h:outputText value="#{adocao.dataAdocao}" rendered="#{adocao.flAdotado}" >
 									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
 									</h:outputText>
 							</div>
 
 							
-							 <div class="row ">
+							 <div class="row "  style="padding-top:5px">
 							 		<p:commandButton actionListener="#{adocaoBean.marcarComoAdotado(adocao)}"
 								type="submit" value="Já Foi adotado?" id="btnAdotar" styleClass="btn btn-primary"
 								rendered="#{not adocao.flAdotado}" title="Marcar como animal adotado" 
@@ -430,8 +444,11 @@
 								>
 							</p:commandButton>
 								</div>
-								
-								
+								 <div class="row " style="padding-top:5px">
+									<p:button outcome="/adocao-detalhe-site.xhtml" value="Ver anúncio"  rendered="#{not adocao.flAdotado}"  styleClass="btn btn-info ">
+   									 <f:param name="id" value="#{adocao.id}"></f:param> 
+								</p:button>
+								</div>
 						</p:column>
 				  									        							        																        					                		                		               	
 				    </p:dataTable>
