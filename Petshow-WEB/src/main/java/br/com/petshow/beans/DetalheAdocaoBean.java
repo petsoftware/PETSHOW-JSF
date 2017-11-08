@@ -105,14 +105,11 @@ public class DetalheAdocaoBean extends SuperBean<Adocao>{
 			setMensagem("");
 
 		} catch (ExceptionErroCallRest  e) {
-			// erro: nao está mostrando a mensavem
-			FacesContext.getCurrentInstance().addMessage("msgEnviar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-
+			MessagesBeanUtil.exception(e);
 		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage("msgEnviar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			MessagesBeanUtil.exception(e);
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage("msgEnviar", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-			e.printStackTrace();
+			MessagesBeanUtil.exception(e);
 		}
 	}
 

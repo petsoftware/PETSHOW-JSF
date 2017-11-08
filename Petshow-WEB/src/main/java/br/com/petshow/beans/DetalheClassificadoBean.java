@@ -1,6 +1,6 @@
 package br.com.petshow.beans;
 
-import java.util.HashMap;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -8,34 +8,39 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.petshow.enums.EnumAssuntoNotificacao;
 import br.com.petshow.exceptions.ExceptionErroCallRest;
 import br.com.petshow.exceptions.ExceptionValidation;
 import br.com.petshow.model.Venda;
+import br.com.petshow.model.Notificacao;
+import br.com.petshow.model.Usuario;
 import br.com.petshow.util.FormatacaoUtil;
+import br.com.petshow.web.util.CallNotificacaoRest;
+import br.com.petshow.web.util.MessagesBeanUtil;
 import br.com.petshow.web.util.RestUtilCall;
 
 @ManagedBean
 @ViewScoped
-public class DetalheClassificadoBean {
+public class DetalheClassificadoBean extends SuperBean<Venda>{
 
 	private Venda venda;
-	
 	private String id;
-	
 	private String nome;
-	
 	private String email;
-	
 	private long telefone;
-	
 	private String mensagem;
-	
+	private Usuario usuario= null;
 	@PostConstruct
 	public void init() {
 		this.venda= new Venda();
-	
-	
+		verificarSeUsuarioLogado();
 		getVendaBanco();
+	}
+	
+	private void verificarSeUsuarioLogado() {
+		if(getUsuarioLogado() != null){
+			usuario =  getUsuarioLogado();
+		}
 	}
 	
 	public void getVendaBanco(){
@@ -55,31 +60,37 @@ public class DetalheClassificadoBean {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
 	
 	public void enviar(){
 		try {
-			
-			HashMap<String,String> map = new HashMap<String,String>();
-			map.put("destinatario", venda.getUsuario().getEmail());
-			map.put("mensagem", mensagem);
-			map.put("telefone", telefone+"");
-			map.put("email", email);
-			
-			RestUtilCall.post( map, "email/enviar");
-
+			Notificacao notificacao = new Notificacao();
+			notificacao.setAdocao(null);
+			notificacao.setPerdido(null);
+			notificacao.setVenda(getVenda());
+			notificacao.setContato(String.valueOf(getTelefone()));
+			notificacao.setDtNotificacao(new Date());
+			notificacao.setEmail(getEmail());
+			notificacao.setFlExcluida(false);
+			notificacao.setMsgNotificacao(getMensagem());
+			notificacao.setNome(getNome());
+			notificacao.setTpNotificacao("A");
+			notificacao.setAssuntoNotificacao(EnumAssuntoNotificacao.ADOCAO);
+			notificacao.setUsuarioDestinatario(getVenda().getUsuario());
+			if(usuario!=null){
+				notificacao.setUsuarioRemetente(usuario);
+			}else{
+				notificacao.setUsuarioRemetente(null);
+			}
+			CallNotificacaoRest.postEntity(notificacao, "notificacao/salvar/", Notificacao.class);
+			MessagesBeanUtil.inforClient("","Enviado com sucesso!","msgEnviar");
+			setMensagem("");
 		} catch (ExceptionErroCallRest  e) {
-			// erro: nao está mostrando a mensavem
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ??:", e.getMessage()));
-
+			MessagesBeanUtil.exception(e);
 		} catch (ExceptionValidation e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", e.getMessage()));
+			MessagesBeanUtil.exception(e);
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro inesperado:", "Favor entrar em contato com o admistrador do sistema!"));
-			e.printStackTrace();
+			MessagesBeanUtil.exception(e);
 		}
 	}
 
@@ -159,29 +170,6 @@ public class DetalheClassificadoBean {
 	public void setMensagem(String mensagem) {
 		this.mensagem = mensagem;
 	}
-	
-//	public String getEstado() {
-//		if(venda.getEstado() !=null){
-//			return venda.getEstado().getNome();
-//		}else{
-//			return "Não Informado";
-//		}
-//		
-//	}
-//	public String getCidade() {
-//		if(venda.getCidade() !=null){
-//			return venda.getCidade().getNome();
-//		}else{
-//			return "Não Informado";
-//		}
-//	}
-//	public String getBairro() {
-//		if(venda.getBairro() !=null){
-//			return venda.getBairro().getNome();
-//		}else{
-//			return "Não Informado";
-//		}
-//	}
 
 	public String getId() {
 		return id;
@@ -191,6 +179,21 @@ public class DetalheClassificadoBean {
 		this.id = id;
 	}
 	
+	public String getEstado() {
+		if(getVenda().getEndereco() !=null){
+			return getVenda().getEndereco().getUf().getLabel();
+		}else{
+			return "SEM Estado";
+		}
+		
+	}
+	public String getCidade() {
+		if(getVenda().getEndereco() !=null){
+			return getVenda().getEndereco().getCidade().getNome();
+		}else{
+			return "SEM Cidade";
+		}
+	}
 	
 	
 }
