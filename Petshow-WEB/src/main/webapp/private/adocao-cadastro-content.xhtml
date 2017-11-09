@@ -48,15 +48,15 @@
 			</div>
 			<div class="row"><p:outputLabel value="Tipo de Animal"/></div>
 			<div class="row">
-				<div class="form-group">
+				
 					<p:selectOneMenu id="cbAnimal" style="width: 100%;"
-						value="#{adocaoBean.adocao.tipo}" required="true" requiredMessage="Por favor informe qual o tipo de animal.">
+						value="#{adocaoBean.adocao.tipo}" >
 						<f:selectItem itemLabel="#{placeHolderBean.selAnimal}"
-							itemValue="#{null}" noSelectionOption="true" />
+							itemValue="" noSelectionOption="true" />
 						<f:selectItems value="#{adocaoBean.tiposAnimais}" />
 						<p:ajax event="change" update="cboRacas" listener="#{adocaoBean.findRacasPorTipoAnimal(adocaoBean.adocao.tipo)}" />
 					</p:selectOneMenu>
-				</div>
+				
 			</div>
 			<div class="row">
 				<div class="form-group">
@@ -274,7 +274,8 @@
 								ajax="true"
 								process="@this"
 								update="@form"
-								oncomplete="setFocus('txtNome')"
+								oncomplete="setFocus('txtNome');Pace.restart();"
+								onclick="paceStart();"
 								>
 									<f:ajax render="@form"/>
 								</p:commandButton>
@@ -287,6 +288,8 @@
 								ajax="true"
 								process="@this"
 								update="grid"
+								onclick="paceStart();"
+								oncomplete="Pace.restart();"
 								 >
 								 	<f:ajax execute="@all" render="@form"/>
 								 	<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
@@ -325,6 +328,7 @@
 								ajax="true" 
 								process="@this"
 								update="grid"
+								
 							/>
 							<p:commandButton
 								actionListener="#{adocaoBean.marcarComoNAOAdotado(adocao)}" type="submit"
@@ -332,7 +336,8 @@
 								rendered="#{adocao.flAdotado}" 
 								ajax="true"
 								process="@this"
-								update="grid" 
+								update="grid"
+								
 								>
 							</p:commandButton>
 							
