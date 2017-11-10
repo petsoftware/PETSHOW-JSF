@@ -17,8 +17,10 @@
 		        	</div>
 	        	</div>     
         		
-        		<h:form id="formContent" enctype="multipart/form-data">  
-        			<p:messages id="msgs" showSummary="true" showDetail="true" closable="true" showIcon="false" />	
+        		<h:form id="formContent" enctype="multipart/form-data"> 
+        			<!--  
+        			<p:messages id="msgs" showSummary="true" showDetail="true" closable="true" showIcon="false" />
+        			-->	
         			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>       	
    					<ui:insert name="body" />
    				</h:form>

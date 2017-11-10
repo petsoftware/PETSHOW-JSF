@@ -231,6 +231,8 @@
 								process="@this"
 								update="@form"
 								oncomplete="setFocus('txtNome')"
+								
+								 
 								>
 									<f:ajax render="@form"/>
 								</p:commandButton>
@@ -278,9 +280,13 @@
 								ajax="true"
 								process="@this"
 								update="grid" 
-							/><p:button outcome="/perdido-detalhe-site.xhtml" value="Ver anúncio"  rendered="#{not perdido.flEncontrado}"  styleClass="btn btn-info ">
-   									 <f:param name="id" value="#{perdido.id}"></f:param> 
-									</p:button>
+								 
+							/>
+							<p:button outcome="/perdido-detalhe-site.xhtml" value="Ver anúncio"  rendered="#{not perdido.flEncontrado}"  styleClass="btn btn-info"
+								onclick="paceStart();"
+								oncomplete="Pace.restart();" >
+ 								<f:param name="id" value="#{perdido.id}"></f:param> 
+							</p:button>
 							
 							<h:outputText style="color:green" value="EM CASA !!!" rendered="#{perdido.flEncontrado}" />
 							

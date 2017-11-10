@@ -24,7 +24,9 @@
 	</ui:define>
 
 	<ui:define name="body">
-
+		<f:metadata>  
+   			<f:event type="preRenderView"  listener="#{enderecoBean.preencherComboCidade(usuarioBean.usuario.endereco.uf)}" />
+		</f:metadata>
 		<div class="container">
 			<div class="row">
 
