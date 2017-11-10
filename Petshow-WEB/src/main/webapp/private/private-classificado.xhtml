@@ -40,7 +40,7 @@
 	</ui:define>
 
 	<ui:define name="body">
-	
+<div class="container">	
 		<f:metadata>  
    			<f:event type="preRenderView"  listener="#{enderecoBean.preencherComboCidade(vendaBean.venda.endereco.uf)}" />
 		</f:metadata>
@@ -56,188 +56,142 @@
 				icon="ui-icon-close" />
 		</p:confirmDialog>
 		
-		<div class="ui-grid ui-grid-responsive">
-			<div class="ui-grid-row ui-grid-row-custom">
-				<div class="ui-grid-col-12">
-					<div class="ui-grid-row ui-grid-row-custom">
-						<div class="ui-grid-col-6" style="padding-right: 5px;">
-
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<h:outputLabel value="Nome do produto/serviço:"
-											for="txtNMVenda" />
-									</div>
-									<div class="ui-grid-row">
-										<p:inputText id="txtNMVenda"
-											value="#{vendaBean.venda.descResumida}" maxlength="30"
-											
-											requiredMessage="Informe o campo de Nome do produto/serviço!" />
-									</div>
-								</div>
-							</div>
-
-
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<h:outputLabel value="Descrição:" for="txtDesc" />
-									</div>
-									<div class="ui-grid-row">
-										<p:inputTextarea rows="6" cols="33" id="txtDesc"
-											value="#{vendaBean.venda.descricao}"
-											maxlength="255"
-											requiredMessage="Informe o campo de Descrição!" />
-									</div>
-								</div>
-							</div>
-
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<p:outputLabel value="Estado"/>
-									</div>
-								
-									<div class="ui-grid-row">
-										<div class="form-group">
-											 <p:selectOneMenu id="cbEstado" value="#{vendaBean.venda.endereco.uf}" required="false" requiredMessage="Por favor, informe o seu estado." style="width: 100%;">
-												<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
-												<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
-													<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(vendaBean.venda.endereco.uf)}" />
-											 </p:selectOneMenu>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<p:outputLabel value="Cidade"/>
-									</div>
-									<div class="ui-grid-row">
-										<div class="form-group">
-											 <p:selectOneMenu id="cbCidade" value="#{vendaBean.venda.endereco.cidade}" converter="cidadeConverter" style="width: 100%;"
-												required="false" requiredMessage="Por favor informe a cidade." >
-												<f:selectItem itemLabel="#{placeHolderBean.selCidade}" itemValue="#{null}"/>
-												<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
-											</p:selectOneMenu>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<p:outputLabel value="Serviço ou Produto?"/>
-									</div>
-								
-									<div class="ui-grid-row">
-										<div class="form-group">
-											 <p:selectOneMenu id="cbServiceProd" value="#{vendaBean.tipoClassificado}" required="false" style="width: 100%;">
+		
+		<div class="row">
+		<div class="col-md-3">
+		
+		
+	
+		<div class="row">
+				<p:outputLabel value="Serviço ou Produto?"/>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					 <p:selectOneMenu id="cbServiceProd" value="#{vendaBean.tipoClassificado}" required="false" style="width: 100%;">
 												<f:selectItem itemLabel="Selecione uma opção" itemValue="#{null}"/>
 												<f:selectItems var="serv" value="#{vendaBean.tiposClassificado}"  itemValue="#{serv}"/>
 													<p:ajax event="change" update="cbCateg" listener="#{vendaBean.obterCategoriaByTtype(vendaBean.tipoClassificado)}" />
 											 </p:selectOneMenu>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<p:outputLabel value="Categoria"/>
-									</div>
-								
-									<div class="ui-grid-row">
-										<div class="form-group">
-											 <p:selectOneMenu value="#{vendaBean.venda.categoria}" id="cbCateg" required="false" style="width: 100%;">
+				
+				</div>
+			</div>
+			<div class="row">
+					<p:outputLabel value="Categoria"/>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					 <p:selectOneMenu value="#{vendaBean.venda.categoria}" id="cbCateg" required="false" style="width: 100%;">
 												<f:selectItem itemLabel="Selecione uma Categoria" itemValue="#{null}"/>
 												<f:selectItems  var="categ" value="#{vendaBean.categorias}" itemLabel="#{categ.descricao}" itemValue="#{categ}" />
 											 </p:selectOneMenu>
-										</div>
-									</div>
-								</div>
-							</div>
-							<p:fileUpload fileUploadListener="#{vendaBean.enviaImagem}"
-                              update="pnlFotos,msgs"
-                              ajax="true"
-                              cancelLabel="Cancelar"
-                              fileLimit="3"
-                              fileLimitMessage="Só são permitidas 3 imagens por anúncio"
-                              label="Adicionar Foto"
-                              invalidFileMessage="Tipo de imagem inválido"
-                              invalidSizeMessage="Imagem muito grande"
-                              uploadLabel="Enviar"
-                              multiple="true"
-                              auto="true"
-                              allowTypes="/(\.|\/)(jpe?g|png)$/">
- 
-                			</p:fileUpload>
-
-						</div>
-						<div class="ui-grid-col-6" style="padding-right: 5px;">
-						
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<h:outputLabel value="DDD / Contato" for="txtResidencialDDD" />
-									</div>
-									<div class="ui-grid-row">
-										<p:inputText style="width:40px" id="txtResidencialDDD"
+				
+				</div>
+			</div>
+		
+		
+		
+		
+		
+		
+			<div class="row">
+				<h:outputLabel value="Nome do produto/serviço:"
+											for="txtNMVenda" />
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<p:inputText id="txtNMVenda" 	value="#{vendaBean.venda.descResumida}" maxlength="30"
+					requiredMessage="Informe o campo de Nome do produto/serviço!" />
+				
+				</div>
+			</div>
+			
+			<div class="row">
+				<h:outputLabel value="Valor" for="txtValor" />
+			</div>
+			<div class="row" style ="width:60%">
+				<div class="form-group">
+					<p:inputNumber id="txtValor" value="#{vendaBean.venda.vlVenda}" maxValue="10000"
+											symbol="R$ "  decimalSeparator="," thousandSeparator="."
+										/>
+				
+				</div>
+			</div>
+	
+			
+			
+		
+		
+		<div class="row">
+				<h:outputLabel value="DDD / Contato Residencial" for="txtResidencialDDD" />
+			</div>
+			<div class="row">
+				<div class="form-group">
+				<p:inputText style="width:40px" id="txtResidencialDDD"
 											value="#{vendaBean.venda.dddResidencial}" maxlength="2" />
 										<p:outputLabel value="/" />
 										<p:inputText styleClass="txtResidencialTel"
 											id="txtResidencialTel"
 											value="#{vendaBean.venda.telefoneResidencial}" maxlength="9" />
-									</div>
-								</div>
-							</div>
-
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<h:outputLabel value="DDD / Celular" for="txtCelularDDD" />
-									</div>
-									<div class="ui-grid-row">
-										<p:inputText styleClass="txtCelularDDD" id="txtCelularDDD"
+				
+				</div>
+			</div>
+			
+			
+			<div class="row">
+					<h:outputLabel value="DDD / Celular" for="txtCelularDDD" />
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<p:inputText styleClass="txtCelularDDD" id="txtCelularDDD"
 											style="width:40px" value="#{vendaBean.venda.dddCelular}"
 											maxlength="2" />
 										<p:outputLabel value="/" />
 										<p:inputText styleClass="txtCelularTel" id="txtCelularTel"
 											value="#{vendaBean.venda.telefoneCelular}" maxlength="9" />
-									</div>
-								</div>
-							</div>
-
-							<div class="ui-grid-row ui-grid-row-custom">
-								<div class="ui-grid-col-12">
-									<div class="ui-grid-row">
-										<h:outputLabel value="Valor" for="txtValor" />
-									</div>
-									<div class="ui-grid-row">
-										<!-- 
-										<p:inputText id="txtValor" validator="numeroValidator"
-											value="#{vendaBean.venda.vlVenda}"
-											validatorMessage="Campo de valor aceita somente numericos!" />
-										 -->
-										<p:inputNumber id="txtValor" value="#{vendaBean.venda.vlVenda}" maxValue="10000"
-											symbol="R$ "  decimalSeparator="," thousandSeparator="."
-										/>
-										
-										
-									</div>
-								</div>
-							</div>
-							
-							
-						</div>
-					</div>
+				
+				</div>
+			</div>
+			<div class="row">
+				<p:outputLabel value="Estado"/>
+			</div>
+			<div class="row">
+				<div class="form-group">
+				 <p:selectOneMenu id="cbEstado" value="#{vendaBean.venda.endereco.uf}" required="false" requiredMessage="Por favor, informe o seu estado." style="width: 100%;">
+												<f:selectItem itemLabel="Selecione um estado" itemValue="#{null}"/>
+												<f:selectItems var="uf" value="#{enderecoBean.ufs}" itemLabel="#{uf.label}" itemValue="#{uf}"/>
+													<p:ajax event="change" update="cbCidade" listener="#{enderecoBean.findCidadesByUF(vendaBean.venda.endereco.uf)}" />
+											 </p:selectOneMenu>
+				
+				</div>
+			</div>
+			<div class="row">
+				<p:outputLabel value="Cidade"/>
+			</div>
+			<div class="row">
+				<div class="form-group">
+					 <p:selectOneMenu id="cbCidade" value="#{vendaBean.venda.endereco.cidade}" converter="cidadeConverter" style="width: 100%;"
+												required="false" requiredMessage="Por favor informe a cidade." >
+												<f:selectItem itemLabel="#{placeHolderBean.selCidade}" itemValue="#{null}"/>
+												<f:selectItems value="#{enderecoBean.cidades}" var="cidade" itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+											</p:selectOneMenu>
+				
+				</div>
+			</div>
+			
+			
+		
+		
+		
+		</div>
+		<div class="col-md-9">
 						<div id="divFotos" class="ui-grid-row ui-grid-row-custom">
-							<div class="ui-grid-col -->-6" align="center">
+							
 								<p:panel header="FOTOS" id="pnlFotos" >
 									<div class="ui-grid-row">
+										<p:outputLabel value="Nenhuma foto foi selecionada!" rendered = "#{not adocaoBean.temFotos}"/>
 										<ui:repeat var="foto" value="#{vendaBean.venda.fotos}" >
-												<div class="ui-grid-col-4">
+												<div class= "col-xs-12 col-md-4">
+												<div class="ui-grid-col-12">
 													<div class="ui-grid-row">
 														<div class="ui-upload-img" style="height: 215px;">
 															<h:graphicImage style="width:100%;height:100%;display:#{foto.isEmpty() ? 'none' : 'inline-block'}"
@@ -267,15 +221,51 @@
 						   								</div>
 													
 												</div>
-											
+											</div>
 										</ui:repeat>
 									</div>
 									</p:panel>
-								</div>
+						
 							</div>
+							<p:fileUpload fileUploadListener="#{vendaBean.enviaImagem}"
+                              update="pnlFotos,msgs"
+                              ajax="true"
+                              cancelLabel="Cancelar"
+                              fileLimit="3"
+                              fileLimitMessage="Só são permitidas 3 imagens por anúncio"
+                              label="Adicionar Foto"
+                              invalidFileMessage="Tipo de imagem inválido"
+                              invalidSizeMessage="Imagem muito grande"
+                              uploadLabel="Enviar"
+                              multiple="true"
+                              auto="true"
+                              allowTypes="/(\.|\/)(jpe?g|png)$/">
+ 
+                			</p:fileUpload>
+							
+							
+		</div>
+		</div>
+			<div class="row">
+				<h:outputLabel value="Descrição:" for="txtDesc" />
+			</div>
+			<div class="row">
+				<div class="form-group">
+					<p:inputTextarea rows="7"  id="txtDesc"
+											value="#{vendaBean.venda.descricao}" placeholder="FALE SOBRE ESTE PRODUTO/SERVICO" 
+											maxlength="1000" style="width:100%" autoResize="false"
+											requiredMessage="Informe o campo de Descrição!" />
+				
+				</div>
+			</div>
+		
+		
+		
+
+						
 					
-					<div class="ui-grid-row ui-grid-row-custom">
-						<div class="ui-grid-col-12">
+						<div class="ui-grid-row ui-grid-row-custom hidden-xs">
+							<div class="ui-grid-col-12">
 							<p:dataTable var="venda" value="#{vendaBean.vendas}"
 								paginator="#{vendaBean.vendas.size() > 12}" 
 								rows="13"
@@ -286,25 +276,7 @@
 								<f:facet name="header">
 				                	<p:outputLabel value="Classificados já cadastrados" />
 				                </f:facet>
-								
-								<p:column headerText="Produto/Serviço" style="width:20%">
-									<h:outputText value="#{venda.descResumida}" />
-								</p:column>
-
-								<p:column headerText="Descrição" style="width:50%">
-									<h:outputText value="#{venda.descricao}" />
-								</p:column>
-
-
-								<p:column headerText="Data Cadastro" style="width:15%">
-									<h:outputText value="#{venda.dataCadastro}">
-										<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
-											timeZone="America/Recife" />
-									</h:outputText>
-								</p:column>
-
-
-								<p:column headerText="Opções" style="width:25%;text-align: center;">
+				                	<p:column headerText="Opções" style="width:25%;text-align: center;">
 								<p:commandButton 
 										actionListener="#{vendaBean.selecionar(venda)}"
 										type="submit" 
@@ -328,14 +300,89 @@
    											<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
    									</p:commandButton>
 								</p:column>
+								
+								<p:column headerText="Nome" >
+									<h:outputText value="#{venda.descResumida}" />
+								</p:column>
+
+								<p:column headerText="Categoria" >
+									<h:outputText value="#{venda.categoria.descricao}" />
+								</p:column>
+
+
+								<p:column headerText="Data do Cadastro" >
+									<h:outputText value="#{venda.dataCadastro}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+											timeZone="America/Recife" />
+									</h:outputText>
+								</p:column>
+							
+
 							</p:dataTable>
+						
 						</div>
 					</div>
-
+<!--  grid Mobile -->
+			<div class="ui-grid-row ui-grid-row-custom hidden-sm hidden-md hidden-lg">
+				<div class="ui-grid-col-12">
+					<p:dataTable var="venda" value="#{vendaBean.vendas}"
+								paginator="#{vendaBean.vendas.size() > 12}" 
+								rows="13"
+								paginatorPosition="bottom" id="gridMobile"
+								emptyMessage="Nenhum Anúncio."
+								>
+								
+								<f:facet name="header">
+				                	<p:outputLabel value="Classificados já cadastrados" />
+				                </f:facet>
+				                
+				                <p:column  style="text-align:center;" width="80">
+				                	 <div class="row"  style="background-color: #FFF3EA"> 
+										<div class="col-xs-6 " style="padding-top:7px">
+											<h:outputText  style="text-align:left;  font-weight: bold;" value="#{venda.descResumida}" />
+										</div>
+										<div class="col-xs-6">
+												<p:commandButton 
+										actionListener="#{vendaBean.selecionar(venda)}"
+										type="submit" 
+										styleClass="btn btn-info btn-lg"
+   										icon="fa fa-pencil-square-o" 
+   										title="Clique aqui para alterar alguma informação"
+   										ajax="true"
+   										process="@this"
+   										update="@form" />
+									
+									
+									<p:commandButton
+										actionListener="#{vendaBean.excluirVenda(venda.id)}"
+										type="submit" 
+											styleClass="btn btn-danger btn-lg"
+   											icon="fa fa-trash-o"
+   											title="Excluir o registro na grid"
+   											ajax="true"
+   											process="@this"
+   											update="grid" >
+   											<p:confirm header="Confirme a exclusão" message="Você tem certeza que deseja excluir este registro?" icon="fa fa-exclamation-triangle" />
+   									</p:commandButton>
+										</div>
+									</div>
+									<div class="row " style="padding-top:5px">Categoria: 
+							 			<h:outputText value="#{venda.categoria.descricao}"/>
+									</div>
+									
+									<div class="row " style="padding-top:5px">Data do Cadastro: 
+							 			<h:outputText value="#{venda.dataCadastro}">
+											<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Recife" />
+										</h:outputText>
+									</div>
+									
+									
+				                </p:column>
+				                
+				     </p:dataTable>
 				</div>
 			</div>
-		</div>
-
+			</div>
 	</ui:define>
 
 </ui:composition>

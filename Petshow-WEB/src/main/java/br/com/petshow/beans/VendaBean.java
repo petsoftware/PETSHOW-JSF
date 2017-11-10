@@ -197,6 +197,13 @@ public class VendaBean {
 		
 		return vendas;
 	}
+	
+	public boolean isTemFotos() {
+		if(venda != null && venda.getFotos() != null && venda.getFotos().size() > 0){
+			return true;
+		}
+		return false;
+	}
 
 
 	public Venda getVenda() {
