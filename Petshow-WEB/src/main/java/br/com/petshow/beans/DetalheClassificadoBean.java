@@ -27,7 +27,7 @@ public class DetalheClassificadoBean extends SuperBean<Venda>{
 	private String id;
 	private String nome;
 	private String email;
-	private long telefone;
+	private String telefone;
 	private String mensagem;
 	private Usuario usuario= null;
 	@PostConstruct
@@ -155,14 +155,6 @@ public class DetalheClassificadoBean extends SuperBean<Venda>{
 		this.email = email;
 	}
 
-	public long getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(long telefone) {
-		this.telefone = telefone;
-	}
-
 	public String getMensagem() {
 		return mensagem;
 	}
@@ -193,6 +185,14 @@ public class DetalheClassificadoBean extends SuperBean<Venda>{
 		}else{
 			return "SEM Cidade";
 		}
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 	
 	

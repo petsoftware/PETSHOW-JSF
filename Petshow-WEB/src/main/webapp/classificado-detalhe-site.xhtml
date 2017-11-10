@@ -175,7 +175,7 @@
 								</div>
 								<div class="row">
 									<p:inputMask  mask="(99)999999999" id="txtTel" maxlength="20" style="width:50%;"
-										value="#{detalheClassificadoBean.telefone}" autoClear="false"/>
+										value="#{detalheClassificadoBean.telefone}" autoClear="false" />
 								</div>
 							</div>
 							<div style="padding-left: 15px">
@@ -191,8 +191,11 @@
 							<div style="padding-left: 15px;padding-right: 15px;padding-bottom: 20px;">	
 								<div class="row">
 									<p:commandButton action="#{detalheClassificadoBean.enviar}" styleClass="btn btn-success btn-lg button" icon="fa fa-fw fa-send"
-										type="submit" value="Enviar Mensagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"/>
+										type="submit" value="Enviar Mensagem" update="msgEnviar" id="btNovo" style="padding-left: 4px !important;"
+										oncomplete="Pace.restart();"
+										onclick="paceStart();"/>
 								</div>
+								<p:graphicImage />
 							</div>
 						</div>
 					</div>
