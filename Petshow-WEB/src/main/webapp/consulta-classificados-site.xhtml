@@ -129,7 +129,7 @@
 													<h:graphicImage rendered="#{venda.fotos.size() > 0}"
 																		style="width:100%;height:100%;"
 																		stream="false" cache="false"
-																		url="data:image/jpg;base64,#{venda.fotos.get(0)}" id="visualizacao"
+																		url="#{venda.fotos.get(0)}" id="visualizacao"
 																		alt="Visualização do anúncio" />
 														
 												</div>

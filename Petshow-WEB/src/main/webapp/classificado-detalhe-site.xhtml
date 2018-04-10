@@ -39,11 +39,11 @@
 								<div class="col-md-11" style=" margin-top: 20px;">
 									
 									<p:galleria value="#{detalheClassificadoBean.venda.fotos}" var="foto"   class ="d-none d-md-block" panelWidth="600"  panelHeight="400" >
-										<h:graphicImage url="data:image/jpg;base64,#{foto}" style="width:100%;height:100% "  id="visualizacao1" title="" />
+										<h:graphicImage url="#{foto}" style="width:100%;height:100% "  id="visualizacao1" title="" />
 									</p:galleria>
 							
 									<p:galleria value="#{detalheClassificadoBean.venda.fotos}" var="foto" 	panelWidth="342"  panelHeight="216"  class ="d-sm-block d-md-none d-lg-none d-xl-none">
-										<h:graphicImage url="data:image/jpg;base64,#{foto}"	style="width:100%;height:100%"  id="visualizacao2" title="" />
+										<h:graphicImage url="#{foto}"	style="width:100%;height:100%"  id="visualizacao2" title="" />
 									</p:galleria>
 								</div>
 												
