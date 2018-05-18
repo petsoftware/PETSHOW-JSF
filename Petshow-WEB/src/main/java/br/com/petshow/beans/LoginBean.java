@@ -80,7 +80,7 @@ public class LoginBean {
 	}
 
 	public Usuario getUsuarioLogado(){
-		Usuario user = authenticationService.getUsuarioLogado();
+		Usuario user = AuthenticationService.getUsuarioLogado();
 		if(user!=null){
 			return user;
 		}else{
